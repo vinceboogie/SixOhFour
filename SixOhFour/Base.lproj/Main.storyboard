@@ -31,9 +31,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfU-NX-PxO">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfU-NX-PxO">
                                 <rect key="frame" x="0.0" y="64" width="375" height="45"/>
-                                <state key="normal" title="Button">
+                                <color key="backgroundColor" red="0.70707070709999997" green="0.70707070709999997" blue="0.70707070709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="        Job#1 - RedGarage">
+                                    <color key="titleColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
