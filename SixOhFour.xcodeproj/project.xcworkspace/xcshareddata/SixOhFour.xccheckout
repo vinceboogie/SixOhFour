@@ -5,16 +5,26 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< Updated upstream
 	<string>EEF74360-730A-4802-BC09-E7AD87BCED47</string>
 	<key>IDESourceControlProjectName</key>
 	<string>SixOhFour</string>
+=======
+	<string>861717D1-92A6-49A1-B939-36C1D1DC1DF7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+>>>>>>> Stashed changes
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>1501E4DC1A00FEB23AB81981904847094134DD09</key>
 		<string>https://github.com/vinceboogie/SixOhFour.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
+<<<<<<< Updated upstream
 	<string>SixOhFour.xcodeproj</string>
+=======
+	<string>SixOhFour.xcodeproj/project.xcworkspace</string>
+>>>>>>> Stashed changes
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1501E4DC1A00FEB23AB81981904847094134DD09</key>
