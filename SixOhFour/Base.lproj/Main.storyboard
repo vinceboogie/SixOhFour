@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3fq-IC-mHr">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,6 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfU-NX-PxO">
+                                <rect key="frame" x="0.0" y="64" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.70707070709999997" green="0.70707070709999997" blue="0.70707070709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="        Job#1 - RedGarage">
+                                    <color key="titleColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVo-WE-4DN">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.49494949490000001" green="0.49494949490000001" blue="0.49494949490000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -31,84 +39,103 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfU-NX-PxO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="45"/>
-                                <color key="backgroundColor" red="0.70707070709999997" green="0.70707070709999997" blue="0.70707070709999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="        Job#1 - RedGarage">
-                                    <color key="titleColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.87444802989130432" green="0.3724067189992179" blue="0.37345373687068201" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" id="ePB-hD-Jxd"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="686.5" y="478.5"/>
+            <point key="canvasLocation" x="1400.5" y="-493.5"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="bov-LZ-EZq">
+        <!--Tab Bar Controller-->
+        <scene sceneID="ifF-9A-S46">
             <objects>
-                <viewController id="oYb-6H-KGU" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="3fq-IC-mHr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Spm-4c-iWX">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="OD6-sn-Bg7"/>
+                        <segue destination="Dti-vi-LIZ" kind="relationship" relationship="viewControllers" id="ZIl-Xd-llu"/>
+                        <segue destination="Htz-RY-exo" kind="relationship" relationship="viewControllers" id="rOI-0V-7n1"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fod-Zc-sYu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="799" y="478"/>
+        </scene>
+        <!--Clock in-->
+        <scene sceneID="ZRW-3z-Lgg">
+            <objects>
+                <viewController id="Dti-vi-LIZ" customClass="ViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="La3-rt-Pvi"/>
-                        <viewControllerLayoutGuide type="bottom" id="rK6-EN-M9p"/>
+                        <viewControllerLayoutGuide type="top" id="Q1V-1l-InV"/>
+                        <viewControllerLayoutGuide type="bottom" id="P4n-Zu-x3g"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zzA-nO-Iop">
+                    <view key="view" contentMode="scaleToFill" id="AM2-NV-acv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1jy-8f-eT0">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQA-22-ecW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.49494949490000001" green="0.49494949490000001" blue="0.49494949490000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.49494949490000001" green="0.49494949490000001" blue="0.49494949490000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
                                 <items>
-                                    <navigationItem title="NAVI" id="Fij-4M-4Rh"/>
+                                    <navigationItem title="Clock In" id="fA0-uh-jQV"/>
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.16083527697118347" green="0.51716849682069943" blue="0.74040421199999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Clock in" id="thk-Qi-Z13"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vab-Q2-8ar" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QRD-BO-ZLQ" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143.5" y="478.5"/>
+            <point key="canvasLocation" x="1400.5" y="489.5"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="gk6-lI-mOD">
+        <!--Calendar-->
+        <scene sceneID="APv-ZR-YgK">
             <objects>
-                <viewController id="5YA-Sc-RMO" sceneMemberID="viewController">
+                <viewController id="Htz-RY-exo" customClass="ViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="A6X-pI-hfb"/>
-                        <viewControllerLayoutGuide type="bottom" id="1CV-tI-MCC"/>
+                        <viewControllerLayoutGuide type="top" id="SaD-mI-KXl"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jol-wC-dc6"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="v53-Cu-dEt">
+                    <view key="view" contentMode="scaleToFill" id="eVe-4q-sBm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3D-xP-z4v">
-                                <rect key="frame" x="164" y="319" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0d-Yp-Wj9">
-                                <rect key="frame" x="164" y="276" width="52" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H48-Bu-s0O">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.49494949490000001" green="0.49494949490000001" blue="0.49494949490000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.49494949490000001" green="0.49494949490000001" blue="0.49494949490000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Calendar" id="Hnt-LM-0Fd"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.99908217940919164" blue="0.49983125617399471" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Calendar" id="xhs-6J-8qZ"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="521-ky-lmi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SLt-eS-RBR" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1946" y="121"/>
+            <point key="canvasLocation" x="1400.5" y="1425.5"/>
         </scene>
     </scenes>
 </document>
