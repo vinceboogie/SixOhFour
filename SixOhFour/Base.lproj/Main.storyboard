@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
@@ -42,17 +42,17 @@
                         </subviews>
                         <color key="backgroundColor" red="0.87444802989130432" green="0.3724067189992179" blue="0.37345373687068201" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="ePB-hD-Jxd"/>
+                    <tabBarItem key="tabBarItem" title="" image="home" id="ePB-hD-Jxd"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1400.5" y="-493.5"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="ifF-9A-S46">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="3fq-IC-mHr" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="3fq-IC-mHr" customClass="MainTabBarController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Spm-4c-iWX">
@@ -62,14 +62,14 @@
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="OD6-sn-Bg7"/>
                         <segue destination="Dti-vi-LIZ" kind="relationship" relationship="viewControllers" id="ZIl-Xd-llu"/>
-                        <segue destination="Htz-RY-exo" kind="relationship" relationship="viewControllers" id="rOI-0V-7n1"/>
+                        <segue destination="8lG-XT-9Ex" kind="relationship" relationship="viewControllers" id="rOI-0V-7n1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fod-Zc-sYu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="799" y="478"/>
         </scene>
-        <!--Clock in-->
+        <!--View Controller-->
         <scene sceneID="ZRW-3z-Lgg">
             <objects>
                 <viewController id="Dti-vi-LIZ" customClass="ViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
@@ -95,7 +95,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.16083527697118347" green="0.51716849682069943" blue="0.74040421199999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Clock in" id="thk-Qi-Z13"/>
+                    <tabBarItem key="tabBarItem" title="" image="clock" id="thk-Qi-Z13"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
@@ -106,7 +106,7 @@
         <!--Calendar-->
         <scene sceneID="APv-ZR-YgK">
             <objects>
-                <viewController id="Htz-RY-exo" customClass="ViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Htz-RY-exo" customClass="CalendarViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SaD-mI-KXl"/>
                         <viewControllerLayoutGuide type="bottom" id="Jol-wC-dc6"/>
@@ -115,27 +115,162 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H48-Bu-s0O">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.49494949490000001" green="0.49494949490000001" blue="0.49494949490000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.49494949490000001" green="0.49494949490000001" blue="0.49494949490000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Calendar" id="Hnt-LM-0Fd"/>
-                                </items>
-                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PGE-wf-6EE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="260"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wednesday, Jun 16" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jy3-Du-Cke">
+                                <rect key="frame" x="16" y="349" width="150" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job 1 - 2:30pm-8:00pm " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccj-DH-Ko1">
+                                <rect key="frame" x="16" y="383" width="188" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job 2 - 10:00pm-3:00am " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdu-K7-GCF">
+                                <rect key="frame" x="16" y="408" width="196" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.99908217940919164" blue="0.49983125617399471" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Calendar" id="xhs-6J-8qZ"/>
+                    <navigationItem key="navigationItem" title="Calendar" id="JuX-P1-Rmh">
+                        <barButtonItem key="leftBarButtonItem" image="list" id="IM6-W1-Iv3">
+                            <connections>
+                                <segue destination="zoy-jV-r4f" kind="presentation" id="p84-Qa-l3h"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="Plus" id="GhZ-5M-Fkm">
+                            <connections>
+                                <segue destination="Zsq-lH-SCG" kind="presentation" id="WHn-bD-b9r"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLt-eS-RBR" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400.5" y="1425.5"/>
+            <point key="canvasLocation" x="2212.5" y="1425.5"/>
+        </scene>
+        <!--Repeating Schedule View Controller-->
+        <scene sceneID="ccV-jZ-Lzn">
+            <objects>
+                <viewController id="zoy-jV-r4f" customClass="RepeatingScheduleViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zup-px-HDR"/>
+                        <viewControllerLayoutGuide type="bottom" id="gmZ-4N-QFS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xoD-oy-qgA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tE-ps-v2l">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="qdD-r2-84C"/>
+                                    <constraint firstAttribute="width" constant="375" id="xb9-PX-w8I"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Repeating Schedule" id="bgZ-rt-1WL">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Vkj-rY-Ygm">
+                                            <connections>
+                                                <segue destination="C4q-kc-VgY" kind="unwind" unwindAction="backToCalendar:" id="g85-fA-5QO"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Edit" id="mvk-W5-x6a"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5tE-ps-v2l" secondAttribute="trailing" id="4iM-xZ-aWn"/>
+                            <constraint firstItem="5tE-ps-v2l" firstAttribute="top" secondItem="xoD-oy-qgA" secondAttribute="top" id="Wju-wo-0aN"/>
+                            <constraint firstItem="5tE-ps-v2l" firstAttribute="leading" secondItem="xoD-oy-qgA" secondAttribute="leading" id="ywd-0k-i7l"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cw1-zf-Z48" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="C4q-kc-VgY" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2212.5" y="2198.5"/>
+        </scene>
+        <!--Add Schedule View Controller-->
+        <scene sceneID="tqC-4E-XOW">
+            <objects>
+                <viewController id="Zsq-lH-SCG" customClass="AddScheduleViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iqH-gF-jsO"/>
+                        <viewControllerLayoutGuide type="bottom" id="Afm-pJ-rsj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RC3-8w-chf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EbU-XJ-oko">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="Hcj-Ci-BsH"/>
+                                    <constraint firstAttribute="height" constant="64" id="w41-nY-4ic"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Add Schedule" id="ImU-dI-fTA">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="yfu-ta-hTL">
+                                            <connections>
+                                                <segue destination="s6w-3o-prF" kind="unwind" unwindAction="backToCalendar:" id="s7W-Da-Xae"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EbU-XJ-oko" firstAttribute="leading" secondItem="RC3-8w-chf" secondAttribute="leading" id="6gG-Q0-MLV"/>
+                            <constraint firstItem="EbU-XJ-oko" firstAttribute="top" secondItem="RC3-8w-chf" secondAttribute="top" id="72c-ix-RVp"/>
+                            <constraint firstAttribute="trailing" secondItem="EbU-XJ-oko" secondAttribute="trailing" id="czi-eK-ylE"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8h0-6m-PqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="s6w-3o-prF" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2749.5" y="1425.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="k5c-p7-CQp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8lG-XT-9Ex" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="calendar" id="xhs-6J-8qZ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5v7-GG-Lj8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Htz-RY-exo" kind="relationship" relationship="rootViewController" id="wgS-Bq-tLi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uCC-1R-IQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1400" y="1425"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Plus" width="16" height="16"/>
+        <image name="calendar" width="20" height="20"/>
+        <image name="clock" width="20" height="20"/>
+        <image name="home" width="21" height="21"/>
+        <image name="list" width="20" height="20"/>
+    </resources>
 </document>

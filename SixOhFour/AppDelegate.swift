@@ -20,8 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         UITabBar.appearance().barTintColor = UIColor.whiteColor()
         
+        var navigationBarAppearace = UINavigationBar.appearance()
         
-            
+//        navigationBarAppearace.tintColor = UIColor.whiteColor()  // Back buttons and such
+//        navigationBarAppearace.barTintColor = UIColor.grayColor()  // Bar's background color
+//        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        
+        
         return true
     }
 
