@@ -7,34 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		87059C5C1B3A67BD004827EA /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87059C5B1B3A67BD004827EA /* Jobs.swift */; };
-		87128D321B3A2439002AF5F7 /* AddJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87128D311B3A2439002AF5F7 /* AddJobViewController.swift */; };
 		874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FACF71B33A9D7002EABB0 /* AppDelegate.swift */; };
 		874FACFB1B33A9D7002EABB0 /* SixOhFour.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 874FACF91B33A9D7002EABB0 /* SixOhFour.xcdatamodeld */; };
 		874FAD001B33A9D7002EABB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 874FACFE1B33A9D7002EABB0 /* Main.storyboard */; };
 		874FAD021B33A9D7002EABB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD011B33A9D7002EABB0 /* Images.xcassets */; };
 		874FAD051B33A9D7002EABB0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */; };
 		874FAD111B33A9D7002EABB0 /* SixOhFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */; };
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-		87CD5DA71B3B78250024B59C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CD5DA61B3B78250024B59C /* HomeViewController.swift */; };
-=======
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
-		B9920E651B3B63980037B44B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E641B3B63980037B44B /* CalendarViewController.swift */; };
 		B9920E671B3B692B0037B44B /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E661B3B692B0037B44B /* AddScheduleViewController.swift */; };
 		B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E681B3B711A0037B44B /* MainTabBarController.swift */; };
 		B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */; };
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
+		B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */; };
+		B9D77DE01B3C96CA00988865 /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D77DDF1B3C96CA00988865 /* Jobs.swift */; };
+		B9D77DE21B3C999500988865 /* AddJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D77DE11B3C999500988865 /* AddJobViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +32,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		87059C5B1B3A67BD004827EA /* Jobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Jobs.swift; path = ../Jobs.swift; sourceTree = "<group>"; };
-		87128D311B3A2439002AF5F7 /* AddJobViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJobViewController.swift; sourceTree = "<group>"; };
 		874FACF21B33A9D7002EABB0 /* SixOhFour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SixOhFour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		874FACF61B33A9D7002EABB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		874FACF71B33A9D7002EABB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,26 +42,12 @@
 		874FAD0A1B33A9D7002EABB0 /* SixOhFourTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SixOhFourTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		874FAD0F1B33A9D7002EABB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOhFourTests.swift; sourceTree = "<group>"; };
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-		87CD5DA61B3B78250024B59C /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-=======
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
-		B9920E641B3B63980037B44B /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		B9920E661B3B692B0037B44B /* AddScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
 		B9920E681B3B711A0037B44B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingScheduleViewController.swift; sourceTree = "<group>"; };
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
+		B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B9D77DDF1B3C96CA00988865 /* Jobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jobs.swift; sourceTree = "<group>"; };
+		B9D77DE11B3C999500988865 /* AddJobViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJobViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,29 +89,10 @@
 		874FACF41B33A9D7002EABB0 /* SixOhFour */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< Updated upstream
+				B9D77DDD1B3C965C00988865 /* Model */,
+				B9D77DDE1B3C966300988865 /* View */,
 				B9920E631B3B63000037B44B /* View Controllers */,
 				874FACF71B33A9D7002EABB0 /* AppDelegate.swift */,
-				B9920E681B3B711A0037B44B /* MainTabBarController.swift */,
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-				87059C5B1B3A67BD004827EA /* Jobs.swift */,
-				874FACF71B33A9D7002EABB0 /* AppDelegate.swift */,
-				874FACFC1B33A9D7002EABB0 /* ViewController.swift */,
-				87128D311B3A2439002AF5F7 /* AddJobViewController.swift */,
-				87CD5DA61B3B78250024B59C /* HomeViewController.swift */,
-=======
-				B9920E631B3B63000037B44B /* View Controllers */,
-				874FACF71B33A9D7002EABB0 /* AppDelegate.swift */,
-				B9920E681B3B711A0037B44B /* MainTabBarController.swift */,
->>>>>>> origin/master
-=======
-				B9920E631B3B63000037B44B /* View Controllers */,
-				874FACF71B33A9D7002EABB0 /* AppDelegate.swift */,
-				B9920E681B3B711A0037B44B /* MainTabBarController.swift */,
->>>>>>> origin/master
->>>>>>> Stashed changes
 				874FACFE1B33A9D7002EABB0 /* Main.storyboard */,
 				874FAD011B33A9D7002EABB0 /* Images.xcassets */,
 				874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */,
@@ -181,11 +130,28 @@
 		B9920E631B3B63000037B44B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B9920E641B3B63980037B44B /* CalendarViewController.swift */,
+				B9920E681B3B711A0037B44B /* MainTabBarController.swift */,
 				B9920E661B3B692B0037B44B /* AddScheduleViewController.swift */,
 				B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */,
+				B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */,
+				B9D77DE11B3C999500988865 /* AddJobViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		B9D77DDD1B3C965C00988865 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B9D77DDF1B3C96CA00988865 /* Jobs.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B9D77DDE1B3C966300988865 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,31 +254,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9920E651B3B63980037B44B /* CalendarViewController.swift in Sources */,
+				B9D77DE21B3C999500988865 /* AddJobViewController.swift in Sources */,
 				874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */,
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-				87128D321B3A2439002AF5F7 /* AddJobViewController.swift in Sources */,
-				87059C5C1B3A67BD004827EA /* Jobs.swift in Sources */,
-				874FACFB1B33A9D7002EABB0 /* SixOhFour.xcdatamodeld in Sources */,
-				87CD5DA71B3B78250024B59C /* HomeViewController.swift in Sources */,
-=======
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 				B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */,
+				B9D77DE01B3C96CA00988865 /* Jobs.swift in Sources */,
 				874FACFB1B33A9D7002EABB0 /* SixOhFour.xcdatamodeld in Sources */,
 				B9920E671B3B692B0037B44B /* AddScheduleViewController.swift in Sources */,
+				B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */,
 				B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */,
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

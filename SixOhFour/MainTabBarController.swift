@@ -16,7 +16,7 @@ class MainTabBarController: UITabBarController {
         
         
         // Change color of the tab bar
-        // self.tabBar.barTintColor = UIColor.darkGrayColor()
+//         self.tabBar.barTintColor = UIColor.darkGrayColor()
         
     }
 

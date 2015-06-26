@@ -26,7 +26,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         fetchRequest.sortDescriptors = [sortDescriptor]
         return fetchRequest
     }
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -38,14 +38,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         frc = getFetchedResultsController()
         frc.delegate = self
         frc.performFetch(nil)
-
+        
         // Do any additional setup after loading the view.
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
     }
-
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         let numberOfSections = frc.sections?.count
         return numberOfSections!
@@ -57,7 +57,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
         
         let jobs = frc.objectAtIndexPath(indexPath) as! Jobs
         
@@ -68,10 +68,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
@@ -87,5 +87,5 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-
+    
 }

@@ -10,10 +10,24 @@ import UIKit
 
 class CalendarViewController: UIViewController {
 
+    @IBOutlet weak var menuView: CVCalendarMenuView!
+    @IBOutlet weak var calendarView: CVCalendarView!
+    @IBOutlet weak var monthLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         // Do any additional setup after loading the view.
+        
+        self.monthLabel.text = CVDate(date: NSDate()).description()
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.calendarView.commitCalendarViewUpdate()
+        self.menuView.commitMenuViewUpdate()
     }
 
     override func didReceiveMemoryWarning() {
