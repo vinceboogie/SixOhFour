@@ -14,6 +14,19 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        //  each of these are relative to the storyboard files they belong to
+        let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let clockInStoryboard: UIStoryboard = UIStoryboard(name: "ClockInStoryboard", bundle: nil)
+        let calendarStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
+        
+        
+        let clockInVC: ClockInViewController = clockInStoryboard.instantiateViewControllerWithIdentifier("ClockInViewController") as! ClockInViewController
+        let calendarVC: CalendarViewController = calendarStoryboard.instantiateViewControllerWithIdentifier("CalendarViewController") as! CalendarViewController
+        let addJobsVC: HomeViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+        
+        
+        self.viewControllers = [UINavigationController(rootViewController: addJobsVC), clockInVC, calendarVC ]
         
         // Change color of the tab bar
 //         self.tabBar.barTintColor = UIColor.darkGrayColor()

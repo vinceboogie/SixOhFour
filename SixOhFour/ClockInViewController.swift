@@ -1,5 +1,5 @@
 //
-//  CalendarViewController.swift
+//  ClockInViewController.swift
 //  SixOhFour
 //
 //  Created by vinceboogie on 6/26/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController {
+class ClockInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
