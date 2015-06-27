@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		87238A461B3E25AA004D44CA /* AddJobStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87238A451B3E25AA004D44CA /* AddJobStoryboard.storyboard */; };
-		87238A481B3E2AD7004D44CA /* ClockInStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87238A471B3E2AD7004D44CA /* ClockInStoryboard.storyboard */; };
 		87238A4C1B3E2EC5004D44CA /* CalendarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87238A4B1B3E2EC5004D44CA /* CalendarStoryboard.storyboard */; };
 		87238A4E1B3E300A004D44CA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87238A4D1B3E300A004D44CA /* CalendarViewController.swift */; };
 		87238A501B3E3212004D44CA /* ClockInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87238A4F1B3E3212004D44CA /* ClockInViewController.swift */; };
@@ -18,6 +17,7 @@
 		874FAD021B33A9D7002EABB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD011B33A9D7002EABB0 /* Images.xcassets */; };
 		874FAD051B33A9D7002EABB0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */; };
 		874FAD111B33A9D7002EABB0 /* SixOhFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */; };
+		87E9BEC51B3E3801005CBDE8 /* ClockInStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E9BEC41B3E3801005CBDE8 /* ClockInStoryboard.storyboard */; };
 		B9920E671B3B692B0037B44B /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E661B3B692B0037B44B /* AddScheduleViewController.swift */; };
 		B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E681B3B711A0037B44B /* MainTabBarController.swift */; };
 		B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */; };
@@ -38,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		87238A451B3E25AA004D44CA /* AddJobStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddJobStoryboard.storyboard; sourceTree = "<group>"; };
-		87238A471B3E2AD7004D44CA /* ClockInStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClockInStoryboard.storyboard; sourceTree = "<group>"; };
 		87238A4B1B3E2EC5004D44CA /* CalendarStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CalendarStoryboard.storyboard; sourceTree = "<group>"; };
 		87238A4D1B3E300A004D44CA /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		87238A4F1B3E3212004D44CA /* ClockInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockInViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +51,7 @@
 		874FAD0A1B33A9D7002EABB0 /* SixOhFourTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SixOhFourTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		874FAD0F1B33A9D7002EABB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOhFourTests.swift; sourceTree = "<group>"; };
+		87E9BEC41B3E3801005CBDE8 /* ClockInStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClockInStoryboard.storyboard; sourceTree = "<group>"; };
 		B9920E661B3B692B0037B44B /* AddScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
 		B9920E681B3B711A0037B44B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingScheduleViewController.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 				874FACFE1B33A9D7002EABB0 /* Main.storyboard */,
 				87238A451B3E25AA004D44CA /* AddJobStoryboard.storyboard */,
 				87238A4B1B3E2EC5004D44CA /* CalendarStoryboard.storyboard */,
-				87238A471B3E2AD7004D44CA /* ClockInStoryboard.storyboard */,
+				87E9BEC41B3E3801005CBDE8 /* ClockInStoryboard.storyboard */,
 				874FAD011B33A9D7002EABB0 /* Images.xcassets */,
 				874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */,
 				874FACF91B33A9D7002EABB0 /* SixOhFour.xcdatamodeld */,
@@ -249,12 +249,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87238A481B3E2AD7004D44CA /* ClockInStoryboard.storyboard in Resources */,
 				87238A4C1B3E2EC5004D44CA /* CalendarStoryboard.storyboard in Resources */,
 				874FAD001B33A9D7002EABB0 /* Main.storyboard in Resources */,
 				874FAD051B33A9D7002EABB0 /* LaunchScreen.xib in Resources */,
 				874FAD021B33A9D7002EABB0 /* Images.xcassets in Resources */,
 				87238A461B3E25AA004D44CA /* AddJobStoryboard.storyboard in Resources */,
+				87E9BEC51B3E3801005CBDE8 /* ClockInStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,23 +5,23 @@
     </dependencies>
     <scenes>
         <!--Clock In View Controller-->
-        <scene sceneID="SPi-4d-XbC">
+        <scene sceneID="CX5-Dr-7jq">
             <objects>
-                <viewController id="XtE-fW-gVm" customClass="ClockInViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClockInViewController" id="3fF-Vc-Hph" customClass="ClockInViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wgU-ht-9bY"/>
-                        <viewControllerLayoutGuide type="bottom" id="sBl-Qr-Mln"/>
+                        <viewControllerLayoutGuide type="top" id="8qF-YI-T7n"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jx6-5q-eoC"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uyv-1L-W5s">
+                    <view key="view" contentMode="scaleToFill" id="u4V-KR-o5T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xpk-ZC-3fQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TPN-Ym-AYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1106" y="436"/>
+            <point key="canvasLocation" x="905" y="383"/>
         </scene>
     </scenes>
 </document>
