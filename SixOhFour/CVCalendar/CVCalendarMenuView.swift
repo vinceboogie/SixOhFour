@@ -15,8 +15,8 @@ class CVCalendarMenuView: UIView {
     var symbols = [String]()
     var symbolViews: [UILabel]?
 
-    override init() {
-        super.init()
+    convenience init() {
+        self.init()
         
         self.setupWeekdaySymbols()
         self.createDaySymbols()

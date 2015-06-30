@@ -32,9 +32,9 @@ class CVCalendarWeekContentView: NSObject, CVCalendarContentDelegate {
     private var presentedDate: NSDate!
     private var presentedMonthView: MonthView!
     
-    private let calendarView: CalendarView!
-    private let scrollView: UIScrollView!
-    private let contentController: ContentController!
+    private var calendarView: CalendarView!
+    private var scrollView: UIScrollView!
+    private var contentController: ContentController!
     
     // MARK: Initialization
     
@@ -315,7 +315,7 @@ class CVCalendarWeekContentView: NSObject, CVCalendarContentDelegate {
         self.prepareTopMarkersOnDayViews(self.weekViews[2]!, hidden: false)
         
         let presentedWeekView = weekViews[1]!
-        let presentedMonthView = presentedWeekView.monthView?
+        let presentedMonthView = presentedWeekView.monthView
         if presentedMonthView != nil {
             self.calendarView.presentedDate = CVDate(date: presentedMonthView!.date!)
         }

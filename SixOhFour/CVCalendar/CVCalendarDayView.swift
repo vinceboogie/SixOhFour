@@ -13,8 +13,8 @@ class CVCalendarDayView: UIView {
     // MARK: - Public properties
 
     var weekView: CVCalendarWeekView?
-    let weekdayIndex: Int?
-    let date: CVDate?
+    var weekdayIndex: Int?
+    var date: CVDate?
     
     var dayLabel: UILabel?
     var circleView: CVCircleView?
@@ -26,8 +26,8 @@ class CVCalendarDayView: UIView {
     
     // MARK: - Initialization
     
-    init(weekView: CVCalendarWeekView, frame: CGRect, weekdayIndex: Int) {
-        super.init()
+    convenience init(weekView: CVCalendarWeekView, frame: CGRect, weekdayIndex: Int) {
+        self.init()
         
         self.weekView = weekView
         self.frame = frame

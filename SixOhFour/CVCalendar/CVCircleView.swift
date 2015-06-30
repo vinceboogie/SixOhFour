@@ -10,10 +10,10 @@ import UIKit
 
 class CVCircleView: UIView {
     
-    private let color: UIColor?
+    private var color: UIColor?
     
-    convenience init(frame: CGRect, color: UIColor, _alpha: CGFloat) {
-        self.init(frame: frame)
+    init(frame: CGRect, color: UIColor, _alpha: CGFloat) {
+        super.init(frame: frame)
         
         self.color = color
         self.alpha = _alpha
