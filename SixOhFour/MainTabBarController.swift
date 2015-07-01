@@ -20,7 +20,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let clockInStoryboard: UIStoryboard = UIStoryboard(name: "ClockInStoryboard", bundle: nil)
         let calendarStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
         
-        let clockInVC: ClockInViewController = clockInStoryboard.instantiateViewControllerWithIdentifier("ClockInViewController") as! ClockInViewController
+        let clockInVC: UINavigationController = clockInStoryboard.instantiateViewControllerWithIdentifier("ClockInNavController") as! UINavigationController
         let calendarVC: UINavigationController = calendarStoryboard.instantiateViewControllerWithIdentifier("CalendarNavController") as! UINavigationController
         let addJobsVC: HomeViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
         
