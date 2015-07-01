@@ -9,11 +9,11 @@
 import UIKit
 
 class CVDate: NSObject {
-    private let date: NSDate?
-    let year: Int?
-    let month: Int?
-    let week: Int?
-    let day: Int?
+    private var date: NSDate?
+    var year: Int?
+    var month: Int?
+    var week: Int?
+    var day: Int?
     
     init(date: NSDate) {
         super.init()
@@ -36,12 +36,18 @@ class CVDate: NSObject {
         self.day = day
     }
     
-    func description() -> String {
+    func displayMonth() -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MMMM"
         
         let month = dateFormatter.stringFromDate(self.date!)
         
-        return "\(month), \(self.year!)"
+            return "\(month)"
+    }
+    
+    func displayMonthYear() -> String {
+        let month = displayMonth()
+        
+        return "\(month) \(self.year!)"
     }
 }

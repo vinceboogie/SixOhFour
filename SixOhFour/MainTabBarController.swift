@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +20,17 @@ class MainTabBarController: UITabBarController {
         let clockInStoryboard: UIStoryboard = UIStoryboard(name: "ClockInStoryboard", bundle: nil)
         let calendarStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
         
-        
         let clockInVC: ClockInViewController = clockInStoryboard.instantiateViewControllerWithIdentifier("ClockInViewController") as! ClockInViewController
-        let calendarVC: CalendarViewController = calendarStoryboard.instantiateViewControllerWithIdentifier("CalendarViewController") as! CalendarViewController
+        let calendarVC: UINavigationController = calendarStoryboard.instantiateViewControllerWithIdentifier("CalendarNavController") as! UINavigationController
         let addJobsVC: HomeViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
         
+        let homeIcon = UITabBarItem(title: "", image:UIImage(named: "home.png"), tag: 1)
+        let clockInIcon = UITabBarItem(title: "", image:UIImage(named: "clock.png"), tag: 2)
+        let calendarIcon = UITabBarItem(title: "", image:UIImage(named: "calendar.png"), tag: 3)
+
+        addJobsVC.tabBarItem = homeIcon
+        clockInVC.tabBarItem = clockInIcon
+        calendarVC.tabBarItem = calendarIcon
         
         self.viewControllers = [UINavigationController(rootViewController: addJobsVC), clockInVC, calendarVC ]
         

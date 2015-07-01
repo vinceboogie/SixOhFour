@@ -22,16 +22,16 @@ class CVCalendarContentViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - Private Properties
     
-    let calendarView: CalendarView!
+    var calendarView: CalendarView!
     var presentedMonthView: MonthView!
     
-    private let scrollView: UIScrollView!
-    private let delegate: ContentDelegate!
+    private var scrollView: UIScrollView!
+    private var delegate: ContentDelegate!
 
     // MARK: - Initialization 
     
-    init(calendarView: CalendarView, frame: CGRect) {
-        super.init()
+    convenience init(calendarView: CalendarView, frame: CGRect) {
+        self.init()
         
         self.calendarView = calendarView
         self.scrollView = UIScrollView(frame: frame)

@@ -109,8 +109,8 @@ class CVCalendarView: UIView {
     
     // MARK: - Initialization
     
-    override init() {
-        super.init()
+    convenience init() {
+        self.init()
         
         hidden = true
         loadCalendarMode()

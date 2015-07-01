@@ -24,8 +24,8 @@ class CVCalendarMonthView: UIView {
     
     // MARK: - Initialization 
 
-    init(calendarView: CVCalendarView, date: NSDate) {
-        
+    convenience init(calendarView: CVCalendarView, date: NSDate) {
+        self.init()
         
         self.calendarView = calendarView
         self.date = date
