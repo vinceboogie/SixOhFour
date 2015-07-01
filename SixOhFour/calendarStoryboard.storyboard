@@ -83,7 +83,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Plus" id="t0x-tI-WZP">
                             <connections>
-                                <segue destination="YzN-GM-lIt" kind="presentation" id="3qN-fi-Hzf"/>
+                                <segue destination="YzN-GM-lIt" kind="show" identifier="addScheduleSegue" id="Aoe-Ll-Xqz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -163,13 +163,7 @@
                                     <constraint firstAttribute="height" constant="64" id="wCP-X5-l11"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Add Schedule" id="kuV-1s-s85">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="xAr-ex-OZo">
-                                            <connections>
-                                                <segue destination="U62-3h-pKI" kind="unwind" unwindAction="backToCalendar:" id="wlq-ab-nXC"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem title="Add Schedule" id="kuV-1s-s85"/>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OD-8y-2F0">
@@ -247,7 +241,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hk5-9r-tYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="U62-3h-pKI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3561.5" y="1425.5"/>
         </scene>
