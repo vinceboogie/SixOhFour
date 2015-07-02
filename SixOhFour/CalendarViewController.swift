@@ -15,6 +15,8 @@ class CalendarViewController: UIViewController, CVCalendarViewDelegate {
     
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var shouldShowDaysOut = true
     var animationFinished = true
@@ -25,7 +27,32 @@ class CalendarViewController: UIViewController, CVCalendarViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let leftConstraint = NSLayoutConstraint(item:self.contentView,
+//            attribute:NSLayoutAttribute.Leading,
+//            relatedBy:NSLayoutRelation.Equal,
+//            toItem:self.view,
+//            attribute:NSLayoutAttribute.Left,
+//            multiplier:1.0,
+//            constant:0)
+//        
+//        self.view.addConstraint(leftConstraint)
+//
+//        
+//        let rightConstraint = NSLayoutConstraint(item:self.contentView,
+//            attribute:NSLayoutAttribute.Trailing,
+//            relatedBy:NSLayoutRelation.Equal,
+//            toItem:self.view,
+//            attribute:NSLayoutAttribute.Right,
+//            multiplier:1.0,
+//            constant:0)
+//        
+//        self.view.addConstraint(rightConstraint)
+        
+        self.scrollView.contentSize.height = 800
+        
         self.monthLabel.text = CVDate(date: NSDate()).displayMonthYear()
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
