@@ -8,18 +8,22 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController, CVCalendarViewDelegate {
+class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CVCalendarViewDelegate {
 
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var todayLabel: UILabel!
     
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var tableView: UITableView!
     
     var shouldShowDaysOut = true
     var animationFinished = true
+    
+    
+    // Dummy schedule for development
+    var schedule: [Shift]!
+    
     
     var currentMonth = CVDate(date: NSDate()).displayMonth()
     let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -27,32 +31,18 @@ class CalendarViewController: UIViewController, CVCalendarViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let leftConstraint = NSLayoutConstraint(item:self.contentView,
-//            attribute:NSLayoutAttribute.Leading,
-//            relatedBy:NSLayoutRelation.Equal,
-//            toItem:self.view,
-//            attribute:NSLayoutAttribute.Left,
-//            multiplier:1.0,
-//            constant:0)
-//        
-//        self.view.addConstraint(leftConstraint)
-//
-//        
-//        let rightConstraint = NSLayoutConstraint(item:self.contentView,
-//            attribute:NSLayoutAttribute.Trailing,
-//            relatedBy:NSLayoutRelation.Equal,
-//            toItem:self.view,
-//            attribute:NSLayoutAttribute.Right,
-//            multiplier:1.0,
-//            constant:0)
-//        
-//        self.view.addConstraint(rightConstraint)
-        
-        self.scrollView.contentSize.height = 800
-        
         self.monthLabel.text = CVDate(date: NSDate()).displayMonthYear()
         
+        tableView.delegate = self
+        tableView.dataSource = self
         
+        
+        schedule = [Shift]()
+        
+        schedule.append(Shift(dictionary: ["color": UIColor.redColor(), "name": "Red Garage", "shiftTime": "0800-2200"]))
+        schedule.append(Shift(dictionary:["color": UIColor.greenColor(), "name": "Air New Zealand", "shiftTime": "1800-2200"]))
+        schedule.append(Shift(dictionary:["color": UIColor.blueColor(), "name": "Golden State Warriors", "shiftTime": "1930-2230"]))
+    
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -73,6 +63,26 @@ class CalendarViewController: UIViewController, CVCalendarViewDelegate {
     @IBAction func backToCalendar(segue:UIStoryboardSegue) {
         
     }
+    
+    
+    // MARK: Table View Datasource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if schedule != nil {
+            return schedule.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("TodayScheduleCell", forIndexPath: indexPath) as! TodayScheduleCell
+        
+        cell.shift = schedule[indexPath.row]
+        
+        return cell
+    }
+    
     
     
     // MARK: Calendar View Delegate

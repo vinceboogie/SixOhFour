@@ -14,6 +14,5 @@ class Jobs: NSManagedObject {
     
     @NSManaged var job: String
     @NSManaged var pay: String
-    @NSManaged var position: String
-    
+    @NSManaged var position: String    
 }
