@@ -18,11 +18,12 @@
 		874FAD051B33A9D7002EABB0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */; };
 		874FAD111B33A9D7002EABB0 /* SixOhFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */; };
 		87E9BEC51B3E3801005CBDE8 /* ClockInStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E9BEC41B3E3801005CBDE8 /* ClockInStoryboard.storyboard */; };
+		87FBAFA01B45FE6E00C8A5B6 /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FBAF9F1B45FE6E00C8A5B6 /* Jobs.swift */; };
+		87FBAFA21B46032100C8A5B6 /* PayRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FBAFA11B46032100C8A5B6 /* PayRateViewController.swift */; };
 		B9920E671B3B692B0037B44B /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E661B3B692B0037B44B /* AddScheduleViewController.swift */; };
 		B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E681B3B711A0037B44B /* MainTabBarController.swift */; };
 		B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */; };
 		B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */; };
-		B9D77DE01B3C96CA00988865 /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D77DDF1B3C96CA00988865 /* Jobs.swift */; };
 		B9D77DE21B3C999500988865 /* AddJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D77DE11B3C999500988865 /* AddJobViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,11 +53,12 @@
 		874FAD0F1B33A9D7002EABB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOhFourTests.swift; sourceTree = "<group>"; };
 		87E9BEC41B3E3801005CBDE8 /* ClockInStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClockInStoryboard.storyboard; sourceTree = "<group>"; };
+		87FBAF9F1B45FE6E00C8A5B6 /* Jobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jobs.swift; sourceTree = "<group>"; };
+		87FBAFA11B46032100C8A5B6 /* PayRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRateViewController.swift; sourceTree = "<group>"; };
 		B9920E661B3B692B0037B44B /* AddScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
 		B9920E681B3B711A0037B44B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingScheduleViewController.swift; sourceTree = "<group>"; };
 		B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		B9D77DDF1B3C96CA00988865 /* Jobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jobs.swift; sourceTree = "<group>"; };
 		B9D77DE11B3C999500988865 /* AddJobViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJobViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,13 +145,14 @@
 		B9920E631B3B63000037B44B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				87FBAFA11B46032100C8A5B6 /* PayRateViewController.swift */,
+				B9D77DE11B3C999500988865 /* AddJobViewController.swift */,
 				B9920E681B3B711A0037B44B /* MainTabBarController.swift */,
 				87238A4F1B3E3212004D44CA /* ClockInViewController.swift */,
 				87238A4D1B3E300A004D44CA /* CalendarViewController.swift */,
 				B9920E661B3B692B0037B44B /* AddScheduleViewController.swift */,
 				B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */,
 				B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */,
-				B9D77DE11B3C999500988865 /* AddJobViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -157,7 +160,7 @@
 		B9D77DDD1B3C965C00988865 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B9D77DDF1B3C96CA00988865 /* Jobs.swift */,
+				87FBAF9F1B45FE6E00C8A5B6 /* Jobs.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -277,9 +280,10 @@
 				87238A501B3E3212004D44CA /* ClockInViewController.swift in Sources */,
 				874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */,
 				B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */,
-				B9D77DE01B3C96CA00988865 /* Jobs.swift in Sources */,
+				87FBAFA21B46032100C8A5B6 /* PayRateViewController.swift in Sources */,
 				874FACFB1B33A9D7002EABB0 /* SixOhFour.xcdatamodeld in Sources */,
 				B9920E671B3B692B0037B44B /* AddScheduleViewController.swift in Sources */,
+				87FBAFA01B45FE6E00C8A5B6 /* Jobs.swift in Sources */,
 				B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */,
 				B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */,
 			);
