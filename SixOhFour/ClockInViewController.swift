@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -19,14 +20,16 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var dateTimestampDisplay: UILabel!
     var stopWatchString: String = ""
     
-    var laps: [String] = []
-    var timeDescription: String = ""
+    var timelogTimestamp: [String] = []
+    var timelogDescription: [String] = []
     var lapsDict: NSDictionary = ["":""]
     
     var rowNumber: Int = 0
     
     var startStopWatch: Bool = true
     var addLap: Bool = false
+    var startBreak: Int = 0
+    
     
     @IBOutlet weak var stopWatchLabel: UILabel!
     
@@ -44,24 +47,23 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             startStopWatch = false
             
             startStopButton.setTitle("Clock Out", forState: UIControlState.Normal)
-            breakButton.setTitle("Timestamp", forState: UIControlState.Normal)
+            breakButton.setTitle("Start Break", forState: UIControlState.Normal)
             
             breakButton.enabled = true
             
             addLap = true
             
-            var timestamp1 = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .ShortStyle, timeStyle: .MediumStyle)
-            
-            laps.append(timestamp1)
-            timeDescription = "Clock In"
-            lapsTableView.reloadData()
-            
-            println(laps)
-            
+            timelogDescription.append("Clock In")
+            appendToTimeTableView()
+            saveToCoreDate()
             
         } else {
             
             //IF USER CLICKED 1st button again
+            timelogDescription.append("Clock Out")
+            appendToTimeTableView()
+            saveToCoreDate()
+            
             timer.invalidate()
             startStopWatch = true
             
@@ -70,6 +72,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             addLap = false
             
+            
         }
         
     }
@@ -77,36 +80,47 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func lapReset(sender: AnyObject) {
         
         //IF USER CLICKED 2nd BUTTON
-        if addLap == true {
-            var timestamp2 = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .ShortStyle, timeStyle: .MediumStyle)
+        if addLap == true && startBreak == 0 {
             
-            laps.append(timestamp2)
-            //lapsDict.append(timeDescription:timestamp2)
-            timeDescription = "Started Lunch"
-            lapsTableView.reloadData()
+            breakButton.setTitle("End Break", forState: UIControlState.Normal)
+            timelogDescription.append("Started Break")
+            appendToTimeTableView()
+            saveToCoreDate()
             
+            addLap = true
+            startBreak = 1
+            
+        //IF USER CLICKED 2nd button a 2nd time
+        } else if addLap == true && startBreak == 1 {
+
+            breakButton.setTitle("Start Break", forState: UIControlState.Normal)
+            timelogDescription.append("Ended Break")
+            appendToTimeTableView()
+            saveToCoreDate()
+            
+            addLap = true
+            startBreak = 0
+            
+        //IF USER CLICKED 2nd button Twice
         } else {
-            
-            //IF USER CLICKED 2nd BUTTON again
-            addLap = false
             
             startStopButton.setTitle("New Shift", forState: UIControlState.Normal)
             breakButton.setTitle(" ", forState: UIControlState.Normal)
             breakButton.enabled = false
             
             //clears all the laps when clicked reset
-            laps.removeAll(keepCapacity: false)
+            timelogTimestamp.removeAll(keepCapacity: false)
             lapsTableView.reloadData()
             
             fractions = 0
             minutes = 0
             seconds = 0
             hours = 0
-            
             stopWatchString = "00:00:00"
             stopWatchLabel.text = stopWatchString
-            
-            
+         
+            addLap = false
+
         }
         
         
@@ -119,7 +133,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view, typically from a nib.
         stopWatchLabel.text = "00:00:00"
         breakButton.enabled = false
-        
         
     }
     
@@ -161,10 +174,10 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.backgroundColor = self.view.backgroundColor
         
-        cell.textLabel!.text = timeDescription
+        cell.textLabel!.text = timelogDescription[indexPath.row]
         //cell.textLabel!.text = "Timestamp #\(indexPath.row + 1)"
         
-        cell.detailTextLabel?.text = laps[indexPath.row]
+        cell.detailTextLabel?.text = timelogTimestamp[indexPath.row]
         
         rowNumber = indexPath.row + 1
         
@@ -174,9 +187,28 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return laps.count
+        return timelogTimestamp.count
     }
     
+    func saveToCoreDate(){
+        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        
+        var newTimeLogs = NSEntityDescription.insertNewObjectForEntityForName("TimeLogs", inManagedObjectContext: context) as! NSManagedObject
+        
+        newTimeLogs.setValue("" + timelogDescription.last!, forKey: "timelogTitle")
+        newTimeLogs.setValue("" + timelogTimestamp.last!, forKey: "timelogTimestamp")
+        
+        context.save(nil)
+        
+        println(newTimeLogs)
+    }
     
+    func appendToTimeTableView() {
+        var timeStampAll = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .ShortStyle, timeStyle: .MediumStyle)
+        timelogTimestamp.append(timeStampAll)
+        lapsTableView.reloadData()
+        
+    }
 }
 
