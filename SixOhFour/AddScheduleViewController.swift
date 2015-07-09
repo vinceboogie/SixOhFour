@@ -26,6 +26,9 @@ class AddScheduleViewController: UIViewController, CVCalendarViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Save", style: .Plain, target: self, action: "sayHello")
+
+        
         self.monthLabel.text = CVDate(date: NSDate()).displayMonthYear()
     }
     
@@ -40,6 +43,13 @@ class AddScheduleViewController: UIViewController, CVCalendarViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: Testing stuff
+    
+    func sayHello() {
+        println("Hello!")
     }
     
     // MARK: Calendar View Delegate

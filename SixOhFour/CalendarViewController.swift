@@ -190,7 +190,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "addScheduleSegue" {
-            let destinationVC = segue.destinationViewController as! UIViewController
+            let destinationVC = segue.destinationViewController as! UITableViewController
             destinationVC.navigationItem.title = "Add Schedule"
             destinationVC.hidesBottomBarWhenPushed = true;
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target: nil, action: nil)
