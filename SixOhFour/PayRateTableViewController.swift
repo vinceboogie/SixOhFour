@@ -68,8 +68,7 @@ class PayRateTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
-//        tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.title = "Pay Rate"
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
