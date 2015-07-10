@@ -36,7 +36,7 @@ class AddJobViewController: UIViewController, writeValueBackDelegate {
     }
     
     
-    func writeValueBack(vc: PayRateViewController, value: String) {
+    func writeValueBack(vc: PayRateTableViewController, value: String) {
         self.payRateLabel.text = "$\(value)"
     }
     
@@ -69,9 +69,9 @@ class AddJobViewController: UIViewController, writeValueBackDelegate {
     
     @IBAction func payRateButtonPressed(sender: AnyObject) {
         let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
-        var payRateViewController: PayRateViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("PayRateViewController") as! PayRateViewController
-        payRateViewController.writeValueDelegate = self
-        navigationController?.pushViewController(payRateViewController, animated: true)
+        var payRateTableViewController: PayRateTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("PayRateTableViewController") as! PayRateTableViewController
+        payRateTableViewController.writeValueDelegate = self
+        navigationController?.pushViewController(payRateTableViewController, animated: true)
     }
     
 }
