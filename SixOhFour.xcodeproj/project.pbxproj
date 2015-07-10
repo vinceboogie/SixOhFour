@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001464781B4E06D400AC0C9F /* ClockInStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 001464771B4E06D400AC0C9F /* ClockInStoryboard.storyboard */; };
+		0014647C1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0014647B1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift */; };
+		0014647E1B4F4EDB00AC0C9F /* ClockIn_JobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0014647D1B4F4EDB00AC0C9F /* ClockIn_JobsCell.swift */; };
+		001464801B4F4F6600AC0C9F /* ClockIn_TimeLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0014647F1B4F4F6600AC0C9F /* ClockIn_TimeLogCell.swift */; };
+		001464821B4F65D300AC0C9F /* TimeLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001464811B4F65D300AC0C9F /* TimeLogs.swift */; };
 		87238A461B3E25AA004D44CA /* AddJobStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87238A451B3E25AA004D44CA /* AddJobStoryboard.storyboard */; };
 		87238A4C1B3E2EC5004D44CA /* CalendarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87238A4B1B3E2EC5004D44CA /* CalendarStoryboard.storyboard */; };
 		87238A4E1B3E300A004D44CA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87238A4D1B3E300A004D44CA /* CalendarViewController.swift */; };
@@ -17,7 +22,6 @@
 		874FAD021B33A9D7002EABB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD011B33A9D7002EABB0 /* Images.xcassets */; };
 		874FAD051B33A9D7002EABB0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */; };
 		874FAD111B33A9D7002EABB0 /* SixOhFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */; };
-		87E9BEC51B3E3801005CBDE8 /* ClockInStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E9BEC41B3E3801005CBDE8 /* ClockInStoryboard.storyboard */; };
 		B90FA0551B4320A6004B4D79 /* CVCalendarContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0411B4320A6004B4D79 /* CVCalendarContentDelegate.swift */; };
 		B90FA0561B4320A6004B4D79 /* CVCalendarContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0421B4320A6004B4D79 /* CVCalendarContentViewController.swift */; };
 		B90FA0571B4320A6004B4D79 /* CVCalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0431B4320A6004B4D79 /* CVCalendarDayView.swift */; };
@@ -60,6 +64,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		001464771B4E06D400AC0C9F /* ClockInStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClockInStoryboard.storyboard; sourceTree = "<group>"; };
+		0014647B1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClockInJobsPopoverViewController.swift; path = ../ClockInJobsPopoverViewController.swift; sourceTree = "<group>"; };
+		0014647D1B4F4EDB00AC0C9F /* ClockIn_JobsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockIn_JobsCell.swift; sourceTree = "<group>"; };
+		0014647F1B4F4F6600AC0C9F /* ClockIn_TimeLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockIn_TimeLogCell.swift; sourceTree = "<group>"; };
+		001464811B4F65D300AC0C9F /* TimeLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLogs.swift; sourceTree = "<group>"; };
 		87238A451B3E25AA004D44CA /* AddJobStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddJobStoryboard.storyboard; sourceTree = "<group>"; };
 		87238A4B1B3E2EC5004D44CA /* CalendarStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CalendarStoryboard.storyboard; sourceTree = "<group>"; };
 		87238A4D1B3E300A004D44CA /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +83,6 @@
 		874FAD0A1B33A9D7002EABB0 /* SixOhFourTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SixOhFourTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		874FAD0F1B33A9D7002EABB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOhFourTests.swift; sourceTree = "<group>"; };
-		87E9BEC41B3E3801005CBDE8 /* ClockInStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClockInStoryboard.storyboard; sourceTree = "<group>"; };
 		B90FA0411B4320A6004B4D79 /* CVCalendarContentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentDelegate.swift; sourceTree = "<group>"; };
 		B90FA0421B4320A6004B4D79 /* CVCalendarContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentViewController.swift; sourceTree = "<group>"; };
 		B90FA0431B4320A6004B4D79 /* CVCalendarDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarDayView.swift; sourceTree = "<group>"; };
@@ -153,7 +161,7 @@
 				874FACFE1B33A9D7002EABB0 /* Main.storyboard */,
 				87238A451B3E25AA004D44CA /* AddJobStoryboard.storyboard */,
 				87238A4B1B3E2EC5004D44CA /* CalendarStoryboard.storyboard */,
-				87E9BEC41B3E3801005CBDE8 /* ClockInStoryboard.storyboard */,
+				001464771B4E06D400AC0C9F /* ClockInStoryboard.storyboard */,
 				874FAD011B33A9D7002EABB0 /* Images.xcassets */,
 				874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */,
 				874FACF91B33A9D7002EABB0 /* SixOhFour.xcdatamodeld */,
@@ -219,6 +227,7 @@
 			children = (
 				B9920E681B3B711A0037B44B /* MainTabBarController.swift */,
 				87238A4F1B3E3212004D44CA /* ClockInViewController.swift */,
+				0014647B1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift */,
 				87238A4D1B3E300A004D44CA /* CalendarViewController.swift */,
 				B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */,
 				B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */,
@@ -233,6 +242,7 @@
 			children = (
 				B9D77DDF1B3C96CA00988865 /* Jobs.swift */,
 				B93E88921B463BFD0030877B /* Shift.swift */,
+				001464811B4F65D300AC0C9F /* TimeLogs.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -242,6 +252,8 @@
 			children = (
 				B93E88881B45FFA00030877B /* JobColorView.swift */,
 				B93E888A1B46067E0030877B /* TodayScheduleCell.swift */,
+				0014647D1B4F4EDB00AC0C9F /* ClockIn_JobsCell.swift */,
+				0014647F1B4F4F6600AC0C9F /* ClockIn_TimeLogCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -331,7 +343,7 @@
 				874FAD051B33A9D7002EABB0 /* LaunchScreen.xib in Resources */,
 				874FAD021B33A9D7002EABB0 /* Images.xcassets in Resources */,
 				87238A461B3E25AA004D44CA /* AddJobStoryboard.storyboard in Resources */,
-				87E9BEC51B3E3801005CBDE8 /* ClockInStoryboard.storyboard in Resources */,
+				001464781B4E06D400AC0C9F /* ClockInStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,11 +376,13 @@
 				B9C8A7B51B4E469E00C4BEEC /* AddScheduleTableViewController.swift in Sources */,
 				B90FA0551B4320A6004B4D79 /* CVCalendarContentDelegate.swift in Sources */,
 				B90FA05A1B4320A6004B4D79 /* CVCalendarMenuView.swift in Sources */,
+				001464801B4F4F6600AC0C9F /* ClockIn_TimeLogCell.swift in Sources */,
 				B90FA0621B4320A6004B4D79 /* CVCalendarViewAppearanceDelegate.swift in Sources */,
 				B90FA0631B4320A6004B4D79 /* CVCalendarViewDelegate.swift in Sources */,
 				B90FA0591B4320A6004B4D79 /* CVCalendarManager.swift in Sources */,
 				B93E888B1B46067E0030877B /* TodayScheduleCell.swift in Sources */,
 				874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */,
+				001464821B4F65D300AC0C9F /* TimeLogs.swift in Sources */,
 				B90FA0671B4320A6004B4D79 /* CVCircleView.swift in Sources */,
 				B90FA05B1B4320A6004B4D79 /* CVCalendarMonthContentView.swift in Sources */,
 				B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */,
@@ -376,9 +390,12 @@
 				B90FA05E1B4320A6004B4D79 /* CVCalendarView.swift in Sources */,
 				874FACFB1B33A9D7002EABB0 /* SixOhFour.xcdatamodeld in Sources */,
 				B90FA05D1B4320A6004B4D79 /* CVCalendarRenderer.swift in Sources */,
+				B9920E671B3B692B0037B44B /* AddScheduleViewController.swift in Sources */,
+				0014647E1B4F4EDB00AC0C9F /* ClockIn_JobsCell.swift in Sources */,
 				B90FA0681B4320A6004B4D79 /* CVDate.swift in Sources */,
 				B90FA0581B4320A6004B4D79 /* CVCalendarDayViewControlCoordinator.swift in Sources */,
 				B90FA0601B4320A6004B4D79 /* CVCalendarViewAnimatorDelegate.swift in Sources */,
+				0014647C1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift in Sources */,
 				B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */,
 				B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */,
 				B90FA0651B4320A6004B4D79 /* CVCalendarWeekContentView.swift in Sources */,
