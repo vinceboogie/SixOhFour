@@ -19,10 +19,11 @@ class CVCalendarViewAppearance: NSObject {
     var spaceBetweenWeekViews: CGFloat? = 0
     var spaceBetweenDayViews: CGFloat? = 0
     
-    var dayLabelWeekdayTextSize: CGFloat? = 18
-    var dayLabelPresentWeekdayTextSize: CGFloat? = 18
-    var dayLabelWeekdayHighlightedTextSize: CGFloat? = 20
-    var dayLabelPresentWeekdayHighlightedTextSize: CGFloat? = 20
+    // changed values from 18/20 to 14/18
+    var dayLabelWeekdayTextSize: CGFloat? = 14
+    var dayLabelPresentWeekdayTextSize: CGFloat? = 14
+    var dayLabelWeekdayHighlightedTextSize: CGFloat? = 18
+    var dayLabelPresentWeekdayHighlightedTextSize: CGFloat? = 18
     
     var dayLabelPresentWeekdayInitallyBold: Bool = true
     
@@ -38,7 +39,7 @@ class CVCalendarViewAppearance: NSObject {
     var dayLabelPresentWeekdayHighlightedTextColor: UIColor? = .whiteColor()
     
     var dotMarkerColor: UIColor? = .whiteColor()
-    var dotMarkerOffset: CGFloat? = 3.5
+    var dotMarkerOffset: CGFloat? = 5 // changed from 3.5 to 5
     
     var delegate: CVCalendarViewAppearanceDelegate? {
         didSet {
