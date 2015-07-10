@@ -61,7 +61,7 @@ class PayRateTableViewController: UITableViewController {
         }
     }
     
-    func payValue(vc: AddJobViewController, value: String) {
+    func payValue(vc: AddJobTableViewController, value: String) {
      
     }
     

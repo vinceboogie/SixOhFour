@@ -80,7 +80,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == "edit" {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let itemController : AddJobViewController = segue.destinationViewController as! AddJobViewController
+            let itemController : AddJobTableViewController = segue.destinationViewController as! AddJobTableViewController
             let nItem : Jobs = frc.objectAtIndexPath(indexPath!) as! Jobs
             itemController.nItem = nItem
             
