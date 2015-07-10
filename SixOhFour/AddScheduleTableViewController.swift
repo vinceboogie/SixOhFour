@@ -11,8 +11,11 @@ import UIKit
 class AddScheduleTableViewController: UITableViewController {
 
     @IBOutlet weak var startLabel: UILabel!
+    @IBOutlet weak var endLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
+    @IBOutlet weak var endDatePicker: UIDatePicker!
     
+    var saveButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +26,13 @@ class AddScheduleTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Save", style: .Plain, target: self, action: "sayHello")
         
-        startDatePickerChanged()
-
+        // TODO - Change Say Hello to Save Function
+        saveButton = UIBarButtonItem(title:"Save", style: .Plain, target: self, action: "sayHello")
+        self.navigationItem.rightBarButtonItem = saveButton
         
+        datePickerChanged(startLabel, datePicker: startDatePicker)
+        saveButton.enabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,23 +50,86 @@ class AddScheduleTableViewController: UITableViewController {
     // MARK: IB Actions
     
     @IBAction func startDatePickerValue(sender: AnyObject) {
-            startDatePickerChanged()
+        datePickerChanged(startLabel, datePicker: startDatePicker)
+    }
+    
+    @IBAction func endDatePickerValue(sender: AnyObject) {
+        datePickerChanged(endLabel, datePicker: endDatePicker)
     }
     
     
     // MARK: Datepicker
     
-    func startDatePickerChanged() {
-        startLabel.text = NSDateFormatter.localizedStringFromDate(startDatePicker.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.ShortStyle)
+    func datePickerChanged(label: UILabel, datePicker: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        
+        
+        label.text = dateFormatter.stringFromDate(datePicker.date)
+        
+        if datePicker == startDatePicker {
+            if datePicker.date.compare(endDatePicker.date) == NSComparisonResult.OrderedDescending {
+                endLabel.text = label.text
+                endDatePicker.date = datePicker.date
+            } else {
+                endLabel.text = dateFormatter.stringFromDate(endDatePicker.date)
+            }
+        }
+        
+        if datePicker == endDatePicker {
+            if datePicker.date.compare(startDatePicker.date) == NSComparisonResult.OrderedAscending {
+                startLabel.text = label.text
+                startDatePicker.date = datePicker.date
+            }
+        }
+        
+        toggleSaveButton()
     }
     
-    var datePickerHidden = true
+    private var startDatePickerHidden = true
+    private var endDatePickerHidden = true
     
-    func toggleStartDatePicker() {
-        datePickerHidden = !datePickerHidden
-    
+    func toggleDatePicker(datePicker: String) {
+        
+        if datePicker == "Start" {
+            startDatePickerHidden = !startDatePickerHidden
+            toggleLabelColor(startDatePickerHidden, label: startLabel)
+            endDatePickerHidden = true
+            toggleLabelColor(endDatePickerHidden, label: endLabel)
+        } else if datePicker == "End" {
+            endDatePickerHidden = !endDatePickerHidden
+            toggleLabelColor(endDatePickerHidden, label: endLabel)
+            startDatePickerHidden = true
+            toggleLabelColor(startDatePickerHidden, label: startLabel)
+        } else {
+            // Close datepickers
+            startDatePickerHidden = true
+            endDatePickerHidden = true
+            toggleLabelColor(startDatePickerHidden, label: startLabel)
+            toggleLabelColor(endDatePickerHidden, label: endLabel)
+        }
+        
         tableView.beginUpdates()
         tableView.endUpdates()
+    }
+    
+    func toggleLabelColor(hidden: Bool, label: UILabel) {
+        if hidden{
+            label.textColor = UIColor.blackColor()
+        } else {
+            label.textColor = UIColor.redColor()
+        }
+    }
+    
+    func toggleSaveButton() {
+        if startDatePicker.date.compare(endDatePicker.date) == NSComparisonResult.OrderedAscending {
+            saveButton.enabled = true
+        } else {
+            saveButton.enabled = false
+        }
+        
+        
     }
 
     // MARK: - Table view data source
@@ -90,27 +158,29 @@ class AddScheduleTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 && indexPath.row == 0 {
-            toggleStartDatePicker()
-            
-            if startLabel.textColor == UIColor.blackColor() {
-                startLabel.textColor = UIColor.redColor()
-            }
-            else {
-                startLabel.textColor = UIColor.blackColor()
-            }
+            toggleDatePicker("Start")
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            toggleDatePicker("End")
+        } else {
+            toggleDatePicker("Close")
         }
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+   
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if datePickerHidden && indexPath.section == 1 && indexPath.row == 1 {
+        if startDatePickerHidden && indexPath.section == 1 && indexPath.row == 1 {
+            return 0
+        } else if endDatePickerHidden && indexPath.section == 1 && indexPath.row == 3 {
             return 0
         } else {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.

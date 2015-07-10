@@ -220,7 +220,7 @@
             <objects>
                 <tableViewController id="uW5-in-xzW" customClass="AddScheduleTableViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="aOf-Kt-WG2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -280,8 +280,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan 1, 2015  10:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrz-2m-Y37">
-                                                    <rect key="frame" x="182" y="11" width="173" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan 1, 2015 10:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrz-2m-Y37">
+                                                    <rect key="frame" x="186" y="11" width="169" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -329,14 +329,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan 1, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvy-kA-3yZ">
-                                                    <rect key="frame" x="171" y="11" width="90" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0C-fr-OBb">
-                                                    <rect key="frame" x="281" y="11" width="74" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan 1, 2015 10:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0C-fr-OBb">
+                                                    <rect key="frame" x="186" y="11" width="169" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -346,9 +340,30 @@
                                                 <constraint firstItem="Wmz-vo-Iba" firstAttribute="leading" secondItem="jSB-5l-L0z" secondAttribute="leading" constant="20" id="6nF-jE-WYX"/>
                                                 <constraint firstAttribute="trailing" secondItem="X0C-fr-OBb" secondAttribute="trailing" constant="20" id="DQZ-dU-db7"/>
                                                 <constraint firstAttribute="centerY" secondItem="X0C-fr-OBb" secondAttribute="centerY" id="U5O-xT-me4"/>
-                                                <constraint firstItem="X0C-fr-OBb" firstAttribute="leading" secondItem="bvy-kA-3yZ" secondAttribute="trailing" constant="20" id="a8p-GF-PhJ"/>
-                                                <constraint firstAttribute="centerY" secondItem="bvy-kA-3yZ" secondAttribute="centerY" id="g5L-oo-ijs"/>
                                                 <constraint firstAttribute="centerY" secondItem="Wmz-vo-Iba" secondAttribute="centerY" id="ljW-vJ-slz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="165" id="fXU-QV-Hg5">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fXU-QV-Hg5" id="akN-Tm-ETs">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="l3c-gi-1hp">
+                                                    <rect key="frame" x="0.0" y="1" width="375" height="162"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="458117385.34052497">
+                                                        <!--2015-07-09 06:49:45 +0000-->
+                                                    </date>
+                                                    <connections>
+                                                        <action selector="endDatePickerValue:" destination="uW5-in-xzW" eventType="valueChanged" id="K7Z-ls-OKQ"/>
+                                                    </connections>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="l3c-gi-1hp" firstAttribute="top" secondItem="akN-Tm-ETs" secondAttribute="top" id="0HK-3K-NGe"/>
+                                                <constraint firstAttribute="trailing" secondItem="l3c-gi-1hp" secondAttribute="trailing" id="10a-aV-afH"/>
+                                                <constraint firstItem="l3c-gi-1hp" firstAttribute="leading" secondItem="akN-Tm-ETs" secondAttribute="leading" id="Gps-uf-DaT"/>
+                                                <constraint firstAttribute="bottom" secondItem="l3c-gi-1hp" secondAttribute="bottom" id="o9R-FO-9Ki"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -419,6 +434,9 @@
                                                 <constraint firstItem="inc-CH-s6m" firstAttribute="leading" secondItem="8ZT-7a-nMj" secondAttribute="leading" constant="20" id="mM3-0c-kjO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="rfp-j3-BwP" kind="show" id="J6q-sE-dVb"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="aml-sT-tkt">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -498,8 +516,11 @@
                             <outlet property="delegate" destination="uW5-in-xzW" id="EAj-zi-EgM"/>
                         </connections>
                     </tableView>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="endDatePicker" destination="l3c-gi-1hp" id="dUJ-qf-cnh"/>
+                        <outlet property="endLabel" destination="X0C-fr-OBb" id="EKh-vb-Ew2"/>
                         <outlet property="startDatePicker" destination="MdH-Ax-WHV" id="JR1-VC-efa"/>
                         <outlet property="startLabel" destination="Xrz-2m-Y37" id="4Fq-ts-O5F"/>
                     </connections>
@@ -669,7 +690,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jDO-pd-Sf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4067.5" y="1424.5"/>
+            <point key="canvasLocation" x="4167.5" y="1424.5"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="ghd-td-zgU">
