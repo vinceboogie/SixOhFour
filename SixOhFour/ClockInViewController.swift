@@ -1,4 +1,4 @@
-//
+
 //  ClockInViewController.swift
 //  SixOhFour
 //
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
 
     var timer = NSTimer()
     var minutes: Int = 0
@@ -50,7 +50,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             breakButton.setTitle("Start Break", forState: UIControlState.Normal)
             
             breakButton.enabled = true
-            
             addLap = true
             
             timelogDescription.append("Clock In")
@@ -120,7 +119,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             stopWatchLabel.text = stopWatchString
          
             addLap = false
-
+            startBreak = 0
+            startStopWatch = true
         }
         
         
@@ -210,5 +210,23 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         lapsTableView.reloadData()
         
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if let popupView = segue.destinationViewController as? UIViewController
+        {
+            if let popup = popupView.popoverPresentationController
+            {
+                popup.delegate = self
+            }
+        }
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
+    {
+        return UIModalPresentationStyle.None
+    }
+    
+
 }
 

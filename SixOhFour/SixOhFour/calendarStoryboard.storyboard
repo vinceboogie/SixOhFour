@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--Calendar-->
+        <scene sceneID="FYc-1d-amo">
+            <objects>
+                <viewController id="mcG-89-bFu" customClass="CalendarViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jEO-aD-lLt"/>
+                        <viewControllerLayoutGuide type="bottom" id="OZH-GH-m0W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="byI-Gu-9AB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job 1 - 2:30pm-8:00pm " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em0-G4-ZlK">
+                                <rect key="frame" x="16" y="448" width="188" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job 2 - 10:00pm-3:00am " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ff-0J-oUD">
+                                <rect key="frame" x="16" y="473" width="196" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7i-DS-nbH">
+                                <rect key="frame" x="134" y="72" width="106" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFJ-Ha-O5y" customClass="CVCalendarMenuView" customModule="SixOhFour" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="101" width="375" height="25"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="4K2-Cs-RIr"/>
+                                    <constraint firstAttribute="width" constant="375" id="dN6-h5-0PO"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsc-ue-uIX" customClass="CVCalendarView" customModule="SixOhFour" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="126" width="375" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="Ib2-i7-Yrn"/>
+                                    <constraint firstAttribute="height" constant="250" id="eVi-Fc-wl4"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="calendarDelegate" destination="mcG-89-bFu" id="dkW-Me-uwB"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday, Jun 16" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBA-jA-dXL">
+                                <rect key="frame" x="16" y="419" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eFJ-Ha-O5y" firstAttribute="top" secondItem="Y7i-DS-nbH" secondAttribute="bottom" constant="8" id="3jH-QR-bTo"/>
+                            <constraint firstAttribute="trailing" secondItem="eFJ-Ha-O5y" secondAttribute="trailing" id="96t-4C-RQ8"/>
+                            <constraint firstItem="ZBA-jA-dXL" firstAttribute="leading" secondItem="byI-Gu-9AB" secondAttribute="leading" constant="16" id="KDK-Se-Uhw"/>
+                            <constraint firstAttribute="trailing" secondItem="gsc-ue-uIX" secondAttribute="trailing" id="LMb-KY-eqF"/>
+                            <constraint firstItem="gsc-ue-uIX" firstAttribute="top" secondItem="eFJ-Ha-O5y" secondAttribute="bottom" id="OMZ-Sd-R4U"/>
+                            <constraint firstItem="gsc-ue-uIX" firstAttribute="leading" secondItem="byI-Gu-9AB" secondAttribute="leading" id="Qn4-eg-kHF"/>
+                            <constraint firstAttribute="trailing" secondItem="ZBA-jA-dXL" secondAttribute="trailing" constant="16" id="T2y-3M-Tfd"/>
+                            <constraint firstAttribute="centerX" secondItem="Y7i-DS-nbH" secondAttribute="centerX" id="T9P-aR-A7Q"/>
+                            <constraint firstItem="ZBA-jA-dXL" firstAttribute="top" secondItem="gsc-ue-uIX" secondAttribute="bottom" constant="43" id="XqK-cF-1vg"/>
+                            <constraint firstItem="Y7i-DS-nbH" firstAttribute="top" secondItem="jEO-aD-lLt" secondAttribute="bottom" constant="8" id="Ya3-iu-LkH"/>
+                            <constraint firstItem="eFJ-Ha-O5y" firstAttribute="leading" secondItem="byI-Gu-9AB" secondAttribute="leading" id="xaD-e4-UeO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Calendar" id="lp4-eS-Eug">
+                        <barButtonItem key="leftBarButtonItem" image="list" id="JR7-ZS-4J9">
+                            <connections>
+                                <segue destination="l4S-jf-v4K" kind="presentation" id="GlL-Ce-sIo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="Plus" id="t0x-tI-WZP">
+                            <connections>
+                                <segue destination="YzN-GM-lIt" kind="show" identifier="addScheduleSegue" id="Aoe-Ll-Xqz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="calendarView" destination="gsc-ue-uIX" id="1gV-z5-JVf"/>
+                        <outlet property="menuView" destination="eFJ-Ha-O5y" id="515-kq-Qgu"/>
+                        <outlet property="monthLabel" destination="Y7i-DS-nbH" id="t3P-pY-0LY"/>
+                        <outlet property="todayLabel" destination="ZBA-jA-dXL" id="UMJ-3P-IsX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7pZ-e6-UYL" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3024.5" y="1425.5"/>
+        </scene>
+        <!--Repeating Schedule View Controller-->
+        <scene sceneID="1b6-1w-Tqt">
+            <objects>
+                <viewController id="l4S-jf-v4K" customClass="RepeatingScheduleViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fA0-I4-DGH"/>
+                        <viewControllerLayoutGuide type="bottom" id="e5H-pI-wZI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pTg-Xj-TgY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PkV-dH-X8L">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="GRm-Ff-wZU"/>
+                                    <constraint firstAttribute="height" constant="64" id="cIh-jK-3qA"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Repeating Schedule" id="8T7-GB-4kQ">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="kUa-yF-D4x">
+                                            <connections>
+                                                <segue destination="xr4-tK-RXe" kind="unwind" unwindAction="backToCalendar:" id="yaG-8j-zZ5"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Edit" id="qBG-4h-cxb"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PkV-dH-X8L" firstAttribute="top" secondItem="pTg-Xj-TgY" secondAttribute="top" id="0fq-Gh-8Zv"/>
+                            <constraint firstAttribute="trailing" secondItem="PkV-dH-X8L" secondAttribute="trailing" id="3ge-xF-d1k"/>
+                            <constraint firstItem="PkV-dH-X8L" firstAttribute="leading" secondItem="pTg-Xj-TgY" secondAttribute="leading" id="l07-kv-rSO"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yyy-bD-kwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xr4-tK-RXe" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3024.5" y="2276.5"/>
+        </scene>
+        <!--Add Schedule View Controller-->
+        <scene sceneID="N6J-dG-q65">
+            <objects>
+                <viewController id="YzN-GM-lIt" customClass="AddScheduleViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CJq-6b-jBE"/>
+                        <viewControllerLayoutGuide type="bottom" id="weK-3E-bR0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zcx-Cc-S1a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mx-E7-LNf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="qUX-3D-uhJ"/>
+                                    <constraint firstAttribute="height" constant="64" id="wCP-X5-l11"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Add Schedule" id="kuV-1s-s85"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OD-8y-2F0">
+                                <rect key="frame" x="134" y="72" width="106" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-PZ-p9Z" customClass="CVCalendarMenuView" customModule="SixOhFour" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="101" width="375" height="25"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="RML-7f-lRT"/>
+                                    <constraint firstAttribute="height" constant="25" id="wcg-qq-XvX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhE-NG-32x" customClass="CVCalendarView" customModule="SixOhFour" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="126" width="375" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="6CN-Ed-H8d"/>
+                                    <constraint firstAttribute="height" constant="250" id="q3P-8r-9qT"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="calendarDelegate" destination="YzN-GM-lIt" id="mIu-H3-eaM"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job 1 - 2:30pm-8:00pm " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gx-kL-8C9">
+                                <rect key="frame" x="16" y="466" width="188" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job 2 - 10:00pm-3:00am " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofq-Rh-bQP">
+                                <rect key="frame" x="16" y="491" width="196" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Job 1 - Red Garage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drq-l1-Jtc">
+                                <rect key="frame" x="16" y="397" width="343" height="32"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wednesday, Jun 16" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hms-pq-q27">
+                                <rect key="frame" x="16" y="437" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7mx-E7-LNf" secondAttribute="trailing" id="3oV-aY-WkO"/>
+                            <constraint firstAttribute="trailing" secondItem="xhE-NG-32x" secondAttribute="trailing" id="9bm-uf-5ty"/>
+                            <constraint firstItem="xhE-NG-32x" firstAttribute="leading" secondItem="zcx-Cc-S1a" secondAttribute="leading" id="AYv-Wx-p5q"/>
+                            <constraint firstItem="xhE-NG-32x" firstAttribute="top" secondItem="fCx-PZ-p9Z" secondAttribute="bottom" id="EMK-we-6sq"/>
+                            <constraint firstItem="fCx-PZ-p9Z" firstAttribute="top" secondItem="7OD-8y-2F0" secondAttribute="bottom" constant="8" id="KJ5-cs-Z2j"/>
+                            <constraint firstItem="fCx-PZ-p9Z" firstAttribute="leading" secondItem="zcx-Cc-S1a" secondAttribute="leading" id="Rrt-i8-caC"/>
+                            <constraint firstItem="7OD-8y-2F0" firstAttribute="top" secondItem="7mx-E7-LNf" secondAttribute="bottom" constant="8" id="cCt-m6-g36"/>
+                            <constraint firstAttribute="trailing" secondItem="fCx-PZ-p9Z" secondAttribute="trailing" id="fVo-Ac-1eZ"/>
+                            <constraint firstAttribute="centerX" secondItem="7OD-8y-2F0" secondAttribute="centerX" id="wXt-dR-Sev"/>
+                            <constraint firstItem="7mx-E7-LNf" firstAttribute="leading" secondItem="zcx-Cc-S1a" secondAttribute="leading" id="zI9-jj-a9x"/>
+                            <constraint firstItem="7mx-E7-LNf" firstAttribute="top" secondItem="zcx-Cc-S1a" secondAttribute="top" id="zVx-cG-O0k"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="calendarView" destination="xhE-NG-32x" id="6Ck-S7-PXQ"/>
+                        <outlet property="menuView" destination="fCx-PZ-p9Z" id="Qg4-qO-ykJ"/>
+                        <outlet property="monthLabel" destination="7OD-8y-2F0" id="zhF-h0-j1X"/>
+                        <outlet property="todayLabel" destination="Hms-pq-q27" id="Mpw-ds-WbD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hk5-9r-tYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3561.5" y="1425.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oKm-kI-2nP">
+            <objects>
+                <navigationController storyboardIdentifier="CalendarNavController" automaticallyAdjustsScrollViewInsets="NO" id="BKQ-QH-rh1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A0L-tw-K3p">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mcG-89-bFu" kind="relationship" relationship="rootViewController" id="6bf-Zw-SDB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UT9-Ig-wFX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2212" y="1425"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Plus" width="16" height="16"/>
+        <image name="list" width="20" height="20"/>
+    </resources>
+</document>

@@ -15,5 +15,7 @@ class Jobs: NSManagedObject {
     @NSManaged var job: String
     @NSManaged var pay: String
     @NSManaged var position: String
+ 
+    //INTIALIZED NEW JOBs. Just needed until Vince's CoreData get inputed to give value
     
 }

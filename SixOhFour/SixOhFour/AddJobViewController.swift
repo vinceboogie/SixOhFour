@@ -44,8 +44,6 @@ class AddJobViewController: UIViewController {
         nItem.position = positionTextField.text
         nItem.pay = payTextField.text
         context!.save(nil)
-        
-        println(nItem)
     }
     
     func editItem() {
@@ -53,8 +51,6 @@ class AddJobViewController: UIViewController {
         nItem!.position = positionTextField.text
         nItem!.pay = payTextField.text
         context!.save(nil)
-
-        println(nItem)
         
     }
     

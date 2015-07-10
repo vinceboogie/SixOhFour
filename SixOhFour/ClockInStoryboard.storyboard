@@ -17,19 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cb1-6U-Gss">
-                                <rect key="frame" x="130" y="145" width="114" height="36"/>
+                                <rect key="frame" x="130" y="160" width="114" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date Timestamp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Van-Hc-jf5">
-                                <rect key="frame" x="131" y="110" width="112.5" height="18"/>
+                                <rect key="frame" x="131" y="125" width="112.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NVW-5q-Yhv">
-                                <rect key="frame" x="222" y="194" width="77" height="30"/>
+                                <rect key="frame" x="221" y="209" width="77" height="30"/>
                                 <state key="normal" title="Start Break">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -37,14 +37,8 @@
                                     <action selector="lapReset:" destination="3fF-Vc-Hph" eventType="touchUpInside" id="9ri-f3-uWV"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FV-K7-kng">
-                                <rect key="frame" x="142" y="84" width="91" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxF-0n-HgQ" userLabel="Top_Half-Top">
-                                <rect key="frame" x="9" y="72" width="356" height="10"/>
+                                <rect key="frame" x="9" y="69" width="355" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="I9P-EV-8Xu"/>
                                     <constraint firstAttribute="height" constant="225" id="V2G-iZ-WA7"/>
@@ -59,20 +53,20 @@
                                 </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXi-Qg-wr4" userLabel="Top_Half-Left">
-                                <rect key="frame" x="9" y="83" width="16" height="214"/>
+                                <rect key="frame" x="9" y="79" width="10" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="IBj-3i-Aby"/>
                                     <constraint firstAttribute="height" constant="200" id="shU-Vw-9Ll"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="35" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t1M-q2-2Gz">
-                                <rect key="frame" x="9" y="284" width="356" height="333"/>
+                                <rect key="frame" x="9" y="299" width="356" height="318"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="356" id="OI2-2d-ve3"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="35" id="YTD-r6-p1u">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClockIn_TimeLogCell" rowHeight="35" id="YTD-r6-p1u">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YTD-r6-p1u" id="uPY-Zk-0Xk">
@@ -100,36 +94,46 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fyd-AQ-mKW">
-                                <rect key="frame" x="74" y="194" width="57" height="30"/>
+                                <rect key="frame" x="74" y="209" width="57" height="30"/>
                                 <state key="normal" title="Clock In"/>
                                 <connections>
                                     <action selector="startStop:" destination="3fF-Vc-Hph" eventType="touchUpInside" id="WcN-Ti-Dav"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RW5-YE-nFl" userLabel="Top_Half-Right">
-                                <rect key="frame" x="354.5" y="79" width="10" height="200"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RW5-YE-nFl" userLabel="Top_Half-Right">
+                                <rect key="frame" x="354" y="79" width="10" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="P6V-DD-HWV"/>
                                     <constraint firstAttribute="width" constant="10" id="eil-sV-vUz"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2h-OL-GR8">
+                                <rect key="frame" x="157" y="87" width="59" height="30"/>
+                                <state key="normal" title="Job Title" backgroundImage="list">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="3ZE-np-SIZ" kind="popoverPresentation" popoverAnchorView="o2h-OL-GR8" id="NxJ-VX-3vf">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PXi-Qg-wr4" firstAttribute="top" secondItem="fxF-0n-HgQ" secondAttribute="bottom" id="13E-Mw-jZV"/>
+                            <constraint firstItem="Van-Hc-jf5" firstAttribute="top" secondItem="o2h-OL-GR8" secondAttribute="bottom" constant="17" id="1fG-OM-4Kl"/>
                             <constraint firstItem="PXi-Qg-wr4" firstAttribute="leading" secondItem="fxF-0n-HgQ" secondAttribute="leading" id="2UC-TF-syf"/>
                             <constraint firstItem="Fyd-AQ-mKW" firstAttribute="top" secondItem="cb1-6U-Gss" secondAttribute="bottom" constant="13" id="77e-I5-tQJ"/>
                             <constraint firstAttribute="centerX" secondItem="Van-Hc-jf5" secondAttribute="centerX" id="JfO-us-4uy"/>
-                            <constraint firstItem="Van-Hc-jf5" firstAttribute="top" secondItem="8FV-K7-kng" secondAttribute="bottom" constant="17" id="Kxv-J6-1Z3"/>
                             <constraint firstItem="NVW-5q-Yhv" firstAttribute="top" secondItem="cb1-6U-Gss" secondAttribute="bottom" constant="13" id="OZK-0o-JoZ"/>
+                            <constraint firstItem="o2h-OL-GR8" firstAttribute="top" secondItem="fxF-0n-HgQ" secondAttribute="bottom" constant="8" id="OlL-Z4-8PS"/>
                             <constraint firstItem="t1M-q2-2Gz" firstAttribute="top" secondItem="PXi-Qg-wr4" secondAttribute="bottom" constant="20" id="PEq-aT-Zq8"/>
                             <constraint firstItem="Jx6-5q-eoC" firstAttribute="top" secondItem="t1M-q2-2Gz" secondAttribute="bottom" constant="50" id="Pbs-qn-LZ3"/>
-                            <constraint firstAttribute="centerX" secondItem="8FV-K7-kng" secondAttribute="centerX" id="QoX-6y-oj0"/>
                             <constraint firstAttribute="centerX" secondItem="fxF-0n-HgQ" secondAttribute="centerX" id="TQ3-o5-DcY"/>
                             <constraint firstItem="fxF-0n-HgQ" firstAttribute="top" secondItem="8qF-YI-T7n" secondAttribute="bottom" constant="5" id="VcN-28-TxM"/>
                             <constraint firstItem="fxF-0n-HgQ" firstAttribute="trailing" secondItem="RW5-YE-nFl" secondAttribute="trailing" id="Xfe-gO-kLR"/>
                             <constraint firstAttribute="trailing" secondItem="t1M-q2-2Gz" secondAttribute="trailing" constant="10" id="bDD-hS-tBl"/>
-                            <constraint firstItem="8FV-K7-kng" firstAttribute="top" secondItem="fxF-0n-HgQ" secondAttribute="bottom" constant="5" id="bTY-RA-TYb"/>
                             <constraint firstAttribute="centerX" secondItem="t1M-q2-2Gz" secondAttribute="centerX" id="cyT-XS-ZTK"/>
                             <constraint firstItem="Fyd-AQ-mKW" firstAttribute="leading" secondItem="PXi-Qg-wr4" secondAttribute="trailing" constant="55" id="dUA-CO-pXC"/>
                             <constraint firstItem="cb1-6U-Gss" firstAttribute="top" secondItem="Van-Hc-jf5" secondAttribute="bottom" constant="17" id="kpm-b1-fu1"/>
@@ -137,6 +141,7 @@
                             <constraint firstItem="RW5-YE-nFl" firstAttribute="leading" secondItem="NVW-5q-Yhv" secondAttribute="trailing" constant="55" id="qoa-Hf-2Zf"/>
                             <constraint firstAttribute="centerX" secondItem="cb1-6U-Gss" secondAttribute="centerX" id="ruj-cw-bBb"/>
                             <constraint firstItem="t1M-q2-2Gz" firstAttribute="leading" secondItem="u4V-KR-o5T" secondAttribute="leading" constant="10" id="seC-2G-jo2"/>
+                            <constraint firstAttribute="centerX" secondItem="o2h-OL-GR8" secondAttribute="centerX" id="vDN-jM-EhV"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -159,6 +164,63 @@
             </objects>
             <point key="canvasLocation" x="1716.5" y="382.5"/>
         </scene>
+        <!--Clock In Jobs Popover View Controller-->
+        <scene sceneID="fX7-I7-QtU">
+            <objects>
+                <viewController id="3ZE-np-SIZ" customClass="ClockInJobsPopoverViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7xH-bn-NsV"/>
+                        <viewControllerLayoutGuide type="bottom" id="3LH-Hk-kix"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mT8-e9-u0P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="py8-NG-Cf8">
+                                <rect key="frame" x="43" y="28" width="235" height="269"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClockInJobsCell" id="ZKZ-1U-VP2" customClass="ClockIn_JobsCell" customModule="SixOhFour" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="245" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZKZ-1U-VP2" id="1tW-yS-Weh">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86w-dg-mtL">
+                                                    <rect key="frame" x="95" y="11" width="44" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="86w-dg-mtL" secondAttribute="centerY" id="z9c-N8-Rwl"/>
+                                                <constraint firstAttribute="centerX" secondItem="86w-dg-mtL" secondAttribute="centerX" id="zZH-dw-gqH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="clockInJobLabel" destination="86w-dg-mtL" id="LZX-Bb-yau"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="3ZE-np-SIZ" id="dUa-PU-X0E"/>
+                                    <outlet property="delegate" destination="3ZE-np-SIZ" id="A6N-Hw-uWs"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8Je-zc-Tyh"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="ClockInJobsTable" destination="py8-NG-Cf8" id="xPd-gD-Vxe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gnI-x6-32J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2388" y="477"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="LaD-2J-KZH">
             <objects>
@@ -178,4 +240,7 @@
             <point key="canvasLocation" x="904" y="382"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="list" width="20" height="20"/>
+    </resources>
 </document>
