@@ -16,7 +16,33 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     @IBOutlet weak var payRateLabel: UILabel!
     @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var colorPicker: UIPickerView!
+    @IBOutlet weak var jobColorView: JobColorView!
+
     let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
+    
+    var pickerVisible = false
+    
+    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var nItem : Jobs? = nil
+    
+    // DUMY FUNCTION - DELETE LATER
+    func getJobColor() -> UIColor {
+        
+        if colorLabel.text == "Red" {
+            return UIColor.redColor()
+        } else if colorLabel.text == "Blue" {
+            return UIColor.blueColor()
+        } else if colorLabel.text == "Green" {
+            return UIColor.greenColor()
+        } else if colorLabel.text == "Yellow" {
+            return UIColor.yellowColor()
+        } else if colorLabel.text == "Purple" {
+            return UIColor.purpleColor()
+        } else {
+            return UIColor.blackColor()
+        }
+    }
     
     @IBAction func payRateButtonPressed(sender: AnyObject) {
         let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
@@ -34,14 +60,11 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
-    var pickerVisible = false
-    
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var nItem : Jobs? = nil
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
         
         colorPicker.dataSource = self
         colorPicker.delegate = self
@@ -51,6 +74,9 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
             positionTextField.text = nItem?.jobPosition
             payRateLabel.text = nItem?.jobPay
             colorLabel.text = nItem?.jobColor
+            if jobColorView != nil {
+                jobColorView.color = nItem!.getJobColor()
+            }
         }
     }
     
@@ -80,7 +106,6 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     func writeValueBack(vc: PayRateTableViewController, value: String) {
         self.payRateLabel.text = "$\(value)"
     }
-     
     
     func newItem() {
         let context = self.context
@@ -115,6 +140,7 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         colorLabel.text = pickerData[row]
+        jobColorView.color = getJobColor()
     }
 
 }

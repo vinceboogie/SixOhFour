@@ -12,7 +12,7 @@ import UIKit
 
 class JobColorView: UIView {
 
-    var color = UIColor.redColor()
+    var color = UIColor.blackColor()
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
