@@ -57,12 +57,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
         
         let jobs = frc.objectAtIndexPath(indexPath) as! Jobs
         
-        cell.textLabel?.text = jobs.jobName
-        cell.textLabel?.textColor = UIColor.grayColor()
+        cell.jobNameLabel.text = jobs.jobName
+        cell.jobColorView.color = jobs.getJobColor()
         
         return cell
     }
