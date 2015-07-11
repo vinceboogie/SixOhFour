@@ -12,9 +12,9 @@ import CoreData
 
 class Jobs: NSManagedObject {
     
-    @NSManaged var job: String
-    @NSManaged var pay: String
-    @NSManaged var position: String
+    @NSManaged var jobName: String
+    @NSManaged var jobPay: String
+    @NSManaged var jobPosition: String
     
     //INTIALIZED NEW JOBs. Just needed until Vince's CoreData get inputed to give value
 }

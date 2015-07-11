@@ -39,9 +39,9 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate {
         super.viewDidLoad()
 
         if nItem != nil {
-            nameTextField.text = nItem?.job
-            positionTextField.text = nItem?.position
-            payRateLabel.text = nItem?.pay
+            nameTextField.text = nItem?.jobName
+            positionTextField.text = nItem?.jobPosition
+            payRateLabel.text = nItem?.jobPay
         }
     }
 
@@ -60,16 +60,16 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate {
         let ent = NSEntityDescription.entityForName("Jobs", inManagedObjectContext: context!)
             
         let nItem = Jobs(entity: ent!, insertIntoManagedObjectContext: context)
-        nItem.job = nameTextField.text
-        nItem.position = positionTextField.text
-        nItem.pay = payRateLabel.text!
+        nItem.jobName = nameTextField.text
+        nItem.jobPosition = positionTextField.text
+        nItem.jobPay = payRateLabel.text!
         context!.save(nil)
     }
         
     func editItem() {
-        nItem!.job = nameTextField.text
-        nItem!.position = positionTextField.text
-        nItem!.pay = payRateLabel.text!
+        nItem!.jobName = nameTextField.text
+        nItem!.jobPosition = positionTextField.text
+        nItem!.jobPay = payRateLabel.text!
         context!.save(nil)
     }
 

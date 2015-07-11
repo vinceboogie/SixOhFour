@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func jobsFetchRequest() -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: "Jobs")
-        let sortDescriptor = NSSortDescriptor(key: "job", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "jobName", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         return fetchRequest
     }
@@ -61,7 +61,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let jobs = frc.objectAtIndexPath(indexPath) as! Jobs
         
-        cell.textLabel?.text = jobs.job
+        cell.textLabel?.text = jobs.jobName
         cell.textLabel?.textColor = UIColor.grayColor()
         
         return cell
