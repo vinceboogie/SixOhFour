@@ -86,6 +86,7 @@
 		874FAD0A1B33A9D7002EABB0 /* SixOhFourTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SixOhFourTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		874FAD0F1B33A9D7002EABB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOhFourTests.swift; sourceTree = "<group>"; };
+		87B57CD51B5090D100D9B438 /* SixOhFourV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SixOhFourV2.xcdatamodel; sourceTree = "<group>"; };
 		B90FA0411B4320A6004B4D79 /* CVCalendarContentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentDelegate.swift; sourceTree = "<group>"; };
 		B90FA0421B4320A6004B4D79 /* CVCalendarContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentViewController.swift; sourceTree = "<group>"; };
 		B90FA0431B4320A6004B4D79 /* CVCalendarDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarDayView.swift; sourceTree = "<group>"; };
@@ -698,9 +699,10 @@
 		874FACF91B33A9D7002EABB0 /* SixOhFour.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				87B57CD51B5090D100D9B438 /* SixOhFourV2.xcdatamodel */,
 				874FACFA1B33A9D7002EABB0 /* SixOhFour.xcdatamodel */,
 			);
-			currentVersion = 874FACFA1B33A9D7002EABB0 /* SixOhFour.xcdatamodel */;
+			currentVersion = 87B57CD51B5090D100D9B438 /* SixOhFourV2.xcdatamodel */;
 			path = SixOhFour.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

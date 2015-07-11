@@ -26,7 +26,7 @@ class ClockIn_JobsCell: UITableViewCell {
     
     var jobtest : Jobs! {
         didSet {
-            clockInJobLabel.text = jobtest.job
+            clockInJobLabel.text = jobtest.jobName
         }
     }
     

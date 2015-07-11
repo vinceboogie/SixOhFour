@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Jobs" representedClassName="Jobs" syncable="YES">
+        <attribute name="jobName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jobPay" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jobPosition" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="TimeLogs" syncable="YES">
+        <attribute name="timelogComment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timelogJob" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timelogTimestamp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timelogTitle" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Jobs" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="TimeLogs" positionX="-63" positionY="9" width="128" height="105"/>
+    </elements>
+</model>
