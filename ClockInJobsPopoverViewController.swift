@@ -118,9 +118,9 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("ClockInJobsCell", forIndexPath: indexPath) as! ClockIn_JobsCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ClockInJobsCell", forIndexPath: indexPath) as! JobsListCell // Old CUSTOM Cell = ClockIn_JobsCell
         
-        cell.jobtest = arrayOfJobs[indexPath.row]
+        cell.job = arrayOfJobs[indexPath.row]
 //        cell.clockInJobButton.setTitle("JOB EXIST" , forState: UIControlState.Normal)
 
             return cell
