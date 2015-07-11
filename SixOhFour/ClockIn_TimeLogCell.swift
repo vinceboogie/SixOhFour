@@ -10,6 +10,20 @@ import UIKit
 
 class ClockIn_TimeLogCell: UITableViewCell {
 
+    @IBOutlet weak var timelogCommentImage: UIImageView!
+    @IBOutlet weak var timelogTimestampLabel: UILabel!
+    @IBOutlet weak var timelogTitleLabel: UILabel!
+    
+    var timelogEntry: TimeLogs! {
+        didSet {
+//            timelogCommentImage.text = job.jobName
+            timelogTimestampLabel.text = timelogEntry.timelogTimestamp
+            timelogTitleLabel.text = timelogEntry.timelogTitle
+
+        }
+    }
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

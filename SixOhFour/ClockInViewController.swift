@@ -9,26 +9,44 @@
 import UIKit
 import CoreData
 
-class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, writeValueBackDelegate2 {
 
     var timer = NSTimer()
     var minutes: Int = 0
     var seconds: Int = 0
     var fractions: Int = 0
     var hours: Int = 0
+
+    var breakTimer = NSTimer()
+    var breakMinutes: Int = 0
+    var breakSeconds: Int = 0
+    var breakFractions: Int = 0
+    var breakHours: Int = 0
     
-    @IBOutlet weak var dateTimestampDisplay: UILabel!
+    @IBOutlet weak var durationDescriptionLabel: UILabel!
+
     var stopWatchString: String = ""
+    var breakWatchString: String = ""
     
     var timelogTimestamp: [String] = []
     var timelogDescription: [String] = []
+    
     var lapsDict: NSDictionary = ["":""]
     
     var rowNumber: Int = 0
     
     var startStopWatch: Bool = true
+    var startBreakWatch: Bool = true
+    
     var addLap: Bool = false
     var startBreak: Int = 0
+    var timerFlow: Int = 0
+    
+    
+    @IBOutlet weak var jobColorDisplay: JobColorView!
+    @IBOutlet weak var jobTitleDisplayButton: UIButton!
+    @IBOutlet weak var jobTitleDisplayLabel: UILabel!
+    
     
     
     @IBOutlet weak var stopWatchLabel: UILabel!
@@ -38,11 +56,24 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var breakButton: UIButton! //lapreset
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        stopWatchLabel.text = "00:00:00"
+        breakButton.enabled = false
+        durationDescriptionLabel.text = " "
+        jobTitleDisplayLabel.text = "Select Job"
+        
+    }
+    
+    
+    
     @IBAction func startStop(sender: AnyObject) {
         
-        //IF USER CLICKED 1st button
+        //CLOCK IN (User clicked 1st button)
         if startStopWatch == true {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateStopWatch"), userInfo: nil, repeats: true)
+            durationDescriptionLabel.text = "Time you've worked"
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("runWorkTimer"), userInfo: nil, repeats: true)
             
             startStopWatch = false
             
@@ -58,7 +89,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
         } else {
             
-            //IF USER CLICKED 1st button again
+            //CLOCK OUT (User clicked 1st button again
             timelogDescription.append("Clock Out")
             appendToTimeTableView()
             saveToCoreDate()
@@ -80,7 +111,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         //IF USER CLICKED 2nd BUTTON
         if addLap == true && startBreak == 0 {
-            
+            durationDescriptionLabel.text = "Time you've been on break"
             breakButton.setTitle("End Break", forState: UIControlState.Normal)
             timelogDescription.append("Started Break")
             appendToTimeTableView()
@@ -126,15 +157,19 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    //MARK: IB Actions
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        stopWatchLabel.text = "00:00:00"
-        breakButton.enabled = false
-        
+    @IBAction func unwindFromClockInPopoverViewControllerAction (segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! ClockInJobsPopoverViewController
+
+        if((sourceVC.selectedJob) != nil ) {
+            
+            jobTitleDisplayLabel.text = sourceVC.selectedJob.jobName
+            jobColorDisplay.color = sourceVC.selectedJob.getJobColor()
+        }
+     
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -142,7 +177,29 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    func updateStopWatch() {
+    func runWorkTimer() {
+        
+        breakSeconds += 1
+        
+        if breakSeconds == 60 {
+            breakMinutes += 1
+            breakSeconds = 0
+        }
+        if breakMinutes == 60 {
+            breakHours += 1
+            breakMinutes = 0
+        }
+        let fractionsStringBreak = breakFractions > 9 ? "\(breakFractions)" : "0\(breakFractions)"
+        let secondsStringBreak = breakSeconds > 9 ? "\(breakSeconds)" : "0\(breakSeconds)"
+        let minutesStringBreak = breakMinutes > 9 ? "\(breakMinutes)" : "0\(breakMinutes)"
+        let hoursStringBreak = breakHours > 9 ? "\(breakHours)" : "0\(breakHours)"
+        
+        stopWatchString  = "\(hoursStringBreak):\(minutesStringBreak):\(secondsStringBreak)"
+        stopWatchLabel.text = stopWatchString
+        
+    }
+    
+    func runBreakTimer() {
         
         seconds += 1
         
@@ -227,6 +284,9 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         return UIModalPresentationStyle.None
     }
     
+    func writeValueBack2(vc: ClockInJobsPopoverViewController, value: String) {
+        self.jobTitleDisplayLabel.text = "$\(value)"
+    }
 
 }
 

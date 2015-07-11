@@ -9,11 +9,21 @@
 import UIKit
 import CoreData
 
+@objc protocol writeValueBackDelegate2 {
+    func writeValueBack2(vc: ClockInJobsPopoverViewController, value: String)
+}
+
+
 class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var writeValueDelegate2: writeValueBackDelegate2?
+    
+
+    
     @IBOutlet weak var ClockInJobsTable: UITableView!
     
     var arrayOfJobs = [Jobs]()
+    var selectedJob: Jobs!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,5 +136,26 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
             return cell
     
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.selectedJob = arrayOfJobs[indexPath.row]
+
+        self.dismissViewControllerAnimated(true, completion: {})
+        
+        self.performSegueWithIdentifier("unwindFromClockInPopoverViewControllerIdentifier", sender: self)
+        
+
+    }
+    
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(true)
+//        
+//        if let delegate = writeValueDelegate2 {
+//            delegate.writeValueBack2(self, value: "\(selectedJobList)")
+//            println("writingBackselectedJobList")
+//        } else {
+//            println("NADA")
+//        }
+//    }
     
 }
