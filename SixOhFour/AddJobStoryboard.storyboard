@@ -206,11 +206,35 @@
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eps-th-HpE">
+                                                    <rect key="frame" x="255" y="12" width="100" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="xgt-C9-67T" secondAttribute="centerY" id="M0S-px-Rhd"/>
+                                                <constraint firstAttribute="trailing" secondItem="eps-th-HpE" secondAttribute="trailing" constant="20" id="PfQ-nO-Mmb"/>
+                                                <constraint firstAttribute="centerY" secondItem="eps-th-HpE" secondAttribute="centerY" id="c9A-hY-O32"/>
                                                 <constraint firstItem="xgt-C9-67T" firstAttribute="leading" secondItem="ftZ-MJ-DIR" secondAttribute="leading" constant="20" id="pCZ-dJ-Hdr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="5vV-kD-L6O">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5vV-kD-L6O" id="c7z-bc-d3I">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjt-Wz-Djq">
+                                                    <rect key="frame" x="28" y="-7" width="320" height="162"/>
+                                                </pickerView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="zjt-Wz-Djq" secondAttribute="centerY" id="6eD-8n-3T0"/>
+                                                <constraint firstAttribute="centerX" secondItem="zjt-Wz-Djq" secondAttribute="centerX" id="T4x-9X-FHk"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -231,6 +255,8 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="colorLabel" destination="eps-th-HpE" id="8pY-xI-vmS"/>
+                        <outlet property="colorPicker" destination="zjt-Wz-Djq" id="LCh-j5-CVK"/>
                         <outlet property="nameTextField" destination="KVa-qI-DnE" id="Cdt-zy-Ean"/>
                         <outlet property="payRateLabel" destination="o76-KP-3Q9" id="Ron-8z-X3h"/>
                         <outlet property="positionTextField" destination="8IK-uV-Hlf" id="A5u-WX-SSI"/>

@@ -9,11 +9,14 @@
 import UIKit
 import CoreData
 
-class AddJobTableViewController: UITableViewController, writeValueBackDelegate {
+class AddJobTableViewController: UITableViewController, writeValueBackDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var positionTextField: UITextField!
     @IBOutlet weak var payRateLabel: UILabel!
+    @IBOutlet weak var colorLabel: UILabel!
+    @IBOutlet weak var colorPicker: UIPickerView!
+    let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
     
     @IBAction func payRateButtonPressed(sender: AnyObject) {
         let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
@@ -31,18 +34,42 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate {
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    var pickerVisible = false
+    
     let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var nItem : Jobs? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        colorPicker.dataSource = self
+        colorPicker.delegate = self
 
         if nItem != nil {
             nameTextField.text = nItem?.jobName
             positionTextField.text = nItem?.jobPosition
             payRateLabel.text = nItem?.jobPay
+            colorLabel.text = nItem?.jobColor
         }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 3 {
+            pickerVisible = !pickerVisible
+            tableView.reloadData()
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row == 4 {
+            if pickerVisible == false {
+                return 0.0
+            }
+            return 150.0
+        }
+        return 44.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,6 +90,7 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate {
         nItem.jobName = nameTextField.text
         nItem.jobPosition = positionTextField.text
         nItem.jobPay = payRateLabel.text!
+        nItem.jobColor = colorLabel.text!
         context!.save(nil)
     }
         
@@ -70,7 +98,23 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate {
         nItem!.jobName = nameTextField.text
         nItem!.jobPosition = positionTextField.text
         nItem!.jobPay = payRateLabel.text!
+        nItem!.jobColor = colorLabel.text!
         context!.save(nil)
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        colorLabel.text = pickerData[row]
     }
 
 }

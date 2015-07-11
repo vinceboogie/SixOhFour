@@ -21,17 +21,19 @@ class Jobs: NSManagedObject {
     //INTIALIZED NEW JOBs. Just needed until Vince's CoreData get inputed to give value
     
     func getJobColor() -> UIColor {
-        
-        return UIColor.redColor()
     
-//        if jobColor == "red" {
-//            return UIColor.redColor()
-//        } else if jobColor == "blue" {
-//            return UIColor.blueColor()
-//        } else if jobColor == "green" {
-//            return UIColor.greenColor()
-//        } else {
-//            return UIColor.blackColor()
-//        }
+        if jobColor == "Red" {
+            return UIColor.redColor()
+        } else if jobColor == "Blue" {
+            return UIColor.blueColor()
+        } else if jobColor == "Green" {
+            return UIColor.greenColor()
+        } else if jobColor == "Yellow" {
+            return UIColor.yellowColor()
+        } else if jobColor == "Purple" {
+            return UIColor.purpleColor()
+        } else {
+            return UIColor.blackColor()
+        }
     }
 }
