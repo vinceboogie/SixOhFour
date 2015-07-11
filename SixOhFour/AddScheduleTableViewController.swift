@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddScheduleTableViewController: UITableViewController {
 
@@ -14,8 +15,11 @@ class AddScheduleTableViewController: UITableViewController {
     @IBOutlet weak var endLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
-    
+    @IBOutlet weak var jobNameLabel: UILabel!
+    @IBOutlet weak var jobColorView: JobColorView!
+
     var saveButton: UIBarButtonItem!
+    var jobListEmpty = true;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,30 @@ class AddScheduleTableViewController: UITableViewController {
         
         datePickerChanged(startLabel, datePicker: startDatePicker)
         saveButton.enabled = false
+        
+        
+        // Fetch first Job
+        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        
+        var request = NSFetchRequest(entityName: "Jobs")
+        request.returnsObjectsAsFaults = false ;
+        
+        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        
+        if results.count > 0 {
+            var firstJob = results[0] as! Jobs
+            jobNameLabel.text = firstJob.jobName
+            jobColorView.color = firstJob.getJobColor()
+            jobListEmpty = false
+        } else {
+            jobNameLabel.text = "Add a Job"
+            jobNameLabel.textColor = UIColor.lightGrayColor()
+            jobColorView.color = UIColor.lightGrayColor()
+            
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,6 +83,16 @@ class AddScheduleTableViewController: UITableViewController {
     
     @IBAction func endDatePickerValue(sender: AnyObject) {
         datePickerChanged(endLabel, datePicker: endDatePicker)
+    }
+    
+    @IBAction func unwindFromJobsListTableViewController (segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! JobsListTableViewController
+        
+        if((sourceVC.selectedJob) != nil) {
+    
+            jobNameLabel.text = sourceVC.selectedJob.jobName
+            jobColorView.color = sourceVC.selectedJob.getJobColor()
+        }
     }
     
     
@@ -123,7 +161,9 @@ class AddScheduleTableViewController: UITableViewController {
     }
     
     func toggleSaveButton() {
-        if startDatePicker.date.compare(endDatePicker.date) == NSComparisonResult.OrderedAscending {
+        if jobListEmpty {
+            saveButton.enabled = false
+        } else if startDatePicker.date.compare(endDatePicker.date) == NSComparisonResult.OrderedAscending {
             saveButton.enabled = true
         } else {
             saveButton.enabled = false
@@ -146,17 +186,25 @@ class AddScheduleTableViewController: UITableViewController {
 //        return 0
 //    }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
+    
+//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCellWithIdentifier("CurrentJobCell", forIndexPath: indexPath) as! JobsListCell
+//
+//        if cell 
+//        
+//        return cell
+//    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+//        if jobListEmpty && indexPath.section == 0 && indexPath.row == 0 {
+//            let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
+//            let addJobsVC: HomeViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+//            
+////            self.navigationController?.dismissViewControllerAnimated(true, completion: {})
+//            self.navigationController?.popToRootViewControllerAnimated(true)
+//        }
+        
         if indexPath.section == 1 && indexPath.row == 0 {
             toggleDatePicker("Start")
         } else if indexPath.section == 1 && indexPath.row == 2 {
@@ -217,14 +265,40 @@ class AddScheduleTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "selectJob" {
+            let destinationVC = segue.destinationViewController as! JobsListTableViewController
+            destinationVC.currentSelection = jobNameLabel.text
+        }
+        
     }
-    */
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if identifier == "selectJob" {
+            if jobListEmpty {
+                let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
+                let addJobsVC: AddJobTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("AddJobTableViewController") as! AddJobTableViewController
+                
+                self.navigationController?.pushViewController(addJobsVC, animated: true)
+                
+            
+                return false
+                
+            } else {
+                return true
+            }
+        }
+        
+        return true
+        
+    }
+    
 
 }
