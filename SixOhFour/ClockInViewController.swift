@@ -35,12 +35,12 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     var timelogTimestamp: [String] = []
     var timelogDescription: [String] = []
     
-    var startStopWatch: Bool = true
-    var startBreakWatch: Bool = true
-    
-    var addLap: Bool = false
-    var startBreak: Int = 0
-    var timerFlow: Int = 0
+//    var startStopWatch: Bool = true
+//    var startBreakWatch: Bool = true
+//    
+//    var addLap: Bool = false
+//    var startBreak: Int = 0
+    var timelogFlow: Int = 0
     
     @IBOutlet weak var jobColorDisplay: JobColorView!
     @IBOutlet weak var jobTitleDisplayButton: UIButton!
@@ -66,22 +66,25 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func startStop(sender: AnyObject) {
         
         //CLOCK IN
-        if startStopWatch == true {
+//        if startStopWatch == true {
+        if timelogFlow == 0 {
             workTitleLabel.text = "Time you've worked"
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("runWorkTimer"), userInfo: nil, repeats: true)
             
-            startStopWatch = false
+//            startStopWatch = false
             
             startStopButton.setTitle("Clock Out", forState: UIControlState.Normal)
             breakButton.setTitle("Start Break", forState: UIControlState.Normal)
             
             breakButton.enabled = true
-            addLap = true
+//            addLap = true
             
             timelogDescription.append("Clocked In")
             appendToTimeTableView()
             saveToCoreDate()
-            
+  
+            timelogFlow = 1
+            println(timelogFlow)
         } else {
         //CLOCK OUT
             
@@ -91,13 +94,17 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             saveToCoreDate()
             
             timer.invalidate()
-            startStopWatch = true
+//            startStopWatch = true
             
             startStopButton.setTitle("Done with Shift", forState: UIControlState.Normal)
             startStopButton.enabled = false
             breakButton.setTitle("Reset", forState: UIControlState.Normal)
             
-            addLap = false
+//            addLap = false
+            
+            timelogFlow = 2
+            println(timelogFlow)
+
         }
         
     }
@@ -105,8 +112,9 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func lapReset(sender: AnyObject) {
         
         //STARTED BREAK
-        if addLap == true && startBreak == 0 {
-
+//        if addLap == true && startBreak == 0 {
+        if timelogFlow == 1 {
+            
             breakMinutes = 0
             breakSeconds = 0
             breakFractions = 0
@@ -131,12 +139,16 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             breakTitleLabel.text = "Time you've been on break"
 
             
-            addLap = true
-            startBreak = 1
+//            addLap = true
+//            startBreak = 1
+
+            timelogFlow = 3
+            println(timelogFlow)
+
             
         //ENDED BREAK
-        } else if addLap == true && startBreak == 1 {
-            
+//        } else if addLap == true && startBreak == 1 {
+        } else if timelogFlow == 3 {
             workTitleLabel.text = "Total time you've worked"
             breakTimeLabel.text = breakWatchString
             
@@ -157,9 +169,12 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             appendToTimeTableView()
             saveToCoreDate()
             
-            addLap = true
-            startBreak = 0
+//            addLap = true
+//            startBreak = 0
             
+            timelogFlow = 1
+            println(timelogFlow)
+
         //RESET
         } else {
             
@@ -185,9 +200,14 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             startStopButton.enabled = true
 
             
-            addLap = false
-            startBreak = 0
-            startStopWatch = true
+//            addLap = false
+//            startBreak = 0
+//            startStopWatch = true
+
+            timelogTimestamp = []
+            timelogDescription = []
+            
+            timelogFlow = 0
         }
         
         
