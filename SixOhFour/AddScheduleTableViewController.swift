@@ -17,6 +17,7 @@ class AddScheduleTableViewController: UITableViewController {
     @IBOutlet weak var endDatePicker: UIDatePicker!
     @IBOutlet weak var jobNameLabel: UILabel!
     @IBOutlet weak var jobColorView: JobColorView!
+    @IBOutlet weak var repeatLabel: UILabel!
 
     var saveButton: UIBarButtonItem!
     var jobListEmpty = true;
@@ -36,8 +37,9 @@ class AddScheduleTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = saveButton
         
         datePickerChanged(startLabel, datePicker: startDatePicker)
-        saveButton.enabled = false
         
+        saveButton.enabled = false
+        repeatLabel.text = "Never"
         
         // Fetch first Job
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
@@ -57,8 +59,6 @@ class AddScheduleTableViewController: UITableViewController {
             jobNameLabel.text = "Add a Job"
             jobNameLabel.textColor = UIColor.lightGrayColor()
             jobColorView.color = UIColor.lightGrayColor()
-            
-            
         }
         
     }
@@ -89,10 +89,20 @@ class AddScheduleTableViewController: UITableViewController {
         let sourceVC = segue.sourceViewController as! JobsListTableViewController
         
         if((sourceVC.selectedJob) != nil) {
-    
             jobNameLabel.text = sourceVC.selectedJob.jobName
             jobColorView.color = sourceVC.selectedJob.getJobColor()
         }
+    }
+    
+    @IBAction func unwindfromSetRepeatTableViewController (segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! SetRepeatTableViewController
+        
+        if ((sourceVC.repeat) != nil) {
+            repeatLabel.text = sourceVC.repeat
+        }
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     
@@ -214,17 +224,27 @@ class AddScheduleTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-   
-    }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if startDatePickerHidden && indexPath.section == 1 && indexPath.row == 1 {
-            return 0
-        } else if endDatePickerHidden && indexPath.section == 1 && indexPath.row == 3 {
-            return 0
-        } else {
+        if !jobListEmpty {
+            if startDatePickerHidden && indexPath.section == 1 && indexPath.row == 1 {
+                return 0
+            } else if endDatePickerHidden && indexPath.section == 1 && indexPath.row == 3 {
+                return 0
+            }
+            
+            if repeatLabel.text == "Never" && indexPath.section == 1 && indexPath.row == 6 {
+                return 0
+            }
+            
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        } else {
+            if indexPath.section == 0 {
+                return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+            } else {
+                return 0
+            }
+            
         }
     }
     
@@ -275,7 +295,12 @@ class AddScheduleTableViewController: UITableViewController {
         
         if segue.identifier == "selectJob" {
             let destinationVC = segue.destinationViewController as! JobsListTableViewController
-            destinationVC.currentSelection = jobNameLabel.text
+            destinationVC.previousSelection = jobNameLabel.text
+        }
+        
+        if segue.identifier == "selectRepeat" {
+            let destinationVC = segue.destinationViewController as! SetRepeatTableViewController
+            destinationVC.previousSelection = repeatLabel.text
         }
         
     }

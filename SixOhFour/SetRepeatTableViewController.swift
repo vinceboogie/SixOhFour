@@ -1,20 +1,17 @@
 //
-//  JobsListTableViewController.swift
+//  SetRepeatTableViewController.swift
 //  SixOhFour
 //
-//  Created by jemsomniac on 7/10/15.
+//  Created by Jem on 7/11/15.
 //  Copyright (c) 2015 vinceboogie. All rights reserved.
 //
 
 import UIKit
-import CoreData
 
-class JobsListTableViewController: UITableViewController {
+class SetRepeatTableViewController: UITableViewController {
 
-    var jobsList = [Jobs]()
-    var jobName: String!
-    var jobColor: UIColor!
-    var selectedJob: Jobs!
+    var repeat: String!
+    var repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month", "Every Year"]
     var previousSelection: String!
     
     override func viewDidLoad() {
@@ -25,16 +22,6 @@ class JobsListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
-        
-        var request = NSFetchRequest(entityName: "Jobs")
-        request.returnsObjectsAsFaults = false ;
-        
-        var results:NSArray = context.executeFetchRequest(request, error: nil)!
-        
-        jobsList = results as! [Jobs]
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,33 +32,43 @@ class JobsListTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return jobsList.count
+        if section == 0 {
+            return 6
+        } else {
+            return 1
+        }
     }
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 {
+            repeat = repeatOptions[indexPath.row]
+        } else {
+            repeat = "Custom"
+        }
+        
+        self.performSegueWithIdentifier("unwindFromSetRepeat", sender: self)
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
-        cell.jobNameLabel.text = jobsList[indexPath.row].jobName
-        cell.jobColorView.color = jobsList[indexPath.row].getJobColor()
+        if indexPath.section == 0 {
+            cell.textLabel?.text = repeatOptions[indexPath.row]
+        } else {
+            cell.textLabel?.text = "Custom"
+        }
         
-        if cell.jobNameLabel.text == previousSelection {
+        if cell.textLabel?.text == previousSelection {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
         
         return cell
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.selectedJob = jobsList[indexPath.row]
-        
-        self.performSegueWithIdentifier("unwindFromJobsListTableViewController", sender: self)
-    }
-    
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -108,15 +105,14 @@ class JobsListTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // MARK: - Navigation
 
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        // Get the new view controller using [segue destinationViewController].
-//        // Pass the selected object to the new view controller.
-//        
-//    }
-    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }
