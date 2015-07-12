@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Clock In View Controller-->
+        <!--Clock In-->
         <scene sceneID="CX5-Dr-7jq">
             <objects>
                 <viewController storyboardIdentifier="ClockInViewController" id="3fF-Vc-Hph" customClass="ClockInViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
@@ -13,23 +13,29 @@
                         <viewControllerLayoutGuide type="bottom" id="Jx6-5q-eoC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="u4V-KR-o5T">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cb1-6U-Gss">
-                                <rect key="frame" x="131" y="143" width="114" height="36"/>
+                                <rect key="frame" x="103" y="132" width="114" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time you've worked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Van-Hc-jf5">
-                                <rect key="frame" x="131" y="128" width="112" height="15"/>
+                                <rect key="frame" x="104" y="122" width="112" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time you've been on break" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l76-Rv-bIS">
+                                <rect key="frame" x="91" y="221" width="140" height="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NVW-5q-Yhv">
-                                <rect key="frame" x="223" y="192" width="77" height="30"/>
+                                <rect key="frame" x="198" y="181" width="77" height="30"/>
                                 <state key="normal" title="Start Break">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -38,12 +44,12 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fxF-0n-HgQ" userLabel="Top_Half-Top">
-                                <rect key="frame" x="10" y="69" width="355" height="10"/>
+                                <rect key="frame" x="35" y="69" width="250" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="I9P-EV-8Xu"/>
                                     <constraint firstAttribute="height" constant="225" id="V2G-iZ-WA7"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="f2a-Rm-NoJ"/>
-                                    <constraint firstAttribute="width" constant="355" id="kwk-8H-XPo"/>
+                                    <constraint firstAttribute="width" constant="250" id="kwk-8H-XPo"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -53,20 +59,20 @@
                                 </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PXi-Qg-wr4" userLabel="Top_Half-Left">
-                                <rect key="frame" x="10" y="79" width="10" height="200"/>
+                                <rect key="frame" x="35" y="79" width="10" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="IBj-3i-Aby"/>
                                     <constraint firstAttribute="height" constant="200" id="shU-Vw-9Ll"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t1M-q2-2Gz">
-                                <rect key="frame" x="5" y="279" width="365" height="338"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="41" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t1M-q2-2Gz">
+                                <rect key="frame" x="5" y="279" width="310" height="239"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="356" id="OI2-2d-ve3"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClockInTimeLogCell" rowHeight="48" id="YTD-r6-p1u" customClass="ClockIn_TimeLogCell" customModule="SixOhFour" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClockInTimeLogCell" rowHeight="41" id="YTD-r6-p1u" customClass="ClockIn_TimeLogCell" customModule="SixOhFour" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YTD-r6-p1u" id="uPY-Zk-0Xk">
@@ -82,7 +88,7 @@
                                                     <rect key="frame" x="324" y="12" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mon DD, HH:MM:SS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4s-Os-tW0">
-                                                    <rect key="frame" x="180" y="13" width="144" height="21"/>
+                                                    <rect key="frame" x="134" y="11" width="144" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -96,27 +102,32 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="OI2-2d-ve3"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="3fF-Vc-Hph" id="cWO-KK-OEM"/>
                                     <outlet property="delegate" destination="3fF-Vc-Hph" id="OjC-mh-nZr"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fyd-AQ-mKW">
-                                <rect key="frame" x="75" y="192" width="57" height="30"/>
+                                <rect key="frame" x="45" y="181" width="57" height="30"/>
                                 <state key="normal" title="Clock In"/>
                                 <connections>
                                     <action selector="startStop:" destination="3fF-Vc-Hph" eventType="touchUpInside" id="WcN-Ti-Dav"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RW5-YE-nFl" userLabel="Top_Half-Right">
-                                <rect key="frame" x="355" y="79" width="10" height="200"/>
+                                <rect key="frame" x="275" y="79" width="10" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="P6V-DD-HWV"/>
                                     <constraint firstAttribute="width" constant="10" id="eil-sV-vUz"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2h-OL-GR8">
-                                <rect key="frame" x="88" y="87" width="200" height="20"/>
+                                <rect key="frame" x="60" y="87" width="200" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="n0s-mM-BqJ"/>
                                 </constraints>
@@ -130,27 +141,35 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select Job" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOx-7b-nx6">
-                                <rect key="frame" x="154" y="88" width="82" height="21"/>
+                                <rect key="frame" x="126" y="88" width="82" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hm9-tB-lC4" customClass="JobColorView" customModule="SixOhFour" customModuleProvider="target">
-                                <rect key="frame" x="139" y="92" width="10" height="10"/>
+                                <rect key="frame" x="111" y="92" width="10" height="10"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="Be0-gR-oua"/>
                                     <constraint firstAttribute="width" constant="10" id="ubM-1A-Ch5"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yY-IF-euy">
+                                <rect key="frame" x="118" y="229" width="84" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PXi-Qg-wr4" firstAttribute="top" secondItem="fxF-0n-HgQ" secondAttribute="bottom" id="13E-Mw-jZV"/>
-                            <constraint firstItem="Van-Hc-jf5" firstAttribute="top" secondItem="o2h-OL-GR8" secondAttribute="bottom" constant="21" id="1fG-OM-4Kl"/>
+                            <constraint firstItem="Van-Hc-jf5" firstAttribute="top" secondItem="o2h-OL-GR8" secondAttribute="bottom" constant="15" id="1fG-OM-4Kl"/>
                             <constraint firstItem="KOx-7b-nx6" firstAttribute="centerX" secondItem="o2h-OL-GR8" secondAttribute="centerX" constant="7" id="2Lr-UN-5KO"/>
                             <constraint firstItem="PXi-Qg-wr4" firstAttribute="leading" secondItem="fxF-0n-HgQ" secondAttribute="leading" id="2UC-TF-syf"/>
                             <constraint firstItem="Fyd-AQ-mKW" firstAttribute="top" secondItem="cb1-6U-Gss" secondAttribute="bottom" constant="13" id="77e-I5-tQJ"/>
+                            <constraint firstAttribute="centerX" secondItem="1yY-IF-euy" secondAttribute="centerX" id="BxH-A6-bro"/>
+                            <constraint firstItem="1yY-IF-euy" firstAttribute="top" secondItem="l76-Rv-bIS" secondAttribute="bottom" constant="-5" id="J1Y-jl-9sI"/>
                             <constraint firstAttribute="centerX" secondItem="Van-Hc-jf5" secondAttribute="centerX" id="JfO-us-4uy"/>
                             <constraint firstItem="KOx-7b-nx6" firstAttribute="leading" secondItem="Hm9-tB-lC4" secondAttribute="trailing" constant="5" id="KKv-uS-hns"/>
                             <constraint firstItem="NVW-5q-Yhv" firstAttribute="top" secondItem="cb1-6U-Gss" secondAttribute="bottom" constant="13" id="OZK-0o-JoZ"/>
@@ -165,40 +184,46 @@
                             <constraint firstItem="fxF-0n-HgQ" firstAttribute="trailing" secondItem="RW5-YE-nFl" secondAttribute="trailing" id="Xfe-gO-kLR"/>
                             <constraint firstAttribute="trailing" secondItem="t1M-q2-2Gz" secondAttribute="trailing" constant="10" id="bDD-hS-tBl"/>
                             <constraint firstAttribute="centerX" secondItem="t1M-q2-2Gz" secondAttribute="centerX" id="cyT-XS-ZTK"/>
-                            <constraint firstItem="Fyd-AQ-mKW" firstAttribute="leading" secondItem="PXi-Qg-wr4" secondAttribute="trailing" constant="55" id="dUA-CO-pXC"/>
+                            <constraint firstItem="Fyd-AQ-mKW" firstAttribute="leading" secondItem="PXi-Qg-wr4" secondAttribute="trailing" id="dUA-CO-pXC"/>
                             <constraint firstAttribute="trailing" secondItem="t1M-q2-2Gz" secondAttribute="trailing" constant="5" id="fO4-2q-lZ0"/>
-                            <constraint firstItem="cb1-6U-Gss" firstAttribute="top" secondItem="Van-Hc-jf5" secondAttribute="bottom" id="kpm-b1-fu1"/>
+                            <constraint firstItem="cb1-6U-Gss" firstAttribute="top" secondItem="Van-Hc-jf5" secondAttribute="bottom" constant="-5" id="kpm-b1-fu1"/>
                             <constraint firstItem="RW5-YE-nFl" firstAttribute="top" secondItem="fxF-0n-HgQ" secondAttribute="bottom" id="lwy-eq-4yF"/>
-                            <constraint firstItem="RW5-YE-nFl" firstAttribute="leading" secondItem="NVW-5q-Yhv" secondAttribute="trailing" constant="55" id="qoa-Hf-2Zf"/>
+                            <constraint firstItem="l76-Rv-bIS" firstAttribute="top" secondItem="Fyd-AQ-mKW" secondAttribute="bottom" constant="10" id="mvm-Ts-37d"/>
+                            <constraint firstAttribute="centerX" secondItem="l76-Rv-bIS" secondAttribute="centerX" id="mx5-Cd-Auj"/>
+                            <constraint firstItem="RW5-YE-nFl" firstAttribute="leading" secondItem="NVW-5q-Yhv" secondAttribute="trailing" id="qoa-Hf-2Zf"/>
                             <constraint firstAttribute="centerX" secondItem="cb1-6U-Gss" secondAttribute="centerX" id="ruj-cw-bBb"/>
                             <constraint firstItem="t1M-q2-2Gz" firstAttribute="leading" secondItem="u4V-KR-o5T" secondAttribute="leading" constant="10" id="seC-2G-jo2"/>
+                            <constraint firstItem="1yY-IF-euy" firstAttribute="top" secondItem="l76-Rv-bIS" secondAttribute="bottom" id="swd-E7-Zoc"/>
                             <constraint firstAttribute="centerX" secondItem="o2h-OL-GR8" secondAttribute="centerX" id="vDN-jM-EhV"/>
                             <constraint firstItem="Hm9-tB-lC4" firstAttribute="centerY" secondItem="KOx-7b-nx6" secondAttribute="centerY" id="vqp-vF-q3g"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="R99-kJ-jBY"/>
+                                <exclude reference="swd-E7-Zoc"/>
                                 <exclude reference="bDD-hS-tBl"/>
                                 <exclude reference="seC-2G-jo2"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="LOe-Sq-fwg"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationItem key="navigationItem" title="Clock In" id="LOe-Sq-fwg"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="breakButton" destination="NVW-5q-Yhv" id="rTS-Xy-QAJ"/>
-                        <outlet property="durationDescriptionLabel" destination="Van-Hc-jf5" id="G7P-gS-avV"/>
+                        <outlet property="breakTimeLabel" destination="1yY-IF-euy" id="KKR-yK-bGf"/>
+                        <outlet property="breakTitleLabel" destination="l76-Rv-bIS" id="8p5-Pc-bfY"/>
                         <outlet property="jobColorDisplay" destination="Hm9-tB-lC4" id="XfO-Rv-Crk"/>
                         <outlet property="jobTitleDisplayButton" destination="o2h-OL-GR8" id="AVR-eK-nwp"/>
                         <outlet property="jobTitleDisplayLabel" destination="KOx-7b-nx6" id="kaV-If-g0K"/>
                         <outlet property="lapsTableView" destination="t1M-q2-2Gz" id="JQH-lJ-gKL"/>
                         <outlet property="startStopButton" destination="Fyd-AQ-mKW" id="NLG-RL-MM8"/>
-                        <outlet property="stopWatchLabel" destination="cb1-6U-Gss" id="PVm-9s-b0t"/>
+                        <outlet property="workTimeLabel" destination="cb1-6U-Gss" id="T5y-6I-Mit"/>
+                        <outlet property="workTitleLabel" destination="Van-Hc-jf5" id="QpL-cb-BgS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TPN-Ym-AYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1716.5" y="382.5"/>
+            <point key="canvasLocation" x="1716" y="382"/>
         </scene>
         <!--Clock In Jobs Popover View Controller-->
         <scene sceneID="fX7-I7-QtU">
@@ -222,14 +247,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZKZ-1U-VP2" id="1tW-yS-Weh">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPH-m0-tfE">
-                                                    <rect key="frame" x="26" y="11" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPH-m0-tfE">
+                                                    <rect key="frame" x="24" y="12" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2WR-KR-4tH" customClass="JobColorView" customModule="SixOhFour" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="17" width="10" height="10"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2WR-KR-4tH" customClass="JobColorView" customModule="SixOhFour" customModuleProvider="target">
+                                                    <rect key="frame" x="7" y="17" width="10" height="10"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="10" id="4FF-Ya-fG9"/>
@@ -237,6 +262,12 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="2WR-KR-4tH" secondAttribute="centerY" id="iSX-ZN-uG4"/>
+                                                <constraint firstAttribute="centerY" secondItem="oPH-m0-tfE" secondAttribute="centerY" id="npL-AW-K74"/>
+                                                <constraint firstItem="2WR-KR-4tH" firstAttribute="leading" secondItem="1tW-yS-Weh" secondAttribute="leading" constant="7" id="qUh-m1-LXg"/>
+                                                <constraint firstItem="oPH-m0-tfE" firstAttribute="leading" secondItem="2WR-KR-4tH" secondAttribute="trailing" constant="7" id="qkt-oi-7xn"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="jobColorView" destination="2WR-KR-4tH" id="8Eh-ko-qPJ"/>
