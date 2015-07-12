@@ -114,11 +114,14 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         //STARTED BREAK
 //        if addLap == true && startBreak == 0 {
         if timelogFlow == 1 {
+
+            breakTimeLabel.text = "00:00:00"
+            breakTitleLabel.text = "Time you've been on break"
             
-            breakMinutes = 0
-            breakSeconds = 0
-            breakFractions = 0
-            breakHours = 0
+//            breakMinutes = 0
+//            breakSeconds = 0
+//            breakFractions = 0
+//            breakHours = 0
 
             breakTitleLabel.textColor = UIColor.blueColor()
             breakTimeLabel.textColor = UIColor.blueColor()
@@ -127,7 +130,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             breakTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("runBreakTimer"), userInfo: nil, repeats: true)
 
-            breakTimeLabel.text = breakWatchString
+//            breakTimeLabel.text = breakWatchString
             
             startStopButton.enabled = false
             breakButton.setTitle("End Break", forState: UIControlState.Normal)
@@ -136,7 +139,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             appendToTimeTableView()
             saveToCoreDate()
             
-            breakTitleLabel.text = "Time you've been on break"
 
             
 //            addLap = true
@@ -174,6 +176,15 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             timelogFlow = 1
             println(timelogFlow)
+            
+            //added if statement to handle break time of 0sec
+            if breakSeconds < 1 {
+                breakTimeLabel.text = "00:00:00"
+                println("this is happening")
+            } else {
+                breakTimeLabel.text = breakWatchString
+                println("this is happening2")
+            }
 
         //RESET
         } else {
@@ -237,7 +248,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     
     func runBreakTimer() {
-        
+
         breakSeconds += 1
         
         if breakSeconds == 60 {
@@ -252,7 +263,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         let secondsStringBreak = breakSeconds > 9 ? "\(breakSeconds)" : "0\(breakSeconds)"
         let minutesStringBreak = breakMinutes > 9 ? "\(breakMinutes)" : "0\(breakMinutes)"
         let hoursStringBreak = breakHours > 9 ? "\(breakHours)" : "0\(breakHours)"
-        
+    
         breakWatchString  = "\(hoursStringBreak):\(minutesStringBreak):\(secondsStringBreak)"
         breakTimeLabel.text = breakWatchString
     }
