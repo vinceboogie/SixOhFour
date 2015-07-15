@@ -345,9 +345,8 @@ class AddScheduleTableViewController: UITableViewController {
                     as! AddJobTableViewController
                 
                 self.navigationController?.pushViewController(addJobsVC, animated: true)
-                
+
                 return false
-                
             } else {
                 return true
             }
@@ -408,6 +407,7 @@ extension AddScheduleTableViewController: UIPickerViewDataSource, UIPickerViewDe
                 
                 startLabel.text = dateFormatter.stringFromDate(startDatePicker.date)
 
+
             }
             endTime = datePicker.date
             startTime = startDatePicker.date
@@ -419,7 +419,7 @@ extension AddScheduleTableViewController: UIPickerViewDataSource, UIPickerViewDe
         
         toggleSaveButton()
     }
-    
+
     
     // MARK: - Reminder Picker
     
