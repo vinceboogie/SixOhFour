@@ -9,14 +9,14 @@
 import UIKit
 import CoreData
 
-@objc protocol writeValueBackDelegate2 {
-    func writeValueBack2(vc: ClockInJobsPopoverViewController, value: String)
-}
+//@objc protocol writeValueBackDelegate2 {
+//    func writeValueBack2(vc: ClockInJobsPopoverViewController, value: String)
+//}
 
 
 class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var writeValueDelegate2: writeValueBackDelegate2?
+//    var writeValueDelegate2: writeValueBackDelegate2?
     
 
     

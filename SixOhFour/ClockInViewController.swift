@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, NSFetchedResultsControllerDelegate {
     //, writeValueBackDelegate2 {
 
     var timer = NSTimer()
@@ -23,6 +23,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     var breakSeconds: Int = 0
     var breakFractions: Int = 0
     var breakHours: Int = 0
+    
     
     @IBOutlet weak var workTitleLabel: UILabel!
     @IBOutlet weak var workTimeLabel: UILabel!
@@ -41,6 +42,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 //    var addLap: Bool = false
 //    var startBreak: Int = 0
     var timelogFlow: Int = 0
+    var breakCount: Int = 0
     
     @IBOutlet weak var jobColorDisplay: JobColorView!
     @IBOutlet weak var jobTitleDisplayButton: UIButton!
@@ -52,6 +54,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.lapsTableView.rowHeight = 30.0
         jobTitleDisplayLabel.text = "Select Job"
         workTitleLabel.text = " "
         workTimeLabel.text = "00:00:00"
@@ -110,19 +113,21 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func lapReset(sender: AnyObject) {
-        
+    
         //STARTED BREAK
 //        if addLap == true && startBreak == 0 {
         if timelogFlow == 1 {
-
+            
             breakTimeLabel.text = "00:00:00"
             breakTitleLabel.text = "Time you've been on break"
             
-//            breakMinutes = 0
-//            breakSeconds = 0
-//            breakFractions = 0
-//            breakHours = 0
+            breakMinutes = 0
+            breakSeconds = 0
+            breakFractions = 0
+            breakHours = 0
 
+            breakCount++
+            
             breakTitleLabel.textColor = UIColor.blueColor()
             breakTimeLabel.textColor = UIColor.blueColor()
             
@@ -135,7 +140,12 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             startStopButton.enabled = false
             breakButton.setTitle("End Break", forState: UIControlState.Normal)
             
+            if breakCount == 1 {
             timelogDescription.append("Started Break")
+            } else {
+            timelogDescription.append("Started Break #\(breakCount)")
+            }
+            
             appendToTimeTableView()
             saveToCoreDate()
             
@@ -166,8 +176,13 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             startStopButton.enabled = true
             breakButton.setTitle("Start Break", forState: UIControlState.Normal)
-            timelogDescription.append("Ended Break")
             
+            if breakCount == 1 {
+                timelogDescription.append("Ended Break")
+            } else {
+                timelogDescription.append("Ended Break #\(breakCount)")
+            }
+    
             appendToTimeTableView()
             saveToCoreDate()
             
@@ -201,6 +216,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             minutes = 0
             seconds = 0
             hours = 0
+            
+            breakCount = 0
 
             workTitleLabel.text = " "
             workTimeLabel.text = "00:00:00"
@@ -225,6 +242,18 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
 //MARK: functions
+    
+    func allTimeLogsFetchRequest() -> NSFetchRequest {
+        
+        var fetchRequest = NSFetchRequest(entityName: "TimeLogs")
+        //let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        
+        fetchRequest.predicate = nil
+        //fetchRequest.sortDescriptors = [sortDescriptor]
+        //fetchRequest.fetchBatchSize = 20
+        
+        return fetchRequest
+    }
     
     func saveToCoreDate(){
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
@@ -307,18 +336,51 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 //Table View funct
     
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         
         cell.backgroundColor = self.view.backgroundColor
         
-        cell.textLabel!.text = timelogDescription[indexPath.row]
-        //cell.textLabel!.text = "Timestamp #\(indexPath.row + 1)"
+        cell.textLabel!.font = UIFont.systemFontOfSize(12.0)
+        cell.detailTextLabel!.font = UIFont.systemFontOfSize(12.0)
+
+//        cell.textLabel!.text = timelogDescription[indexPath.row] //ascending order
+//        cell.detailTextLabel?.text = timelogTimestamp[indexPath.row] //ascending order
         
-        cell.detailTextLabel?.text = timelogTimestamp[indexPath.row]
-        
+        cell.textLabel!.text = timelogDescription[timelogTimestamp.count - indexPath.row - 1] //descending order
+        cell.detailTextLabel?.text = timelogTimestamp[timelogTimestamp.count - indexPath.row - 1] //descending order
+
+        //changing to custom cell =
         return cell
+//        //changing to custom cell =
+//        
+//        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+//        var context:NSManagedObjectContext = appDel.managedObjectContext!
+//        var newTimeLogs = NSEntityDescription.insertNewObjectForEntityForName("TimeLogs", inManagedObjectContext: context) as! NSManagedObject
+//        var request = NSFetchRequest(entityName: "TimeLogs")
+//        request.returnsObjectsAsFaults = false ;
+////        
+//        var arrayOfTimeLogs = [TimeLogs]()
+////        
+//        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+////
+//        arrayOfTimeLogs = results as! [TimeLogs]
+//
+//        let cell2 = tableView.dequeueReusableCellWithIdentifier("ClockInJobsCell", forIndexPath: indexPath) as! ClockIn_TimeLogCell
+//        
+
+////        cell2.timelogTitleLabel = arrayOfTimeLogs[indexPath.row]
+//
+//        return cell2
+
+//        let cell3: TimeLogs = tableView.dequeueReusableCellWithIdentifier("ClockInTimeLogCell")
+//        
+//        cell3.timelogTimestamp = arrayOfTimeLogs.timelogTimestamp[indexPath.row]
+//        
+//        return cell3
         
     }
     
@@ -326,32 +388,47 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         return timelogTimestamp.count
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showDetails", sender: tableView)
+    }
 
-//Popover Effect - Drop down menu --->>>>>
+
+//Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
+        //Popover Effect - Drop down menu --->>>>>
         if let popupView = segue.destinationViewController as? UIViewController
         {
             if let popup = popupView.popoverPresentationController
             {
                 popup.delegate = self
             }
+        } //Popover Effect Ended <<<<<-------
+        
+        //Timelog Details
+        if segue.identifier == "showDetails" {
+            let destinationVC = segue.destinationViewController as! UIViewController
+            destinationVC.navigationItem.title = ""
+            destinationVC.hidesBottomBarWhenPushed = true;
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target: nil, action: nil)
         }
-    }
 
+    }
+    
+    //Popover Effect - Drop down menu --->>>>>
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
     {
         return UIModalPresentationStyle.None
-    }
+    }//Popover Effect Ended <<<<<-------
     
-    func writeValueBack2(vc: ClockInJobsPopoverViewController, value: String) {
-        self.jobTitleDisplayLabel.text = "$\(value)"
-    }
+//    func writeValueBack2(vc: ClockInJobsPopoverViewController, value: String) {
+//        self.jobTitleDisplayLabel.text = "$\(value)"
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    } //Popover Effect Ended <<<<<-------
+    }
 
 }
 
