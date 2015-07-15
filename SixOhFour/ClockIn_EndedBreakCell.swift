@@ -1,28 +1,20 @@
 //
-//  ClockIn_TimeLogCell.swift
+//  ClockIn_EndedBreakCell.swift
 //  SixOhFour
 //
-//  Created by Joseph Pelina on 7/9/15.
+//  Created by Joseph Pelina on 7/11/15.
 //  Copyright (c) 2015 vinceboogie. All rights reserved.
 //
 
 import UIKit
 
-class ClockIn_TimeLogCell: UITableViewCell {
+class ClockIn_EndedBreakCell: UITableViewCell {
 
+    
     @IBOutlet weak var timelogCommentLabel: UILabel!
+    @IBOutlet weak var timelogBreakDurationLabel: UILabel!
     @IBOutlet weak var timelogTimestampLabel: UILabel!
     @IBOutlet weak var timelogTitleLabel: UILabel!
-    
-    var timelogEntry: TimeLogs! {
-        didSet {
-//            timelogCommentImage.text = job.jobName
-            timelogTimestampLabel.text = timelogEntry.timelogTimestamp
-            timelogTitleLabel.text = timelogEntry.timelogTitle
-
-        }
-    }
-
     
     override func awakeFromNib() {
         super.awakeFromNib()

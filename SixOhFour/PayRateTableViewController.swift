@@ -58,6 +58,8 @@ class PayRateTableViewController: UITableViewController {
         if let delegate = writeValueDelegate {
             delegate.writeValueBack(self, value: payTextField.text)
             println("writingValueBack")
+            println(writeValueDelegate)
+
         }
     }
     

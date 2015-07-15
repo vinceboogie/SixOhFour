@@ -16,5 +16,7 @@ class TimeLogs: NSManagedObject {
     @NSManaged var timelogTitle: String
     @NSManaged var timelogTimestamp: String
     @NSManaged var timelogJob: String
+    @NSManaged var timelogDuration: String
     
+
 }
