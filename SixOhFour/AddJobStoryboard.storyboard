@@ -90,7 +90,7 @@
         <!--Add Job-->
         <scene sceneID="fjk-1C-Ban">
             <objects>
-                <tableViewController id="VWE-CX-2nS" customClass="AddJobTableViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddJobTableViewController" id="VWE-CX-2nS" customClass="AddJobTableViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vez-51-qQw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
