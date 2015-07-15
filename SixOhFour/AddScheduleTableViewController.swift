@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddScheduleTableViewController: UITableViewController {
+class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var endLabel: UILabel!
@@ -18,19 +18,18 @@ class AddScheduleTableViewController: UITableViewController {
     @IBOutlet weak var jobNameLabel: UILabel!
     @IBOutlet weak var jobColorView: JobColorView!
     @IBOutlet weak var repeatLabel: UILabel!
-
+    @IBOutlet weak var reminderLabel: UILabel!
+    @IBOutlet weak var reminderPicker: UIPickerView!
+    
     var saveButton: UIBarButtonItem!
     var jobListEmpty = true;
+    var reminderMinutes = 16 // Maximum reminder = 15 minutes
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         
         // TODO - Change Say Hello to Save Function
         saveButton = UIBarButtonItem(title:"Save", style: .Plain, target: self, action: "sayHello")
@@ -61,6 +60,9 @@ class AddScheduleTableViewController: UITableViewController {
             jobColorView.color = UIColor.lightGrayColor()
         }
         
+        // Reminder Picker
+        self.reminderPicker.dataSource = self
+        self.reminderPicker.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,19 +96,19 @@ class AddScheduleTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func unwindfromSetRepeatTableViewController (segue: UIStoryboardSegue) {
-        let sourceVC = segue.sourceViewController as! SetRepeatTableViewController
-        
-        if ((sourceVC.repeat) != nil) {
-            repeatLabel.text = sourceVC.repeat
-        }
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
-    }
+//    @IBAction func unwindFromSetRepeatTableViewController (segue: UIStoryboardSegue) {
+//        let sourceVC = segue.sourceViewController as! SetRepeatTableViewController
+//        
+//        if ((sourceVC.repeat) != nil) {
+//            repeatLabel.text = sourceVC.repeat
+//        }
+//        
+//        tableView.beginUpdates()
+//        tableView.endUpdates()
+//    }
     
     
-    // MARK: Datepicker
+    // MARK: - Date Picker
     
     func datePickerChanged(label: UILabel, datePicker: UIDatePicker) {
         let dateFormatter = NSDateFormatter()
@@ -135,25 +137,62 @@ class AddScheduleTableViewController: UITableViewController {
         toggleSaveButton()
     }
     
+    
+    // MARK: - Reminder Picker
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return reminderMinutes
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return "\(row)"
+        
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 0 {
+            reminderLabel.text = "None"
+        } else {
+            reminderLabel.text = "\(row) minutes before"
+        }
+    }
+    
+    
+    // MARK: - Toggles
+    
     private var startDatePickerHidden = true
     private var endDatePickerHidden = true
+    private var reminderPickerHidden = true
     
-    func toggleDatePicker(datePicker: String) {
+    func togglePicker(picker: String) {
         
-        if datePicker == "Start" {
+        if picker == "startDate" {
             startDatePickerHidden = !startDatePickerHidden
             toggleLabelColor(startDatePickerHidden, label: startLabel)
             endDatePickerHidden = true
+            reminderPickerHidden = true
             toggleLabelColor(endDatePickerHidden, label: endLabel)
-        } else if datePicker == "End" {
+        } else if picker == "endDate" {
             endDatePickerHidden = !endDatePickerHidden
             toggleLabelColor(endDatePickerHidden, label: endLabel)
             startDatePickerHidden = true
+            reminderPickerHidden = true
+            toggleLabelColor(startDatePickerHidden, label: startLabel)
+        } else if picker == "reminder" {
+            reminderPickerHidden = !reminderPickerHidden
+            startDatePickerHidden = true
+            endDatePickerHidden = true
+            toggleLabelColor(endDatePickerHidden, label: endLabel)
             toggleLabelColor(startDatePickerHidden, label: startLabel)
         } else {
             // Close datepickers
             startDatePickerHidden = true
             endDatePickerHidden = true
+            reminderPickerHidden = true
             toggleLabelColor(startDatePickerHidden, label: startLabel)
             toggleLabelColor(endDatePickerHidden, label: endLabel)
         }
@@ -181,6 +220,9 @@ class AddScheduleTableViewController: UITableViewController {
         
         
     }
+    
+
+    
 
     // MARK: - Table view data source
 
@@ -216,12 +258,15 @@ class AddScheduleTableViewController: UITableViewController {
 //        }
         
         if indexPath.section == 1 && indexPath.row == 0 {
-            toggleDatePicker("Start")
+            togglePicker("startDate")
         } else if indexPath.section == 1 && indexPath.row == 2 {
-            toggleDatePicker("End")
+            togglePicker("endDate")
+        } else if indexPath.section == 2 && indexPath.row == 0 {
+            togglePicker("reminder")
         } else {
-            toggleDatePicker("Close")
+            togglePicker("Close")
         }
+        
     }
     
     
@@ -233,7 +278,11 @@ class AddScheduleTableViewController: UITableViewController {
                 return 0
             }
             
-            if repeatLabel.text == "Never" && indexPath.section == 1 && indexPath.row == 6 {
+            if repeatLabel.text == "Never" && indexPath.section == 1 && indexPath.row == 5 {
+                return 0
+            }
+            
+            if reminderPickerHidden && indexPath.section == 2 && indexPath.row == 1 {
                 return 0
             }
             
@@ -298,10 +347,10 @@ class AddScheduleTableViewController: UITableViewController {
             destinationVC.previousSelection = jobNameLabel.text
         }
         
-        if segue.identifier == "selectRepeat" {
-            let destinationVC = segue.destinationViewController as! SetRepeatTableViewController
-            destinationVC.previousSelection = repeatLabel.text
-        }
+//        if segue.identifier == "selectRepeat" {
+//            let destinationVC = segue.destinationViewController as! SetRepeatTableViewController
+//            destinationVC.previousSelection = repeatLabel.text
+//        }
         
     }
     
