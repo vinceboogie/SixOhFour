@@ -195,7 +195,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1s5-2r-4FM">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="colorCell" id="1s5-2r-4FM" customClass="JobsListCell" customModule="SixOhFour" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1s5-2r-4FM" id="ftZ-MJ-DIR">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -206,11 +206,45 @@
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eps-th-HpE">
+                                                    <rect key="frame" x="255" y="12" width="100" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ed-gr-KzU" customClass="JobColorView" customModule="SixOhFour" customModuleProvider="target">
+                                                    <rect key="frame" x="237" y="17" width="10" height="10"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="10" id="GQl-Sr-bpb"/>
+                                                        <constraint firstAttribute="height" constant="10" id="XfW-i5-afT"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="xgt-C9-67T" secondAttribute="centerY" id="M0S-px-Rhd"/>
+                                                <constraint firstAttribute="trailing" secondItem="eps-th-HpE" secondAttribute="trailing" constant="20" id="PfQ-nO-Mmb"/>
+                                                <constraint firstAttribute="centerY" secondItem="5ed-gr-KzU" secondAttribute="centerY" id="UkV-gQ-cR4"/>
+                                                <constraint firstAttribute="centerY" secondItem="eps-th-HpE" secondAttribute="centerY" id="c9A-hY-O32"/>
                                                 <constraint firstItem="xgt-C9-67T" firstAttribute="leading" secondItem="ftZ-MJ-DIR" secondAttribute="leading" constant="20" id="pCZ-dJ-Hdr"/>
+                                                <constraint firstItem="eps-th-HpE" firstAttribute="leading" secondItem="5ed-gr-KzU" secondAttribute="trailing" constant="8" id="vGB-jB-CDB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="5vV-kD-L6O">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5vV-kD-L6O" id="c7z-bc-d3I">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjt-Wz-Djq">
+                                                    <rect key="frame" x="27" y="-7" width="320" height="162"/>
+                                                </pickerView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="zjt-Wz-Djq" secondAttribute="centerY" id="6eD-8n-3T0"/>
+                                                <constraint firstAttribute="centerX" secondItem="zjt-Wz-Djq" secondAttribute="centerX" id="T4x-9X-FHk"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -231,9 +265,13 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="colorLabel" destination="eps-th-HpE" id="8pY-xI-vmS"/>
+                        <outlet property="colorPicker" destination="zjt-Wz-Djq" id="LCh-j5-CVK"/>
+                        <outlet property="jobColorView" destination="5ed-gr-KzU" id="IBm-NF-0hm"/>
                         <outlet property="nameTextField" destination="KVa-qI-DnE" id="Cdt-zy-Ean"/>
                         <outlet property="payRateLabel" destination="o76-KP-3Q9" id="Ron-8z-X3h"/>
                         <outlet property="positionTextField" destination="8IK-uV-Hlf" id="A5u-WX-SSI"/>
+                        <outlet property="saveJobButton" destination="tDm-Fx-RlF" id="0Za-Qc-RkR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmC-Q6-3EP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -547,6 +585,14 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q5I-5J-4X1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ja-54-SIa" customClass="JobColorView" customModule="SixOhFour" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="cKF-30-1NZ"/>
+                        <constraint firstAttribute="width" constant="10" id="uQ2-ZM-6lj"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="2619.5" y="-504.5"/>
         </scene>
