@@ -70,7 +70,7 @@ class JobsListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.selectedJob = jobsList[indexPath.row]
-        
+                
         self.performSegueWithIdentifier("unwindFromJobsListTableViewController", sender: self)
     }
     

@@ -205,8 +205,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
             toggleLabelColor(endDatePickerHidden, label: endLabel)
         }
         
-        tableView.beginUpdates()
-        tableView.endUpdates()
+
     }
     
     func toggleLabelColor(hidden: Bool, label: UILabel) {
