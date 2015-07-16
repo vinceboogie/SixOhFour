@@ -11,25 +11,31 @@ import CoreData
 
 class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, NSFetchedResultsControllerDelegate {
     //, writeValueBackDelegate2 {
+    
+    @IBOutlet weak var workTitleLabel: UILabel!
+    @IBOutlet weak var workTimeLabel: UILabel!
+    @IBOutlet weak var breakTitleLabel: UILabel!
+    @IBOutlet weak var breakTimeLabel: UILabel!
+    
+    @IBOutlet weak var jobColorDisplay: JobColorView!
+    @IBOutlet weak var jobTitleDisplayButton: UIButton!
+    @IBOutlet weak var jobTitleDisplayLabel: UILabel!
+    @IBOutlet weak var lapsTableView: UITableView!
+    @IBOutlet weak var startStopButton: UIButton!
+    @IBOutlet weak var breakButton: UIButton! //lapreset
 
     var timer = NSTimer()
     var minutes: Int = 0
     var seconds: Int = 0
     var fractions: Int = 0
     var hours: Int = 0
-
+    
     var breakTimer = NSTimer()
     var breakMinutes: Int = 0
     var breakSeconds: Int = 0
     var breakFractions: Int = 0
     var breakHours: Int = 0
     
-    
-    @IBOutlet weak var workTitleLabel: UILabel!
-    @IBOutlet weak var workTimeLabel: UILabel!
-    @IBOutlet weak var breakTitleLabel: UILabel!
-    @IBOutlet weak var breakTimeLabel: UILabel!
-
     var stopWatchString: String = ""
     var breakWatchString: String = ""
     
@@ -38,20 +44,14 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 //    var startStopWatch: Bool = true
 //    var startBreakWatch: Bool = true
-//    
+//
 //    var addLap: Bool = false
 //    var startBreak: Int = 0
     var timelogFlow: Int = 0
     var breakCount: Int = 0
     
-    @IBOutlet weak var jobColorDisplay: JobColorView!
-    @IBOutlet weak var jobTitleDisplayButton: UIButton!
-    @IBOutlet weak var jobTitleDisplayLabel: UILabel!
-    @IBOutlet weak var lapsTableView: UITableView!
-    @IBOutlet weak var startStopButton: UIButton!
-    @IBOutlet weak var breakButton: UIButton! //lapreset
-    
     var jobListEmpty = true
+    var selectedJob = "Select A Job"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,36 +63,61 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         breakButton.enabled = false
         breakTitleLabel.text = " "
         breakTimeLabel.text = " "
+
+  //      self.7:08?.title = "Detail"
+    
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        // Fetch first Job
-        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
-        
-        var request = NSFetchRequest(entityName: "Jobs")
-        request.returnsObjectsAsFaults = false ;
-        
-        var results:NSArray = context.executeFetchRequest(request, error: nil)!
-        
-        if results.count > 0 {
-            var firstJob = results[0] as! Jobs
-            jobTitleDisplayLabel.text = firstJob.jobName
-            jobColorDisplay.color = firstJob.getJobColor()
-            jobTitleDisplayLabel.textColor = UIColor.blackColor()
-            jobListEmpty = false
-        } else {
-            jobTitleDisplayLabel.text = "Add a Job"
-            jobTitleDisplayLabel.textColor = UIColor.blueColor()
-            jobColorDisplay.color = UIColor.lightGrayColor()
-        }
-        
         if jobListEmpty {
             startStopButton.enabled = false
             workTimeLabel.textColor = UIColor.grayColor()
         }
+        
+        
+        if selectedJob == "Select A Job" {
+            // Fetch jobs list to keep refreshing changes
+            var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+            var context:NSManagedObjectContext = appDel.managedObjectContext!
+            
+            var request = NSFetchRequest(entityName: "Jobs")
+            request.returnsObjectsAsFaults = false ;
+            
+            var results:NSArray = context.executeFetchRequest(request, error: nil)!
+            
+            if results.count > 0 {
+                //Fetches the first jobs
+//                var firstJob = results[0] as! Jobs
+                jobTitleDisplayLabel.text = selectedJob//.jobName
+//                jobColorDisplay.color = firstJob.getJobColor()
+                jobTitleDisplayLabel.textColor = UIColor.blackColor()
+                
+                jobListEmpty = false
+                startStopButton.enabled = true
+                jobTitleDisplayLabel.textColor = UIColor.blackColor()
+                
+            } else {
+                jobTitleDisplayLabel.text = "Add a Job"
+                jobTitleDisplayLabel.textColor = UIColor.blueColor()
+                jobColorDisplay.color = UIColor.lightGrayColor()
+            }
+            
+        } else {
+            var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+            var context:NSManagedObjectContext = appDel.managedObjectContext!
+            
+            var request = NSFetchRequest(entityName: "Jobs")
+            request.returnsObjectsAsFaults = false ;
+            
+            var results:NSArray = context.executeFetchRequest(request, error: nil)!
+
+            jobTitleDisplayLabel.text = selectedJob
+            //selectedJob = ""
+        }
+
+    
     }
     
 //MARK: IBActions:
@@ -123,7 +148,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
         //CLOCK OUT
             
-            workTitleLabel.text = "Total time you worked for the shift"
+            workTitleLabel.text = "Total time you've worked"
             timelogDescription.append("Clocked Out")
             appendToTimeTableView()
             saveToCoreDate()
@@ -277,12 +302,11 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         if jobListEmpty {
             let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
             let addJobsVC: AddJobTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("AddJobTableViewController") as! AddJobTableViewController
-            
+                    
             self.navigationController?.pushViewController(addJobsVC, animated: true)
             
-            jobListEmpty = false
         } else {
-            self.shouldPerformSegueWithIdentifier("displayPopover", sender: self)
+            self.performSegueWithIdentifier("displayJobList", sender: self)
         }
     }
     
@@ -373,8 +397,9 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         let sourceVC = segue.sourceViewController as! ClockInJobsPopoverViewController
         
         if((sourceVC.selectedJob) != nil ) {
+            selectedJob = sourceVC.selectedJob.jobName
             
-            jobTitleDisplayLabel.text = sourceVC.selectedJob.jobName
+//            jobTitleDisplayLabel.text = sourceVC.selectedJob.jobName
             jobColorDisplay.color = sourceVC.selectedJob.getJobColor()
         }
     }
@@ -442,12 +467,22 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 //Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        if let popupView = segue.destinationViewController as? UIViewController {
-            if let popup = popupView.popoverPresentationController
-            {
-                popup.delegate = self
-            }
-        } //Popover Effect Ended <<<<<-------
+//        //Popover Effect - Drop down menu --->>>>>
+//
+//        if let popupView = segue.destinationViewController as? UIViewController {
+//            if let popup = popupView.popoverPresentationController
+//            {
+//                popup.delegate = self
+//            }
+//        } //Popover Effect Ended <<<<<-------
+
+        //New Jobs List without the Popover
+        if segue.identifier == "displayJobsList" {
+            let destinationVC = segue.destinationViewController as! UIViewController
+            destinationVC.navigationItem.title = ""
+            destinationVC.hidesBottomBarWhenPushed = true;
+            //self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target: nil, action: nil)
+        }
         
         //Timelog Details
         if segue.identifier == "showDetails" {
@@ -459,15 +494,12 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
     
-    //Popover Effect - Drop down menu --->>>>>
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
-    {
-        return UIModalPresentationStyle.None
-    }//Popover Effect Ended <<<<<-------
+//    //Popover Effect - Drop down menu --->>>>>
+//    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
+//    {
+//        return UIModalPresentationStyle.None
+//    }//Popover Effect Ended <<<<<-------
     
-//    func writeValueBack2(vc: ClockInJobsPopoverViewController, value: String) {
-//        self.jobTitleDisplayLabel.text = "$\(value)"
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
