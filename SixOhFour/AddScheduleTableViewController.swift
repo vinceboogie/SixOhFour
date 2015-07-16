@@ -24,6 +24,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     var saveButton: UIBarButtonItem!
     var jobListEmpty = true;
     var reminderMinutes = 16 // Maximum reminder = 15 minutes
+    var addShift: Shift!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         // self.clearsSelectionOnViewWillAppear = false
         
         // TODO - Change Say Hello to Save Function
-        saveButton = UIBarButtonItem(title:"Save", style: .Plain, target: self, action: "sayHello")
+        saveButton = UIBarButtonItem(title:"Save", style: .Plain, target: self, action: "addSchedule")
         self.navigationItem.rightBarButtonItem = saveButton
         
         datePickerChanged(startLabel, datePicker: startDatePicker)
@@ -74,8 +75,10 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     
     // MARK: Testing Stuff
     
-    func sayHello() {
-        println("Hello!")
+    func addSchedule() {
+        addShift = Shift(dictionary: ["color": jobColorView.color , "name": "\(jobNameLabel.text!)", "shiftTime": "08:00 AM - 05:00 PM"])
+        self.performSegueWithIdentifier("unwindAfterSaveSchedule", sender: self)
+        
     }
     
     
