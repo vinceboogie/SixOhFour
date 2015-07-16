@@ -62,7 +62,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let jobs = frc.objectAtIndexPath(indexPath) as! Jobs
         
         cell.jobNameLabel.text = jobs.jobName
-        cell.jobColorView.color = jobs.getJobColor()
+        
+        var jc = JobColor()
+        cell.jobColorView.color = jc.getJobColor(jobs.jobColor)
         
         return cell
     }

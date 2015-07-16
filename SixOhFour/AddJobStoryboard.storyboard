@@ -238,7 +238,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjt-Wz-Djq">
-                                                    <rect key="frame" x="27" y="-6.5" width="320" height="162"/>
+                                                    <rect key="frame" x="27" y="-7" width="320" height="162"/>
                                                 </pickerView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -271,6 +271,7 @@
                         <outlet property="nameTextField" destination="KVa-qI-DnE" id="Cdt-zy-Ean"/>
                         <outlet property="payRateLabel" destination="o76-KP-3Q9" id="Ron-8z-X3h"/>
                         <outlet property="positionTextField" destination="8IK-uV-Hlf" id="A5u-WX-SSI"/>
+                        <outlet property="saveJobButton" destination="tDm-Fx-RlF" id="0Za-Qc-RkR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmC-Q6-3EP" userLabel="First Responder" sceneMemberID="firstResponder"/>

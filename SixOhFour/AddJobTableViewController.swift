@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddJobTableViewController: UITableViewController, writeValueBackDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class AddJobTableViewController: UITableViewController, writeValueBackDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var positionTextField: UITextField!
@@ -17,7 +17,8 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var colorPicker: UIPickerView!
     @IBOutlet weak var jobColorView: JobColorView!
-
+    @IBOutlet weak var saveJobButton: UIBarButtonItem!
+    
     let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
     
     var pickerVisible = false
@@ -25,24 +26,6 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var nItem : Jobs? = nil
-    
-    // DUMY FUNCTION - DELETE LATER
-    func getJobColor() -> UIColor {
-        
-        if colorLabel.text == "Red" {
-            return UIColor.redColor()
-        } else if colorLabel.text == "Blue" {
-            return UIColor.blueColor()
-        } else if colorLabel.text == "Green" {
-            return UIColor.greenColor()
-        } else if colorLabel.text == "Yellow" {
-            return UIColor.yellowColor()
-        } else if colorLabel.text == "Purple" {
-            return UIColor.purpleColor()
-        } else {
-            return UIColor.blackColor()
-        }
-    }
     
     @IBAction func payRateButtonPressed(sender: AnyObject) {
         let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
@@ -75,8 +58,38 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
             payRateLabel.text = nItem?.jobPay
             colorLabel.text = nItem?.jobColor
             if jobColorView != nil {
-                jobColorView.color = nItem!.getJobColor()
+                var jc = JobColor()
+                jobColorView.color = jc.getJobColor(colorLabel.text!)
             }
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if nameTextField.text == "" {
+            self.navigationItem.rightBarButtonItem!.enabled = false
+        }
+        
+         nameTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        
+        var selectedColor = 0
+        
+        for var i = 0; i < pickerData.count; i++ {
+            var color = colorLabel.text!
+            if pickerData[i] == color {
+                selectedColor = i
+            }
+        }
+        
+        colorPicker.selectRow(selectedColor, inComponent: 0, animated: true)
+    }
+    
+    func textFieldDidChange(textField: UITextField) {
+        let whitespaceSet = NSCharacterSet.whitespaceCharacterSet()
+        if textField.text.stringByTrimmingCharactersInSet(whitespaceSet) != "" {
+            self.navigationItem.rightBarButtonItem!.enabled = true
+
         }
     }
     
@@ -140,7 +153,10 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         colorLabel.text = pickerData[row]
-        jobColorView.color = getJobColor()
+        
+        var jc = JobColor()
+        jobColorView.color = jc.getJobColor(pickerData[row])
+        jobColorView.setNeedsDisplay()
     }
-
+    
 }
