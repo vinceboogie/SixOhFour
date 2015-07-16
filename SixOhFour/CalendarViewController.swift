@@ -64,6 +64,15 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    @IBAction func unwindAfterSaveSchedule(segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! AddScheduleTableViewController
+        
+        if((sourceVC.addShift) != nil) {
+            schedule.append(sourceVC.addShift)
+            tableView.reloadData()
+        }
+    }
+    
     
     // MARK: Table View Datasource
     

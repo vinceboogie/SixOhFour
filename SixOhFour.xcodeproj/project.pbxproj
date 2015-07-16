@@ -58,11 +58,16 @@
 		B90FA0661B4320A6004B4D79 /* CVCalendarWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0521B4320A6004B4D79 /* CVCalendarWeekView.swift */; };
 		B90FA0671B4320A6004B4D79 /* CVCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0531B4320A6004B4D79 /* CVCircleView.swift */; };
 		B90FA0681B4320A6004B4D79 /* CVDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0541B4320A6004B4D79 /* CVDate.swift */; };
+		B936D63F1B607674009777A7 /* EndRepeatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B936D63E1B607674009777A7 /* EndRepeatTableViewController.swift */; };
 		B93E88891B45FFA00030877B /* JobColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E88881B45FFA00030877B /* JobColorView.swift */; };
 		B93E888B1B46067E0030877B /* TodayScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E888A1B46067E0030877B /* TodayScheduleCell.swift */; };
 		B93E88931B463BFD0030877B /* Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E88921B463BFD0030877B /* Shift.swift */; };
 		B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E681B3B711A0037B44B /* MainTabBarController.swift */; };
 		B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */; };
+		B992A18D1B582FFE006E5A2B /* SetRepeatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992A18C1B582FFE006E5A2B /* SetRepeatTableViewController.swift */; };
+		B992A1951B587CE1006E5A2B /* RepeatSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992A1941B587CE1006E5A2B /* RepeatSettings.swift */; };
+		B9A0BFF01B5993BB00433C96 /* WeekDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */; };
+		B9A0BFF21B5993E200433C96 /* RepeatOnDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */; };
 		B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */; };
 		B9C8A7B51B4E469E00C4BEEC /* AddScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8A7B41B4E469E00C4BEEC /* AddScheduleTableViewController.swift */; };
 		B9E34BCB1B50D21800B9FD88 /* JobsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E34BCA1B50D21800B9FD88 /* JobsListTableViewController.swift */; };
@@ -136,11 +141,16 @@
 		B90FA0521B4320A6004B4D79 /* CVCalendarWeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarWeekView.swift; sourceTree = "<group>"; };
 		B90FA0531B4320A6004B4D79 /* CVCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCircleView.swift; sourceTree = "<group>"; };
 		B90FA0541B4320A6004B4D79 /* CVDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVDate.swift; sourceTree = "<group>"; };
+		B936D63E1B607674009777A7 /* EndRepeatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndRepeatTableViewController.swift; sourceTree = "<group>"; };
 		B93E88881B45FFA00030877B /* JobColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobColorView.swift; sourceTree = "<group>"; };
 		B93E888A1B46067E0030877B /* TodayScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayScheduleCell.swift; sourceTree = "<group>"; };
 		B93E88921B463BFD0030877B /* Shift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shift.swift; sourceTree = "<group>"; };
 		B9920E681B3B711A0037B44B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingScheduleViewController.swift; sourceTree = "<group>"; };
+		B992A18C1B582FFE006E5A2B /* SetRepeatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetRepeatTableViewController.swift; sourceTree = "<group>"; };
+		B992A1941B587CE1006E5A2B /* RepeatSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatSettings.swift; sourceTree = "<group>"; };
+		B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatOnDaysCell.swift; sourceTree = "<group>"; };
 		B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B9C8A7B41B4E469E00C4BEEC /* AddScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScheduleTableViewController.swift; sourceTree = "<group>"; };
 		B9E34BCA1B50D21800B9FD88 /* JobsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsListTableViewController.swift; sourceTree = "<group>"; };
@@ -356,6 +366,8 @@
 				B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */,
 				B9C8A7B41B4E469E00C4BEEC /* AddScheduleTableViewController.swift */,
 				B9E34BCA1B50D21800B9FD88 /* JobsListTableViewController.swift */,
+				B992A18C1B582FFE006E5A2B /* SetRepeatTableViewController.swift */,
+				B936D63E1B607674009777A7 /* EndRepeatTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -364,6 +376,8 @@
 			isa = PBXGroup;
 			children = (
 				B93E888A1B46067E0030877B /* TodayScheduleCell.swift */,
+				B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */,
+				B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -372,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				B93E88921B463BFD0030877B /* Shift.swift */,
+				B992A1941B587CE1006E5A2B /* RepeatSettings.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -497,6 +512,7 @@
 				B93E88891B45FFA00030877B /* JobColorView.swift in Sources */,
 				B90FA05C1B4320A6004B4D79 /* CVCalendarMonthView.swift in Sources */,
 				B93E88931B463BFD0030877B /* Shift.swift in Sources */,
+				B992A1951B587CE1006E5A2B /* RepeatSettings.swift in Sources */,
 				B90FA0611B4320A6004B4D79 /* CVCalendarViewAppearance.swift in Sources */,
 				B90FA0561B4320A6004B4D79 /* CVCalendarContentViewController.swift in Sources */,
 				B90FA0661B4320A6004B4D79 /* CVCalendarWeekView.swift in Sources */,
@@ -504,7 +520,9 @@
 				B90FA05F1B4320A6004B4D79 /* CVCalendarViewAnimator.swift in Sources */,
 				B90FA0641B4320A6004B4D79 /* CVCalendarWeekContentRecovery.swift in Sources */,
 				870CECBF1B4F4E9C00B30AAE /* PayRateTableViewController.swift in Sources */,
+				B936D63F1B607674009777A7 /* EndRepeatTableViewController.swift in Sources */,
 				87238A501B3E3212004D44CA /* ClockInViewController.swift in Sources */,
+				B9A0BFF01B5993BB00433C96 /* WeekDayCollectionViewCell.swift in Sources */,
 				B9C8A7B51B4E469E00C4BEEC /* AddScheduleTableViewController.swift in Sources */,
 				B90FA0551B4320A6004B4D79 /* CVCalendarContentDelegate.swift in Sources */,
 				B90FA05A1B4320A6004B4D79 /* CVCalendarMenuView.swift in Sources */,
@@ -517,6 +535,7 @@
 				B93E888B1B46067E0030877B /* TodayScheduleCell.swift in Sources */,
 				87B57CD71B509B4400D9B438 /* JobsListCell.swift in Sources */,
 				874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */,
+				B992A18D1B582FFE006E5A2B /* SetRepeatTableViewController.swift in Sources */,
 				001464821B4F65D300AC0C9F /* TimeLogs.swift in Sources */,
 				B9E34BCB1B50D21800B9FD88 /* JobsListTableViewController.swift in Sources */,
 				879277011B5868E90023CBA6 /* JobOverviewViewController.swift in Sources */,
@@ -525,6 +544,7 @@
 				B90FA0671B4320A6004B4D79 /* CVCircleView.swift in Sources */,
 				87B7C1861B69C22800C65C96 /* Job.swift in Sources */,
 				B90FA05B1B4320A6004B4D79 /* CVCalendarMonthContentView.swift in Sources */,
+				B9A0BFF21B5993E200433C96 /* RepeatOnDaysCell.swift in Sources */,
 				B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */,
 				005EAD531B52235600F8E970 /* ClockIn_EndedBreakCell.swift in Sources */,
 				B90FA05E1B4320A6004B4D79 /* CVCalendarView.swift in Sources */,
