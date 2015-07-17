@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cb1-6U-Gss">
-                                <rect key="frame" x="103" y="142" width="114" height="36"/>
+                                <rect key="frame" x="103" y="141" width="114" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -29,13 +29,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time you've been on break" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l76-Rv-bIS">
-                                <rect key="frame" x="91" y="231" width="140" height="14"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <rect key="frame" x="85" y="231" width="151" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NVW-5q-Yhv">
-                                <rect key="frame" x="198" y="191" width="77" height="30"/>
+                                <rect key="frame" x="198" y="190" width="77" height="30"/>
                                 <state key="normal" title="Start Break">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -72,100 +72,14 @@
                                     <constraint firstAttribute="width" constant="356" id="OI2-2d-ve3"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClockInTimeLogCell" rowHeight="41" id="YTD-r6-p1u" customClass="ClockIn_TimeLogCell" customModule="SixOhFour" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gj1-xo-Sqq">
+                                        <rect key="frame" x="0.0" y="0.0" width="310" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YTD-r6-p1u" id="uPY-Zk-0Xk">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gj1-xo-Sqq" id="QS8-ep-TcA">
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clocked In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8n-WP-Yc1">
-                                                    <rect key="frame" x="10" y="12" width="70" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEG-s3-Cdq">
-                                                    <rect key="frame" x="273" y="13" width="27" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.58451704545454541" green="0.58451704545454541" blue="0.58451704545454541" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon DD, HH:MM:SS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4s-Os-tW0">
-                                                    <rect key="frame" x="109" y="12" width="124" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="c8n-WP-Yc1" secondAttribute="centerY" id="JKl-Ct-Zc3"/>
-                                                <constraint firstAttribute="trailing" secondItem="nEG-s3-Cdq" secondAttribute="trailing" constant="10" id="Jhk-dE-be7"/>
-                                                <constraint firstAttribute="centerY" secondItem="l4s-Os-tW0" secondAttribute="centerY" id="d5q-SP-wu6"/>
-                                                <constraint firstItem="nEG-s3-Cdq" firstAttribute="leading" secondItem="l4s-Os-tW0" secondAttribute="trailing" constant="40" id="eQS-Ts-yFB"/>
-                                                <constraint firstAttribute="centerY" secondItem="nEG-s3-Cdq" secondAttribute="centerY" id="yJN-7v-fnR"/>
-                                                <constraint firstItem="c8n-WP-Yc1" firstAttribute="leading" secondItem="uPY-Zk-0Xk" secondAttribute="leading" constant="10" id="zUf-g0-ssG"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="timelogCommentLabel" destination="nEG-s3-Cdq" id="Gpn-vq-Scr"/>
-                                            <outlet property="timelogTimestampLabel" destination="l4s-Os-tW0" id="yt8-8d-q0B"/>
-                                            <outlet property="timelogTitleLabel" destination="c8n-WP-Yc1" id="pwt-rw-Rvc"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClockInEndedBreakCell" rowHeight="41" id="ipO-KV-Oa5" customClass="ClockIn_EndedBreakCell" customModule="SixOhFour" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ipO-KV-Oa5" id="zuI-ez-ANu">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ended Break" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUb-Vi-dyF">
-                                                    <rect key="frame" x="10" y="12" width="83" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mk-eV-BmP">
-                                                    <rect key="frame" x="273" y="13" width="27" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.58451704550000005" green="0.58451704550000005" blue="0.58451704550000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration of Break: 00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTT-oY-fZP">
-                                                    <rect key="frame" x="109" y="23" width="154" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.58451704550000005" green="0.58451704550000005" blue="0.58451704550000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon DD, HH:MM:SS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vi7-fl-Ap8">
-                                                    <rect key="frame" x="109" y="8" width="124" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="HTT-oY-fZP" firstAttribute="top" secondItem="vi7-fl-Ap8" secondAttribute="bottom" constant="-1" id="E75-II-AMZ"/>
-                                                <constraint firstItem="mUb-Vi-dyF" firstAttribute="leading" secondItem="zuI-ez-ANu" secondAttribute="leading" constant="10" id="Mkb-u1-vUi"/>
-                                                <constraint firstAttribute="centerY" secondItem="vi7-fl-Ap8" secondAttribute="centerY" id="WP3-ee-L50"/>
-                                                <constraint firstItem="vi7-fl-Ap8" firstAttribute="top" secondItem="zuI-ez-ANu" secondAttribute="top" constant="8" id="a49-y1-5An"/>
-                                                <constraint firstAttribute="centerY" secondItem="mUb-Vi-dyF" secondAttribute="centerY" id="kuM-io-e8d"/>
-                                                <constraint firstItem="vi7-fl-Ap8" firstAttribute="leading" secondItem="HTT-oY-fZP" secondAttribute="leading" id="lRf-Fy-mfm"/>
-                                                <constraint firstAttribute="centerY" secondItem="8Mk-eV-BmP" secondAttribute="centerY" id="mTW-ga-0XM"/>
-                                                <constraint firstAttribute="trailing" secondItem="8Mk-eV-BmP" secondAttribute="trailing" constant="10" id="rDR-3B-M3g"/>
-                                                <constraint firstItem="8Mk-eV-BmP" firstAttribute="leading" secondItem="vi7-fl-Ap8" secondAttribute="trailing" constant="40" id="uXJ-EK-vEa"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="WP3-ee-L50"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="timelogBreakDurationLabel" destination="HTT-oY-fZP" id="15X-zV-Xms"/>
-                                            <outlet property="timelogCommentLabel" destination="8Mk-eV-BmP" id="Xtm-Oz-GHJ"/>
-                                            <outlet property="timelogTimestampLabel" destination="vi7-fl-Ap8" id="pEj-jE-NxM"/>
-                                            <outlet property="timelogTitleLabel" destination="mUb-Vi-dyF" id="A0D-Mf-KXt"/>
-                                            <segue destination="ZT9-wB-HRj" kind="show" identifier="showDetails" id="JSi-NY-yOw"/>
+                                            <segue destination="ZT9-wB-HRj" kind="show" identifier="showDetails" id="5cm-hA-XRw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -180,7 +94,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fyd-AQ-mKW">
-                                <rect key="frame" x="45" y="191" width="57" height="30"/>
+                                <rect key="frame" x="45" y="190" width="57" height="30"/>
                                 <state key="normal" title="Clock In"/>
                                 <connections>
                                     <action selector="startStop:" destination="3fF-Vc-Hph" eventType="touchUpInside" id="WcN-Ti-Dav"/>
@@ -220,7 +134,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yY-IF-euy">
-                                <rect key="frame" x="118" y="240" width="84" height="27"/>
+                                <rect key="frame" x="118" y="244" width="84" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -382,7 +296,7 @@
         <!--Details-->
         <scene sceneID="Yx0-9r-HRO">
             <objects>
-                <tableViewController id="ZT9-wB-HRj" customClass="detailsTimelogTableviewController" sceneMemberID="viewController">
+                <tableViewController id="ZT9-wB-HRj" customClass="detailsTimelogViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gmf-Mj-d79">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -403,8 +317,8 @@
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Red Garage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0H-AY-K4n">
-                                                    <rect key="frame" x="263" y="12.5" width="92" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Red Garage" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0H-AY-K4n">
+                                                    <rect key="frame" x="256" y="13" width="99" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -433,8 +347,8 @@
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clocked In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49Q-5Z-sjP">
-                                                    <rect key="frame" x="272.5" y="11.5" width="82.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Clocked In" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49Q-5Z-sjP">
+                                                    <rect key="frame" x="250" y="12" width="105" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -461,7 +375,7 @@
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="7/15/15, 7:08:02 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mr-zh-hlC">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="7/15/15, 7:08:02 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mr-zh-hlC">
                                                     <rect key="frame" x="198" y="11.5" width="157" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -515,16 +429,34 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Details" id="Cek-eH-R5M" userLabel="Detail">
-                        <barButtonItem key="rightBarButtonItem" title="Delete" id="RI2-Xt-QRt"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ctn-GE-vd6">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Fzc-mS-xVx">
+                                <rect key="frame" x="-23" y="-15" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButton:" destination="ZT9-wB-HRj" eventType="touchUpInside" id="8kC-uE-cq7"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="commentTextField" destination="U15-DI-FcH" id="5AR-wg-nVq"/>
+                        <outlet property="entryLabel" destination="49Q-5Z-sjP" id="lee-kb-sne"/>
+                        <outlet property="jobLabel" destination="H0H-AY-K4n" id="aNj-VF-QTO"/>
+                        <outlet property="timestampLabel" destination="3Mr-zh-hlC" id="dTM-OO-xat"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXv-q5-4Gp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2089.5" y="1226.5"/>
+            <point key="canvasLocation" x="2203.5" y="1227.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="JbC-6P-XBd"/>
+        <segue reference="brI-uV-27j"/>
     </inferredMetricsTieBreakers>
 </document>
