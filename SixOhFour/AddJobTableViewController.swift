@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddJobTableViewController: UITableViewController, writeValueBackDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var positionTextField: UITextField!
@@ -46,6 +46,13 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
             newItem()
         }
         navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    @IBAction func unwindFromPayRateTableViewController(segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! PayRateTableViewController
+        payRateLabel.text = sourceVC.payRate.payRate
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     override func viewDidLoad() {
@@ -121,9 +128,9 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
         // Dispose of any resources that can be recreated.
     }
 
-    func writeValueBack(vc: PayRateTableViewController, value: String) {
-        self.payRateLabel.text = "$\(value)"
-    }
+//    func writeValueBack(vc: PayRateTableViewController, value: String) {
+//        self.payRateLabel.text = "$\(value)"
+//    }
     
     func newItem() {
         let context = self.context
@@ -162,6 +169,13 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
         var jc = JobColor()
         jobColorView.color = jc.getJobColor(pickerData[row])
         jobColorView.setNeedsDisplay()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "payRate" {
+            let destinationVC = segue.destinationViewController as! PayRateTableViewController
+            destinationVC.payRate = self.payRate
+        }
     }
     
 }

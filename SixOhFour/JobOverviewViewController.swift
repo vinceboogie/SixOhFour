@@ -21,32 +21,29 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var lastThirtyDaysLabel: UILabel!
     @IBOutlet weak var yearToDateLabel: UILabel!
     
-    var jobs : Jobs!
     
-    let context : NSManagedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-    
-    var frc : NSFetchedResultsController = NSFetchedResultsController()
-    
-    func getFetchedResultsController() -> NSFetchedResultsController {
-        frc = NSFetchedResultsController(fetchRequest: jobsFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        return frc
-    }
-    
-    func jobsFetchRequest() -> NSFetchRequest {
-        let fetchRequest = NSFetchRequest(entityName: "Jobs")
-        let sortDescriptor = NSSortDescriptor(key: "jobName", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return fetchRequest
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        frc = getFetchedResultsController()
-        frc.delegate = self
-        frc.performFetch(nil)
+        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
         
-        println(jobs?.jobName)
+        var request = NSFetchRequest(entityName: "Jobs")
+        request.returnsObjectsAsFaults = false ;
+        
+        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        
+        if results.count > 0 {
+            var firstJob = results[0] as! Jobs
+            nameLabel.text = firstJob.jobName
+            
+            var firstPosition = results[0] as! Jobs
+            positionLabel.text = firstPosition.jobPosition
+            
+            var firstPay = results[0] as! Jobs
+            payLabel.text = "$\(firstPay.jobPay)/hr"
+        }
     }
 
     override func didReceiveMemoryWarning() {
