@@ -14,6 +14,7 @@
 		005EAD531B52235600F8E970 /* ClockIn_EndedBreakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005EAD521B52235600F8E970 /* ClockIn_EndedBreakCell.swift */; };
 		870CECBF1B4F4E9C00B30AAE /* PayRateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870CECBE1B4F4E9C00B30AAE /* PayRateTableViewController.swift */; };
 		870CECC11B4F77C900B30AAE /* AddJobTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870CECC01B4F77C900B30AAE /* AddJobTableViewController.swift */; };
+		871307391B630E4B00D96582 /* TimesheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871307381B630E4B00D96582 /* TimesheetViewController.swift */; };
 		87238A461B3E25AA004D44CA /* AddJobStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87238A451B3E25AA004D44CA /* AddJobStoryboard.storyboard */; };
 		87238A4C1B3E2EC5004D44CA /* CalendarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87238A4B1B3E2EC5004D44CA /* CalendarStoryboard.storyboard */; };
 		87238A4E1B3E300A004D44CA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87238A4D1B3E300A004D44CA /* CalendarViewController.swift */; };
@@ -77,6 +78,7 @@
 		005EAD521B52235600F8E970 /* ClockIn_EndedBreakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockIn_EndedBreakCell.swift; sourceTree = "<group>"; };
 		870CECBE1B4F4E9C00B30AAE /* PayRateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRateTableViewController.swift; sourceTree = "<group>"; };
 		870CECC01B4F77C900B30AAE /* AddJobTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJobTableViewController.swift; sourceTree = "<group>"; };
+		871307381B630E4B00D96582 /* TimesheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesheetViewController.swift; sourceTree = "<group>"; };
 		87238A451B3E25AA004D44CA /* AddJobStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddJobStoryboard.storyboard; sourceTree = "<group>"; };
 		87238A4B1B3E2EC5004D44CA /* CalendarStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CalendarStoryboard.storyboard; sourceTree = "<group>"; };
 		87238A4D1B3E300A004D44CA /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				870CECC01B4F77C900B30AAE /* AddJobTableViewController.swift */,
 				B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */,
 				879277001B5868E90023CBA6 /* JobOverviewViewController.swift */,
+				871307381B630E4B00D96582 /* TimesheetViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				001464821B4F65D300AC0C9F /* TimeLogs.swift in Sources */,
 				B9E34BCB1B50D21800B9FD88 /* JobsListTableViewController.swift in Sources */,
 				879277011B5868E90023CBA6 /* JobOverviewViewController.swift in Sources */,
+				871307391B630E4B00D96582 /* TimesheetViewController.swift in Sources */,
 				B90FA0671B4320A6004B4D79 /* CVCircleView.swift in Sources */,
 				B90FA05B1B4320A6004B4D79 /* CVCalendarMonthContentView.swift in Sources */,
 				B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */,
