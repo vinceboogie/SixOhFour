@@ -75,19 +75,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        if segue.identifier == "edit" {
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
-            let itemController : AddJobTableViewController = segue.destinationViewController as! AddJobTableViewController
-            let nItem : Jobs = frc.objectAtIndexPath(indexPath!) as! Jobs
-            itemController.nItem = nItem
-            
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//        
+//        if segue.identifier == "edit" {
+//            let cell = sender as! UITableViewCell
+//            let indexPath = tableView.indexPathForCell(cell)
+//            let itemController : AddJobTableViewController = segue.destinationViewController as! AddJobTableViewController
+//            let nItem : Jobs = frc.objectAtIndexPath(indexPath!) as! Jobs
+//            itemController.nItem = nItem
+//            
+//        }
+//    }
     
     
 }

@@ -24,6 +24,8 @@
 		874FAD021B33A9D7002EABB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD011B33A9D7002EABB0 /* Images.xcassets */; };
 		874FAD051B33A9D7002EABB0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */; };
 		874FAD111B33A9D7002EABB0 /* SixOhFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */; };
+		879277011B5868E90023CBA6 /* JobOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879277001B5868E90023CBA6 /* JobOverviewViewController.swift */; };
+		879277031B588B2C0023CBA6 /* PayRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879277021B588B2C0023CBA6 /* PayRate.swift */; };
 		87B57CD71B509B4400D9B438 /* JobsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B57CD61B509B4400D9B438 /* JobsListCell.swift */; };
 		87F4B3781B57411C001B9526 /* JobColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F4B3771B57411C001B9526 /* JobColor.swift */; };
 		B90FA0551B4320A6004B4D79 /* CVCalendarContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0411B4320A6004B4D79 /* CVCalendarContentDelegate.swift */; };
@@ -89,6 +91,8 @@
 		874FAD0A1B33A9D7002EABB0 /* SixOhFourTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SixOhFourTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		874FAD0F1B33A9D7002EABB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOhFourTests.swift; sourceTree = "<group>"; };
+		879277001B5868E90023CBA6 /* JobOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobOverviewViewController.swift; sourceTree = "<group>"; };
+		879277021B588B2C0023CBA6 /* PayRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRate.swift; sourceTree = "<group>"; };
 		87B57CD51B5090D100D9B438 /* SixOhFourV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SixOhFourV2.xcdatamodel; sourceTree = "<group>"; };
 		87B57CD61B509B4400D9B438 /* JobsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsListCell.swift; sourceTree = "<group>"; };
 		87F4B3771B57411C001B9526 /* JobColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobColor.swift; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 			children = (
 				B9D77DDF1B3C96CA00988865 /* Jobs.swift */,
 				87F4B3771B57411C001B9526 /* JobColor.swift */,
+				879277021B588B2C0023CBA6 /* PayRate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				870CECBE1B4F4E9C00B30AAE /* PayRateTableViewController.swift */,
 				870CECC01B4F77C900B30AAE /* AddJobTableViewController.swift */,
 				B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */,
+				879277001B5868E90023CBA6 /* JobOverviewViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -462,6 +468,7 @@
 				B90FA0611B4320A6004B4D79 /* CVCalendarViewAppearance.swift in Sources */,
 				B90FA0561B4320A6004B4D79 /* CVCalendarContentViewController.swift in Sources */,
 				B90FA0661B4320A6004B4D79 /* CVCalendarWeekView.swift in Sources */,
+				879277031B588B2C0023CBA6 /* PayRate.swift in Sources */,
 				B90FA05F1B4320A6004B4D79 /* CVCalendarViewAnimator.swift in Sources */,
 				B90FA0641B4320A6004B4D79 /* CVCalendarWeekContentRecovery.swift in Sources */,
 				870CECBF1B4F4E9C00B30AAE /* PayRateTableViewController.swift in Sources */,
@@ -479,6 +486,7 @@
 				874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */,
 				001464821B4F65D300AC0C9F /* TimeLogs.swift in Sources */,
 				B9E34BCB1B50D21800B9FD88 /* JobsListTableViewController.swift in Sources */,
+				879277011B5868E90023CBA6 /* JobOverviewViewController.swift in Sources */,
 				B90FA0671B4320A6004B4D79 /* CVCircleView.swift in Sources */,
 				B90FA05B1B4320A6004B4D79 /* CVCalendarMonthContentView.swift in Sources */,
 				B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */,

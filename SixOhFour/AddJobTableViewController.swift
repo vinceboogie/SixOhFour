@@ -19,6 +19,8 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     @IBOutlet weak var jobColorView: JobColorView!
     @IBOutlet weak var saveJobButton: UIBarButtonItem!
     
+    var payRate = PayRate()
+    
     let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
     
     var pickerVisible = false
@@ -27,12 +29,15 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     
     var nItem : Jobs? = nil
     
-    @IBAction func payRateButtonPressed(sender: AnyObject) {
-        let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
-        var payRateTableViewController: PayRateTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("PayRateTableViewController") as! PayRateTableViewController
-        payRateTableViewController.writeValueDelegate = self
-        navigationController?.pushViewController(payRateTableViewController, animated: true)
-    }
+//    @IBAction func payRateButtonPressed(sender: AnyObject) {
+//        let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
+//        var payRateTableViewController: PayRateTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("PayRateTableViewController") as! PayRateTableViewController
+//        payRateTableViewController.writeValueDelegate = self
+//        
+//        payRateTableViewController.
+//        
+//        navigationController?.pushViewController(payRateTableViewController, animated: true)
+//    }
     
     @IBAction func saveJobButton(sender: AnyObject) {
         if nItem != nil {

@@ -15,6 +15,8 @@ import CoreData
 
 class PayRateTableViewController: UITableViewController {
     
+    var payRate: PayRate!
+    
     var writeValueDelegate: writeValueBackDelegate?
 
     @IBOutlet weak var payTextField: UITextField!
