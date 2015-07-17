@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddJobTableViewController: UITableViewController, writeValueBackDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var positionTextField: UITextField!
@@ -19,6 +19,8 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     @IBOutlet weak var jobColorView: JobColorView!
     @IBOutlet weak var saveJobButton: UIBarButtonItem!
     
+    var payRate = PayRate()
+    
     let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
     
     var pickerVisible = false
@@ -27,12 +29,15 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
     
     var nItem : Jobs? = nil
     
-    @IBAction func payRateButtonPressed(sender: AnyObject) {
-        let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
-        var payRateTableViewController: PayRateTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("PayRateTableViewController") as! PayRateTableViewController
-        payRateTableViewController.writeValueDelegate = self
-        navigationController?.pushViewController(payRateTableViewController, animated: true)
-    }
+//    @IBAction func payRateButtonPressed(sender: AnyObject) {
+//        let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
+//        var payRateTableViewController: PayRateTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("PayRateTableViewController") as! PayRateTableViewController
+//        payRateTableViewController.writeValueDelegate = self
+//        
+//        payRateTableViewController.
+//        
+//        navigationController?.pushViewController(payRateTableViewController, animated: true)
+//    }
     
     @IBAction func saveJobButton(sender: AnyObject) {
         if nItem != nil {
@@ -41,6 +46,13 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
             newItem()
         }
         navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    @IBAction func unwindFromPayRateTableViewController(segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! PayRateTableViewController
+        payRateLabel.text = sourceVC.payRate.payRate
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     override func viewDidLoad() {
@@ -116,9 +128,9 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
         // Dispose of any resources that can be recreated.
     }
 
-    func writeValueBack(vc: PayRateTableViewController, value: String) {
-        self.payRateLabel.text = "$\(value)"
-    }
+//    func writeValueBack(vc: PayRateTableViewController, value: String) {
+//        self.payRateLabel.text = "$\(value)"
+//    }
     
     func newItem() {
         let context = self.context
@@ -157,6 +169,13 @@ class AddJobTableViewController: UITableViewController, writeValueBackDelegate, 
         var jc = JobColor()
         jobColorView.color = jc.getJobColor(pickerData[row])
         jobColorView.setNeedsDisplay()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "payRate" {
+            let destinationVC = segue.destinationViewController as! PayRateTableViewController
+            destinationVC.payRate = self.payRate
+        }
     }
     
 }

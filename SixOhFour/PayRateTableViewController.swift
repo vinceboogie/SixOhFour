@@ -9,13 +9,17 @@
 import UIKit
 import CoreData
 
-@objc protocol writeValueBackDelegate {
-    func writeValueBack(vc: PayRateTableViewController, value: String)
-}
+//@objc protocol writeValueBackDelegate {
+//    func writeValueBack(vc: PayRateTableViewController, value: String)
+//}
 
 class PayRateTableViewController: UITableViewController {
     
-    var writeValueDelegate: writeValueBackDelegate?
+    var payRate: PayRate!
+    
+//    var writeValueDelegate: writeValueBackDelegate?
+    
+    var saveButton: UIBarButtonItem!
 
     @IBOutlet weak var payTextField: UITextField!
     
@@ -52,25 +56,35 @@ class PayRateTableViewController: UITableViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(true)
-        
-        if let delegate = writeValueDelegate {
-            delegate.writeValueBack(self, value: payTextField.text)
-            println("writingValueBack")
-            println(writeValueDelegate)
-
-        }
-    }
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(true)
+//        
+//        if let delegate = writeValueDelegate {
+//            delegate.writeValueBack(self, value: payTextField.text)
+//            println("writingValueBack")
+//            println(writeValueDelegate)
+//
+//        }
+//    }
     
-    func payValue(vc: AddJobTableViewController, value: String) {
-     
+//    func payValue(vc: AddJobTableViewController, value: String) {
+//     
+//    }
+    
+    func savePayRate() {
+        payRate.payRate = payTextField.text
+        self.performSegueWithIdentifier("unwindFromPayRate", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "savePayRate")
+        self.navigationItem.rightBarButtonItem = saveButton
+        
         self.title = "Pay Rate"
+        
+        payTextField.text = payRate.payRate
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
