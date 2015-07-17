@@ -258,11 +258,28 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDP-qP-faQ">
+                                <rect key="frame" x="72" y="274" width="16" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGR-j0-lSz">
+                                <rect key="frame" x="267" y="72" width="37" height="30"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneSettingBreaktimeAction:" destination="hN0-WT-Qik" eventType="touchUpInside" id="q5A-DQ-wUd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="fdf-oW-sNX" secondAttribute="centerX" id="4Nr-k7-BRG"/>
                             <constraint firstAttribute="centerY" secondItem="J63-PZ-xpV" secondAttribute="centerY" id="ALU-DZ-Zsa"/>
+                            <constraint firstAttribute="centerX" secondItem="WDP-qP-faQ" secondAttribute="centerX" constant="80" id="E3y-ZL-zPL"/>
+                            <constraint firstAttribute="centerY" secondItem="WDP-qP-faQ" secondAttribute="centerY" id="EdN-bk-vMO"/>
                             <constraint firstAttribute="centerY" secondItem="fdf-oW-sNX" secondAttribute="centerY" id="Mpm-20-OFP"/>
                             <constraint firstAttribute="centerX" secondItem="J63-PZ-xpV" secondAttribute="centerX" constant="-40" id="eRX-q5-9vS"/>
                         </constraints>
@@ -270,9 +287,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="SetBreakTimePicker" destination="fdf-oW-sNX" id="Wld-1A-ZiN"/>
+                        <outlet property="doneSettingBreaktimeButton" destination="aGR-j0-lSz" id="U6P-cM-kOW"/>
+                        <segue destination="frJ-yD-GyK" kind="unwind" identifier="unwindFromSetBreakTimeViewController" unwindAction="unwindFromSetBreakTimeViewController:" id="Mrb-Ly-Dzm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlW-jn-XC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="frJ-yD-GyK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2278" y="42"/>
         </scene>

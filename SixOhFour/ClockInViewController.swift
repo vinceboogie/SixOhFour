@@ -9,8 +9,7 @@
 import UIKit
 import CoreData
 
-class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, NSFetchedResultsControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-    //, writeValueBackDelegate2 {
+class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var workTitleLabel: UILabel!
     @IBOutlet weak var workTimeLabel: UILabel!
@@ -35,7 +34,14 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     var breakMinutes: Int = 0
     var breakSeconds: Int = 0
     var breakHours: Int = 0
-    
+
+    var breakMinutesSet: Int = 30
+    var breakSecondsSet: Int = 0
+    var breakHoursSet: Int = 0
+
+    var breakMinutesChange: Int = 0
+    var breakHoursChange: Int = 0
+
     var breakTimerOver = NSTimer()
     
     var stopWatchString: String = ""
@@ -86,6 +92,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             workTimeLabel.textColor = UIColor.grayColor()
         }
         
+        displayBreaktime ()
         
         if selectedJob == "Select A Job" {
             // Fetch jobs list to keep refreshing changes
@@ -198,9 +205,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             editBreakInstruction.hidden = false
             editBreakButton.enabled = true
 
-            breakMinutes = 5
-            breakSeconds = 0
-            breakHours = 0
+            breakReset ()
 
             //Display Break time instantly
             let secondsStringBreak = breakSeconds > 9 ? "\(breakSeconds)" : "0\(breakSeconds)"
@@ -211,13 +216,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             breakCount++
             
-            if breakHours > 0 {
-                breakTitleLabel.text = "Your break is set to \(breakHours) hr and \(breakMinutes) min"
-            } else if breakHours == 0 && breakMinutes > 0 {
-                breakTitleLabel.text = "Your break is set to \(breakMinutes) min"
-            } else if breakMinutes == 0 && breakSeconds > 0 {
-                breakTitleLabel.text = "Your break is set to \(breakSeconds) sec"
-            }
+            displayBreaktime ()
 
             
             breakTitleLabel.textColor = UIColor.blueColor()
@@ -253,9 +252,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             editBreakInstruction.hidden = true
             editBreakButton.enabled = false
 
-            breakMinutes = 0
-            breakSeconds = 5
-            breakHours = 0
+            breakReset()
             
             breakTimer.invalidate()
             
@@ -503,6 +500,28 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
+    @IBAction func unwindFromSetBreakTimeViewController (segue: UIStoryboardSegue) {
+        
+        let sourceVC = segue.sourceViewController as! SetBreakTimeViewController
+        
+        if((sourceVC.breakMinutes) >= 0 ) {
+            breakMinutesSet = sourceVC.breakMinutes
+            println("breakMinutesSet from SetBreaktime = \(breakMinutes)")
+            breakMinutesChange = ( sourceVC.breakMinutes - sourceVC.breakMinutesSetIntial )
+            println("breakMinutesChange = \(breakMinutesChange)")
+            breakMinutes = (breakMinutes + breakMinutesChange)
+        }
+
+        if((sourceVC.breakHours) >= 0 ) {
+            breakHoursSet = sourceVC.breakHours
+            println("breakHoursSet from SetBreaktime = \(breakHours)")
+            breakHoursChange = ( sourceVC.breakHours - sourceVC.breakHoursSetIntial )
+            println("breakHoursChange = \(breakHoursChange)")
+            breakHours =  (breakHours + breakHoursChange)
+        }
+
+        
+    }
     
 //Table View funct
     
@@ -583,16 +602,23 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         //New Jobs List without the Popover
         if segue.identifier == "displayJobsList" {
-            let destinationVC = segue.destinationViewController as! UIViewController
+            let destinationVC = segue.destinationViewController as! ClockInJobsPopoverViewController
             destinationVC.navigationItem.title = ""
             destinationVC.hidesBottomBarWhenPushed = true;
             //self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target: nil, action: nil)
         }
         
         if segue.identifier == "editBreaktimeSegue" {
-            let destinationVC = segue.destinationViewController as! UIViewController
+            let destinationVC = segue.destinationViewController as! SetBreakTimeViewController
             destinationVC.navigationItem.title = "Set Breaktime"
             destinationVC.hidesBottomBarWhenPushed = true;
+            
+            //Passes 2 data variables
+            destinationVC.breakMinutes = self.breakMinutesSet
+            destinationVC.breakHours = self.breakHoursSet
+            //Pass same 2 variable to get the delta
+            destinationVC.breakMinutesSetIntial = self.breakMinutesSet
+            destinationVC.breakHoursSetIntial = self.breakHoursSet
         }
         
         //Send Core Data Timelog Details
@@ -618,29 +644,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
     
-    // MARK: - BreakTime Picker
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return breakMinutes
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return "\(row)"
-        
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if row == 0 {
-            breakMinutes = 0
-        } else {
-            breakMinutes = row
-        }
-    }
-    
 //    //Popover Effect - Drop down menu --->>>>>
 //    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
 //    {
@@ -651,6 +654,22 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func displayBreaktime () {
+        if breakHoursSet > 0 {
+            breakTitleLabel.text = "Your break is set to \(breakHoursSet) hr and \(breakMinutesSet) min"
+        } else if breakHoursSet == 0 && breakMinutes > 0 {
+            breakTitleLabel.text = "Your break is set to \(breakMinutesSet) min"
+        } else if breakMinutesSet == 0 && breakSecondsSet > 0 {
+            breakTitleLabel.text = "Your break is set to \(breakSecondsSet) sec"
+        }
+    }
+    
+    func breakReset () {
+        breakMinutes = breakMinutesSet
+        breakSeconds = breakSecondsSet
+        breakHours = breakHoursSet
     }
 
 }
