@@ -25,20 +25,17 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     var jobListEmpty = true;
     var reminderMinutes = 16 // Maximum reminder = 15 minutes
     var addShift: Shift!
+    var repeatSettings = RepeatSettings()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
-        // TODO - Change Say Hello to Save Function
         saveButton = UIBarButtonItem(title:"Save", style: .Plain, target: self, action: "addSchedule")
         self.navigationItem.rightBarButtonItem = saveButton
-        
+        saveButton.enabled = false
+
         datePickerChanged(startLabel, datePicker: startDatePicker)
         
-        saveButton.enabled = false
         repeatLabel.text = "Never"
         
         // Fetch first Job
@@ -73,7 +70,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: Testing Stuff
+    // MARK: - Class Functions
     
     func addSchedule() {
         addShift = Shift(dictionary: ["color": jobColorView.color , "name": "\(jobNameLabel.text!)", "shiftTime": "08:00 AM - 05:00 PM"])
@@ -82,7 +79,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     }
     
     
-    // MARK: IB Actions
+    // MARK: - SetIB Actions
     
     @IBAction func startDatePickerValue(sender: AnyObject) {
         datePickerChanged(startLabel, datePicker: startDatePicker)
@@ -92,16 +89,31 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         datePickerChanged(endLabel, datePicker: endDatePicker)
     }
     
-    @IBAction func unwindFromJobsListTableViewController (segue: UIStoryboardSegue) {
+    @IBAction func unwindFromJobsListTableViewController(segue: UIStoryboardSegue) {
         let sourceVC = segue.sourceViewController as! JobsListTableViewController
         
-        if((sourceVC.selectedJob) != nil) {
+        if sourceVC.selectedJob != nil {
             jobNameLabel.text = sourceVC.selectedJob.jobName
             
             var jc = JobColor()
-            
             jobColorView.color = jc.getJobColor(sourceVC.selectedJob.jobColor)
         }
+    }
+    
+    @IBAction func unwindFromSetRepeatTableViewController(segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! SetRepeatTableViewController
+        
+        if sourceVC.repeatSettings.enabled {
+            repeatLabel.text = "Yes"
+        } else {
+            repeatLabel.text = "Never"
+        }
+        
+        self.repeatSettings = sourceVC.repeatSettings
+
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
 //    @IBAction func unwindFromSetRepeatTableViewController (segue: UIStoryboardSegue) {
@@ -205,6 +217,8 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
             toggleLabelColor(endDatePickerHidden, label: endLabel)
         }
         
+        tableView.beginUpdates()
+        tableView.endUpdates()
 
     }
     
@@ -275,7 +289,6 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         }
         
     }
-    
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if !jobListEmpty {
@@ -354,10 +367,11 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
             destinationVC.previousSelection = jobNameLabel.text
         }
         
-//        if segue.identifier == "selectRepeat" {
-//            let destinationVC = segue.destinationViewController as! SetRepeatTableViewController
-//            destinationVC.previousSelection = repeatLabel.text
-//        }
+        if segue.identifier == "setRepeat" {
+            let destinationVC = segue.destinationViewController as! SetRepeatTableViewController
+            
+            destinationVC.repeatSettings = self.repeatSettings
+        }
         
     }
     
@@ -369,7 +383,6 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
                 
                 self.navigationController?.pushViewController(addJobsVC, animated: true)
                 
-            
                 return false
                 
             } else {
@@ -378,7 +391,6 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         }
         
         return true
-        
     }
     
 

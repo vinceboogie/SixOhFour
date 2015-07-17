@@ -15,22 +15,55 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     @IBOutlet weak var weekLabel: UILabel!
     
     let weekdaysArray = ["S", "M", "T", "W", "T", "F", "S"]
-    var weeksRepeat = 1
+    
+    var doneButton: UIBarButtonItem!
     var pickerHidden = true
     var weekIndex = 0
-    var selectedDaysArray = Array(count: 5, repeatedValue: Array(count: 7, repeatedValue: false))
+    var repeatSettings: RepeatSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        doneButton = UIBarButtonItem(title:"Done", style: .Plain, target: self, action: "setRepeat")
+        self.navigationItem.rightBarButtonItem = self.doneButton
+        
+        if repeatSettings.enabled {
+            pickerHidden = false
+            repeatSwitch.on = true
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    
+        var row = repeatSettings.weeksToRepeat - 1 // subtract 1 since row index starts at 0
+        repeatPicker.selectRow(row, inComponent: 0, animated: true)
+        
+        setWeekLabelText(row)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Class Functions
+    
+    func setWeekLabelText(row: Int) {
+        if row == 0 {
+            weekLabel.text = "week"
+        } else {
+            weekLabel.text = "weeks"
+        }
+    }
+    
+    func setRepeat() {
+        if repeatSwitch.on {
+            repeatSettings.enabled = true
+        } else {
+            repeatSettings = RepeatSettings()
+        }
+        self.performSegueWithIdentifier("unwindAfterSetRepeat", sender: self)
     }
     
     
@@ -63,18 +96,13 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        if row == 0 {
-            weekLabel.text = "week"
-        } else {
-            weekLabel.text = "weeks"
-        }
+        setWeekLabelText(row)
         
-        weeksRepeat = row + 1
+        repeatSettings.weeksToRepeat = row + 1
         tableView.reloadData()
     }
         
     
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -85,7 +113,7 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
         if section == 0 {
             return 2
         } else {
-            return weeksRepeat + 1
+            return repeatSettings.weeksToRepeat + 1 // Add 1 to account for the first cell containing the label
         }
     }
     
@@ -102,55 +130,10 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        weekIndex = indexPath.row
-    }
-    
-    
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        weekIndex = indexPath.row
+//        println(weekIndex)
+//    }
     
     // MARK: - Collection View Data Source and Delegate
     
@@ -161,6 +144,7 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WeekdayCell", forIndexPath: indexPath) as! WeekdayCell
         
+        
         cell.dayLabel.text = weekdaysArray[indexPath.row]
         
         return cell
@@ -169,27 +153,29 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WeekdayCell
         
-        if !selectedDaysArray[weekIndex][indexPath.row] {
+        println(collectionView.tag)
+        
+        if repeatSettings.selectedDaysArray[weekIndex][indexPath.row] == false{
             cell.backgroundColor = UIColor.darkGrayColor()
             cell.dayLabel.textColor = UIColor.whiteColor()
-            selectedDaysArray[weekIndex][indexPath.row] = true
+
+            repeatSettings.selectedDaysArray[weekIndex][indexPath.row] = true
         } else {
-            cell.backgroundColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1)
+            cell.backgroundColor = UIColor.lightGrayColor()
             cell.dayLabel.textColor = UIColor.blackColor()
-            selectedDaysArray[weekIndex][indexPath.row] = false
+            
+            repeatSettings.selectedDaysArray[weekIndex][indexPath.row] = false
         }
 
     }
     
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
+//    // In a storyboard-based application, you will often want to do a little preparation before navigation
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        // Get the new view controller using [segue destinationViewController].
+//        // Pass the selected object to the new view controller.
+//    }
+    
 
 }
