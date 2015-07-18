@@ -161,7 +161,6 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="editBreakTime:" destination="3fF-Vc-Hph" eventType="touchUpInside" id="gbq-0O-KmP"/>
                                     <segue destination="hN0-WT-Qik" kind="show" identifier="editBreaktimeSegue" id="Rsg-M5-rCb"/>
                                 </connections>
                             </button>
@@ -259,26 +258,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDP-qP-faQ">
-                                <rect key="frame" x="72" y="274" width="16" height="21"/>
+                                <rect key="frame" x="78" y="274" width="16" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGR-j0-lSz">
-                                <rect key="frame" x="267" y="72" width="37" height="30"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="doneSettingBreaktimeAction:" destination="hN0-WT-Qik" eventType="touchUpInside" id="q5A-DQ-wUd"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="fdf-oW-sNX" secondAttribute="centerX" id="4Nr-k7-BRG"/>
                             <constraint firstAttribute="centerY" secondItem="J63-PZ-xpV" secondAttribute="centerY" id="ALU-DZ-Zsa"/>
-                            <constraint firstAttribute="centerX" secondItem="WDP-qP-faQ" secondAttribute="centerX" constant="80" id="E3y-ZL-zPL"/>
+                            <constraint firstAttribute="centerX" secondItem="WDP-qP-faQ" secondAttribute="centerX" constant="75" id="E3y-ZL-zPL"/>
                             <constraint firstAttribute="centerY" secondItem="WDP-qP-faQ" secondAttribute="centerY" id="EdN-bk-vMO"/>
                             <constraint firstAttribute="centerY" secondItem="fdf-oW-sNX" secondAttribute="centerY" id="Mpm-20-OFP"/>
                             <constraint firstAttribute="centerX" secondItem="J63-PZ-xpV" secondAttribute="centerX" constant="-40" id="eRX-q5-9vS"/>
@@ -287,7 +277,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="SetBreakTimePicker" destination="fdf-oW-sNX" id="Wld-1A-ZiN"/>
-                        <outlet property="doneSettingBreaktimeButton" destination="aGR-j0-lSz" id="U6P-cM-kOW"/>
                         <segue destination="frJ-yD-GyK" kind="unwind" identifier="unwindFromSetBreakTimeViewController" unwindAction="unwindFromSetBreakTimeViewController:" id="Mrb-Ly-Dzm"/>
                     </connections>
                 </viewController>
@@ -394,6 +383,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <datePicker key="tableFooterView" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="rbi-Kp-RKS">
+                            <rect key="frame" x="0.0" y="228" width="375" height="162"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <date key="date" timeIntervalSinceReferenceDate="458864453.71075398">
+                                <!--2015-07-17 22:20:53 +0000-->
+                            </date>
+                        </datePicker>
                         <sections>
                             <tableViewSection id="dwU-9u-Vqb">
                                 <cells>
@@ -402,9 +398,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rkf-1J-2zz" id="YfT-PD-tSt">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwq-II-dn6">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Company Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwq-II-dn6">
                                                     <rect key="frame" x="20" y="12" width="118" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -432,9 +428,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BOp-fs-KUA" id="Z5P-by-Hkn">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entry Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uf7-pq-Asr">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Entry Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uf7-pq-Asr">
                                                     <rect key="frame" x="20" y="11" width="94" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -460,9 +456,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="83W-dy-BMo" id="EAW-kI-Bhy">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timestamp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3x-rW-kcN">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Timestamp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3x-rW-kcN">
                                                     <rect key="frame" x="20" y="12" width="81" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -487,16 +483,15 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GcC-Il-3tf" id="av6-f2-MyI">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKb-VH-760">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Comment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKb-VH-760">
                                                     <rect key="frame" x="20" y="12" width="72" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Notes" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U15-DI-FcH">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Notes" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U15-DI-FcH">
                                                     <rect key="frame" x="134" y="12" width="222" height="18"/>
-                                                    <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
@@ -519,35 +514,23 @@
                             <outlet property="delegate" destination="ZT9-wB-HRj" id="r9W-1Y-gUL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Details" id="Cek-eH-R5M" userLabel="Detail">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="ctn-GE-vd6">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Fzc-mS-xVx">
-                                <rect key="frame" x="-23" y="-15" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="doneButton:" destination="ZT9-wB-HRj" eventType="touchUpInside" id="8kC-uE-cq7"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Details" id="Cek-eH-R5M" userLabel="Detail"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="commentTextField" destination="U15-DI-FcH" id="5AR-wg-nVq"/>
                         <outlet property="entryLabel" destination="49Q-5Z-sjP" id="lee-kb-sne"/>
                         <outlet property="jobLabel" destination="H0H-AY-K4n" id="aNj-VF-QTO"/>
                         <outlet property="timestampLabel" destination="3Mr-zh-hlC" id="dTM-OO-xat"/>
+                        <segue destination="OyI-O1-2G7" kind="unwind" identifier="unwindFromDetailsTimelogViewController" unwindAction="unwindFromDetailsTimelogViewController:" id="haH-ob-CCd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXv-q5-4Gp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="OyI-O1-2G7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2203.5" y="1227.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="brI-uV-27j"/>
+        <segue reference="JbC-6P-XBd"/>
     </inferredMetricsTieBreakers>
 </document>
