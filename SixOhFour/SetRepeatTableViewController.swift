@@ -13,6 +13,8 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     @IBOutlet weak var repeatPicker: UIPickerView!
     @IBOutlet weak var repeatSwitch: UISwitch!
     @IBOutlet weak var weekLabel: UILabel!
+    @IBOutlet var collectionView: [UICollectionView]!
+
     
     let weekdaysArray = ["S", "M", "T", "W", "T", "F", "S"]
     
@@ -94,27 +96,44 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         setWeekLabelText(row)
         
-        repeatSettings.weeksToRepeat = row + 1
+        var previous = repeatSettings.weeksToRepeat
+        var current = row + 1
+
+        repeatSettings.weeksToRepeat = current
+
         
-        for x in 1...repeatSettings.weeksToRepeat {
-            for y in 0...6 {
-                if repeatSettings.selectedDaysArray[x-1][y] {
-                    repeatSettings.selectedDaysArray[x][y] = true
-                }
-            }
-        }
+        println(previous)
+        println(current)
         
-        // Reset the selected days for weeks not displayed
-        if repeatSettings.weeksToRepeat < 5 {
-            for x in repeatSettings.weeksToRepeat...4 {
+        if current > previous {
+            for x in previous...row {
                 for y in 0...6 {
-                    repeatSettings.selectedDaysArray[x][y] = false
+                    repeatSettings.selectedDaysArray[x][y] = repeatSettings.selectedDaysArray[x-1][y]
                 }
+                collectionView[x].reloadData()
             }
         }
+        
+                // Test
+                for x in 0...4 {
+                    for y in 0...6 {
+                        print(repeatSettings.selectedDaysArray[x][y])
+                        print("\t")
+                    }
+                    println("")
+                }
+                println("")
+        
+//        // Reset the selected days for weeks not displayed
+//        if repeatSettings.weeksToRepeat < 5 {
+//            for x in repeatSettings.weeksToRepeat...4 {
+//                for y in 0...6 {
+//                    repeatSettings.selectedDaysArray[x][y] = false
+//                }
+//            }
+//        }
         tableView.reloadData()
     }
         
@@ -156,8 +175,6 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WeekDayCell", forIndexPath: indexPath) as! WeekDayCollectionViewCell
         
         var weekIndex = collectionView.tag
-        
-        repeatSettings.selectedDaysArray[weekIndex][repeatSettings.daySelectedIndex] = true
         
         if repeatSettings.selectedDaysArray[weekIndex][indexPath.row]{
             cell.backgroundColor = UIColor.darkGrayColor()

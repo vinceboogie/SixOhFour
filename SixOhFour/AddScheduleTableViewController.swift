@@ -374,6 +374,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         if segue.identifier == "setRepeat" {
             let destinationVC = segue.destinationViewController as! SetRepeatTableViewController
             
+            repeatSettings.selectedDaysArray[0][repeatSettings.daySelectedIndex] = true 
             destinationVC.repeatSettings = self.repeatSettings
         }
         
