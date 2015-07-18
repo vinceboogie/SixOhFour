@@ -12,5 +12,5 @@ struct RepeatSettings {
     var enabled = false
     var weeksToRepeat = 1 // Defaults to 1 week
     var selectedDaysArray = Array(count: 5, repeatedValue: Array(count: 7, repeatedValue: false))
-
+    var daySelectedIndex = 0 // Fail safe default is Sunday
 }

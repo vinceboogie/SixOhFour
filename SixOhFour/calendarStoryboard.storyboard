@@ -547,7 +547,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="lyU-2s-YqT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="WZa-rk-hHW">
                                 <cells>
@@ -559,7 +559,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8h-aN-9Gi">
                                                     <rect key="frame" x="20" y="11" width="55" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rUh-Np-tZP">
@@ -592,7 +592,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="week" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8r-Os-wg3">
                                                     <rect key="frame" x="190" y="71" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -618,7 +618,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat on which days:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuW-IR-EGJ">
                                                     <rect key="frame" x="20" y="11" width="175" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -628,12 +628,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="X0W-Op-QLu">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="X0W-Op-QLu" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X0W-Op-QLu" id="BUN-Vd-mbV">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I53-ba-45k">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I53-ba-45k" customClass="RepeatOnDaysCollectionView" customModule="SixOhFour" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="zbL-xA-vay">
@@ -643,7 +643,7 @@
                                                         <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekdayCell" id="aCQ-UX-MX3" customClass="WeekdayCell" customModule="SixOhFour" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekDayCell" id="aCQ-UX-MX3" customClass="WeekDayCollectionViewCell" customModule="SixOhFour" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -653,7 +653,7 @@
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQs-zA-dLW">
                                                                         <rect key="frame" x="25" y="5" width="8" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -673,13 +673,13 @@
                                                                 </mask>
                                                             </variation>
                                                             <connections>
-                                                                <outlet property="dayLabel" destination="FQs-zA-dLW" id="tsS-Lr-L8X"/>
+                                                                <outlet property="dayLabel" destination="FQs-zA-dLW" id="cJi-yH-WaG"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="hDZ-Hi-vW6"/>
-                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="XrZ-Nm-x15"/>
+                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="95X-97-zp6"/>
+                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="sYp-7l-AKq"/>
                                                     </connections>
                                                 </collectionView>
                                             </subviews>
@@ -691,32 +691,32 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="JuK-eu-qJK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="IOp-4i-NLw" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JuK-eu-qJK" id="HQ0-PV-1Oe">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IOp-4i-NLw" id="czD-B6-DLG">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jGD-LU-ecP">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kaw-WI-dnz" customClass="RepeatOnDaysCollectionView" customModule="SixOhFour" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="QaR-2h-hxr">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="2lI-0A-ZjU">
                                                         <size key="itemSize" width="38" height="38"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekdayCell" id="NNK-3y-kHx" customClass="WeekdayCell" customModule="SixOhFour" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekDayCell" id="OtI-Ax-WSD" customClass="WeekDayCollectionViewCell" customModule="SixOhFour" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNp-Ni-hiV">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJl-7j-8FM">
                                                                         <rect key="frame" x="25" y="5" width="8" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -724,62 +724,62 @@
                                                             </view>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstItem="oNp-Ni-hiV" firstAttribute="top" secondItem="NNK-3y-kHx" secondAttribute="top" constant="5" id="S0m-99-OUM"/>
-                                                                <constraint firstAttribute="trailing" secondItem="oNp-Ni-hiV" secondAttribute="trailing" constant="5" id="SBj-Es-On2"/>
-                                                                <constraint firstAttribute="trailing" secondItem="oNp-Ni-hiV" secondAttribute="trailing" constant="5" id="heE-5w-Kid"/>
-                                                                <constraint firstItem="oNp-Ni-hiV" firstAttribute="top" secondItem="NNK-3y-kHx" secondAttribute="top" constant="5" id="jpK-gg-Xse"/>
+                                                                <constraint firstItem="qJl-7j-8FM" firstAttribute="top" secondItem="OtI-Ax-WSD" secondAttribute="top" constant="5" id="DPm-4L-PTN"/>
+                                                                <constraint firstAttribute="trailing" secondItem="qJl-7j-8FM" secondAttribute="trailing" constant="5" id="VMH-QL-ppa"/>
+                                                                <constraint firstAttribute="trailing" secondItem="qJl-7j-8FM" secondAttribute="trailing" constant="5" id="bCv-7N-cYs"/>
+                                                                <constraint firstItem="qJl-7j-8FM" firstAttribute="top" secondItem="OtI-Ax-WSD" secondAttribute="top" constant="5" id="zuV-ct-bkF"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
-                                                                    <exclude reference="jpK-gg-Xse"/>
-                                                                    <exclude reference="heE-5w-Kid"/>
+                                                                    <exclude reference="DPm-4L-PTN"/>
+                                                                    <exclude reference="VMH-QL-ppa"/>
                                                                 </mask>
                                                             </variation>
                                                             <connections>
-                                                                <outlet property="dayLabel" destination="oNp-Ni-hiV" id="XuY-kg-OqQ"/>
+                                                                <outlet property="dayLabel" destination="qJl-7j-8FM" id="BiR-7x-mn8"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="DXh-4d-xu3"/>
-                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="H3K-Vs-knZ"/>
+                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="3Dh-zC-FIY"/>
+                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="jFt-q2-M5e"/>
                                                     </connections>
                                                 </collectionView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="jGD-LU-ecP" secondAttribute="trailing" id="0K8-93-5jA"/>
-                                                <constraint firstItem="jGD-LU-ecP" firstAttribute="top" secondItem="HQ0-PV-1Oe" secondAttribute="top" id="K0c-f8-ZUf"/>
-                                                <constraint firstAttribute="bottom" secondItem="jGD-LU-ecP" secondAttribute="bottom" id="nWn-R6-gM2"/>
-                                                <constraint firstItem="jGD-LU-ecP" firstAttribute="leading" secondItem="HQ0-PV-1Oe" secondAttribute="leading" id="rcN-kK-sdD"/>
+                                                <constraint firstItem="kaw-WI-dnz" firstAttribute="top" secondItem="czD-B6-DLG" secondAttribute="top" id="LFi-ai-KSX"/>
+                                                <constraint firstItem="kaw-WI-dnz" firstAttribute="leading" secondItem="czD-B6-DLG" secondAttribute="leading" id="adm-A1-4Mf"/>
+                                                <constraint firstAttribute="bottom" secondItem="kaw-WI-dnz" secondAttribute="bottom" id="axV-Dm-fIn"/>
+                                                <constraint firstAttribute="trailing" secondItem="kaw-WI-dnz" secondAttribute="trailing" id="iRb-y2-4cK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="yFY-IQ-A1b">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="v0V-BY-rjQ" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yFY-IQ-A1b" id="oop-y6-2gW">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v0V-BY-rjQ" id="tZw-wc-lHu">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eZB-tS-ae8">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DaA-Sa-JNn" customClass="RepeatOnDaysCollectionView" customModule="SixOhFour" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="RHS-p6-rZ9">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="EqA-Rp-lTJ">
                                                         <size key="itemSize" width="38" height="38"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekdayCell" id="zY0-Km-ks8" customClass="WeekdayCell" customModule="SixOhFour" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekDayCell" id="qBX-V8-sMy" customClass="WeekDayCollectionViewCell" customModule="SixOhFour" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juj-TK-Lxv">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUC-OJ-Fy0">
                                                                         <rect key="frame" x="25" y="5" width="8" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -787,62 +787,62 @@
                                                             </view>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstItem="juj-TK-Lxv" firstAttribute="top" secondItem="zY0-Km-ks8" secondAttribute="top" constant="5" id="Adw-ta-a0x"/>
-                                                                <constraint firstAttribute="trailing" secondItem="juj-TK-Lxv" secondAttribute="trailing" constant="5" id="Gro-cF-ein"/>
-                                                                <constraint firstItem="juj-TK-Lxv" firstAttribute="top" secondItem="zY0-Km-ks8" secondAttribute="top" constant="5" id="qfT-50-dgH"/>
-                                                                <constraint firstAttribute="trailing" secondItem="juj-TK-Lxv" secondAttribute="trailing" constant="5" id="wgd-OB-coN"/>
+                                                                <constraint firstItem="BUC-OJ-Fy0" firstAttribute="top" secondItem="qBX-V8-sMy" secondAttribute="top" constant="5" id="D1G-fA-Ztc"/>
+                                                                <constraint firstAttribute="trailing" secondItem="BUC-OJ-Fy0" secondAttribute="trailing" constant="5" id="hgz-xY-f4d"/>
+                                                                <constraint firstItem="BUC-OJ-Fy0" firstAttribute="top" secondItem="qBX-V8-sMy" secondAttribute="top" constant="5" id="t70-Re-vF3"/>
+                                                                <constraint firstAttribute="trailing" secondItem="BUC-OJ-Fy0" secondAttribute="trailing" constant="5" id="vH3-JX-ayb"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
-                                                                    <exclude reference="Adw-ta-a0x"/>
-                                                                    <exclude reference="Gro-cF-ein"/>
+                                                                    <exclude reference="D1G-fA-Ztc"/>
+                                                                    <exclude reference="hgz-xY-f4d"/>
                                                                 </mask>
                                                             </variation>
                                                             <connections>
-                                                                <outlet property="dayLabel" destination="juj-TK-Lxv" id="Hcs-r0-WyM"/>
+                                                                <outlet property="dayLabel" destination="BUC-OJ-Fy0" id="n4f-mE-uvT"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="iK1-GH-ikZ"/>
-                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="2sq-YP-z9r"/>
+                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="DTJ-9t-0hW"/>
+                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="3yG-SU-uUG"/>
                                                     </connections>
                                                 </collectionView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="eZB-tS-ae8" secondAttribute="bottom" id="0F7-7P-Knb"/>
-                                                <constraint firstItem="eZB-tS-ae8" firstAttribute="leading" secondItem="oop-y6-2gW" secondAttribute="leading" id="2BM-Hk-c0S"/>
-                                                <constraint firstAttribute="trailing" secondItem="eZB-tS-ae8" secondAttribute="trailing" id="2Om-p2-lJB"/>
-                                                <constraint firstItem="eZB-tS-ae8" firstAttribute="top" secondItem="oop-y6-2gW" secondAttribute="top" id="fVX-BT-gmL"/>
+                                                <constraint firstItem="DaA-Sa-JNn" firstAttribute="top" secondItem="tZw-wc-lHu" secondAttribute="top" id="GbH-ka-BHD"/>
+                                                <constraint firstAttribute="bottom" secondItem="DaA-Sa-JNn" secondAttribute="bottom" id="TCW-Cw-0jk"/>
+                                                <constraint firstAttribute="trailing" secondItem="DaA-Sa-JNn" secondAttribute="trailing" id="Ure-Kj-KYn"/>
+                                                <constraint firstItem="DaA-Sa-JNn" firstAttribute="leading" secondItem="tZw-wc-lHu" secondAttribute="leading" id="nuN-dB-hNa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="DXl-E9-Z5W">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="IZa-4X-msm" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DXl-E9-Z5W" id="zga-kc-XTR">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IZa-4X-msm" id="EyY-A5-Lya">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tYQ-De-waT">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="3" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oWF-hD-RH0" customClass="RepeatOnDaysCollectionView" customModule="SixOhFour" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="dME-RD-HG6">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="XeE-KM-slC">
                                                         <size key="itemSize" width="38" height="38"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekdayCell" id="6ly-Jt-a8B" customClass="WeekdayCell" customModule="SixOhFour" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekDayCell" id="kHb-rE-cb5" customClass="WeekDayCollectionViewCell" customModule="SixOhFour" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hou-J2-S49">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqP-hX-eQk">
                                                                         <rect key="frame" x="25" y="5" width="8" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -850,62 +850,62 @@
                                                             </view>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="Hou-J2-S49" secondAttribute="trailing" constant="5" id="CNL-u6-zBI"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Hou-J2-S49" secondAttribute="trailing" constant="5" id="MOh-8H-kZt"/>
-                                                                <constraint firstItem="Hou-J2-S49" firstAttribute="top" secondItem="6ly-Jt-a8B" secondAttribute="top" constant="5" id="XXe-WR-RPm"/>
-                                                                <constraint firstItem="Hou-J2-S49" firstAttribute="top" secondItem="6ly-Jt-a8B" secondAttribute="top" constant="5" id="vrE-af-JW4"/>
+                                                                <constraint firstAttribute="trailing" secondItem="zqP-hX-eQk" secondAttribute="trailing" constant="5" id="HJF-Xi-YeJ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="zqP-hX-eQk" secondAttribute="trailing" constant="5" id="JVm-RI-Gex"/>
+                                                                <constraint firstItem="zqP-hX-eQk" firstAttribute="top" secondItem="kHb-rE-cb5" secondAttribute="top" constant="5" id="OD4-6F-OuM"/>
+                                                                <constraint firstItem="zqP-hX-eQk" firstAttribute="top" secondItem="kHb-rE-cb5" secondAttribute="top" constant="5" id="ud6-Lj-y3a"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
-                                                                    <exclude reference="XXe-WR-RPm"/>
-                                                                    <exclude reference="CNL-u6-zBI"/>
+                                                                    <exclude reference="ud6-Lj-y3a"/>
+                                                                    <exclude reference="HJF-Xi-YeJ"/>
                                                                 </mask>
                                                             </variation>
                                                             <connections>
-                                                                <outlet property="dayLabel" destination="Hou-J2-S49" id="8pe-fD-Sen"/>
+                                                                <outlet property="dayLabel" destination="zqP-hX-eQk" id="SAg-9a-CKP"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="Eay-y3-SVK"/>
-                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="a5g-fK-p8t"/>
+                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="mFZ-9h-hjf"/>
+                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="H2K-Rb-Jq9"/>
                                                     </connections>
                                                 </collectionView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="tYQ-De-waT" firstAttribute="top" secondItem="zga-kc-XTR" secondAttribute="top" id="1ru-C4-xXI"/>
-                                                <constraint firstAttribute="trailing" secondItem="tYQ-De-waT" secondAttribute="trailing" id="tVf-QP-b1p"/>
-                                                <constraint firstItem="tYQ-De-waT" firstAttribute="leading" secondItem="zga-kc-XTR" secondAttribute="leading" id="wet-oW-OGl"/>
-                                                <constraint firstAttribute="bottom" secondItem="tYQ-De-waT" secondAttribute="bottom" id="wvh-bk-Wfx"/>
+                                                <constraint firstItem="oWF-hD-RH0" firstAttribute="top" secondItem="EyY-A5-Lya" secondAttribute="top" id="7uy-3x-p8b"/>
+                                                <constraint firstAttribute="bottom" secondItem="oWF-hD-RH0" secondAttribute="bottom" id="BBn-RS-FhF"/>
+                                                <constraint firstItem="oWF-hD-RH0" firstAttribute="leading" secondItem="EyY-A5-Lya" secondAttribute="leading" id="DZV-TT-qJH"/>
+                                                <constraint firstAttribute="trailing" secondItem="oWF-hD-RH0" secondAttribute="trailing" id="sAO-UG-FjB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="QYp-Bd-ZpI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="Syq-WI-3EE" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QYp-Bd-ZpI" id="jG1-3t-KEO">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Syq-WI-3EE" id="Qde-kI-F4c">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oet-pY-PNR">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="4" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NnL-3Y-ffO" customClass="RepeatOnDaysCollectionView" customModule="SixOhFour" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="hHQ-4u-iLG">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="ND4-mF-BAi">
                                                         <size key="itemSize" width="38" height="38"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekdayCell" id="N8H-J0-RNK" customClass="WeekdayCell" customModule="SixOhFour" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekDayCell" id="gUE-dm-NxW" customClass="WeekDayCollectionViewCell" customModule="SixOhFour" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IH9-mw-GMQ">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsB-ZD-tUz">
                                                                         <rect key="frame" x="25" y="5" width="8" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -913,33 +913,33 @@
                                                             </view>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstItem="IH9-mw-GMQ" firstAttribute="top" secondItem="N8H-J0-RNK" secondAttribute="top" constant="5" id="1QV-dx-Fit"/>
-                                                                <constraint firstItem="IH9-mw-GMQ" firstAttribute="top" secondItem="N8H-J0-RNK" secondAttribute="top" constant="5" id="EzE-Y7-ZVI"/>
-                                                                <constraint firstAttribute="trailing" secondItem="IH9-mw-GMQ" secondAttribute="trailing" constant="5" id="WEH-Pp-TZp"/>
-                                                                <constraint firstAttribute="trailing" secondItem="IH9-mw-GMQ" secondAttribute="trailing" constant="5" id="bV2-sd-ZLO"/>
+                                                                <constraint firstItem="SsB-ZD-tUz" firstAttribute="top" secondItem="gUE-dm-NxW" secondAttribute="top" constant="5" id="T4P-gD-dP9"/>
+                                                                <constraint firstItem="SsB-ZD-tUz" firstAttribute="top" secondItem="gUE-dm-NxW" secondAttribute="top" constant="5" id="aBR-zh-DT1"/>
+                                                                <constraint firstAttribute="trailing" secondItem="SsB-ZD-tUz" secondAttribute="trailing" constant="5" id="bSw-bb-UVC"/>
+                                                                <constraint firstAttribute="trailing" secondItem="SsB-ZD-tUz" secondAttribute="trailing" constant="5" id="ye6-Gc-r1u"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
-                                                                    <exclude reference="EzE-Y7-ZVI"/>
-                                                                    <exclude reference="WEH-Pp-TZp"/>
+                                                                    <exclude reference="T4P-gD-dP9"/>
+                                                                    <exclude reference="ye6-Gc-r1u"/>
                                                                 </mask>
                                                             </variation>
                                                             <connections>
-                                                                <outlet property="dayLabel" destination="IH9-mw-GMQ" id="ZNj-jg-ahz"/>
+                                                                <outlet property="dayLabel" destination="SsB-ZD-tUz" id="8ye-3G-Udv"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="QDO-Px-7fQ"/>
-                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="JqB-JB-PNf"/>
+                                                        <outlet property="dataSource" destination="Cs3-rY-NcT" id="PLd-T8-qLO"/>
+                                                        <outlet property="delegate" destination="Cs3-rY-NcT" id="BBK-ay-IhO"/>
                                                     </connections>
                                                 </collectionView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Oet-pY-PNR" firstAttribute="leading" secondItem="jG1-3t-KEO" secondAttribute="leading" id="SG2-jO-FRb"/>
-                                                <constraint firstAttribute="bottom" secondItem="Oet-pY-PNR" secondAttribute="bottom" id="Ure-sF-egh"/>
-                                                <constraint firstItem="Oet-pY-PNR" firstAttribute="top" secondItem="jG1-3t-KEO" secondAttribute="top" id="VeN-dK-NUS"/>
-                                                <constraint firstAttribute="trailing" secondItem="Oet-pY-PNR" secondAttribute="trailing" id="vPL-ft-psC"/>
+                                                <constraint firstItem="NnL-3Y-ffO" firstAttribute="top" secondItem="Qde-kI-F4c" secondAttribute="top" id="FTP-2y-sHH"/>
+                                                <constraint firstItem="NnL-3Y-ffO" firstAttribute="leading" secondItem="Qde-kI-F4c" secondAttribute="leading" id="GZT-Sy-xoy"/>
+                                                <constraint firstAttribute="trailing" secondItem="NnL-3Y-ffO" secondAttribute="trailing" id="RWu-rs-Ff3"/>
+                                                <constraint firstAttribute="bottom" secondItem="NnL-3Y-ffO" secondAttribute="bottom" id="u8O-bC-9Fe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

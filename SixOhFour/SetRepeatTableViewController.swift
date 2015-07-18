@@ -18,7 +18,6 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     
     var doneButton: UIBarButtonItem!
     var pickerHidden = true
-    var weekIndex = 0
     var repeatSettings: RepeatSettings!
     
     override func viewDidLoad() {
@@ -99,6 +98,23 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
         setWeekLabelText(row)
         
         repeatSettings.weeksToRepeat = row + 1
+        
+        for x in 1...repeatSettings.weeksToRepeat {
+            for y in 0...6 {
+                if repeatSettings.selectedDaysArray[x-1][y] {
+                    repeatSettings.selectedDaysArray[x][y] = true
+                }
+            }
+        }
+        
+        // Reset the selected days for weeks not displayed
+        if repeatSettings.weeksToRepeat < 5 {
+            for x in repeatSettings.weeksToRepeat...4 {
+                for y in 0...6 {
+                    repeatSettings.selectedDaysArray[x][y] = false
+                }
+            }
+        }
         tableView.reloadData()
     }
         
@@ -116,7 +132,7 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
             return repeatSettings.weeksToRepeat + 1 // Add 1 to account for the first cell containing the label
         }
     }
-    
+        
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if pickerHidden {
@@ -130,11 +146,6 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
         }
     }
     
-//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        weekIndex = indexPath.row
-//        println(weekIndex)
-//    }
-    
     // MARK: - Collection View Data Source and Delegate
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -142,8 +153,19 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WeekdayCell", forIndexPath: indexPath) as! WeekdayCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WeekDayCell", forIndexPath: indexPath) as! WeekDayCollectionViewCell
         
+        var weekIndex = collectionView.tag
+        
+        repeatSettings.selectedDaysArray[weekIndex][repeatSettings.daySelectedIndex] = true
+        
+        if repeatSettings.selectedDaysArray[weekIndex][indexPath.row]{
+            cell.backgroundColor = UIColor.darkGrayColor()
+            cell.dayLabel.textColor = UIColor.whiteColor()
+        } else {
+            cell.backgroundColor = UIColor.lightGrayColor()
+            cell.dayLabel.textColor = UIColor.blackColor()
+        }
         
         cell.dayLabel.text = weekdaysArray[indexPath.row]
         
@@ -151,9 +173,9 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WeekdayCell
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WeekDayCollectionViewCell
         
-        println(collectionView.tag)
+        var weekIndex = collectionView.tag
         
         if repeatSettings.selectedDaysArray[weekIndex][indexPath.row] == false{
             cell.backgroundColor = UIColor.darkGrayColor()
@@ -166,6 +188,16 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
             
             repeatSettings.selectedDaysArray[weekIndex][indexPath.row] = false
         }
+        
+//        // Test
+//        for x in 0...4 {
+//            for y in 0...6 {
+//                print(repeatSettings.selectedDaysArray[x][y])
+//                print("\t")
+//            }
+//            println("")
+//        }
+//        println("")
 
     }
     

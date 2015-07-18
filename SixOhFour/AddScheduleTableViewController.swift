@@ -154,6 +154,10 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
             }
         }
         
+        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let myComponents = cal!.components(NSCalendarUnit.CalendarUnitWeekday, fromDate: datePicker.date)
+        repeatSettings.daySelectedIndex = myComponents.weekday - 1
+        
         toggleSaveButton()
     }
     

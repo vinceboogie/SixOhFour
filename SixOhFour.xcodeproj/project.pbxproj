@@ -52,8 +52,10 @@
 		B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E681B3B711A0037B44B /* MainTabBarController.swift */; };
 		B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */; };
 		B992A18D1B582FFE006E5A2B /* SetRepeatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992A18C1B582FFE006E5A2B /* SetRepeatTableViewController.swift */; };
-		B992A1911B5838B4006E5A2B /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992A1901B5838B4006E5A2B /* WeekdayCell.swift */; };
 		B992A1951B587CE1006E5A2B /* RepeatSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992A1941B587CE1006E5A2B /* RepeatSettings.swift */; };
+		B9A0BFEC1B59918B00433C96 /* RepeatOnDaysCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0BFEB1B59918B00433C96 /* RepeatOnDaysCollectionView.swift */; };
+		B9A0BFF01B5993BB00433C96 /* WeekDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */; };
+		B9A0BFF21B5993E200433C96 /* RepeatOnDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */; };
 		B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */; };
 		B9C8A7B51B4E469E00C4BEEC /* AddScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8A7B41B4E469E00C4BEEC /* AddScheduleTableViewController.swift */; };
 		B9D77DE01B3C96CA00988865 /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D77DDF1B3C96CA00988865 /* Jobs.swift */; };
@@ -121,8 +123,10 @@
 		B9920E681B3B711A0037B44B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B9920E6A1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingScheduleViewController.swift; sourceTree = "<group>"; };
 		B992A18C1B582FFE006E5A2B /* SetRepeatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetRepeatTableViewController.swift; sourceTree = "<group>"; };
-		B992A1901B5838B4006E5A2B /* WeekdayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
 		B992A1941B587CE1006E5A2B /* RepeatSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatSettings.swift; sourceTree = "<group>"; };
+		B9A0BFEB1B59918B00433C96 /* RepeatOnDaysCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatOnDaysCollectionView.swift; sourceTree = "<group>"; };
+		B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatOnDaysCell.swift; sourceTree = "<group>"; };
 		B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B9C8A7B41B4E469E00C4BEEC /* AddScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScheduleTableViewController.swift; sourceTree = "<group>"; };
 		B9D77DDF1B3C96CA00988865 /* Jobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jobs.swift; sourceTree = "<group>"; };
@@ -337,7 +341,9 @@
 			isa = PBXGroup;
 			children = (
 				B93E888A1B46067E0030877B /* TodayScheduleCell.swift */,
-				B992A1901B5838B4006E5A2B /* WeekdayCell.swift */,
+				B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */,
+				B9A0BFEB1B59918B00433C96 /* RepeatOnDaysCollectionView.swift */,
+				B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -476,8 +482,8 @@
 				B90FA0641B4320A6004B4D79 /* CVCalendarWeekContentRecovery.swift in Sources */,
 				870CECBF1B4F4E9C00B30AAE /* PayRateTableViewController.swift in Sources */,
 				87238A501B3E3212004D44CA /* ClockInViewController.swift in Sources */,
+				B9A0BFF01B5993BB00433C96 /* WeekDayCollectionViewCell.swift in Sources */,
 				B9C8A7B51B4E469E00C4BEEC /* AddScheduleTableViewController.swift in Sources */,
-				B992A1911B5838B4006E5A2B /* WeekdayCell.swift in Sources */,
 				B90FA0551B4320A6004B4D79 /* CVCalendarContentDelegate.swift in Sources */,
 				B90FA05A1B4320A6004B4D79 /* CVCalendarMenuView.swift in Sources */,
 				001464801B4F4F6600AC0C9F /* ClockIn_TimeLogCell.swift in Sources */,
@@ -493,6 +499,7 @@
 				B9E34BCB1B50D21800B9FD88 /* JobsListTableViewController.swift in Sources */,
 				B90FA0671B4320A6004B4D79 /* CVCircleView.swift in Sources */,
 				B90FA05B1B4320A6004B4D79 /* CVCalendarMonthContentView.swift in Sources */,
+				B9A0BFF21B5993E200433C96 /* RepeatOnDaysCell.swift in Sources */,
 				B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */,
 				B9D77DE01B3C96CA00988865 /* Jobs.swift in Sources */,
 				005EAD531B52235600F8E970 /* ClockIn_EndedBreakCell.swift in Sources */,
@@ -507,6 +514,7 @@
 				B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */,
 				B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */,
 				B90FA0651B4320A6004B4D79 /* CVCalendarWeekContentView.swift in Sources */,
+				B9A0BFEC1B59918B00433C96 /* RepeatOnDaysCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
