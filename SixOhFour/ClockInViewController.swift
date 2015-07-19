@@ -55,8 +55,10 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var jobListEmpty = true
     var selectedJobIndex: Int = -1
-    
+
     var nItemClockIn : TimeLogs!
+    var nItemClockIn2 : TimeLogs!
+
     var timelogsList = [TimeLogs]()
     
     var frc : NSFetchedResultsController = NSFetchedResultsController()
@@ -145,6 +147,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             breakButton.setTitle("Save shift for \(jobTitleDisplayLabel.text!)", forState: UIControlState.Normal)
         }
 
+        lapsTableView.reloadData()
     
     }
     
@@ -525,7 +528,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     func displayBreaktime () {
         if breakHoursSet > 0 {
             breakTitleLabel.text = "Your break is set to \(breakHoursSet) hr and \(breakMinutesSet) min"
-        } else if breakHoursSet == 0 && breakMinutes > 0 {
+        } else if breakHoursSet == 0 && breakMinutesSet > 0 {
             breakTitleLabel.text = "Your break is set to \(breakMinutesSet) min"
         } else if breakMinutesSet == 0 && breakSecondsSet > 0 {
             breakTitleLabel.text = "Your break is set to \(breakSecondsSet) sec"
@@ -568,6 +571,12 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         self.nItemClockIn = timelogsList[timelogsList.count - indexPath.row - 1]
+        
+        if (timelogsList.count - indexPath.row - 2) >= 0 {
+        self.nItemClockIn2 = timelogsList[timelogsList.count - indexPath.row - 2]
+        } else {
+        
+        }
         
         self.performSegueWithIdentifier("showDetails", sender: tableView.cellForRowAtIndexPath(indexPath))
         println(indexPath)
@@ -623,7 +632,9 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             let destinationVC = segue.destinationViewController as! detailsTimelogViewController
             destinationVC.hidesBottomBarWhenPushed = true;
+            
             destinationVC.nItem = self.nItemClockIn
+            destinationVC.nItem2 = self.nItemClockIn2
             destinationVC.jobLabelDisplay = jobTitleDisplayLabel.text!
             destinationVC.jobColorDisplayPassed = jobColorDisplay.color
         }
