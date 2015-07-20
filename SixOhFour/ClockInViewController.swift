@@ -55,10 +55,14 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var jobListEmpty = true
     var selectedJobIndex: Int = -1
+    var noMinDate: Bool = false
+    var noMaxDate: Bool = false
 
     var nItemClockIn : TimeLogs!
-    var nItemClockIn2 : TimeLogs!
+    var nItemClockInPrevious : TimeLogs!
+    var nItemClockInNext : TimeLogs!
 
+    
     var timelogsList = [TimeLogs]()
     
     var frc : NSFetchedResultsController = NSFetchedResultsController()
@@ -320,6 +324,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             //clears all the laps when clicked reset
             timelogTimestamp.removeAll(keepCapacity: false)
             timelogDescription.removeAll(keepCapacity: false)
+            timelogsList = []
+            
             lapsTableView.reloadData()
             
             minutes = 0
@@ -405,7 +411,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         var timeStampAll = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .MediumStyle)
         timelogTimestamp.append(timeStampAll)
         lapsTableView.reloadData()
-        //        lapsTableView.reloadRowsAtIndexPaths([NSIndexPath.self], withRowAnimation: UITableViewRowAnimation.Automatic)
+        //lapsTableView.reloadRowsAtIndexPaths([NSIndexPath.self], withRowAnimation: UITableViewRowAnimation.Automatic)
     }
 
     
@@ -569,17 +575,27 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+        self.nItemClockIn = timelogsList[timelogsList.count - indexPath.row - 1] // send up actual
         
-        self.nItemClockIn = timelogsList[timelogsList.count - indexPath.row - 1]
-        
-        if (timelogsList.count - indexPath.row - 2) >= 0 {
-        self.nItemClockIn2 = timelogsList[timelogsList.count - indexPath.row - 2]
+        if (timelogsList.count - indexPath.row - 1) == 0 {
+            noMinDate = true // user select CLOCKIN so noMinDate
         } else {
-        
+            noMinDate = false
+            self.nItemClockInPrevious = timelogsList[timelogsList.count - indexPath.row - 2]
         }
         
+        if indexPath.row == 0 {
+            noMaxDate = true //user select last TIMELOD so noMaxDat is sent, and will use NSDATE instead
+        } else {
+            noMaxDate = false
+            self.nItemClockInNext = timelogsList[timelogsList.count - indexPath.row]
+        }
+        
+        
+        println("!!!!!!!!!IN CLOCKIN timelogsList.count = \(timelogsList.count) and indexPath.row = \((indexPath.row))!!!!!!!!!!")
+
         self.performSegueWithIdentifier("showDetails", sender: tableView.cellForRowAtIndexPath(indexPath))
-        println(indexPath)
         
     }
 
@@ -634,9 +650,13 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             destinationVC.hidesBottomBarWhenPushed = true;
             
             destinationVC.nItem = self.nItemClockIn
-            destinationVC.nItem2 = self.nItemClockIn2
+            destinationVC.nItemPrevious = self.nItemClockInPrevious
+            destinationVC.nItemNext = self.nItemClockInNext
             destinationVC.jobLabelDisplay = jobTitleDisplayLabel.text!
             destinationVC.jobColorDisplayPassed = jobColorDisplay.color
+            destinationVC.noMinDate = self.noMinDate
+            destinationVC.noMaxDate = self.noMaxDate
+
         }
 
     }
