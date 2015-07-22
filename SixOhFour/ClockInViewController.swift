@@ -411,7 +411,11 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         var timeStampAll = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .MediumStyle)
         timelogTimestamp.append(timeStampAll)
         lapsTableView.reloadData()
-        //lapsTableView.reloadRowsAtIndexPaths([NSIndexPath.self], withRowAnimation: UITableViewRowAnimation.Automatic)
+
+        
+        var indexPathScroll = NSIndexPath(forRow: timelogsList.count, inSection: 0)
+        self.lapsTableView.scrollToRowAtIndexPath(indexPathScroll, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        
     }
 
     
@@ -466,7 +470,9 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             }))
             
-            presentViewController(alert, animated: true, completion:nil)
+//??????????????? I dont know what this code was used for.
+//          presentViewController(alert, animated: true, completion:nil)
+//????????????????
             
             breakTimer.invalidate()
             
@@ -561,10 +567,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.textLabel!.font = UIFont.systemFontOfSize(12.0)
         cell.detailTextLabel!.font = UIFont.systemFontOfSize(12.0)
 
-        cell.textLabel!.text = timelogsList[timelogsList.count - indexPath.row - 1].timelogTitle
-        cell.detailTextLabel?.text = timelogsList[timelogsList.count - indexPath.row - 1].timelogTimestamp //if you want acesending order [indexPath.row]
-        
-        lapsTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        cell.textLabel!.text = timelogsList[indexPath.row].timelogTitle //
+        cell.detailTextLabel?.text = timelogsList[indexPath.row].timelogTimestamp //if you want decesending order [timelogsList.count - indexPath.row - 1]
         
         return cell
         
@@ -576,22 +580,39 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        self.nItemClockIn = timelogsList[timelogsList.count - indexPath.row - 1] // send up actual
+        self.nItemClockIn = timelogsList[indexPath.row] // send up actual
         
-        if (timelogsList.count - indexPath.row - 1) == 0 {
+        if (indexPath.row) == 0 {
             noMinDate = true // user select CLOCKIN so noMinDate
         } else {
             noMinDate = false
-            self.nItemClockInPrevious = timelogsList[timelogsList.count - indexPath.row - 2]
+            self.nItemClockInPrevious = timelogsList[indexPath.row - 1]
         }
         
-        if indexPath.row == 0 {
+        if (timelogsList.count - indexPath.row - 1) == 0 {
             noMaxDate = true //user select last TIMELOD so noMaxDat is sent, and will use NSDATE instead
         } else {
             noMaxDate = false
-            self.nItemClockInNext = timelogsList[timelogsList.count - indexPath.row]
+            self.nItemClockInNext = timelogsList[indexPath.row + 1]
         }
         
+////////////////////////////////////////////////////////////
+//      DESCENDING ORDER
+//        self.nItemClockIn = timelogsList[timelogsList.count - indexPath.row - 1] // send up actual
+//
+//        if (timelogsList.count - indexPath.row - 1) == 0 {
+//            noMinDate = true // user select CLOCKIN so noMinDate
+//        } else {
+//            noMinDate = false
+//            self.nItemClockInPrevious = timelogsList[timelogsList.count - indexPath.row - 2]
+//        }
+//        
+//        if indexPath.row == 0 {
+//            noMaxDate = true //user select last TIMELOD so noMaxDat is sent, and will use NSDATE instead
+//        } else {
+//            noMaxDate = false
+//            self.nItemClockInNext = timelogsList[timelogsList.count - indexPath.row]
+//        }
         
         println("!!!!!!!!!IN CLOCKIN timelogsList.count = \(timelogsList.count) and indexPath.row = \((indexPath.row))!!!!!!!!!!")
 
@@ -603,17 +624,17 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         return true
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-//            timelogsList.removeAtIndex(timelogsList.count - indexPath.row - 1)
-//            lapsTableView.reloadData()
-//            lapsTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
-        
-        
-    }
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+//            // handle delete (by removing the data from your array and updating the tableview)
+////            timelogsList.removeAtIndex(timelogsList.count - indexPath.row - 1)
+////            lapsTableView.reloadData()
+////            lapsTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+//        }
+//        
+//        
+//    }
     
 
 // MARK: Segues
