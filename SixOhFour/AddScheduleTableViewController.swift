@@ -20,6 +20,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     @IBOutlet weak var repeatLabel: UILabel!
     @IBOutlet weak var reminderLabel: UILabel!
     @IBOutlet weak var reminderPicker: UIPickerView!
+    @IBOutlet weak var endRepeatLabel: UILabel!
     
     var saveButton: UIBarButtonItem!
     var jobListEmpty = true;
@@ -37,6 +38,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         datePickerChanged(startLabel, datePicker: startDatePicker)
         
         repeatLabel.text = "Never"
+        endRepeatLabel.text = "Never"
         
         // Fetch first Job
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
@@ -116,17 +118,11 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         tableView.endUpdates()
     }
     
-//    @IBAction func unwindFromSetRepeatTableViewController (segue: UIStoryboardSegue) {
-//        let sourceVC = segue.sourceViewController as! SetRepeatTableViewController
-//        
-//        if ((sourceVC.repeat) != nil) {
-//            repeatLabel.text = sourceVC.repeat
-//        }
-//        
-//        tableView.beginUpdates()
-//        tableView.endUpdates()
-//    }
-    
+    @IBAction func unwindFromEndRepeatTableViewController(segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! EndRepeatTableViewController
+        
+        endRepeatLabel.text = sourceVC.endRepeat
+    }
     
     // MARK: - Date Picker
     
@@ -247,40 +243,9 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     }
     
 
-    
-
     // MARK: - Table view data source
-
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        // #warning Potentially incomplete method implementation.
-//        // Return the number of sections.
-//        return 0
-//    }
-//
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete method implementation.
-//        // Return the number of rows in the section.
-//        return 0
-//    }
-
-    
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier("CurrentJobCell", forIndexPath: indexPath) as! JobsListCell
-//
-//        if cell 
-//        
-//        return cell
-//    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-//        if jobListEmpty && indexPath.section == 0 && indexPath.row == 0 {
-//            let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
-//            let addJobsVC: HomeViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
-//            
-////            self.navigationController?.dismissViewControllerAnimated(true, completion: {})
-//            self.navigationController?.popToRootViewControllerAnimated(true)
-//        }
         
         if indexPath.section == 1 && indexPath.row == 0 {
             togglePicker("startDate")
@@ -291,7 +256,6 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         } else {
             togglePicker("Close")
         }
-        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -376,6 +340,12 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
             
             repeatSettings.selectedDaysArray[0][repeatSettings.daySelectedIndex] = true 
             destinationVC.repeatSettings = self.repeatSettings
+        }
+        
+        if segue.identifier == "setEndRepeat" {
+            let destinationVC = segue.destinationViewController as! EndRepeatTableViewController
+            
+            destinationVC.endRepeat = endRepeatLabel.text
         }
         
     }

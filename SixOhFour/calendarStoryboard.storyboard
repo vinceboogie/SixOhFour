@@ -438,6 +438,9 @@
                                                 <constraint firstItem="lA3-I5-ih0" firstAttribute="leading" secondItem="nQd-7I-uhE" secondAttribute="trailing" constant="10" id="emO-Vb-gvu"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="hED-AS-5Ox" kind="show" identifier="setEndRepeat" id="kq2-m0-iXj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -457,7 +460,6 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="None" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LkZ-im-GKh">
                                                     <rect key="frame" x="314" y="11" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -525,6 +527,7 @@
                     <connections>
                         <outlet property="endDatePicker" destination="l3c-gi-1hp" id="dUJ-qf-cnh"/>
                         <outlet property="endLabel" destination="X0C-fr-OBb" id="EKh-vb-Ew2"/>
+                        <outlet property="endRepeatLabel" destination="nQd-7I-uhE" id="efe-Fs-et3"/>
                         <outlet property="jobColorView" destination="3Ep-MD-z0Z" id="Djz-Vn-hS9"/>
                         <outlet property="jobNameLabel" destination="Fxq-LR-nkd" id="SOT-RS-Hgt"/>
                         <outlet property="reminderLabel" destination="LkZ-im-GKh" id="vte-H9-wrO"/>
@@ -545,7 +548,7 @@
             <objects>
                 <tableViewController id="Cs3-rY-NcT" customClass="SetRepeatTableViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="lyU-2s-YqT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
@@ -857,8 +860,8 @@
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
-                                                                    <exclude reference="YZv-Ul-Xkb"/>
                                                                     <exclude reference="TUR-c1-AgS"/>
+                                                                    <exclude reference="YZv-Ul-Xkb"/>
                                                                 </mask>
                                                             </variation>
                                                             <connections>
@@ -920,8 +923,8 @@
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
-                                                                    <exclude reference="cBZ-RL-7gm"/>
                                                                     <exclude reference="29P-b3-pIP"/>
+                                                                    <exclude reference="cBZ-RL-7gm"/>
                                                                 </mask>
                                                             </variation>
                                                             <connections>
@@ -952,7 +955,7 @@
                         </connections>
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="700"/>
+                    <size key="freeformSize" width="320" height="800"/>
                     <connections>
                         <outlet property="repeatPicker" destination="r3e-YA-qSY" id="pkw-xU-cTF"/>
                         <outlet property="repeatSwitch" destination="rUh-Np-tZP" id="m6a-q3-H1p"/>
@@ -969,6 +972,97 @@
                 <exit id="uRX-iR-v4e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4093" y="1274"/>
+        </scene>
+        <!--End Repeat Table View Controller-->
+        <scene sceneID="zOK-ea-3AZ">
+            <objects>
+                <tableViewController id="hED-AS-5Ox" customClass="EndRepeatTableViewController" customModule="SixOhFour" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FRC-CV-yU8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="sfz-1k-IW8">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Wio-9b-0qZ">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wio-9b-0qZ" id="RyH-te-gtf">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Never" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl9-h3-bmB">
+                                                    <rect key="frame" x="20" y="11" width="46" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="Fl9-h3-bmB" secondAttribute="centerY" id="60U-iY-2Dz"/>
+                                                <constraint firstItem="Fl9-h3-bmB" firstAttribute="leading" secondItem="RyH-te-gtf" secondAttribute="leading" constant="20" id="iK1-Da-TY5"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cUg-N8-Qjr">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cUg-N8-Qjr" id="Dpk-PZ-bry">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zjf-jN-qy5">
+                                                    <rect key="frame" x="20" y="11" width="64" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="Zjf-jN-qy5" secondAttribute="centerY" id="7YG-mC-Vnl"/>
+                                                <constraint firstItem="Zjf-jN-qy5" firstAttribute="leading" secondItem="Dpk-PZ-bry" secondAttribute="leading" constant="20" id="NHp-0n-PwO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="165" id="bw2-Om-06o">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bw2-Om-06o" id="ye4-F4-AtD">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="WxK-if-Z4f">
+                                                    <rect key="frame" x="0.0" y="1" width="320" height="162"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="459306538.80063802">
+                                                        <!--2015-07-23 01:08:58 +0000-->
+                                                    </date>
+                                                    <connections>
+                                                        <action selector="datePickerChanged:" destination="hED-AS-5Ox" eventType="valueChanged" id="qhc-Ne-7bk"/>
+                                                    </connections>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WxK-if-Z4f" firstAttribute="leading" secondItem="ye4-F4-AtD" secondAttribute="leading" id="1Bo-qb-GqZ"/>
+                                                <constraint firstItem="WxK-if-Z4f" firstAttribute="top" secondItem="ye4-F4-AtD" secondAttribute="top" id="Zgm-K3-qWZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="WxK-if-Z4f" secondAttribute="bottom" id="vKZ-3U-KiH"/>
+                                                <constraint firstAttribute="trailing" secondItem="WxK-if-Z4f" secondAttribute="trailing" id="y7j-8w-jho"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="hED-AS-5Ox" id="UpM-M4-gJY"/>
+                            <outlet property="delegate" destination="hED-AS-5Ox" id="4HI-n0-eoz"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="datePicker" destination="WxK-if-Z4f" id="zCE-V3-1Qo"/>
+                        <outlet property="neverCell" destination="Wio-9b-0qZ" id="7n3-1e-MSX"/>
+                        <outlet property="onDateCell" destination="cUg-N8-Qjr" id="h14-9p-Lnp"/>
+                        <segue destination="sPH-6r-ULs" kind="unwind" identifier="unwindFromEndRepeatTableViewController" unwindAction="unwindFromEndRepeatTableViewController:" id="bW6-fC-9tL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MnE-Zw-A8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="sPH-6r-ULs" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4093" y="2036"/>
         </scene>
         <!--Jobs List Table View Controller-->
         <scene sceneID="ghd-td-zgU">
