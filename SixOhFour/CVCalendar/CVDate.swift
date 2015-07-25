@@ -9,7 +9,7 @@
 import UIKit
 
 class CVDate: NSObject {
-    private var date: NSDate?
+    var date: NSDate? // change back to private?
     var year: Int?
     var month: Int?
     var week: Int?

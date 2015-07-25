@@ -19,11 +19,11 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var shouldShowDaysOut = true
     var animationFinished = true
-    
+    var today: String!
     
     // Dummy schedule for development
-    var schedule: [Shift]!
-    
+    var schedule: [Schedule]!
+    var mySchedule: [String: [Schedule]]!
     
     var currentMonth = CVDate(date: NSDate()).displayMonth()
     let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -36,13 +36,14 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         tableView.dataSource = self
         
+        schedule = [Schedule]()
+        mySchedule = [String: [Schedule]]()
+       
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
         
-        schedule = [Shift]()
+        today = dateFormatter.stringFromDate(NSDate())
         
-        schedule.append(Shift(dictionary: ["color": UIColor.redColor(), "name": "Red Garage", "shiftTime": "0800-2200"]))
-        schedule.append(Shift(dictionary:["color": UIColor.greenColor(), "name": "Air New Zealand", "shiftTime": "1800-2200"]))
-        schedule.append(Shift(dictionary:["color": UIColor.blueColor(), "name": "Golden State Warriors", "shiftTime": "1930-2230"]))
-    
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,27 +68,51 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func unwindAfterSaveSchedule(segue: UIStoryboardSegue) {
         let sourceVC = segue.sourceViewController as! AddScheduleTableViewController
         
-        if((sourceVC.addShift) != nil) {
-            schedule.append(sourceVC.addShift)
+        if((sourceVC.schedule) != nil) {
+            
+            var dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+            
+            var key = dateFormatter.stringFromDate(sourceVC.startShift)
+            
+            if mySchedule[key] != nil {
+                schedule = mySchedule[key]
+            } else {
+                schedule = []
+            }
+            
+            schedule.append(sourceVC.schedule)
+            
+            mySchedule[key] = self.schedule
             tableView.reloadData()
         }
+        
+        var arr = mySchedule.keys.array
     }
     
     
     // MARK: Table View Datasource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if schedule != nil {
-            return schedule.count
+        if mySchedule[today] != nil {
+            var todaySchedule = mySchedule[today]!
+
+            return todaySchedule.count
         } else {
             return 0
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var todaySchedule = [Schedule]()
+        
+        if mySchedule[today] != nil {
+            todaySchedule = mySchedule[today]!
+        }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("TodayScheduleCell", forIndexPath: indexPath) as! TodayScheduleCell
         
-        cell.shift = schedule[indexPath.row]
+        cell.shift = todaySchedule[indexPath.row]
         
         return cell
     }
@@ -104,6 +129,12 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         if let currentDay =  dayView.date?.day {
             if let index = dayView.weekdayIndex {
                 self.todayLabel.text = weekday[index-1] + ", \(currentMonth) \(currentDay)"
+                
+                if let currentYear = dayView.date?.year {
+                    today = "\(currentMonth) \(currentDay), \(currentYear)"
+                }
+                
+                tableView.reloadData()
             }
         }
     }
@@ -122,6 +153,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func dotMarker(shouldShowOnDayView dayView: CVCalendarDayView) -> Bool {
+        
         if dayView.date?.day == 3 || dayView.date?.day == 5 || dayView.date?.day == 2 {
             return true
         } else {

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import EventKit
 
 class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
@@ -25,8 +26,13 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     var saveButton: UIBarButtonItem!
     var jobListEmpty = true;
     var reminderMinutes = 16 // Maximum reminder = 15 minutes
-    var addShift: Shift!
     var repeatSettings = RepeatSettings()
+    var schedule: Schedule!
+    var job: Jobs!
+    var startShift: NSDate!
+    var endShift: NSDate!
+    var reminder = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +56,11 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
         if results.count > 0 {
-            var firstJob = results[0] as! Jobs
-            jobNameLabel.text = firstJob.jobName
+            job = results[0] as! Jobs
+            jobNameLabel.text = job.jobName
             
             var jc = JobColor()
-            jobColorView.color = jc.getJobColor(firstJob.jobColor)
+            jobColorView.color = jc.getJobColor(job.jobColor)
             jobListEmpty = false
         } else {
             jobNameLabel.text = "Add a Job"
@@ -75,7 +81,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     // MARK: - Class Functions
     
     func addSchedule() {
-        addShift = Shift(dictionary: ["color": jobColorView.color , "name": "\(jobNameLabel.text!)", "shiftTime": "08:00 AM - 05:00 PM"])
+        schedule = Schedule(job: job, startShift: startShift, endShift: endShift, reminder: reminder)
         self.performSegueWithIdentifier("unwindAfterSaveSchedule", sender: self)
         
     }
@@ -95,10 +101,11 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         let sourceVC = segue.sourceViewController as! JobsListTableViewController
         
         if sourceVC.selectedJob != nil {
-            jobNameLabel.text = sourceVC.selectedJob.jobName
+            job = sourceVC.selectedJob
+            jobNameLabel.text = job.jobName
             
             var jc = JobColor()
-            jobColorView.color = jc.getJobColor(sourceVC.selectedJob.jobColor)
+            jobColorView.color = jc.getJobColor(job.jobColor)
         }
     }
     
@@ -131,7 +138,6 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
         
-        
         label.text = dateFormatter.stringFromDate(datePicker.date)
         
         if datePicker == startDatePicker {
@@ -141,6 +147,9 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
             } else {
                 endLabel.text = dateFormatter.stringFromDate(endDatePicker.date)
             }
+            
+            startShift = datePicker.date
+            endShift = endDatePicker.date
         }
         
         if datePicker == endDatePicker {
@@ -148,6 +157,9 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
                 startLabel.text = label.text
                 startDatePicker.date = datePicker.date
             }
+            
+            startShift = startDatePicker.date
+            endShift = datePicker.date
         }
         
         let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
@@ -179,6 +191,8 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         } else {
             reminderLabel.text = "\(row) minutes before"
         }
+        
+        reminder = row
     }
     
     

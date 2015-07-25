@@ -14,11 +14,13 @@ class TodayScheduleCell: UITableViewCell {
     @IBOutlet weak var jobNameLabel: UILabel!
     @IBOutlet weak var shiftTimeLabel: UILabel!
     
-    var shift: Shift! {
+    var shift: Schedule! {
         didSet {
-            jobColorView.color = shift.color!
-            jobNameLabel.text = shift.name
-            shiftTimeLabel.text = shift.shiftTime
+            var jc = JobColor()
+        
+            jobColorView.color = jc.getJobColor(shift.job.jobColor)
+            jobNameLabel.text = shift.job.jobName
+            shiftTimeLabel.text = "Shift time"
         }
     }
     
