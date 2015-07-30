@@ -8,17 +8,19 @@
         <attribute name="payRate" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="jobs" inverseEntity="Company" syncable="YES"/>
-        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Schedule" inverseName="job" inverseEntity="Schedule" syncable="YES"/>
+        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ScheduledShift" inverseName="job" inverseEntity="ScheduledShift" syncable="YES"/>
         <relationship name="workedShifts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkedShift" inverseName="job" inverseEntity="WorkedShift" syncable="YES"/>
     </entity>
-    <entity name="Schedule" syncable="YES">
-        <relationship name="job" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Job" inverseName="schedule" inverseEntity="Job" syncable="YES"/>
-        <relationship name="scheduledShifts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduledShift" inverseName="schedule" inverseEntity="ScheduledShift" syncable="YES"/>
+    <entity name="RepeatingSchedule" syncable="YES">
+        <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ScheduledShift" inverseName="scheduledShifts" inverseEntity="ScheduledShift" syncable="YES"/>
     </entity>
     <entity name="ScheduledShift" syncable="YES">
-        <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Schedule" inverseName="scheduledShifts" inverseEntity="Schedule" syncable="YES"/>
+        <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="job" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Job" inverseName="schedule" inverseEntity="Job" syncable="YES"/>
+        <relationship name="scheduledShifts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RepeatingSchedule" inverseName="schedule" inverseEntity="RepeatingSchedule" syncable="YES"/>
     </entity>
     <entity name="Timelog" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
@@ -29,9 +31,13 @@
         <relationship name="workedShift" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkedShift" inverseName="timelogs" inverseEntity="WorkedShift" syncable="YES"/>
     </entity>
     <entity name="UserPreferences" syncable="YES">
-        <attribute name="alert" optional="YES" attributeType="Boolean" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="alert" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="reminder" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="enableAlert" optional="YES" attributeType="Boolean" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="enableReminder" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="enableReminder2" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="reminder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="reminder2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="WorkedShift" syncable="YES">
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
@@ -41,11 +47,11 @@
     </entity>
     <elements>
         <element name="Job" positionX="-63" positionY="-1" width="128" height="118"/>
-        <element name="Timelog" positionX="243" positionY="-0" width="128" height="133"/>
-        <element name="Company" positionX="-65" positionY="-120" width="128" height="73"/>
-        <element name="WorkedShift" positionX="90" positionY="-0" width="128" height="103"/>
-        <element name="Schedule" positionX="-216" positionY="-0" width="128" height="73"/>
-        <element name="UserPreferences" positionX="-65" positionY="144" width="128" height="90"/>
-        <element name="ScheduledShift" positionX="-371" positionY="0" width="128" height="90"/>
+        <element name="Timelog" positionX="304" positionY="-0" width="128" height="133"/>
+        <element name="Company" positionX="-119" positionY="-126" width="128" height="73"/>
+        <element name="WorkedShift" positionX="124" positionY="5" width="128" height="103"/>
+        <element name="ScheduledShift" positionX="-216" positionY="-0" width="128" height="103"/>
+        <element name="UserPreferences" positionX="-144" positionY="144" width="128" height="148"/>
+        <element name="RepeatingSchedule" positionX="-389" positionY="-0" width="128" height="88"/>
     </elements>
 </model>
