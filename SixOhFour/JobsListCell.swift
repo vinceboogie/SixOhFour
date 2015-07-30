@@ -13,12 +13,12 @@ class JobsListCell: UITableViewCell {
     @IBOutlet weak var jobColorView: JobColorView!
     @IBOutlet weak var jobNameLabel: UILabel!
     
-    var job: Jobs! {
+    var job: Job! {
         didSet {
-            jobNameLabel.text = job.jobName
+            jobNameLabel.text = job.company.name
             
             var jc = JobColor()
-            jobColorView.color = jc.getJobColor(job.jobColor)
+            jobColorView.color = jc.getJobColor(job.color.name)
         }
     }
     

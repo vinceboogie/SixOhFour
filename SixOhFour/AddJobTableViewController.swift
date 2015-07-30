@@ -20,27 +20,14 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     @IBOutlet weak var saveJobButton: UIBarButtonItem!
     
     var payRate = PayRate()
-    
-    let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
-    
+    var job: Job!
     var pickerVisible = false
     
+    let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
     let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    var nItem : Jobs? = nil
-    
-//    @IBAction func payRateButtonPressed(sender: AnyObject) {
-//        let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
-//        var payRateTableViewController: PayRateTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("PayRateTableViewController") as! PayRateTableViewController
-//        payRateTableViewController.writeValueDelegate = self
-//        
-//        payRateTableViewController.
-//        
-//        navigationController?.pushViewController(payRateTableViewController, animated: true)
-//    }
-    
     @IBAction func saveJobButton(sender: AnyObject) {
-        if nItem != nil {
+        if job != nil {
             editItem()
         } else {
             newItem()
@@ -63,18 +50,21 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         
         colorPicker.dataSource = self
         colorPicker.delegate = self
-
-        if nItem != nil {
-            nameTextField.text = nItem?.jobName
-            positionTextField.text = nItem?.jobPosition
-            payRateLabel.text = nItem?.jobPay
-            colorLabel.text = nItem?.jobColor
-            if jobColorView != nil {
-                var jc = JobColor()
-                jobColorView.color = jc.getJobColor(colorLabel.text!)
-            }
+        
+        if job != nil {
+            nameTextField.text = job.company.name
+            positionTextField.text = job.position
+            payRateLabel.text = "\(job.payRate)"
+            colorLabel.text = job.color.name
+            var jc = JobColor()
+            jobColorView.color = jc.getJobColor(colorLabel.text!)
+        }
+        
+        if job != nil {
+        payRate.payRate = "\(job.payRate)"
         }
     }
+        
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -82,8 +72,7 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         if nameTextField.text == "" {
             self.navigationItem.rightBarButtonItem!.enabled = false
         }
-        
-         nameTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        nameTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         
         var selectedColor = 0
         
@@ -93,7 +82,6 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
                 selectedColor = i
             }
         }
-        
         colorPicker.selectRow(selectedColor, inComponent: 0, animated: true)
     }
     
@@ -101,7 +89,6 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         let whitespaceSet = NSCharacterSet.whitespaceCharacterSet()
         if textField.text.stringByTrimmingCharactersInSet(whitespaceSet) != "" {
             self.navigationItem.rightBarButtonItem!.enabled = true
-
         }
     }
     
@@ -127,28 +114,42 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-//    func writeValueBack(vc: PayRateTableViewController, value: String) {
-//        self.payRateLabel.text = "$\(value)"
-//    }
     
     func newItem() {
         let context = self.context
-        let ent = NSEntityDescription.entityForName("Jobs", inManagedObjectContext: context!)
+        let ent = NSEntityDescription.entityForName("Job", inManagedObjectContext: context!)
+        let com = NSEntityDescription.entityForName("Company", inManagedObjectContext: context!)
+        let col = NSEntityDescription.entityForName("Color", inManagedObjectContext: context!)
+
+
+        let company = Company(entity: com!, insertIntoManagedObjectContext: context)
+        let color = Color(entity: col!, insertIntoManagedObjectContext: context)
+        let job = Job(entity: ent!, insertIntoManagedObjectContext: context)
+        
+        
+        company.name = nameTextField.text
+        color.name = colorLabel.text!
+
+        
+        job.setValue(company, forKey: "company")
+        job.position = positionTextField.text
+        job.payRate = NSDecimalNumber(string: payRateLabel.text)
+        job.setValue(color, forKey: "color")
+
+        println(job.company.name)
+        println(job.color.name)
             
-        let nItem = Jobs(entity: ent!, insertIntoManagedObjectContext: context)
-        nItem.jobName = nameTextField.text
-        nItem.jobPosition = positionTextField.text
-        nItem.jobPay = payRateLabel.text!
-        nItem.jobColor = colorLabel.text!
+        println(color)
+        print(job)
+        print(company)
         context!.save(nil)
     }
         
     func editItem() {
-        nItem!.jobName = nameTextField.text
-        nItem!.jobPosition = positionTextField.text
-        nItem!.jobPay = payRateLabel.text!
-        nItem!.jobColor = colorLabel.text!
+        job.company.name = nameTextField.text
+        job.position = positionTextField.text
+        job.payRate = NSDecimalNumber(string: payRateLabel.text)
+        job.color.name = colorLabel.text!
         context!.save(nil)
     }
     

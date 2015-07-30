@@ -22,8 +22,8 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
     
     @IBOutlet weak var ClockInJobsTable: UITableView!
     
-    var arrayOfJobs = [Jobs]()
-    var selectedJob: Jobs!
+    var arrayOfJobs = [Job]()
+    var selectedJob: Job!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
         
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
-        arrayOfJobs = results as! [Jobs]
+        arrayOfJobs = results as! [Job]
         
 //        if(results.count > 0 ) {
 //            for res in results{

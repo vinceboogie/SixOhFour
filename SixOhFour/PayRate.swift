@@ -9,7 +9,7 @@
 import UIKit
 
 class PayRate: NSObject {
-    var payRate = "0"
+    var payRate = ""
     var overtime = false
     var special = false
     var shiftDifferential = false
