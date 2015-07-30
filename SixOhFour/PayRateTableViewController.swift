@@ -13,7 +13,7 @@ class PayRateTableViewController: UITableViewController {
     
     var payRate: PayRate!
     var saveButton: UIBarButtonItem!
-    var job: Jobs!
+    var job: Job!
 
     @IBOutlet weak var payTextField: UITextField!
     @IBOutlet weak var toggleOvertime: UISwitch!

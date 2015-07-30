@@ -22,18 +22,18 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var yearToDateLabel: UILabel!
     
     var editButton: UIBarButtonItem!
-    var job: Jobs!
+    var job: Job!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         editButton = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: "editJob")
         self.navigationItem.rightBarButtonItem = editButton
         
-        self.title = job.jobName
+        self.title = job.company.name
         
-        nameLabel.text = job.jobName
-        positionLabel.text = job.jobPosition
-        payLabel.text = "$\(job.jobPay)/hr"
+        nameLabel.text = job.company.name
+        positionLabel.text = job.position
+        payLabel.text = "$\(job.payRate)/hr"
     }
 
     override func didReceiveMemoryWarning() {

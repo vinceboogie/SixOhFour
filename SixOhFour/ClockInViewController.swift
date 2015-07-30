@@ -328,11 +328,11 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if((sourceVC.selectedJob) != nil ) {
             
-            jobTitleDisplayLabel.text = sourceVC.selectedJob.jobName
+            jobTitleDisplayLabel.text = sourceVC.selectedJob.company.name
             
             var jc = JobColor()
             
-            jobColorDisplay.color = jc.getJobColor(sourceVC.selectedJob.jobColor)
+            jobColorDisplay.color = jc.getJobColor(sourceVC.selectedJob.color.name)
         }
     }
 

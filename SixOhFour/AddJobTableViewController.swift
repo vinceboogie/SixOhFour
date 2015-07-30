@@ -20,7 +20,7 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     @IBOutlet weak var saveJobButton: UIBarButtonItem!
     
     var payRate = PayRate()
-    var job: Jobs!
+    var job: Job!
     var pickerVisible = false
     
     let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
@@ -52,16 +52,16 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         colorPicker.delegate = self
         
         if job != nil {
-            nameTextField.text = job.jobName
-            positionTextField.text = job.jobPosition
-            payRateLabel.text = job.jobPay
-            colorLabel.text = job.jobColor
+            nameTextField.text = job.company.name
+            positionTextField.text = job.position
+            payRateLabel.text = "\(job.payRate)"
+            colorLabel.text = job.color.name
             var jc = JobColor()
             jobColorView.color = jc.getJobColor(colorLabel.text!)
         }
         
         if job != nil {
-        payRate.payRate = job.jobPay
+        payRate.payRate = "\(job.payRate)"
         }
     }
         
@@ -117,21 +117,39 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     
     func newItem() {
         let context = self.context
-        let ent = NSEntityDescription.entityForName("Jobs", inManagedObjectContext: context!)
+        let ent = NSEntityDescription.entityForName("Job", inManagedObjectContext: context!)
+        let com = NSEntityDescription.entityForName("Company", inManagedObjectContext: context!)
+        let col = NSEntityDescription.entityForName("Color", inManagedObjectContext: context!)
+
+
+        let company = Company(entity: com!, insertIntoManagedObjectContext: context)
+        let color = Color(entity: col!, insertIntoManagedObjectContext: context)
+        let job = Job(entity: ent!, insertIntoManagedObjectContext: context)
+        
+        
+        company.name = nameTextField.text
+        color.name = colorLabel.text!
+
+        
+        job.setValue(company, forKey: "company")
+        job.position = positionTextField.text
+        job.payRate = NSDecimalNumber(string: payRateLabel.text)
+        job.setValue(color, forKey: "color")
+
+        println(job.company.name)
+        println(job.color.name)
             
-        let nItem = Jobs(entity: ent!, insertIntoManagedObjectContext: context)
-        nItem.jobName = nameTextField.text
-        nItem.jobPosition = positionTextField.text
-        nItem.jobPay = payRateLabel.text!
-        nItem.jobColor = colorLabel.text!
+        println(color)
+        print(job)
+        print(company)
         context!.save(nil)
     }
         
     func editItem() {
-        job.jobName = nameTextField.text
-        job.jobPosition = positionTextField.text
-        job.jobPay = payRateLabel.text!
-        job.jobColor = colorLabel.text!
+        job.company.name = nameTextField.text
+        job.position = positionTextField.text
+        job.payRate = NSDecimalNumber(string: payRateLabel.text)
+        job.color.name = colorLabel.text!
         context!.save(nil)
     }
     

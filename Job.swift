@@ -8,13 +8,18 @@
 
 import Foundation
 import CoreData
+@objc(Job)
 
 class Job: NSManagedObject {
 
     @NSManaged var payRate: NSDecimalNumber
     @NSManaged var position: String
-    @NSManaged var company: Company
-    @NSManaged var schedule: NSManagedObject
-    @NSManaged var workedShifts: NSSet
 
+    //RELATIONSHIP TO OTHER Classes
+    @NSManaged var company: Company
+    @NSManaged var color: Color
+    @NSManaged var schedule: NSManagedObject
+//    @NSManaged var workedShifts: NSSet
+
+    
 }

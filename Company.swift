@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+@objc(Company)
+
 
 class Company: NSManagedObject {
 

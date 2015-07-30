@@ -14,12 +14,11 @@ class ClockIn_TimeLogCell: UITableViewCell {
     @IBOutlet weak var timelogTimestampLabel: UILabel!
     @IBOutlet weak var timelogTitleLabel: UILabel!
     
-    var timelogEntry: TimeLogs! {
+    var timelogEntry: Timelog! {
         didSet {
-//            timelogCommentImage.text = job.jobName
-            timelogTimestampLabel.text = timelogEntry.timelogTimestamp
-            timelogTitleLabel.text = timelogEntry.timelogTitle
-
+//            var dateFormatter = NSDateFormatter( )
+//            timelogTimestampLabel.text = timelogEntry.time
+//            timelogTitleLabel.text = timelogEntry.type
         }
     }
 

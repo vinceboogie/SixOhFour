@@ -13,8 +13,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
-    var job: Jobs!
-    var jobsList = [Jobs]()
+    var job: Job!
+    var jobsList = [Job]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +37,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         
-        var request = NSFetchRequest(entityName: "Jobs")
+        var request = NSFetchRequest(entityName: "Job")
         request.returnsObjectsAsFaults = false ;
         
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
-        jobsList = results as! [Jobs]
+        jobsList = results as! [Job]
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -66,10 +66,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
         
-        cell.jobNameLabel.text = jobsList[indexPath.row].jobName
+        cell.jobNameLabel.text = jobsList[indexPath.row].company.name
         
         var jc = JobColor()
-        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].jobColor)
+        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)
         
         return cell
     }

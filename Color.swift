@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+@objc(Color)
+
 
 class Color: NSManagedObject {
 
