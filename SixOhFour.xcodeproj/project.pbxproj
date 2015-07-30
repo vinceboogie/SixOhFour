@@ -97,6 +97,7 @@
 		879277021B588B2C0023CBA6 /* PayRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRate.swift; sourceTree = "<group>"; };
 		87B57CD51B5090D100D9B438 /* SixOhFourV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SixOhFourV2.xcdatamodel; sourceTree = "<group>"; };
 		87B57CD61B509B4400D9B438 /* JobsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsListCell.swift; sourceTree = "<group>"; };
+		87B7C17E1B69AAAE00C65C96 /* SixOhFourV3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SixOhFourV3.xcdatamodel; sourceTree = "<group>"; };
 		87F4B3771B57411C001B9526 /* JobColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobColor.swift; sourceTree = "<group>"; };
 		B90FA0411B4320A6004B4D79 /* CVCalendarContentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentDelegate.swift; sourceTree = "<group>"; };
 		B90FA0421B4320A6004B4D79 /* CVCalendarContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentViewController.swift; sourceTree = "<group>"; };
@@ -723,6 +724,7 @@
 		874FACF91B33A9D7002EABB0 /* SixOhFour.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				87B7C17E1B69AAAE00C65C96 /* SixOhFourV3.xcdatamodel */,
 				87B57CD51B5090D100D9B438 /* SixOhFourV2.xcdatamodel */,
 				874FACFA1B33A9D7002EABB0 /* SixOhFour.xcdatamodel */,
 			);
