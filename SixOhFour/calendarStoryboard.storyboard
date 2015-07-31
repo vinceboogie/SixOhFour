@@ -36,6 +36,9 @@
                                         <exclude reference="X3b-im-zCT"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="menuViewDelegate" destination="mcG-89-bFu" id="USH-Sq-mB3"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zmc-jX-FvP" customClass="CVCalendarView" customModule="SixOhFour" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="123" width="375" height="220"/>
@@ -631,7 +634,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="X0W-Op-QLu" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="X0W-Op-QLu">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X0W-Op-QLu" id="BUN-Vd-mbV">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -694,7 +697,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="NDg-Ct-72O" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="NDg-Ct-72O">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NDg-Ct-72O" id="SV3-vK-WdI">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -757,7 +760,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="xpc-nu-nv0" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="xpc-nu-nv0">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xpc-nu-nv0" id="XZE-qt-8SE">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -820,7 +823,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="e93-nq-mBu" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="e93-nq-mBu">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e93-nq-mBu" id="2cY-aB-0FA">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -883,7 +886,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatOnDaysCell" rowHeight="60" id="inQ-LN-j7B" customClass="RepeatOnDaysCell" customModule="SixOhFour" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="inQ-LN-j7B">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="inQ-LN-j7B" id="kTK-Dq-9od">
                                             <autoresizingMask key="autoresizingMask"/>

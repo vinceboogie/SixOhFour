@@ -12,10 +12,10 @@ import CoreData
 
 class JobsListTableViewController: UITableViewController {
 
-    var jobsList = [Jobs]()
+    var jobsList = [Job]()
     var jobName: String!
     var jobColor: UIColor!
-    var selectedJob: Jobs!
+    var selectedJob: Job!
     var previousSelection: String!
     
     override func viewDidLoad() {
@@ -25,12 +25,12 @@ class JobsListTableViewController: UITableViewController {
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         
-        var request = NSFetchRequest(entityName: "Jobs")
+        var request = NSFetchRequest(entityName: "Job")
         request.returnsObjectsAsFaults = false ;
         
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
-        jobsList = results as! [Jobs]
+        jobsList = results as! [Job]
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,10 +52,10 @@ class JobsListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
         
-        cell.jobNameLabel.text = jobsList[indexPath.row].jobName
+        cell.jobNameLabel.text = jobsList[indexPath.row].company.name
         
         var jc = JobColor()
-        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].jobColor)
+        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)
         
         if cell.jobNameLabel.text == previousSelection {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -110,27 +110,27 @@ class JobsListTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-
-        cell.jobNameLabel.text = jobsList[indexPath.row].jobName
-        
-        var jc = JobColor()
-        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].jobColor)
-        
-        if cell.jobNameLabel.text == previousSelection {
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        }
-        
-        return cell
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        // Get the new view controller using [segue destinationViewController].
+//        // Pass the selected object to the new view controller.
+//
+//        cell.jobNameLabel.text = jobsList[indexPath.row].company.name
+//        
+//        var jc = JobColor()
+//        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)
+//        
+//        if cell.jobNameLabel.text == previousSelection {
+//            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+//        }
+//        
+//        return cell
+//    }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.selectedJob = jobsList[indexPath.row]
-        
-        self.performSegueWithIdentifier("unwindFromJobsListTableViewController", sender: self)
-    }
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        self.selectedJob = jobsList[indexPath.row]
+//        
+//        self.performSegueWithIdentifier("unwindFromJobsListTableViewController", sender: self)
+//    }
     
 
     /*

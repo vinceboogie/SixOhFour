@@ -14,11 +14,23 @@ class TodayScheduleCell: UITableViewCell {
     @IBOutlet weak var jobNameLabel: UILabel!
     @IBOutlet weak var shiftTimeLabel: UILabel!
     
-    var shift: Shift! {
+    var shift: ScheduledShift! {
         didSet {
-            jobColorView.color = shift.color!
-            jobNameLabel.text = shift.name
-            shiftTimeLabel.text = shift.shiftTime
+            var jc = JobColor()
+            jobColorView.color = jc.getJobColor(shift.job.color.name)
+            
+            jobNameLabel.text = shift.job.company.name
+            
+            let formatter = NSDateFormatter()
+            formatter.dateStyle = .NoStyle
+            formatter.timeStyle = .ShortStyle
+            
+            shiftTimeLabel.text = "\(formatter.stringFromDate(shift.startTime)) - \(formatter.stringFromDate(shift.endTime))"
+            
+            
+            println(shift.job.color.name)
+            println(shift.job.company.name)
+            println(shiftTimeLabel.text)
         }
     }
     

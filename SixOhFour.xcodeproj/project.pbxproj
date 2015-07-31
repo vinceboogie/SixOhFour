@@ -38,26 +38,6 @@
 		87B7C18E1B69C22800C65C96 /* Timelog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B7C18D1B69C22800C65C96 /* Timelog.swift */; };
 		87B7C1901B69C91D00C65C96 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B7C18F1B69C91D00C65C96 /* Color.swift */; };
 		87F4B3781B57411C001B9526 /* JobColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F4B3771B57411C001B9526 /* JobColor.swift */; };
-		B90FA0551B4320A6004B4D79 /* CVCalendarContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0411B4320A6004B4D79 /* CVCalendarContentDelegate.swift */; };
-		B90FA0561B4320A6004B4D79 /* CVCalendarContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0421B4320A6004B4D79 /* CVCalendarContentViewController.swift */; };
-		B90FA0571B4320A6004B4D79 /* CVCalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0431B4320A6004B4D79 /* CVCalendarDayView.swift */; };
-		B90FA0581B4320A6004B4D79 /* CVCalendarDayViewControlCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0441B4320A6004B4D79 /* CVCalendarDayViewControlCoordinator.swift */; };
-		B90FA0591B4320A6004B4D79 /* CVCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0451B4320A6004B4D79 /* CVCalendarManager.swift */; };
-		B90FA05A1B4320A6004B4D79 /* CVCalendarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0461B4320A6004B4D79 /* CVCalendarMenuView.swift */; };
-		B90FA05B1B4320A6004B4D79 /* CVCalendarMonthContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0471B4320A6004B4D79 /* CVCalendarMonthContentView.swift */; };
-		B90FA05C1B4320A6004B4D79 /* CVCalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0481B4320A6004B4D79 /* CVCalendarMonthView.swift */; };
-		B90FA05D1B4320A6004B4D79 /* CVCalendarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0491B4320A6004B4D79 /* CVCalendarRenderer.swift */; };
-		B90FA05E1B4320A6004B4D79 /* CVCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA04A1B4320A6004B4D79 /* CVCalendarView.swift */; };
-		B90FA05F1B4320A6004B4D79 /* CVCalendarViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA04B1B4320A6004B4D79 /* CVCalendarViewAnimator.swift */; };
-		B90FA0601B4320A6004B4D79 /* CVCalendarViewAnimatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA04C1B4320A6004B4D79 /* CVCalendarViewAnimatorDelegate.swift */; };
-		B90FA0611B4320A6004B4D79 /* CVCalendarViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA04D1B4320A6004B4D79 /* CVCalendarViewAppearance.swift */; };
-		B90FA0621B4320A6004B4D79 /* CVCalendarViewAppearanceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA04E1B4320A6004B4D79 /* CVCalendarViewAppearanceDelegate.swift */; };
-		B90FA0631B4320A6004B4D79 /* CVCalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA04F1B4320A6004B4D79 /* CVCalendarViewDelegate.swift */; };
-		B90FA0641B4320A6004B4D79 /* CVCalendarWeekContentRecovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0501B4320A6004B4D79 /* CVCalendarWeekContentRecovery.swift */; };
-		B90FA0651B4320A6004B4D79 /* CVCalendarWeekContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0511B4320A6004B4D79 /* CVCalendarWeekContentView.swift */; };
-		B90FA0661B4320A6004B4D79 /* CVCalendarWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0521B4320A6004B4D79 /* CVCalendarWeekView.swift */; };
-		B90FA0671B4320A6004B4D79 /* CVCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0531B4320A6004B4D79 /* CVCircleView.swift */; };
-		B90FA0681B4320A6004B4D79 /* CVDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FA0541B4320A6004B4D79 /* CVDate.swift */; };
 		B936D63F1B607674009777A7 /* EndRepeatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B936D63E1B607674009777A7 /* EndRepeatTableViewController.swift */; };
 		B93E88891B45FFA00030877B /* JobColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E88881B45FFA00030877B /* JobColorView.swift */; };
 		B93E888B1B46067E0030877B /* TodayScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E888A1B46067E0030877B /* TodayScheduleCell.swift */; };
@@ -67,9 +47,34 @@
 		B992A18D1B582FFE006E5A2B /* SetRepeatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992A18C1B582FFE006E5A2B /* SetRepeatTableViewController.swift */; };
 		B992A1951B587CE1006E5A2B /* RepeatSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992A1941B587CE1006E5A2B /* RepeatSettings.swift */; };
 		B9A0BFF01B5993BB00433C96 /* WeekDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */; };
-		B9A0BFF21B5993E200433C96 /* RepeatOnDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */; };
 		B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */; };
 		B9C8A7B51B4E469E00C4BEEC /* AddScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8A7B41B4E469E00C4BEEC /* AddScheduleTableViewController.swift */; };
+		B9CF328E1B6B046900757E43 /* CVAuxiliaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32741B6B046800757E43 /* CVAuxiliaryView.swift */; };
+		B9CF328F1B6B046900757E43 /* CVCalendarContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32751B6B046800757E43 /* CVCalendarContentViewController.swift */; };
+		B9CF32901B6B046900757E43 /* CVCalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32761B6B046800757E43 /* CVCalendarDayView.swift */; };
+		B9CF32911B6B046900757E43 /* CVCalendarDayViewControlCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32771B6B046800757E43 /* CVCalendarDayViewControlCoordinator.swift */; };
+		B9CF32921B6B046900757E43 /* CVCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32781B6B046800757E43 /* CVCalendarManager.swift */; };
+		B9CF32931B6B046900757E43 /* CVCalendarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32791B6B046800757E43 /* CVCalendarMenuView.swift */; };
+		B9CF32941B6B046900757E43 /* CVCalendarMenuViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF327A1B6B046800757E43 /* CVCalendarMenuViewDelegate.swift */; };
+		B9CF32951B6B046900757E43 /* CVCalendarMonthContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF327B1B6B046800757E43 /* CVCalendarMonthContentViewController.swift */; };
+		B9CF32961B6B046900757E43 /* CVCalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF327C1B6B046800757E43 /* CVCalendarMonthView.swift */; };
+		B9CF32971B6B046900757E43 /* CVCalendarTouchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF327D1B6B046800757E43 /* CVCalendarTouchController.swift */; };
+		B9CF32981B6B046900757E43 /* CVCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF327E1B6B046800757E43 /* CVCalendarView.swift */; };
+		B9CF32991B6B046900757E43 /* CVCalendarViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF327F1B6B046800757E43 /* CVCalendarViewAnimator.swift */; };
+		B9CF329A1B6B046900757E43 /* CVCalendarViewAnimatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32801B6B046800757E43 /* CVCalendarViewAnimatorDelegate.swift */; };
+		B9CF329B1B6B046900757E43 /* CVCalendarViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32811B6B046800757E43 /* CVCalendarViewAppearance.swift */; };
+		B9CF329C1B6B046900757E43 /* CVCalendarViewAppearanceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32821B6B046800757E43 /* CVCalendarViewAppearanceDelegate.swift */; };
+		B9CF329D1B6B046900757E43 /* CVCalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32831B6B046800757E43 /* CVCalendarViewDelegate.swift */; };
+		B9CF329E1B6B046900757E43 /* CVCalendarViewPresentationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32841B6B046800757E43 /* CVCalendarViewPresentationMode.swift */; };
+		B9CF329F1B6B046900757E43 /* CVCalendarWeekContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32851B6B046800757E43 /* CVCalendarWeekContentViewController.swift */; };
+		B9CF32A01B6B046900757E43 /* CVCalendarWeekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32861B6B046800757E43 /* CVCalendarWeekday.swift */; };
+		B9CF32A11B6B046900757E43 /* CVCalendarWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32871B6B046800757E43 /* CVCalendarWeekView.swift */; };
+		B9CF32A21B6B046900757E43 /* CVDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32881B6B046900757E43 /* CVDate.swift */; };
+		B9CF32A31B6B046900757E43 /* CVRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF32891B6B046900757E43 /* CVRange.swift */; };
+		B9CF32A41B6B046900757E43 /* CVScrollDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF328A1B6B046900757E43 /* CVScrollDirection.swift */; };
+		B9CF32A51B6B046900757E43 /* CVSelectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF328B1B6B046900757E43 /* CVSelectionType.swift */; };
+		B9CF32A61B6B046900757E43 /* CVSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF328C1B6B046900757E43 /* CVSet.swift */; };
+		B9CF32A71B6B046900757E43 /* CVShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CF328D1B6B046900757E43 /* CVShape.swift */; };
 		B9E34BCB1B50D21800B9FD88 /* JobsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E34BCA1B50D21800B9FD88 /* JobsListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -121,26 +126,6 @@
 		87B7C18D1B69C22800C65C96 /* Timelog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timelog.swift; path = ../Timelog.swift; sourceTree = "<group>"; };
 		87B7C18F1B69C91D00C65C96 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = ../Color.swift; sourceTree = "<group>"; };
 		87F4B3771B57411C001B9526 /* JobColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobColor.swift; sourceTree = "<group>"; };
-		B90FA0411B4320A6004B4D79 /* CVCalendarContentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentDelegate.swift; sourceTree = "<group>"; };
-		B90FA0421B4320A6004B4D79 /* CVCalendarContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentViewController.swift; sourceTree = "<group>"; };
-		B90FA0431B4320A6004B4D79 /* CVCalendarDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarDayView.swift; sourceTree = "<group>"; };
-		B90FA0441B4320A6004B4D79 /* CVCalendarDayViewControlCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarDayViewControlCoordinator.swift; sourceTree = "<group>"; };
-		B90FA0451B4320A6004B4D79 /* CVCalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarManager.swift; sourceTree = "<group>"; };
-		B90FA0461B4320A6004B4D79 /* CVCalendarMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarMenuView.swift; sourceTree = "<group>"; };
-		B90FA0471B4320A6004B4D79 /* CVCalendarMonthContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarMonthContentView.swift; sourceTree = "<group>"; };
-		B90FA0481B4320A6004B4D79 /* CVCalendarMonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarMonthView.swift; sourceTree = "<group>"; };
-		B90FA0491B4320A6004B4D79 /* CVCalendarRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarRenderer.swift; sourceTree = "<group>"; };
-		B90FA04A1B4320A6004B4D79 /* CVCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarView.swift; sourceTree = "<group>"; };
-		B90FA04B1B4320A6004B4D79 /* CVCalendarViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewAnimator.swift; sourceTree = "<group>"; };
-		B90FA04C1B4320A6004B4D79 /* CVCalendarViewAnimatorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewAnimatorDelegate.swift; sourceTree = "<group>"; };
-		B90FA04D1B4320A6004B4D79 /* CVCalendarViewAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewAppearance.swift; sourceTree = "<group>"; };
-		B90FA04E1B4320A6004B4D79 /* CVCalendarViewAppearanceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewAppearanceDelegate.swift; sourceTree = "<group>"; };
-		B90FA04F1B4320A6004B4D79 /* CVCalendarViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewDelegate.swift; sourceTree = "<group>"; };
-		B90FA0501B4320A6004B4D79 /* CVCalendarWeekContentRecovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarWeekContentRecovery.swift; sourceTree = "<group>"; };
-		B90FA0511B4320A6004B4D79 /* CVCalendarWeekContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarWeekContentView.swift; sourceTree = "<group>"; };
-		B90FA0521B4320A6004B4D79 /* CVCalendarWeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarWeekView.swift; sourceTree = "<group>"; };
-		B90FA0531B4320A6004B4D79 /* CVCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCircleView.swift; sourceTree = "<group>"; };
-		B90FA0541B4320A6004B4D79 /* CVDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVDate.swift; sourceTree = "<group>"; };
 		B936D63E1B607674009777A7 /* EndRepeatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndRepeatTableViewController.swift; sourceTree = "<group>"; };
 		B93E88881B45FFA00030877B /* JobColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobColorView.swift; sourceTree = "<group>"; };
 		B93E888A1B46067E0030877B /* TodayScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayScheduleCell.swift; sourceTree = "<group>"; };
@@ -150,9 +135,34 @@
 		B992A18C1B582FFE006E5A2B /* SetRepeatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetRepeatTableViewController.swift; sourceTree = "<group>"; };
 		B992A1941B587CE1006E5A2B /* RepeatSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatSettings.swift; sourceTree = "<group>"; };
 		B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDayCollectionViewCell.swift; sourceTree = "<group>"; };
-		B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatOnDaysCell.swift; sourceTree = "<group>"; };
 		B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B9C8A7B41B4E469E00C4BEEC /* AddScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScheduleTableViewController.swift; sourceTree = "<group>"; };
+		B9CF32741B6B046800757E43 /* CVAuxiliaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAuxiliaryView.swift; sourceTree = "<group>"; };
+		B9CF32751B6B046800757E43 /* CVCalendarContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentViewController.swift; sourceTree = "<group>"; };
+		B9CF32761B6B046800757E43 /* CVCalendarDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarDayView.swift; sourceTree = "<group>"; };
+		B9CF32771B6B046800757E43 /* CVCalendarDayViewControlCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarDayViewControlCoordinator.swift; sourceTree = "<group>"; };
+		B9CF32781B6B046800757E43 /* CVCalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarManager.swift; sourceTree = "<group>"; };
+		B9CF32791B6B046800757E43 /* CVCalendarMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarMenuView.swift; sourceTree = "<group>"; };
+		B9CF327A1B6B046800757E43 /* CVCalendarMenuViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarMenuViewDelegate.swift; sourceTree = "<group>"; };
+		B9CF327B1B6B046800757E43 /* CVCalendarMonthContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarMonthContentViewController.swift; sourceTree = "<group>"; };
+		B9CF327C1B6B046800757E43 /* CVCalendarMonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarMonthView.swift; sourceTree = "<group>"; };
+		B9CF327D1B6B046800757E43 /* CVCalendarTouchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarTouchController.swift; sourceTree = "<group>"; };
+		B9CF327E1B6B046800757E43 /* CVCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarView.swift; sourceTree = "<group>"; };
+		B9CF327F1B6B046800757E43 /* CVCalendarViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewAnimator.swift; sourceTree = "<group>"; };
+		B9CF32801B6B046800757E43 /* CVCalendarViewAnimatorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewAnimatorDelegate.swift; sourceTree = "<group>"; };
+		B9CF32811B6B046800757E43 /* CVCalendarViewAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewAppearance.swift; sourceTree = "<group>"; };
+		B9CF32821B6B046800757E43 /* CVCalendarViewAppearanceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewAppearanceDelegate.swift; sourceTree = "<group>"; };
+		B9CF32831B6B046800757E43 /* CVCalendarViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewDelegate.swift; sourceTree = "<group>"; };
+		B9CF32841B6B046800757E43 /* CVCalendarViewPresentationMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarViewPresentationMode.swift; sourceTree = "<group>"; };
+		B9CF32851B6B046800757E43 /* CVCalendarWeekContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarWeekContentViewController.swift; sourceTree = "<group>"; };
+		B9CF32861B6B046800757E43 /* CVCalendarWeekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarWeekday.swift; sourceTree = "<group>"; };
+		B9CF32871B6B046800757E43 /* CVCalendarWeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarWeekView.swift; sourceTree = "<group>"; };
+		B9CF32881B6B046900757E43 /* CVDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVDate.swift; sourceTree = "<group>"; };
+		B9CF32891B6B046900757E43 /* CVRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVRange.swift; sourceTree = "<group>"; };
+		B9CF328A1B6B046900757E43 /* CVScrollDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVScrollDirection.swift; sourceTree = "<group>"; };
+		B9CF328B1B6B046900757E43 /* CVSelectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVSelectionType.swift; sourceTree = "<group>"; };
+		B9CF328C1B6B046900757E43 /* CVSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVSet.swift; sourceTree = "<group>"; };
+		B9CF328D1B6B046900757E43 /* CVShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVShape.swift; sourceTree = "<group>"; };
 		B9E34BCA1B50D21800B9FD88 /* JobsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -233,29 +243,35 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B90FA0401B4320A6004B4D79 /* CVCalendar */ = {
+		B9CF32731B6B046800757E43 /* CVCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				B90FA0411B4320A6004B4D79 /* CVCalendarContentDelegate.swift */,
-				B90FA0421B4320A6004B4D79 /* CVCalendarContentViewController.swift */,
-				B90FA0431B4320A6004B4D79 /* CVCalendarDayView.swift */,
-				B90FA0441B4320A6004B4D79 /* CVCalendarDayViewControlCoordinator.swift */,
-				B90FA0451B4320A6004B4D79 /* CVCalendarManager.swift */,
-				B90FA0461B4320A6004B4D79 /* CVCalendarMenuView.swift */,
-				B90FA0471B4320A6004B4D79 /* CVCalendarMonthContentView.swift */,
-				B90FA0481B4320A6004B4D79 /* CVCalendarMonthView.swift */,
-				B90FA0491B4320A6004B4D79 /* CVCalendarRenderer.swift */,
-				B90FA04A1B4320A6004B4D79 /* CVCalendarView.swift */,
-				B90FA04B1B4320A6004B4D79 /* CVCalendarViewAnimator.swift */,
-				B90FA04C1B4320A6004B4D79 /* CVCalendarViewAnimatorDelegate.swift */,
-				B90FA04D1B4320A6004B4D79 /* CVCalendarViewAppearance.swift */,
-				B90FA04E1B4320A6004B4D79 /* CVCalendarViewAppearanceDelegate.swift */,
-				B90FA04F1B4320A6004B4D79 /* CVCalendarViewDelegate.swift */,
-				B90FA0501B4320A6004B4D79 /* CVCalendarWeekContentRecovery.swift */,
-				B90FA0511B4320A6004B4D79 /* CVCalendarWeekContentView.swift */,
-				B90FA0521B4320A6004B4D79 /* CVCalendarWeekView.swift */,
-				B90FA0531B4320A6004B4D79 /* CVCircleView.swift */,
-				B90FA0541B4320A6004B4D79 /* CVDate.swift */,
+				B9CF32741B6B046800757E43 /* CVAuxiliaryView.swift */,
+				B9CF32751B6B046800757E43 /* CVCalendarContentViewController.swift */,
+				B9CF32761B6B046800757E43 /* CVCalendarDayView.swift */,
+				B9CF32771B6B046800757E43 /* CVCalendarDayViewControlCoordinator.swift */,
+				B9CF32781B6B046800757E43 /* CVCalendarManager.swift */,
+				B9CF32791B6B046800757E43 /* CVCalendarMenuView.swift */,
+				B9CF327A1B6B046800757E43 /* CVCalendarMenuViewDelegate.swift */,
+				B9CF327B1B6B046800757E43 /* CVCalendarMonthContentViewController.swift */,
+				B9CF327C1B6B046800757E43 /* CVCalendarMonthView.swift */,
+				B9CF327D1B6B046800757E43 /* CVCalendarTouchController.swift */,
+				B9CF327E1B6B046800757E43 /* CVCalendarView.swift */,
+				B9CF327F1B6B046800757E43 /* CVCalendarViewAnimator.swift */,
+				B9CF32801B6B046800757E43 /* CVCalendarViewAnimatorDelegate.swift */,
+				B9CF32811B6B046800757E43 /* CVCalendarViewAppearance.swift */,
+				B9CF32821B6B046800757E43 /* CVCalendarViewAppearanceDelegate.swift */,
+				B9CF32831B6B046800757E43 /* CVCalendarViewDelegate.swift */,
+				B9CF32841B6B046800757E43 /* CVCalendarViewPresentationMode.swift */,
+				B9CF32851B6B046800757E43 /* CVCalendarWeekContentViewController.swift */,
+				B9CF32861B6B046800757E43 /* CVCalendarWeekday.swift */,
+				B9CF32871B6B046800757E43 /* CVCalendarWeekView.swift */,
+				B9CF32881B6B046900757E43 /* CVDate.swift */,
+				B9CF32891B6B046900757E43 /* CVRange.swift */,
+				B9CF328A1B6B046900757E43 /* CVScrollDirection.swift */,
+				B9CF328B1B6B046900757E43 /* CVSelectionType.swift */,
+				B9CF328C1B6B046900757E43 /* CVSet.swift */,
+				B9CF328D1B6B046900757E43 /* CVShape.swift */,
 			);
 			path = CVCalendar;
 			sourceTree = "<group>";
@@ -350,7 +366,7 @@
 		B9E34BC31B508AB500B9FD88 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				B90FA0401B4320A6004B4D79 /* CVCalendar */,
+				B9CF32731B6B046800757E43 /* CVCalendar */,
 				B9E34BC61B508AD200B9FD88 /* Model */,
 				B9E34BC51B508ACD00B9FD88 /* View */,
 				B9E34BC41B508AC200B9FD88 /* View Controllers */,
@@ -376,7 +392,6 @@
 			isa = PBXGroup;
 			children = (
 				B93E888A1B46067E0030877B /* TodayScheduleCell.swift */,
-				B9A0BFF11B5993E200433C96 /* RepeatOnDaysCell.swift */,
 				B9A0BFEF1B5993BB00433C96 /* WeekDayCollectionViewCell.swift */,
 			);
 			name = View;
@@ -503,35 +518,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B90FA0571B4320A6004B4D79 /* CVCalendarDayView.swift in Sources */,
 				87B7C18E1B69C22800C65C96 /* Timelog.swift in Sources */,
+				B9CF329C1B6B046900757E43 /* CVCalendarViewAppearanceDelegate.swift in Sources */,
 				87238A4E1B3E300A004D44CA /* CalendarViewController.swift in Sources */,
 				87B7C18C1B69C22800C65C96 /* ScheduledShift.swift in Sources */,
 				87B7C1901B69C91D00C65C96 /* Color.swift in Sources */,
+				B9CF32A11B6B046900757E43 /* CVCalendarWeekView.swift in Sources */,
+				B9CF32951B6B046900757E43 /* CVCalendarMonthContentViewController.swift in Sources */,
+				B9CF32A01B6B046900757E43 /* CVCalendarWeekday.swift in Sources */,
+				B9CF329A1B6B046900757E43 /* CVCalendarViewAnimatorDelegate.swift in Sources */,
 				87B7C1801B69C22700C65C96 /* WorkedShift.swift in Sources */,
 				B93E88891B45FFA00030877B /* JobColorView.swift in Sources */,
-				B90FA05C1B4320A6004B4D79 /* CVCalendarMonthView.swift in Sources */,
 				B93E88931B463BFD0030877B /* Shift.swift in Sources */,
+				B9CF32A71B6B046900757E43 /* CVShape.swift in Sources */,
 				B992A1951B587CE1006E5A2B /* RepeatSettings.swift in Sources */,
-				B90FA0611B4320A6004B4D79 /* CVCalendarViewAppearance.swift in Sources */,
-				B90FA0561B4320A6004B4D79 /* CVCalendarContentViewController.swift in Sources */,
-				B90FA0661B4320A6004B4D79 /* CVCalendarWeekView.swift in Sources */,
 				879277031B588B2C0023CBA6 /* PayRate.swift in Sources */,
-				B90FA05F1B4320A6004B4D79 /* CVCalendarViewAnimator.swift in Sources */,
-				B90FA0641B4320A6004B4D79 /* CVCalendarWeekContentRecovery.swift in Sources */,
 				870CECBF1B4F4E9C00B30AAE /* PayRateTableViewController.swift in Sources */,
+				B9CF32A21B6B046900757E43 /* CVDate.swift in Sources */,
+				B9CF32A31B6B046900757E43 /* CVRange.swift in Sources */,
+				B9CF32961B6B046900757E43 /* CVCalendarMonthView.swift in Sources */,
 				B936D63F1B607674009777A7 /* EndRepeatTableViewController.swift in Sources */,
+				B9CF329E1B6B046900757E43 /* CVCalendarViewPresentationMode.swift in Sources */,
 				87238A501B3E3212004D44CA /* ClockInViewController.swift in Sources */,
+				B9CF32A61B6B046900757E43 /* CVSet.swift in Sources */,
+				B9CF32A51B6B046900757E43 /* CVSelectionType.swift in Sources */,
 				B9A0BFF01B5993BB00433C96 /* WeekDayCollectionViewCell.swift in Sources */,
+				B9CF32981B6B046900757E43 /* CVCalendarView.swift in Sources */,
+				B9CF32941B6B046900757E43 /* CVCalendarMenuViewDelegate.swift in Sources */,
+				B9CF32901B6B046900757E43 /* CVCalendarDayView.swift in Sources */,
+				B9CF329D1B6B046900757E43 /* CVCalendarViewDelegate.swift in Sources */,
 				B9C8A7B51B4E469E00C4BEEC /* AddScheduleTableViewController.swift in Sources */,
-				B90FA0551B4320A6004B4D79 /* CVCalendarContentDelegate.swift in Sources */,
-				B90FA05A1B4320A6004B4D79 /* CVCalendarMenuView.swift in Sources */,
 				87B7C1821B69C22800C65C96 /* UserPreferences.swift in Sources */,
 				001464801B4F4F6600AC0C9F /* ClockIn_TimeLogCell.swift in Sources */,
-				B90FA0621B4320A6004B4D79 /* CVCalendarViewAppearanceDelegate.swift in Sources */,
-				B90FA0631B4320A6004B4D79 /* CVCalendarViewDelegate.swift in Sources */,
-				B90FA0591B4320A6004B4D79 /* CVCalendarManager.swift in Sources */,
 				87F4B3781B57411C001B9526 /* JobColor.swift in Sources */,
+				B9CF32A41B6B046900757E43 /* CVScrollDirection.swift in Sources */,
 				B93E888B1B46067E0030877B /* TodayScheduleCell.swift in Sources */,
 				87B57CD71B509B4400D9B438 /* JobsListCell.swift in Sources */,
 				874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */,
@@ -541,25 +561,25 @@
 				879277011B5868E90023CBA6 /* JobOverviewViewController.swift in Sources */,
 				87B7C1881B69C22800C65C96 /* RepeatingSchedule.swift in Sources */,
 				871307391B630E4B00D96582 /* TimesheetViewController.swift in Sources */,
-				B90FA0671B4320A6004B4D79 /* CVCircleView.swift in Sources */,
 				87B7C1861B69C22800C65C96 /* Job.swift in Sources */,
-				B90FA05B1B4320A6004B4D79 /* CVCalendarMonthContentView.swift in Sources */,
-				B9A0BFF21B5993E200433C96 /* RepeatOnDaysCell.swift in Sources */,
+				B9CF32991B6B046900757E43 /* CVCalendarViewAnimator.swift in Sources */,
 				B9920E691B3B711A0037B44B /* MainTabBarController.swift in Sources */,
+				B9CF32971B6B046900757E43 /* CVCalendarTouchController.swift in Sources */,
+				B9CF32911B6B046900757E43 /* CVCalendarDayViewControlCoordinator.swift in Sources */,
 				005EAD531B52235600F8E970 /* ClockIn_EndedBreakCell.swift in Sources */,
-				B90FA05E1B4320A6004B4D79 /* CVCalendarView.swift in Sources */,
 				870CECC11B4F77C900B30AAE /* AddJobTableViewController.swift in Sources */,
+				B9CF328E1B6B046900757E43 /* CVAuxiliaryView.swift in Sources */,
 				874FACFB1B33A9D7002EABB0 /* SixOhFour.xcdatamodeld in Sources */,
-				B90FA05D1B4320A6004B4D79 /* CVCalendarRenderer.swift in Sources */,
-				B90FA0681B4320A6004B4D79 /* CVDate.swift in Sources */,
-				B90FA0581B4320A6004B4D79 /* CVCalendarDayViewControlCoordinator.swift in Sources */,
+				B9CF32931B6B046900757E43 /* CVCalendarMenuView.swift in Sources */,
+				B9CF32921B6B046900757E43 /* CVCalendarManager.swift in Sources */,
 				87B7C1841B69C22800C65C96 /* Company.swift in Sources */,
-				B90FA0601B4320A6004B4D79 /* CVCalendarViewAnimatorDelegate.swift in Sources */,
+				B9CF329F1B6B046900757E43 /* CVCalendarWeekContentViewController.swift in Sources */,
 				87B7C18A1B69C22800C65C96 /* Reminders.swift in Sources */,
 				0014647C1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift in Sources */,
 				B9BBE8AD1B3BE356004D68DB /* HomeViewController.swift in Sources */,
 				B9920E6B1B3B7A1C0037B44B /* RepeatingScheduleViewController.swift in Sources */,
-				B90FA0651B4320A6004B4D79 /* CVCalendarWeekContentView.swift in Sources */,
+				B9CF328F1B6B046900757E43 /* CVCalendarContentViewController.swift in Sources */,
+				B9CF329B1B6B046900757E43 /* CVCalendarViewAppearance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

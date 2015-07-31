@@ -26,8 +26,13 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     var saveButton: UIBarButtonItem!
     var jobListEmpty = true;
     var reminderMinutes = 16 // Maximum reminder = 15 minutes
-    var addShift: Shift!
     var repeatSettings = RepeatSettings()
+    var schedule: [ScheduledShift]!
+    var startTime: NSDate!
+    var endTime: NSDate!
+    var job: Job!
+    
+    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +42,8 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         saveButton.enabled = false
 
         datePickerChanged(startLabel, datePicker: startDatePicker)
+        startTime = startDatePicker.date
+        endTime = endDatePicker.date
         
         repeatLabel.text = "Never"
         endRepeatLabel.text = "Never"
@@ -45,17 +52,17 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         
-        var request = NSFetchRequest(entityName: "Jobs")
+        var request = NSFetchRequest(entityName: "Job")
         request.returnsObjectsAsFaults = false ;
         
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
         if results.count > 0 {
-            var firstJob = results[0] as! Jobs
-            jobNameLabel.text = firstJob.jobName
+            job = results[0] as! Job
+            jobNameLabel.text = job.company.name
             
             var jc = JobColor()
-            jobColorView.color = jc.getJobColor(firstJob.jobColor)
+            jobColorView.color = jc.getJobColor(job.color.name)
             jobListEmpty = false
         } else {
             jobNameLabel.text = "Add a Job"
@@ -76,7 +83,23 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     // MARK: - Class Functions
     
     func addSchedule() {
-        addShift = Shift(dictionary: ["color": jobColorView.color , "name": "\(jobNameLabel.text!)", "shiftTime": "08:00 AM - 05:00 PM"])
+        let context = self.context
+        let ent = NSEntityDescription.entityForName("ScheduledShift", inManagedObjectContext: context!)
+        let shift = ScheduledShift(entity: ent!, insertIntoManagedObjectContext: context)
+        
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .LongStyle
+        formatter.timeStyle = .NoStyle
+        
+        shift.startDate = formatter.stringFromDate(self.startTime)
+        shift.startTime = self.startTime
+        shift.endTime = self.endTime
+        shift.job = self.job
+        
+        println(shift)
+        context!.save(nil)
+        
         self.performSegueWithIdentifier("unwindAfterSaveSchedule", sender: self)
         
     }
@@ -96,10 +119,11 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         let sourceVC = segue.sourceViewController as! JobsListTableViewController
         
         if sourceVC.selectedJob != nil {
-            jobNameLabel.text = sourceVC.selectedJob.jobName
+            job = sourceVC.selectedJob
+            jobNameLabel.text = sourceVC.selectedJob.company.name
             
             var jc = JobColor()
-            jobColorView.color = jc.getJobColor(sourceVC.selectedJob.jobColor)
+            jobColorView.color = jc.getJobColor(sourceVC.selectedJob.color.name)
         }
     }
     
@@ -132,7 +156,6 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
         
-        
         label.text = dateFormatter.stringFromDate(datePicker.date)
         
         if datePicker == startDatePicker {
@@ -142,6 +165,8 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
             } else {
                 endLabel.text = dateFormatter.stringFromDate(endDatePicker.date)
             }
+            
+            startTime = datePicker.date
         }
         
         if datePicker == endDatePicker {
@@ -149,6 +174,7 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
                 startLabel.text = label.text
                 startDatePicker.date = datePicker.date
             }
+            endTime = datePicker.date
         }
         
         let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
