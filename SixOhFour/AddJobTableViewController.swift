@@ -18,10 +18,10 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     @IBOutlet weak var colorPicker: UIPickerView!
     @IBOutlet weak var jobColorView: JobColorView!
     @IBOutlet weak var saveJobButton: UIBarButtonItem!
-    
-    var payRate = PayRate()
+
     var job: Job!
     var pickerVisible = false
+    var payRate: NSDecimalNumber!
     
     let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
     let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -37,7 +37,17 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     
     @IBAction func unwindFromPayRateTableViewController(segue: UIStoryboardSegue) {
         let sourceVC = segue.sourceViewController as! PayRateTableViewController
-        payRateLabel.text = sourceVC.payRate.payRate
+        payRateLabel.text = "\(sourceVC.payTextField.text)"
+        
+        var str = sourceVC.payTextField.text
+        str = str.stringByReplacingOccurrencesOfString(",", withString: "")
+        str = str.stringByReplacingOccurrencesOfString("$", withString: "")
+        
+        print("str ")
+        println(str)
+        
+        payRate = NSDecimalNumber(string: str)
+        
         tableView.beginUpdates()
         tableView.endUpdates()
     }
@@ -55,13 +65,11 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
             nameTextField.text = job.company.name
             positionTextField.text = job.position
             payRateLabel.text = "\(job.payRate)"
+            
+            payRate = job.payRate
             colorLabel.text = job.color.name
             var jc = JobColor()
             jobColorView.color = jc.getJobColor(colorLabel.text!)
-        }
-        
-        if job != nil {
-        payRate.payRate = "\(job.payRate)"
         }
     }
         
@@ -121,36 +129,30 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         let com = NSEntityDescription.entityForName("Company", inManagedObjectContext: context!)
         let col = NSEntityDescription.entityForName("Color", inManagedObjectContext: context!)
 
-
         let company = Company(entity: com!, insertIntoManagedObjectContext: context)
         let color = Color(entity: col!, insertIntoManagedObjectContext: context)
         let job = Job(entity: ent!, insertIntoManagedObjectContext: context)
         
-        
         company.name = nameTextField.text
         color.name = colorLabel.text!
 
-        
         job.setValue(company, forKey: "company")
         job.position = positionTextField.text
-        job.payRate = NSDecimalNumber(string: payRateLabel.text)
+        job.payRate = payRate
         job.setValue(color, forKey: "color")
 
-        println(job.company.name)
-        println(job.color.name)
-            
-        println(color)
-        print(job)
-        print(company)
         context!.save(nil)
     }
         
     func editItem() {
         job.company.name = nameTextField.text
         job.position = positionTextField.text
-        job.payRate = NSDecimalNumber(string: payRateLabel.text)
+        job.payRate = payRate
         job.color.name = colorLabel.text!
+        
         context!.save(nil)
+        
+        
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -175,7 +177,7 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "payRate" {
             let destinationVC = segue.destinationViewController as! PayRateTableViewController
-            destinationVC.payRate = self.payRate
+            destinationVC.job = self.job
         }
     }
     

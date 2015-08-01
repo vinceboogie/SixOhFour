@@ -1,25 +1,21 @@
 //
-//  TimesheetViewController.swift
+//  TSDetailsViewController.swift
 //  SixOhFour
 //
-//  Created by vinceboogie on 7/24/15.
+//  Created by vinceboogie on 7/30/15.
 //  Copyright (c) 2015 vinceboogie. All rights reserved.
 //
 
 import UIKit
 
-class TimesheetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class TSDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+
     var tableView: UITableView!
     
-    var days: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    var hours: [String] = ["8.0", "8.4", "4.6", "8.3", "8.4", "5.6", "8.5"]
+    var entryType: [String] = ["Clock In", "Start Break", "End Break", "Clock Out"]
+    var timestamps = [Timelog]()
     
-    @IBOutlet weak var regularHoursLabel: UILabel!
-    @IBOutlet weak var overtimeHoursLabel: UILabel!
-    @IBOutlet weak var totalHoursLabel: UILabel!
-    @IBOutlet weak var earningsLabel: UILabel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,15 +27,15 @@ class TimesheetViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.days.count
+        return self.entryType.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TimesheetCell", forIndexPath: indexPath) as! TimesheetCell
         
-        cell.dayLabel.text = self.days[indexPath.row]
-        cell.hoursLabel.text = self.hours[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("DetailsCell", forIndexPath: indexPath) as! DetailsCell
         
+        cell.textLabel?.text = entryType[indexPath.row]
+//        cell.detailTextLabel?.text = timestamps[indexPath.row].time
         return cell
     }
     

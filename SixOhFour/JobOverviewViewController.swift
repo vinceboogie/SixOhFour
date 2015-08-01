@@ -23,9 +23,13 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     
     var editButton: UIBarButtonItem!
     var job: Job!
+    var timelog: Timelog!
+    var workedshift: WorkedShift!
+    var allWorkedShifts = [WorkedShift]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         editButton = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: "editJob")
         self.navigationItem.rightBarButtonItem = editButton
         
@@ -34,11 +38,33 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         nameLabel.text = job.company.name
         positionLabel.text = job.position
         payLabel.text = "$\(job.payRate)/hr"
+        
+        calculateRegHours()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchData() {
+        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        
+        var request = NSFetchRequest(entityName: "WorkedShift")
+        request.returnsObjectsAsFaults = false ;
+        
+        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        
+        allWorkedShifts = results as! [WorkedShift]
+    }
+    
+    func calculateRegHours() {
+        fetchData()
+        
+        println(allWorkedShifts)
+        
+        
     }
     
     func editJob() {

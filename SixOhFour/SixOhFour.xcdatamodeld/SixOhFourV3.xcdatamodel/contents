@@ -56,12 +56,12 @@
     <elements>
         <element name="Color" positionX="-65" positionY="173" width="128" height="88"/>
         <element name="Company" positionX="-119" positionY="-126" width="128" height="73"/>
-        <element name="Job" positionX="-63" positionY="-1" width="128" height="133"/>
+        <element name="Job" positionX="-63" positionY="-1" width="128" height="135"/>
         <element name="Reminders" positionX="-423" positionY="209" width="128" height="133"/>
         <element name="RepeatingSchedule" positionX="-389" positionY="-0" width="128" height="88"/>
         <element name="ScheduledShift" positionX="-216" positionY="-0" width="128" height="103"/>
         <element name="Timelog" positionX="304" positionY="-0" width="128" height="133"/>
-        <element name="UserPreferences" positionX="-272" positionY="212" width="128" height="58"/>
+        <element name="UserPreferences" positionX="-272" positionY="212" width="128" height="60"/>
         <element name="WorkedShift" positionX="124" positionY="5" width="128" height="103"/>
     </elements>
 </model>

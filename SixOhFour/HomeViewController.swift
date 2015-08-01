@@ -67,6 +67,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
         
         cell.jobNameLabel.text = jobsList[indexPath.row].company.name
+        cell.jobPositionLabel.text = jobsList[indexPath.row].position
         
         var jc = JobColor()
         cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)
