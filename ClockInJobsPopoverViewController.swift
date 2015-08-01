@@ -54,15 +54,15 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         self.selectedJobIndex = indexPath.row
+
         self.dismissViewControllerAnimated(true, completion: {})
         
         self.performSegueWithIdentifier("unwindFromClockInPopoverViewControllerIdentifier", sender: self)
-        
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }

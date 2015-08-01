@@ -9,11 +9,13 @@
 import UIKit
 import CoreData
 
-class PayRateTableViewController: UITableViewController {
+class PayRateTableViewController: UITableViewController, UITextFieldDelegate {
     
-    var payRate: PayRate!
     var saveButton: UIBarButtonItem!
     var job: Job!
+    var currentString = ""
+    
+    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     @IBOutlet weak var payTextField: UITextField!
     @IBOutlet weak var toggleOvertime: UISwitch!
@@ -50,13 +52,22 @@ class PayRateTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.payTextField.delegate = self
+        
         saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "savePayRate")
         self.navigationItem.rightBarButtonItem = saveButton
         
         self.title = "Pay Rate"
         
-        payTextField.text = payRate.payRate
-        
+        if job != nil {
+            let unitedStatesLocale = NSLocale(localeIdentifier: "en_US")
+            let pay = job.payRate
+            var numberFormatter = NSNumberFormatter()
+            numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+            numberFormatter.locale = unitedStatesLocale
+            
+            payTextField.text = numberFormatter.stringFromNumber(pay)!
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -78,8 +89,39 @@ class PayRateTableViewController: UITableViewController {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
     
+    //Textfield delegates
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool { // return NO to not change text
+        
+        switch string {
+        case "0","1","2","3","4","5","6","7","8","9":
+            currentString += string
+            formatCurrency(string: currentString)
+        default:
+            var array = Array(string)
+            var currentStringArray = Array(currentString)
+            if array.count == 0 && currentStringArray.count != 0 {
+                currentStringArray.removeLast()
+                currentString = ""
+                for character in currentStringArray {
+                    currentString += String(character)
+                }
+                formatCurrency(string: currentString)
+            }
+        }
+        return false
+    }
+    
+    func formatCurrency(#string: String) {
+        println("format \(string)")
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        var numberFromField = (NSString(string: currentString).doubleValue)/100
+        payTextField.text = formatter.stringFromNumber(numberFromField)
+        println(payTextField.text)
+    }
+    
     func savePayRate() {
-        payRate.payRate = payTextField.text
         self.performSegueWithIdentifier("unwindFromPayRate", sender: self)
     }
 

@@ -286,7 +286,7 @@ class AddScheduleTableViewController: UITableViewController {
             togglePicker("Close")
         }
     }
-    
+
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if !jobListEmpty {
             if startDatePickerHidden && indexPath.section == 1 && indexPath.row == 1 {
@@ -314,6 +314,7 @@ class AddScheduleTableViewController: UITableViewController {
         }
     }
     
+
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -321,7 +322,7 @@ class AddScheduleTableViewController: UITableViewController {
             let destinationVC = segue.destinationViewController as! JobsListTableViewController
             destinationVC.previousSelection = jobNameLabel.text
         }
-        
+
         if segue.identifier == "setRepeat" {
             let destinationVC = segue.destinationViewController as! SetRepeatTableViewController
             
@@ -334,7 +335,6 @@ class AddScheduleTableViewController: UITableViewController {
             
             destinationVC.endRepeat = endRepeatLabel.text
         }
-        
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {

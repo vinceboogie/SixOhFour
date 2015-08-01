@@ -36,6 +36,9 @@
 		87B7C18C1B69C22800C65C96 /* ScheduledShift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B7C18B1B69C22800C65C96 /* ScheduledShift.swift */; };
 		87B7C18E1B69C22800C65C96 /* Timelog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B7C18D1B69C22800C65C96 /* Timelog.swift */; };
 		87B7C1901B69C91D00C65C96 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B7C18F1B69C91D00C65C96 /* Color.swift */; };
+		87EAE1331B6B05D000EBEF78 /* TimesheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EAE1321B6B05D000EBEF78 /* TimesheetCell.swift */; };
+		87EAE1351B6B15C000EBEF78 /* TSDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EAE1341B6B15C000EBEF78 /* TSDetailsViewController.swift */; };
+		87EAE1371B6B18FA00EBEF78 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EAE1361B6B18FA00EBEF78 /* DetailsCell.swift */; };
 		87F4B3781B57411C001B9526 /* JobColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F4B3771B57411C001B9526 /* JobColor.swift */; };
 		B936D63F1B607674009777A7 /* EndRepeatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B936D63E1B607674009777A7 /* EndRepeatTableViewController.swift */; };
 		B93E88891B45FFA00030877B /* JobColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E88881B45FFA00030877B /* JobColorView.swift */; };
@@ -125,6 +128,9 @@
 		87B7C18B1B69C22800C65C96 /* ScheduledShift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduledShift.swift; path = ../ScheduledShift.swift; sourceTree = "<group>"; };
 		87B7C18D1B69C22800C65C96 /* Timelog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timelog.swift; path = ../Timelog.swift; sourceTree = "<group>"; };
 		87B7C18F1B69C91D00C65C96 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = ../Color.swift; sourceTree = "<group>"; };
+		87EAE1321B6B05D000EBEF78 /* TimesheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesheetCell.swift; sourceTree = "<group>"; };
+		87EAE1341B6B15C000EBEF78 /* TSDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSDetailsViewController.swift; sourceTree = "<group>"; };
+		87EAE1361B6B18FA00EBEF78 /* DetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
 		87F4B3771B57411C001B9526 /* JobColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobColor.swift; sourceTree = "<group>"; };
 		B936D63E1B607674009777A7 /* EndRepeatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndRepeatTableViewController.swift; sourceTree = "<group>"; };
 		B93E88881B45FFA00030877B /* JobColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobColorView.swift; sourceTree = "<group>"; };
@@ -309,6 +315,8 @@
 			children = (
 				B93E88881B45FFA00030877B /* JobColorView.swift */,
 				87B57CD61B509B4400D9B438 /* JobsListCell.swift */,
+				87EAE1321B6B05D000EBEF78 /* TimesheetCell.swift */,
+				87EAE1361B6B18FA00EBEF78 /* DetailsCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 				B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */,
 				879277001B5868E90023CBA6 /* JobOverviewViewController.swift */,
 				871307381B630E4B00D96582 /* TimesheetViewController.swift */,
+				87EAE1341B6B15C000EBEF78 /* TSDetailsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -523,6 +532,7 @@
 				B9CF329C1B6B046900757E43 /* CVCalendarViewAppearanceDelegate.swift in Sources */,
 				87238A4E1B3E300A004D44CA /* CalendarViewController.swift in Sources */,
 				87B7C18C1B69C22800C65C96 /* ScheduledShift.swift in Sources */,
+				87EAE1351B6B15C000EBEF78 /* TSDetailsViewController.swift in Sources */,
 				87B7C1901B69C91D00C65C96 /* Color.swift in Sources */,
 				B9CF32A11B6B046900757E43 /* CVCalendarWeekView.swift in Sources */,
 				B9CF32951B6B046900757E43 /* CVCalendarMonthContentViewController.swift in Sources */,
@@ -540,6 +550,8 @@
 				B9CF32961B6B046900757E43 /* CVCalendarMonthView.swift in Sources */,
 				B936D63F1B607674009777A7 /* EndRepeatTableViewController.swift in Sources */,
 				B9CF329E1B6B046900757E43 /* CVCalendarViewPresentationMode.swift in Sources */,
+				87EAE1371B6B18FA00EBEF78 /* DetailsCell.swift in Sources */,
+				87EAE1331B6B05D000EBEF78 /* TimesheetCell.swift in Sources */,
 				87238A501B3E3212004D44CA /* ClockInViewController.swift in Sources */,
 				B9CF32A61B6B046900757E43 /* CVSet.swift in Sources */,
 				B9CF32A51B6B046900757E43 /* CVSelectionType.swift in Sources */,

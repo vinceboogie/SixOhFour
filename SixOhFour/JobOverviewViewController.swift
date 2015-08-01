@@ -23,22 +23,52 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     
     var editButton: UIBarButtonItem!
     var job: Job!
+    var timelog: Timelog!
+    var workedshift: WorkedShift!
+    var allWorkedShifts = [WorkedShift]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         editButton = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: "editJob")
         self.navigationItem.rightBarButtonItem = editButton
         
         self.title = job.company.name
         
+        let unitedStatesLocale = NSLocale(localeIdentifier: "en_US")
+        let pay = job.payRate
+        var numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        numberFormatter.locale = unitedStatesLocale
+        
         nameLabel.text = job.company.name
         positionLabel.text = job.position
-        payLabel.text = "$\(job.payRate)/hr"
+        payLabel.text = "\(numberFormatter.stringFromNumber(pay)!)/hr"
+        
+        calculateRegHours()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchData() {
+        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        
+        var request = NSFetchRequest(entityName: "WorkedShift")
+        request.returnsObjectsAsFaults = false ;
+        
+        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        
+        allWorkedShifts = results as! [WorkedShift]
+    }
+    
+    func calculateRegHours() {
+        fetchData()
+        
+        println(allWorkedShifts) 
     }
     
     func editJob() {
@@ -48,6 +78,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editJob" {
             let destinationVC = segue.destinationViewController as! AddJobTableViewController
+            destinationVC.navigationItem.title = "Edit Job"
             destinationVC.job = self.job
         }
     }

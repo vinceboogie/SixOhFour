@@ -16,6 +16,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var job: Job!
     var jobsList = [Job]()
     
+    lazy var managedObjectContext : NSManagedObjectContext? = {
+        let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if let managedContext : NSManagedObjectContext? = appDelegate.managedObjectContext {
+            return managedContext
+        } else {
+            return nil
+        }
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,11 +59,33 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
+        if editingStyle == .Delete {
+            managedObjectContext?.deleteObject(jobsList[indexPath.row] as Job)
+            
+//            let alert : UIAlertController = UIAlertController(title: "Warning", message: "Deleting this job will also delete all associated time logs!", preferredStyle: UIAlertControllerStyle.Alert)
+//            
+//            let deleteAction : UIAlertAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
+//                self.tableView.reloadData()
+//            }
+//            
+//            let cancelAction : UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
+//            }
+//            
+//            alert.addAction(deleteAction)
+//            alert.addAction(cancelAction)
+//            
+//            presentViewController(alert, animated: true, completion: nil)
+            
+            var error: NSError? = nil
+            if !managedObjectContext!.save(&error) {
+                println("Failed to delete the item \(error), \(error?.userInfo)")
+            } else {
+                jobsList.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            }
         }
     }
-    
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -67,6 +98,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
         
         cell.jobNameLabel.text = jobsList[indexPath.row].company.name
+        cell.jobPositionLabel.text = jobsList[indexPath.row].position
         
         var jc = JobColor()
         cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)

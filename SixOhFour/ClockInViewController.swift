@@ -6,17 +6,20 @@
 //  Copyright (c) 2015 vinceboogie. All rights reserved.
 //
 
+
 import UIKit
 import CoreData
 
+
 class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, NSFetchedResultsControllerDelegate {
     
-    @IBOutlet weak var saveOption: UILabel!
+
     @IBOutlet weak var workTitleLabel: UILabel!
     @IBOutlet weak var workTimeLabel: UILabel!
     @IBOutlet weak var breakTitleLabel: UILabel!
     @IBOutlet weak var breakTimeLabel: UILabel!
     @IBOutlet weak var editBreakInstruction: UILabel!
+    
     
     @IBOutlet weak var jobColorDisplay: JobColorView!
     @IBOutlet weak var jobTitleDisplayButton: UIButton!
@@ -26,9 +29,14 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var breakButton: UIButton!
     @IBOutlet weak var editBreakButton: UIButton!
     
+    
     var timer = NSTimer()
     
+    var minutes: Int = 0
+    var seconds: Int = 0
+    var hours: Int = 0
     
+        
     var breakTimer = NSTimer()
     var breakMinutes: Int = 0
     var breakSeconds: Int = 0
@@ -79,6 +87,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.lapsTableView.rowHeight = 30.0
         workTitleLabel.text = " "
@@ -181,10 +190,10 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             flow = "onTheClock"
             
             workTitleLabel.text = "Time you've worked"
-            
+
             startStopButton.setTitle("Clock Out", forState: UIControlState.Normal)
             breakButton.setTitle("Start Break", forState: UIControlState.Normal)
-            
+
             breakButton.enabled = true
             
             timelogDescription.append("Clocked In")
@@ -220,7 +229,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    
+
     
     @IBAction func lapReset(sender: AnyObject) {
         
@@ -233,6 +242,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             editBreakInstruction.hidden = false
             editBreakButton.enabled = true
             
+
             breakReset ()
             
             
@@ -249,7 +259,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             breakTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("runBreakTimer"), userInfo: nil, repeats: true)
             
             timer.invalidate()
-            
+
             startStopButton.enabled = false
             breakButton.setTitle("End Break", forState: UIControlState.Normal)
             
@@ -280,9 +290,10 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             breakTimer.invalidate()
             
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("runAndUpdateWorkTimer"), userInfo: nil, repeats: true)
-            
+
             startStopButton.enabled = true
             breakButton.setTitle("Start Break", forState: UIControlState.Normal)
+            
             
             if breakCount == 1 {
                 timelogDescription.append("Ended Break")
@@ -301,7 +312,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             startStopButton.setTitle("Clock In", forState: UIControlState.Normal)
             breakButton.setTitle("Start Break", forState: UIControlState.Normal)
-            breakButton.enabled = false
             
             saveWorkedShiftToJob()
             
@@ -414,6 +424,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         arrayOfJobs = results as! [Job]
         
         currentWorkedShift.job = arrayOfJobs[0]
+
         
     }
     
@@ -514,6 +525,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         let minutesStringBreak = breakMinutes > 9 ? "\(breakMinutes)" : "0\(breakMinutes)"
         let hoursStringBreak = breakHours > 9 ? "\(breakHours)" : "0\(breakHours)"
         
+
         breakWatchString  = "\(hoursStringBreak):\(minutesStringBreak):\(secondsStringBreak)"
         breakTimeLabel.text = breakWatchString
         
@@ -533,6 +545,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             
         }
     }
+    
+    
     
     //redundant code - need to combine both timers
     func runBreakTimerOver() {
@@ -563,7 +577,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         breakWatchString  = "\(breakHoursString):\(breakMinutesString):\(breakSecondsString)"
         breakTimeLabel.text = breakWatchString
-        
     }
     
     func displayBreaktime () {
@@ -585,11 +598,13 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    
     func breakReset () {
         breakMinutes = breakMinutesSet
         breakSeconds = breakSecondsSet
         breakHours = breakHoursSet
     }
+    
     
     func notifyBreakOver() {
         //Notifications outside the App (Home screen and Lock Screen)
@@ -641,9 +656,10 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.detailTextLabel!.text = NSDateFormatter.localizedStringFromDate( (timelogsList[indexPath.row].time) , dateStyle: .MediumStyle, timeStyle: .MediumStyle)
         
         return cell
+
         
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timelogTimestamp.count
     }
@@ -778,8 +794,10 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         timelogTimestamp[selectedRowIndex] = sourceVC.nItem.time
     }
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     
