@@ -59,12 +59,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @IBAction func unwindAfterSaveSchedule(segue: UIStoryboardSegue) {
-        let sourceVC = segue.sourceViewController as! AddScheduleTableViewController
-        
-//        if((sourceVC.addShift) != nil) {
-//            schedule.append(sourceVC.addShift)
-//            tableView.reloadData()
-//        }
+
     }
     
     
@@ -128,7 +123,6 @@ extension CalendarViewController: CVCalendarViewDelegate {
             }
         }
         
-        // Fetch Jobs - should look into changing later
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         
@@ -137,8 +131,6 @@ extension CalendarViewController: CVCalendarViewDelegate {
         
         var startDay = dayView.date.currentDay
         
-        println(startDay)
-        
         let predicate = NSPredicate(format: "startDate == %@", startDay)
         
         request.predicate = predicate
@@ -146,8 +138,6 @@ extension CalendarViewController: CVCalendarViewDelegate {
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
         schedule = results as! [ScheduledShift]
-        
-        println(schedule.count)
         
         tableView.reloadData()
     }
@@ -198,11 +188,45 @@ extension CalendarViewController: CVCalendarViewDelegate {
     }
     
     func dotMarker(shouldShowOnDayView dayView: CVCalendarDayView) -> Bool {
-        let day = dayView.date.day
-        let randomDay = Int(arc4random_uniform(31))
-        if day == randomDay {
-            return true
+        
+        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        
+        var request = NSFetchRequest(entityName: "ScheduledShift")
+        request.returnsObjectsAsFaults = false;
+        
+        var currentMonth = dayView.date.currentMonth
+        
+        let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
+
+        request.predicate = predicate
+        
+        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        
+        schedule = results as! [ScheduledShift]
+        
+        let day = dayView.date.currentDay
+
+        for s in schedule {
+            if s.startDate == day {
+                println("startdate:  \(s.startDate)")
+                println("day: \(day)")
+                return true
+            } else {
+                return false
+            }
         }
+        
+        var timelog = Timelog()
+        timelog.t
+        
+        println("new iteration")
+        
+//        let day = dayView.date.day
+//        let randomDay = Int(arc4random_uniform(31))
+//        if day == randomDay {
+//            return true
+//        }
         
         return false
     }
@@ -215,8 +239,9 @@ extension CalendarViewController: CVCalendarViewDelegate {
         let blue = CGFloat(arc4random_uniform(600) / 255)
         
         let color = UIColor(red: red, green: green, blue: blue, alpha: 1)
-        
-        let numberOfDots = Int(arc4random_uniform(3) + 1)
+
+        let numberOfDots = 1
+//        let numberOfDots = Int(arc4random_uniform(3) + 1)
         switch(numberOfDots) {
         case 2:
             return [color, color]

@@ -130,13 +130,8 @@ class AddScheduleTableViewController: UITableViewController, UIPickerViewDataSou
     @IBAction func unwindFromSetRepeatTableViewController(segue: UIStoryboardSegue) {
         let sourceVC = segue.sourceViewController as! SetRepeatTableViewController
         
-        if sourceVC.repeatSettings.enabled {
-            repeatLabel.text = "Yes"
-        } else {
-            repeatLabel.text = "Never"
-        }
-        
         self.repeatSettings = sourceVC.repeatSettings
+        repeatLabel.text = repeatSettings.type
 
         
         tableView.beginUpdates()
