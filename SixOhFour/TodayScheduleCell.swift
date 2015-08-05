@@ -16,8 +16,7 @@ class TodayScheduleCell: UITableViewCell {
     
     var shift: ScheduledShift! {
         didSet {
-            var jc = JobColor()
-            jobColorView.color = jc.getJobColor(shift.job.color.name)
+            jobColorView.color = shift.job.color.getColor
             
             jobNameLabel.text = shift.job.company.name
             
@@ -26,11 +25,6 @@ class TodayScheduleCell: UITableViewCell {
             formatter.timeStyle = .ShortStyle
             
             shiftTimeLabel.text = "\(formatter.stringFromDate(shift.startTime)) - \(formatter.stringFromDate(shift.endTime))"
-            
-            
-            println(shift.job.color.name)
-            println(shift.job.company.name)
-            println(shiftTimeLabel.text)
         }
     }
     

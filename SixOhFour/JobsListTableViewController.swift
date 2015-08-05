@@ -54,8 +54,7 @@ class JobsListTableViewController: UITableViewController {
         
         cell.jobNameLabel.text = jobsList[indexPath.row].company.name
         
-        var jc = JobColor()
-        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)
+        cell.jobColorView.color = jobsList[indexPath.row].color.getColor
         
         if cell.jobNameLabel.text == previousSelection {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark

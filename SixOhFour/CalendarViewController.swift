@@ -35,7 +35,6 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         tableView.dataSource = self
         
-        
         schedule = [ScheduledShift]()
     }
     
@@ -59,7 +58,10 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @IBAction func unwindAfterSaveSchedule(segue: UIStoryboardSegue) {
-
+        
+        // TODO: Delete later. Test for add schedule dot update bug
+        calendarView.setNeedsDisplay()
+        calendarView.commitCalendarViewUpdate()
     }
     
     
@@ -77,6 +79,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("TodayScheduleCell", forIndexPath: indexPath) as! TodayScheduleCell
         
         cell.shift = schedule[indexPath.row]
+        
         cell.jobColorView.setNeedsDisplay()
         
         return cell
@@ -139,6 +142,7 @@ extension CalendarViewController: CVCalendarViewDelegate {
         
         schedule = results as! [ScheduledShift]
         
+        calendarView.setNeedsDisplay()
         tableView.reloadData()
     }
     
@@ -203,53 +207,74 @@ extension CalendarViewController: CVCalendarViewDelegate {
         
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
-        schedule = results as! [ScheduledShift]
+        var todaySchedule = results as! [ScheduledShift]
         
         let day = dayView.date.currentDay
-
-        for s in schedule {
-            if s.startDate == day {
-                println("startdate:  \(s.startDate)")
-                println("day: \(day)")
-                return true
-            } else {
-                return false
+        var shouldShowDot = false
+        
+        for s in todaySchedule {
+            if day == s.startDate {
+                shouldShowDot = true
             }
         }
         
-        var timelog = Timelog()
-        timelog.t
-        
-        println("new iteration")
-        
-//        let day = dayView.date.day
-//        let randomDay = Int(arc4random_uniform(31))
-//        if day == randomDay {
-//            return true
-//        }
-        
-        return false
+        return shouldShowDot
     }
     
     func dotMarker(colorOnDayView dayView: CVCalendarDayView) -> [UIColor] {
-        let day = dayView.date.day
         
-        let red = CGFloat(arc4random_uniform(600) / 255)
-        let green = CGFloat(arc4random_uniform(600) / 255)
-        let blue = CGFloat(arc4random_uniform(600) / 255)
+        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
         
-        let color = UIColor(red: red, green: green, blue: blue, alpha: 1)
-
-        let numberOfDots = 1
-//        let numberOfDots = Int(arc4random_uniform(3) + 1)
-        switch(numberOfDots) {
-        case 2:
-            return [color, color]
-        case 3:
-            return [color, color, color]
-        default:
-            return [color] // return 1 dot
+        var request = NSFetchRequest(entityName: "ScheduledShift")
+        request.returnsObjectsAsFaults = false;
+        
+        var currentMonth = dayView.date.currentMonth
+        
+        let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
+        
+        request.predicate = predicate
+        
+        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        
+        var todaySchedule = results as! [ScheduledShift]
+        
+        let day = dayView.date.currentDay
+        var color = UIColor.blackColor()
+        var numberOfDots = 0
+        var colors = [UIColor]()
+        
+        for s in todaySchedule {
+            if day == s.startDate {
+                color = s.job.color.getColor
+                numberOfDots++
+                colors.append(color)
+            }
         }
+        
+        return colors
+        
+        // TODO: Update the color and number of dots based on the real schedule
+        
+//
+//        if numberOfDots == 2 {
+//            return [color, color]
+//        } else if numberOfDots >= 3 {
+//            return [color, color, color]
+//        } else {
+//            return [color]
+//        }
+//
+//        switch(numberOfDots) {
+//        case 1:
+//            return [color]
+//        case 2:
+//            return [color, color]
+//        case 3:
+//            return [color, color, color]
+//        default:
+//            return [color] // return 1 dot
+//        }
     }
     
     func dotMarker(shouldMoveOnHighlightingOnDayView dayView: CVCalendarDayView) -> Bool {
