@@ -26,7 +26,8 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     var schedule: [ScheduledShift]!
     
     let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
+    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,9 +60,6 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func unwindAfterSaveSchedule(segue: UIStoryboardSegue) {
         
-        // TODO: Delete later. Test for add schedule dot update bug
-        calendarView.setNeedsDisplay()
-        calendarView.commitCalendarViewUpdate()
     }
     
     
@@ -83,6 +81,24 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.jobColorView.setNeedsDisplay()
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == .Delete) {
+            tableView.beginUpdates()
+            let shiftToDelete = schedule[indexPath.row]
+            schedule.removeAtIndex(indexPath.row)
+            
+            context?.deleteObject(shiftToDelete)
+            context!.save(nil)
+
+            tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: .Automatic)
+            tableView.endUpdates()
+        }
     }
     
 
@@ -126,9 +142,6 @@ extension CalendarViewController: CVCalendarViewDelegate {
             }
         }
         
-        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
-        
         var request = NSFetchRequest(entityName: "ScheduledShift")
         request.returnsObjectsAsFaults = false;
         
@@ -138,11 +151,18 @@ extension CalendarViewController: CVCalendarViewDelegate {
         
         request.predicate = predicate
         
-        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        var results:NSArray = context!.executeFetchRequest(request, error: nil)!
         
         schedule = results as! [ScheduledShift]
         
-        calendarView.setNeedsDisplay()
+        
+        // TODO: Testing dotmarker bug. Delete later
+        for d in dayView.dotMarkers {
+            d?.setNeedsDisplay()
+        }
+        
+            
+            
         tableView.reloadData()
     }
     
@@ -193,9 +213,6 @@ extension CalendarViewController: CVCalendarViewDelegate {
     
     func dotMarker(shouldShowOnDayView dayView: CVCalendarDayView) -> Bool {
         
-        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
-        
         var request = NSFetchRequest(entityName: "ScheduledShift")
         request.returnsObjectsAsFaults = false;
         
@@ -205,7 +222,7 @@ extension CalendarViewController: CVCalendarViewDelegate {
 
         request.predicate = predicate
         
-        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        var results:NSArray = context!.executeFetchRequest(request, error: nil)!
         
         var todaySchedule = results as! [ScheduledShift]
         
@@ -222,10 +239,7 @@ extension CalendarViewController: CVCalendarViewDelegate {
     }
     
     func dotMarker(colorOnDayView dayView: CVCalendarDayView) -> [UIColor] {
-        
-        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
-        
+                
         var request = NSFetchRequest(entityName: "ScheduledShift")
         request.returnsObjectsAsFaults = false;
         
@@ -235,7 +249,7 @@ extension CalendarViewController: CVCalendarViewDelegate {
         
         request.predicate = predicate
         
-        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        var results:NSArray = context!.executeFetchRequest(request, error: nil)!
         
         var todaySchedule = results as! [ScheduledShift]
         
@@ -243,12 +257,14 @@ extension CalendarViewController: CVCalendarViewDelegate {
         var color = UIColor.blackColor()
         var numberOfDots = 0
         var colors = [UIColor]()
+        var test = [String]()
         
         for s in todaySchedule {
             if day == s.startDate {
                 color = s.job.color.getColor
                 numberOfDots++
                 colors.append(color)
+                test.append(s.job.color.name)
             }
         }
         
