@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        navigationBarAppearace.barTintColor = UIColor.grayColor()  // Bar's background color
 //        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
-        
         return true
     }
 

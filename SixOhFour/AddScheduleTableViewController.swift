@@ -79,6 +79,7 @@ class AddScheduleTableViewController: UITableViewController {
             datePickerChanged(startLabel, datePicker: startDatePicker)
 
         }
+        
         // Reminder Picker
         self.reminderPicker.dataSource = self
         self.reminderPicker.delegate = self
@@ -93,6 +94,14 @@ class AddScheduleTableViewController: UITableViewController {
     // MARK: - Class Functions
     
     func saveSchedule() {
+        
+//        // TODO: Validate Shift
+//        let alertController = UIAlertController(title: "Schedule Conflict", message:
+//            "Shift already exists", preferredStyle: UIAlertControllerStyle.Alert)
+//        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+//        
+//        self.presentViewController(alertController, animated: true, completion: nil)
+        
         if isNewSchedule {
             addSchedule()
         } else {
@@ -100,18 +109,51 @@ class AddScheduleTableViewController: UITableViewController {
         }
     }
     
+    // TODO: Validate Shift
+    
+//    func validateShift(shift: ScheduledShift) {
+//        let startPredicate = NSPredicate(format: "startTime >= %@ AND %@ <= endTime", shift.startTime, shift.startTime)
+//        let endPredicate = NSPredicate(format: "startTime >= %@ AND %@ <= endTime", shift.endTime, shift.endTime)
+//        
+//        let sortDescriptor = NSSortDescriptor(key: "startTime", ascending: true)
+//        let sortDescriptors = [sortDescriptor]
+//        
+//        let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [startPredicate, endPredicate])
+//
+//        let results = dataManager.fetch("ScheduledShift", predicate: predicate, sortDescriptors: sortDescriptors)
+//        
+//        if results.count == 0 {
+//            println("no conflicts")
+//        } else {
+//            println(shift.startTime)
+//            println(shift.endTime)
+//            println()
+//            
+//            var shifts = results as! [ScheduledShift]
+//            
+//            for s in shifts {
+//                println("conflicts with")
+//                println(s.startTime)
+//                println(s.endTime)
+//            }
+//        }
+//        
+//    }
+    
     func addSchedule() {
         
-        let shift = dataManager.addItem("ScheduledShift") as! ScheduledShift
+        let newShift = dataManager.addItem("ScheduledShift") as! ScheduledShift
         
         let formatter = NSDateFormatter()
         formatter.dateStyle = .LongStyle
         formatter.timeStyle = .NoStyle
         
-        shift.startDate = formatter.stringFromDate(self.startTime)
-        shift.startTime = self.startTime
-        shift.endTime = self.endTime
-        shift.job = self.job
+        newShift.startDate = formatter.stringFromDate(self.startTime)
+        newShift.startTime = self.startTime
+        newShift.endTime = self.endTime
+        newShift.job = self.job
+        
+//        validateShift(newShift)
         
         dataManager.save()
         
@@ -131,12 +173,13 @@ class AddScheduleTableViewController: UITableViewController {
         editShift.endTime = self.endTime
         editShift.job = self.job
         
+//        validateShift(editShift)
+        
         dataManager.save()
         
         self.performSegueWithIdentifier("unwindAfterSaveSchedule", sender: self)
-
     }
-    
+
     
     // MARK: - SetIB Actions
     
@@ -329,6 +372,17 @@ extension AddScheduleTableViewController: UIPickerViewDataSource, UIPickerViewDe
                 endLabel.text = label.text
                 endDatePicker.date = datePicker.date
             } else {
+                let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                
+                let dateComponents = NSDateComponents()
+                dateComponents.day = 1
+                
+                let maxDate = calendar.dateByAddingComponents(dateComponents, toDate: datePicker.date, options: nil)
+                
+                if maxDate!.compare(endDatePicker.date) == NSComparisonResult.OrderedAscending {
+                    endDatePicker.date = maxDate!
+                }
+                
                 endLabel.text = dateFormatter.stringFromDate(endDatePicker.date)
             }
             
@@ -340,6 +394,20 @@ extension AddScheduleTableViewController: UIPickerViewDataSource, UIPickerViewDe
             if datePicker.date.compare(startDatePicker.date) == NSComparisonResult.OrderedAscending {
                 startLabel.text = label.text
                 startDatePicker.date = datePicker.date
+            } else {
+                let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                
+                let dateComponents = NSDateComponents()
+                dateComponents.day = -1
+                
+                let minDate = calendar.dateByAddingComponents(dateComponents, toDate: datePicker.date, options: nil)
+                
+                if minDate!.compare(startDatePicker.date) == NSComparisonResult.OrderedDescending {
+                    startDatePicker.date = minDate!
+                }
+                
+                startLabel.text = dateFormatter.stringFromDate(startDatePicker.date)
+
             }
             endTime = datePicker.date
             startTime = startDatePicker.date

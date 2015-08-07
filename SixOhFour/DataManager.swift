@@ -32,6 +32,18 @@ class DataManager {
         return results
     }
     
+    func fetch(entityName: String, predicate: NSPredicate, sortDescriptors: [NSSortDescriptor]) -> NSArray {
+        var request = NSFetchRequest(entityName: entityName)
+        
+        request.returnsObjectsAsFaults = false;
+        request.predicate = predicate
+        request.sortDescriptors = sortDescriptors
+        
+        var results:NSArray = context!.executeFetchRequest(request, error: nil)!
+        
+        return results
+    }
+    
     func delete(objectToDelete: NSManagedObject) {
         context?.deleteObject(objectToDelete)
         save()
@@ -44,24 +56,12 @@ class DataManager {
         return object
     }
     
-//    func editItem(item: NSManagedObject, oldItem: NSManagedObject, entityName: String) -> AnyObject {
-//        let predicate = NSPredicate(format: "objectId == %@", oldItem.objectID)
-//        
-//        var result = fetch(entityName, predicate: predicate)
-//        
-//        let item: AnyObject = result[0]
-//        
-//        item.
-//        return item
-//    }
-    
     func editItem(entity: NSManagedObject, entityName: String) -> NSManagedObject {
         let predicate = NSPredicate(format: "SELF == %@", entity)
         let result = fetch(entityName, predicate: predicate)
         
         return result[0] as! NSManagedObject
     }
-    
     
     func save() {
         context!.save(nil)

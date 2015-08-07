@@ -48,7 +48,10 @@ class CalendarViewController: UIViewController {
         super.viewWillAppear(true)
         
         let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
-        monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate) as! [ScheduledShift]
+        let sortDescriptor = NSSortDescriptor(key: "startTime", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+
+        monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate, sortDescriptors: sortDescriptors) as! [ScheduledShift]
         
     }
     
