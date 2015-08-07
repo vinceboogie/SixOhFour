@@ -8,19 +8,22 @@
 
 import UIKit
 
-class SetRepeatTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class SetRepeatTableViewController: UITableViewController {
 
     @IBOutlet weak var repeatPicker: UIPickerView!
     @IBOutlet weak var frequencyPicker: UIPickerView!
     @IBOutlet weak var repeatLabel: UILabel!
     @IBOutlet weak var frequencyLabel: UILabel!
     @IBOutlet var collectionView: [UICollectionView]!
-
-    let weekdaysArray = ["S", "M", "T", "W", "T", "F", "S"]
-    let repeatTypes = ["Never", "Weekly", "Monthly"]
     
     var doneButton: UIBarButtonItem!
     var repeatSettings: RepeatSettings!
+    
+    var repeatPickerHidden = true
+    var frequencyPickerHidden = true
+
+    let weekdaysArray = ["S", "M", "T", "W", "T", "F", "S"]
+    let repeatTypes = ["Never", "Weekly", "Monthly"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +84,69 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
         self.performSegueWithIdentifier("unwindAfterSetRepeat", sender: self)
     }
     
-    // MARK: - Repeat Picker
+    func togglePicker(picker: String) {
+        switch(picker) {
+        case "repeatPicker":
+            repeatPickerHidden = !repeatPickerHidden
+            frequencyPickerHidden = true
+        case "frequencyPicker":
+            frequencyPickerHidden = !frequencyPickerHidden
+            repeatPickerHidden = true
+        default:
+            repeatPickerHidden = true
+            frequencyPickerHidden = true
+        }
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    
+    // MARK: - Table view data source
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 4
+        } else {
+            return repeatSettings.weeksToRepeat + 1 // Add 1 to account for the first cell containing the label
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            togglePicker("repeatPicker")
+        } else if indexPath.section == 0 && indexPath.row == 2 {
+            togglePicker("frequencyPicker")
+        } else {
+            togglePicker("close")
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if repeatPickerHidden && indexPath.section == 0 && indexPath.row == 1 {
+            return 0
+        }
+        
+        if frequencyPickerHidden && indexPath.section == 0 && indexPath.row == 3 {
+            return 0
+        }
+        
+        if repeatSettings.type == "Never" && indexPath.section == 0 && indexPath.row == 2 {
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+    }
+}
+
+
+// MARK: - Picker View Data Source and Delegate
+
+extension SetRepeatTableViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         switch(pickerView) {
@@ -153,118 +218,58 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
             setFrequencyLabelText(row+1)
             repeatSettings.frequency = row+1
         default: ()
+            
         }
         
         frequencyPicker.reloadAllComponents()
-    
         
         
-//        var previous = repeatSettings.weeksToRepeat
-//        var current = row + 1
-//
-//        repeatSettings.weeksToRepeat = current
-//
-//        
-//        println(previous)
-//        println(current)
-//        
-//        if current > previous {
-//            for x in previous...row {
-//                for y in 0...6 {
-//                    repeatSettings.selectedDaysArray[x][y] = repeatSettings.selectedDaysArray[x-1][y]
-//                }
-//                collectionView[x].reloadData()
-//            }
-//        }
-//        
-//                // Test
-//                for x in 0...4 {
-//                    for y in 0...6 {
-//                        print(repeatSettings.selectedDaysArray[x][y])
-//                        print("\t")
-//                    }
-//                    println("")
-//                }
-//                println("")
-//        
-//        // Reset the selected days for weeks not displayed
-//        if repeatSettings.weeksToRepeat < 5 {
-//            for x in repeatSettings.weeksToRepeat...4 {
-//                for y in 0...6 {
-//                    repeatSettings.selectedDaysArray[x][y] = false
-//                }
-//            }
-//        }
+        //        // TODO: Implement weekly and monthly view
+        //        var previous = repeatSettings.weeksToRepeat
+        //        var current = row + 1
+        //
+        //        repeatSettings.weeksToRepeat = current
+        //
+        //
+        //        println(previous)
+        //        println(current)
+        //
+        //        if current > previous {
+        //            for x in previous...row {
+        //                for y in 0...6 {
+        //                    repeatSettings.selectedDaysArray[x][y] = repeatSettings.selectedDaysArray[x-1][y]
+        //                }
+        //                collectionView[x].reloadData()
+        //            }
+        //        }
+        //
+        //                // Test
+        //                for x in 0...4 {
+        //                    for y in 0...6 {
+        //                        print(repeatSettings.selectedDaysArray[x][y])
+        //                        print("\t")
+        //                    }
+        //                    println("")
+        //                }
+        //                println("")
+        //
+        //        // Reset the selected days for weeks not displayed
+        //        if repeatSettings.weeksToRepeat < 5 {
+        //            for x in repeatSettings.weeksToRepeat...4 {
+        //                for y in 0...6 {
+        //                    repeatSettings.selectedDaysArray[x][y] = false
+        //                }
+        //            }
+        //        }
         
         tableView.reloadData()
     }
-        
-    
-    // MARK: - Table view data source
+}
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 4
-        } else {
-            return repeatSettings.weeksToRepeat + 1 // Add 1 to account for the first cell containing the label
-        }
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 && indexPath.row == 0 {
-            togglePicker("repeatPicker")
-        } else if indexPath.section == 0 && indexPath.row == 2 {
-            togglePicker("frequencyPicker")
-        } else {
-            togglePicker("close")
-        }
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        if repeatPickerHidden && indexPath.section == 0 && indexPath.row == 1 {
-            return 0
-        }
-        
-        if frequencyPickerHidden && indexPath.section == 0 && indexPath.row == 3 {
-            return 0
-        }
-        
-        if repeatSettings.type == "Never" && indexPath.section == 0 && indexPath.row == 2 {
-            return 0
-        }
-        
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        
-    }
-    
-    var repeatPickerHidden = true
-    var frequencyPickerHidden = true
-    
-    func togglePicker(picker: String) {
-        switch(picker) {
-        case "repeatPicker":
-            repeatPickerHidden = !repeatPickerHidden
-            frequencyPickerHidden = true
-        case "frequencyPicker":
-            frequencyPickerHidden = !frequencyPickerHidden
-            repeatPickerHidden = true
-        default:
-            repeatPickerHidden = true
-            frequencyPickerHidden = true
-        }
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        
-    }
-    
-    // MARK: - Collection View Data Source and Delegate
-    
+// MARK: - Collection View Data Source and Delegate
+
+extension SetRepeatTableViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return weekdaysArray.count
     }
@@ -296,7 +301,7 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
         if repeatSettings.selectedDaysArray[weekIndex][indexPath.row] == false{
             cell.backgroundColor = .colorFromCode(0x1D62F0)
             cell.dayLabel.textColor = UIColor.whiteColor()
-
+            
             repeatSettings.selectedDaysArray[weekIndex][indexPath.row] = true
         } else {
             cell.backgroundColor = UIColor.whiteColor()
@@ -304,26 +309,6 @@ class SetRepeatTableViewController: UITableViewController, UICollectionViewDataS
             
             repeatSettings.selectedDaysArray[weekIndex][indexPath.row] = false
         }
-        
-//        // Test
-//        for x in 0...4 {
-//            for y in 0...6 {
-//                print(repeatSettings.selectedDaysArray[x][y])
-//                print("\t")
-//            }
-//            println("")
-//        }
-//        println("")
-
     }
-    
-    // MARK: - Navigation
-
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        // Get the new view controller using [segue destinationViewController].
-//        // Pass the selected object to the new view controller.
-//    }
-    
-
 }
+

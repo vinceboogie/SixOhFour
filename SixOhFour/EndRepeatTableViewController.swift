@@ -16,8 +16,10 @@ class EndRepeatTableViewController: UITableViewController {
     
     var endRepeat: String!
     var doneButton: UIBarButtonItem!
-    var backButtonTitle = ""
     
+    var backButtonTitle = ""
+    var pickerHidden = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,15 +40,19 @@ class EndRepeatTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
+    // MARK: - IB Actions
+
     @IBAction func datePickerChanged(sender: AnyObject) {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         
         endRepeat = dateFormatter.stringFromDate(datePicker.date)
-
     }
     
+    
+    // MARK: - Class Functions
     
     func setEndRepeat() {
         self.performSegueWithIdentifier("unwindFromEndRepeatTableViewController", sender: self)
@@ -73,7 +79,6 @@ class EndRepeatTableViewController: UITableViewController {
         return 3
     }
 
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 1 {
             togglePicker("onDate")
@@ -87,8 +92,6 @@ class EndRepeatTableViewController: UITableViewController {
             onDateCell.accessoryType = UITableViewCellAccessoryType.None
         }
     }
-
-    var pickerHidden = true
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if pickerHidden && indexPath.row == 2 {
@@ -97,15 +100,4 @@ class EndRepeatTableViewController: UITableViewController {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

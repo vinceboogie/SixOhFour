@@ -13,6 +13,7 @@ class TodayScheduleCell: UITableViewCell {
     @IBOutlet weak var jobColorView: JobColorView!
     @IBOutlet weak var jobNameLabel: UILabel!
     @IBOutlet weak var shiftTimeLabel: UILabel!
+    @IBOutlet weak var nextDayLabel: UILabel!
     
     var shift: ScheduledShift! {
         didSet {
@@ -25,6 +26,19 @@ class TodayScheduleCell: UITableViewCell {
             formatter.timeStyle = .ShortStyle
             
             shiftTimeLabel.text = "\(formatter.stringFromDate(shift.startTime)) - \(formatter.stringFromDate(shift.endTime))"
+            
+            formatter.dateStyle = .ShortStyle
+            formatter.timeStyle = .NoStyle
+ 
+            let start = "\(formatter.stringFromDate(shift.startTime))"
+            let end = "\(formatter.stringFromDate(shift.endTime))"
+            
+            
+            if start == end {
+                nextDayLabel.hidden = true
+            } else {
+                nextDayLabel.hidden = false
+            }
         }
     }
     

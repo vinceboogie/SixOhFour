@@ -49,6 +49,7 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="5kZ-uq-rDQ"/>
                                         <exclude reference="GQe-6r-0qI"/>
                                     </mask>
                                 </variation>
@@ -92,12 +93,20 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGb-Vl-PPV">
+                                                    <rect key="frame" x="311" y="37" width="48" height="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="jDE-eE-6pl" firstAttribute="bottom" secondItem="hZU-1R-5X1" secondAttribute="bottom" id="2NR-IQ-iMN"/>
                                                 <constraint firstAttribute="centerX" secondItem="hZU-1R-5X1" secondAttribute="centerX" id="5Wr-mm-C7g"/>
+                                                <constraint firstAttribute="trailing" secondItem="AGb-Vl-PPV" secondAttribute="trailing" constant="16" id="6hA-3t-NWC"/>
                                                 <constraint firstAttribute="trailing" secondItem="jDE-eE-6pl" secondAttribute="trailing" constant="16" id="CpB-48-Jn3"/>
                                                 <constraint firstItem="jDE-eE-6pl" firstAttribute="bottom" secondItem="hZU-1R-5X1" secondAttribute="bottom" id="I9I-zc-F8H"/>
+                                                <constraint firstItem="AGb-Vl-PPV" firstAttribute="top" secondItem="jDE-eE-6pl" secondAttribute="bottom" id="Nwr-6o-qTI"/>
                                                 <constraint firstAttribute="centerY" secondItem="jDE-eE-6pl" secondAttribute="centerY" id="RgV-Gm-ONi"/>
                                                 <constraint firstAttribute="centerY" secondItem="hZU-1R-5X1" secondAttribute="centerY" id="Rjj-mj-RPv"/>
                                                 <constraint firstItem="jDE-eE-6pl" firstAttribute="centerY" secondItem="hZU-1R-5X1" secondAttribute="centerY" id="VmI-nE-i8H"/>
@@ -123,6 +132,7 @@
                                         <connections>
                                             <outlet property="jobColorView" destination="6j2-jh-EDW" id="SHT-ua-UZc"/>
                                             <outlet property="jobNameLabel" destination="hZU-1R-5X1" id="uDB-Ui-23P"/>
+                                            <outlet property="nextDayLabel" destination="AGb-Vl-PPV" id="Qkm-43-1VL"/>
                                             <outlet property="shiftTimeLabel" destination="jDE-eE-6pl" id="ZpO-kI-zEE"/>
                                         </connections>
                                     </tableViewCell>
@@ -168,6 +178,7 @@
                         <outlet property="monthLabel" destination="DDt-fV-1UJ" id="Jgm-SC-tXz"/>
                         <outlet property="tableView" destination="tI3-2L-tHe" id="yZ2-Z4-hgv"/>
                         <outlet property="todayLabel" destination="4nD-Ja-O8D" id="RGH-Pd-UXN"/>
+                        <segue destination="uW5-in-xzW" kind="show" identifier="editSchedule" id="7lv-qF-2DV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7pZ-e6-UYL" sceneMemberID="firstResponder"/>
@@ -1187,4 +1198,7 @@
         <image name="list" width="20" height="20"/>
         <image name="rightArrow" width="9" height="14"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="7lv-qF-2DV"/>
+    </inferredMetricsTieBreakers>
 </document>
