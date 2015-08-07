@@ -35,9 +35,15 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         
         self.title = job.company.name
         
+        let unitedStatesLocale = NSLocale(localeIdentifier: "en_US")
+        let pay = job.payRate
+        var numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        numberFormatter.locale = unitedStatesLocale
+        
         nameLabel.text = job.company.name
         positionLabel.text = job.position
-        payLabel.text = "$\(job.payRate)/hr"
+        payLabel.text = numberFormatter.stringFromNumber(pay)!
         
         calculateRegHours()
     }
@@ -74,6 +80,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editJob" {
             let destinationVC = segue.destinationViewController as! AddJobTableViewController
+            destinationVC.navigationItem.title = "Edit Job"
             destinationVC.job = self.job
         }
     }

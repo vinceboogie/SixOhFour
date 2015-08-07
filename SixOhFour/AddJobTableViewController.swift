@@ -23,7 +23,7 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     var pickerVisible = false
     var payRate: NSDecimalNumber!
     
-    let pickerData = ["Red", "Blue", "Green", "Yellow", "Purple"]
+    let pickerData = ["Red", "Magenta", "Purple", "Blue", "Cyan", "Green", "Yellow", "Orange", "Brown", "Gray"]
     let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     @IBAction func saveJobButton(sender: AnyObject) {
@@ -47,7 +47,7 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         println(str)
         
         payRate = NSDecimalNumber(string: str)
-        
+
         tableView.beginUpdates()
         tableView.endUpdates()
     }
@@ -62,9 +62,15 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         colorPicker.delegate = self
         
         if job != nil {
+            let unitedStatesLocale = NSLocale(localeIdentifier: "en_US")
+            let pay = job.payRate
+            var numberFormatter = NSNumberFormatter()
+            numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+            numberFormatter.locale = unitedStatesLocale
+            
             nameTextField.text = job.company.name
             positionTextField.text = job.position
-            payRateLabel.text = "\(job.payRate)"
+            payRateLabel.text = numberFormatter.stringFromNumber(pay)!
             
             payRate = job.payRate
             colorLabel.text = job.color.name
@@ -103,6 +109,7 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3 {
             pickerVisible = !pickerVisible
+
             tableView.reloadData()
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -151,8 +158,6 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         job.color.name = colorLabel.text!
         
         context!.save(nil)
-        
-        
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

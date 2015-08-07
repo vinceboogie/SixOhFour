@@ -60,7 +60,13 @@ class PayRateTableViewController: UITableViewController, UITextFieldDelegate {
         self.title = "Pay Rate"
         
         if job != nil {
-        payTextField.text = "\(job.payRate)"
+            let unitedStatesLocale = NSLocale(localeIdentifier: "en_US")
+            let pay = job.payRate
+            var numberFormatter = NSNumberFormatter()
+            numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+            numberFormatter.locale = unitedStatesLocale
+            
+            payTextField.text = numberFormatter.stringFromNumber(pay)!
         }
         
         // Uncomment the following line to preserve selection between presentations
@@ -102,7 +108,6 @@ class PayRateTableViewController: UITableViewController, UITextFieldDelegate {
                 formatCurrency(string: currentString)
             }
         }
-        
         return false
     }
     
@@ -116,9 +121,7 @@ class PayRateTableViewController: UITableViewController, UITextFieldDelegate {
         println(payTextField.text)
     }
     
-    
     func savePayRate() {
-//        job.payRate = NSDecimalNumber(string: payTextField.text)
         self.performSegueWithIdentifier("unwindFromPayRate", sender: self)
     }
 

@@ -22,6 +22,16 @@ class JobColor: NSObject {
             return UIColor.yellowColor()
         } else if jobColor == "Purple" {
             return UIColor.purpleColor()
+        } else if jobColor == "Cyan" {
+            return UIColor.cyanColor()
+        } else if jobColor == "Orange" {
+            return UIColor.orangeColor()
+        } else if jobColor == "Magenta" {
+            return UIColor.magentaColor()
+        } else if jobColor == "Brown" {
+            return UIColor.brownColor()
+        } else if jobColor == "Gray" {
+            return UIColor.lightGrayColor()
         } else {
             return UIColor.blackColor()
         }
