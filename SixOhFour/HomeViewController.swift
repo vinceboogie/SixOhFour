@@ -65,13 +65,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let alert : UIAlertController = UIAlertController(title: "Warning", message: "Deleting this job will also delete all associated time logs!", preferredStyle: UIAlertControllerStyle.Alert)
             
             let deleteAction : UIAlertAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
-                self.deleteJob
                 self.tableView.reloadData()
             }
             
             let cancelAction : UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in) }
             
-            alert.addAction(saveAction)
+            alert.addAction(deleteAction)
             alert.addAction(cancelAction)
             
             presentViewController(alert, animated: true, completion: nil)
@@ -85,7 +84,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
     }
-        
+    
+    }
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
