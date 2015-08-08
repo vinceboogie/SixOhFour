@@ -145,8 +145,11 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
 
         job.setValue(company, forKey: "company")
         job.position = positionTextField.text
-        job.payRate = payRate
         job.setValue(color, forKey: "color")
+        
+        if payRate == nil {
+            job.payRate = 0.00
+        }
 
         context!.save(nil)
     }
