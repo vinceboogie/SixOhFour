@@ -9,13 +9,15 @@
 import UIKit
 
 class JobsListCell: UITableViewCell {
-
+    
     @IBOutlet weak var jobColorView: JobColorView!
     @IBOutlet weak var jobNameLabel: UILabel!
+    @IBOutlet weak var jobPositionLabel: UILabel!
     
     var job: Job! {
         didSet {
             jobNameLabel.text = job.company.name
+            jobPositionLabel.text = job.position
             
             var jc = JobColor()
             jobColorView.color = jc.getJobColor(job.color.name)
@@ -26,11 +28,11 @@ class JobsListCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }

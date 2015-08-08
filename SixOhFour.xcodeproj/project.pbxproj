@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		001464781B4E06D400AC0C9F /* ClockInStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 001464771B4E06D400AC0C9F /* ClockInStoryboard.storyboard */; };
 		0014647C1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0014647B1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift */; };
-		001464821B4F65D300AC0C9F /* TimeLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001464811B4F65D300AC0C9F /* TimeLogs.swift */; };
 		00521B971B758C0900735849 /* SetBreakTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00521B961B758C0900735849 /* SetBreakTimeViewController.swift */; };
 		00FCD4601B5753E600031CBD /* detailsTimelogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FCD45F1B5753E600031CBD /* detailsTimelogTableViewController.swift */; };
 		870CECBF1B4F4E9C00B30AAE /* PayRateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870CECBE1B4F4E9C00B30AAE /* PayRateTableViewController.swift */; };
@@ -90,9 +89,7 @@
 /* Begin PBXFileReference section */
 		001464771B4E06D400AC0C9F /* ClockInStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClockInStoryboard.storyboard; sourceTree = "<group>"; };
 		0014647B1B4E14FE00AC0C9F /* ClockInJobsPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClockInJobsPopoverViewController.swift; path = ../ClockInJobsPopoverViewController.swift; sourceTree = "<group>"; };
-		001464811B4F65D300AC0C9F /* TimeLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLogs.swift; sourceTree = "<group>"; };
 		00521B961B758C0900735849 /* SetBreakTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetBreakTimeViewController.swift; sourceTree = "<group>"; };
-		00B577E71B5B27690085B727 /* Shifts2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shifts2.swift; sourceTree = "<group>"; };
 		00FCD45F1B5753E600031CBD /* detailsTimelogTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailsTimelogTableViewController.swift; sourceTree = "<group>"; };
 		870CECBE1B4F4E9C00B30AAE /* PayRateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRateTableViewController.swift; sourceTree = "<group>"; };
 		870CECC01B4F77C900B30AAE /* AddJobTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJobTableViewController.swift; sourceTree = "<group>"; };
@@ -357,8 +354,6 @@
 		B9E34BC21B508AA700B9FD88 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				001464811B4F65D300AC0C9F /* TimeLogs.swift */,
-				00B577E71B5B27690085B727 /* Shifts2.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -556,7 +551,6 @@
 				87B57CD71B509B4400D9B438 /* JobsListCell.swift in Sources */,
 				874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */,
 				B992A18D1B582FFE006E5A2B /* SetRepeatTableViewController.swift in Sources */,
-				001464821B4F65D300AC0C9F /* TimeLogs.swift in Sources */,
 				B9E34BCB1B50D21800B9FD88 /* JobsListTableViewController.swift in Sources */,
 				879277011B5868E90023CBA6 /* JobOverviewViewController.swift in Sources */,
 				87B7C1881B69C22800C65C96 /* RepeatingSchedule.swift in Sources */,

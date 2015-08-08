@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDelegate {
-
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var payLabel: UILabel!
@@ -23,13 +23,23 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     
     var editButton: UIBarButtonItem!
     var job: Job!
-
+    var timelog: Timelog!
+    var workedshift: WorkedShift!
+    var allWorkedShifts = [WorkedShift]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         editButton = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: "editJob")
         self.navigationItem.rightBarButtonItem = editButton
         
         self.title = job.company.name
+        
+        let unitedStatesLocale = NSLocale(localeIdentifier: "en_US")
+        let pay = job.payRate
+        var numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        numberFormatter.locale = unitedStatesLocale
         
         nameLabel.text = job.company.name
         positionLabel.text = job.position
@@ -37,7 +47,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         
         calculateRegHours()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -58,16 +68,17 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     func calculateRegHours() {
         fetchData()
         
-        println(allWorkedShifts) 
+        println(allWorkedShifts)
     }
     
     func editJob() {
         self.performSegueWithIdentifier("editJob", sender: self)
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editJob" {
             let destinationVC = segue.destinationViewController as! AddJobTableViewController
+            destinationVC.navigationItem.title = "Edit Job"
             destinationVC.job = self.job
         }
     }
