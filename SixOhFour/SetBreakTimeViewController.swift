@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetBreakTimeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class SetBreakTimeViewController: UIViewController {
     
     
     @IBOutlet weak var SetBreakTimePicker: UIPickerView!
@@ -41,17 +41,22 @@ class SetBreakTimeViewController: UIViewController, UIPickerViewDataSource, UIPi
         
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Class Functions
+    
     func doneSettingBreak () {
         self.performSegueWithIdentifier("unwindFromSetBreakTimeViewController", sender: self)
     }
-    
-    // MARK: - Set Break Time Picker
+}
+
+
+// MARK: - Picker View Source and Delegate
+
+extension SetBreakTimeViewController: UIPickerViewDataSource, UIPickerViewDelegate{
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 3
@@ -92,5 +97,4 @@ class SetBreakTimeViewController: UIViewController, UIPickerViewDataSource, UIPi
             }
         }
     }
-    
 }

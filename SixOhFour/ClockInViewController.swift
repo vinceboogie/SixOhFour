@@ -79,9 +79,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var currentWorkedShift : WorkedShift!
     
-    var jc = JobColor()
-    
-    
     var frc : NSFetchedResultsController = NSFetchedResultsController()
     let context : NSManagedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
     
@@ -133,7 +130,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 jobTitleDisplayLabel.textColor = UIColor.blackColor()
                 jobColorDisplay.hidden = false
-                jobColorDisplay.color = jc.getJobColor(firstJob.color.name)
+                jobColorDisplay.color = firstJob.color.getColor
                 jobColorDisplay.setNeedsDisplay()
                 
                 jobListEmpty = false
@@ -158,7 +155,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             var arrayOfJobs = [Job]()
             arrayOfJobs = results as! [Job]
             jobTitleDisplayLabel.text = arrayOfJobs[selectedJobIndex].company.name
-            jobColorDisplay.color = jc.getJobColor(arrayOfJobs[selectedJobIndex].color.name)
+            jobColorDisplay.color = arrayOfJobs[selectedJobIndex].color.getColor
             jobColorDisplay.setNeedsDisplay()
             
         }

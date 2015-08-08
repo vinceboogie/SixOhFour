@@ -19,7 +19,7 @@ class Job: NSManagedObject {
     @NSManaged var company: Company
     @NSManaged var color: Color
     @NSManaged var schedule: NSManagedObject
-//    @NSManaged var workedShifts: NSSet
+    @NSManaged var workedShifts: NSSet
 
     
 }

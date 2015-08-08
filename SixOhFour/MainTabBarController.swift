@@ -15,7 +15,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //  each of these are relative to the storyboard files they belong to
+        //  Each of these are relative to the storyboard files they belong to
         let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let clockInStoryboard: UIStoryboard = UIStoryboard(name: "ClockInStoryboard", bundle: nil)
@@ -35,30 +35,24 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         self.viewControllers = [UINavigationController(rootViewController: addJobsVC), clockInVC, calendarVC ]
         
-        // Change color of the tab bar
-//         self.tabBar.barTintColor = UIColor.darkGrayColor()
-        
+
+        // Pre-populate the Color table when the app is opened for the first time
         let dataManager = DataManager()
         
         var colors = dataManager.fetch("Color") as! [Color]
         
-        var defaultColors = ["Red", "Green", "Blue"]
-        
+        let defaultColors = ["Red", "Magenta", "Purple", "Blue", "Cyan", "Green", "Yellow", "Orange", "Brown", "Gray"]
+
         if colors.isEmpty {
             for d in defaultColors {
                 
-                let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-                
-                let ent = NSEntityDescription.entityForName("Color", inManagedObjectContext: context!)
-                let color = Color(entity: ent!, insertIntoManagedObjectContext: context)
+                let color = dataManager.addItem("Color") as! Color
             
                 color.name = d
                 color.isSelected = false
                 
-                context?.save(nil)
+                dataManager.save()
             }
-        } else {
-            println("Not Empty")
         }
         
     }

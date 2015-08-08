@@ -15,13 +15,13 @@ class JobsListTableViewController: UITableViewController {
     var selectedJob: Job!
     var previousSelection: String!
 
-    var jobsList = [Job]()
+    var jobs = [Job]()
     var dataManager = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        jobsList = dataManager.fetch("Job") as! [Job]
+        jobs = dataManager.fetch("Job") as! [Job]
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,16 +37,16 @@ class JobsListTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return jobsList.count
+        return jobs.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
         
-        cell.jobNameLabel.text = jobsList[indexPath.row].company.name
+        cell.jobNameLabel.text = jobs[indexPath.row].company.name
         
-        cell.jobColorView.color = jobsList[indexPath.row].color.getColor
+        cell.jobColorView.color = jobs[indexPath.row].color.getColor
 
         
         if cell.jobNameLabel.text == previousSelection {
@@ -57,7 +57,7 @@ class JobsListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.selectedJob = jobsList[indexPath.row]
+        self.selectedJob = jobs[indexPath.row]
                 
         self.performSegueWithIdentifier("unwindFromJobsListTableViewController", sender: self)
     }

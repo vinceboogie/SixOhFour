@@ -99,9 +99,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         cell.jobNameLabel.text = jobsList[indexPath.row].company.name
         cell.jobPositionLabel.text = jobsList[indexPath.row].position
-        
-        var jc = JobColor()
-        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)
+
+        // DELETE: Review and Delete
+//        var jc = JobColor()
+//        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)
+
+        cell.jobColorView.color = jobsList[indexPath.row].color.getColor
         
         return cell
     }

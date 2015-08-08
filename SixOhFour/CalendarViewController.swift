@@ -27,6 +27,7 @@ class CalendarViewController: UIViewController {
     
     let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     let dataManager = DataManager()
+    let tapGesture = UITapGestureRecognizer()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +39,10 @@ class CalendarViewController: UIViewController {
         selectedDate = CVDate(date: NSDate()).convertedDate()
         daySchedule = [ScheduledShift]()
         
-        // DELETE: Testing pre-populating colors
-        var colors = dataManager.fetch("Color") as! [Color]
-        println(colors)
+        tapGesture.addTarget(self, action: "tappedMonthLabel")
+        
+        monthLabel.addGestureRecognizer(tapGesture)
+        monthLabel.userInteractionEnabled = true
         
     }
     
@@ -73,9 +75,21 @@ class CalendarViewController: UIViewController {
     @IBAction func backToCalendar(segue:UIStoryboardSegue) {
         
     }
+
+    
+    // TODO: Update dotmarker and list of shifts on segue
     
     @IBAction func unwindAfterSaveSchedule(segue: UIStoryboardSegue) {
-
+        calendarView.toggleViewWithDate(selectedDate)
+        
+        println(selectedDate)
+    }
+    
+    
+    // MARK: - Class Functions 
+    
+    func tappedMonthLabel() {
+        calendarView.toggleCurrentDayView()
     }
     
     
@@ -159,6 +173,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.beginUpdates()
             let shiftToDelete = daySchedule[indexPath.row]
             daySchedule.removeAtIndex(indexPath.row)
+            monthSchedule.removeAtIndex(indexPath.row)
             
             dataManager.delete(shiftToDelete)
             
@@ -311,7 +326,7 @@ extension CalendarViewController: CVCalendarViewDelegate {
     }
     
     func dotMarker(shouldMoveOnHighlightingOnDayView dayView: CVCalendarDayView) -> Bool {
-        return true
+        return false
     }
 }
 
