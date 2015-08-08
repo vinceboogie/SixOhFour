@@ -10,8 +10,6 @@ import UIKit
 
 class JobsListTableViewController: UITableViewController {
 
-    var jobName: String!
-    var jobColor: UIColor!
     var selectedJob: Job!
     var previousSelection: String!
 
@@ -32,10 +30,6 @@ class JobsListTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return jobs.count
     }
@@ -44,10 +38,11 @@ class JobsListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
         
-        cell.jobNameLabel.text = jobs[indexPath.row].company.name
         
+        // TODO: Change once we update storyboard
+//        cell.job = jobs[indexPath.row]
+        cell.jobNameLabel.text = jobs[indexPath.row].company.name
         cell.jobColorView.color = jobs[indexPath.row].color.getColor
-
         
         if cell.jobNameLabel.text == previousSelection {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark

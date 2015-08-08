@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+@objc(RepeatingSchedule)
+
 
 class RepeatingSchedule: NSManagedObject {
 

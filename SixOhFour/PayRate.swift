@@ -7,6 +7,7 @@
 //
 
 import UIKit
+@objc(PayRate)
 
 class PayRate: NSObject {
     var payRate = ""
