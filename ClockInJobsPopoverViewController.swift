@@ -9,6 +9,19 @@
 import UIKit
 import CoreData
 
+<<<<<<< HEAD
+class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var ClockInJobsTable: UITableView!
+    
+    
+    var arrayOfJobs = [Job]()
+    var selectedJob: Job!
+    var selectedJobIndex: Int!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+=======
 //@objc protocol writeValueBackDelegate2 {
 //    func writeValueBack2(vc: ClockInJobsPopoverViewController, value: String)
 //}
@@ -28,17 +41,24 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
  //       labelFirstPlayer.text = namenSpelers[0]
+>>>>>>> 8432c40... -Fixed pay rate format
         
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         
+<<<<<<< HEAD
+        var request = NSFetchRequest(entityName: "Job")
+=======
         var request = NSFetchRequest(entityName: "Jobs")
+>>>>>>> 8432c40... -Fixed pay rate format
         request.returnsObjectsAsFaults = false ;
         
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
         arrayOfJobs = results as! [Job]
         
+<<<<<<< HEAD
+=======
 //        if(results.count > 0 ) {
 //            for res in results{
 //                var myjob = res as! Jobs
@@ -54,10 +74,17 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
         
         // Do any additional setup after loading the view.
         
+>>>>>>> 8432c40... -Fixed pay rate format
         ClockInJobsTable.delegate = self
         ClockInJobsTable.dataSource = self
         
         self.ClockInJobsTable.reloadData()
+<<<<<<< HEAD
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrayOfJobs.count
+=======
         
         
         
@@ -124,10 +151,24 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return arrayOfJobs.count
+>>>>>>> 8432c40... -Fixed pay rate format
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+<<<<<<< HEAD
+        let cell = tableView.dequeueReusableCellWithIdentifier("ClockInJobsCell", forIndexPath: indexPath) as! JobsListCell
+        
+        cell.job = arrayOfJobs[indexPath.row]
+        
+        return cell
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.selectedJobIndex = indexPath.row
+=======
         let cell = tableView.dequeueReusableCellWithIdentifier("ClockInJobsCell", forIndexPath: indexPath) as! JobsListCell // Old CUSTOM Cell = ClockIn_JobsCell
         
         cell.job = arrayOfJobs[indexPath.row]
@@ -140,10 +181,21 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.selectedJob = arrayOfJobs[indexPath.row]
 
+>>>>>>> 8432c40... -Fixed pay rate format
         self.dismissViewControllerAnimated(true, completion: {})
         
         self.performSegueWithIdentifier("unwindFromClockInPopoverViewControllerIdentifier", sender: self)
         
+<<<<<<< HEAD
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+}
+=======
 
     }
     
@@ -159,3 +211,4 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
 //    }
     
 }
+>>>>>>> 8432c40... -Fixed pay rate format

@@ -60,12 +60,6 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
             jobColorView.color = jc.getJobColor(colorLabel.text!)
         }
         
-        if job != nil {
-        payRate.payRate = "\(job.payRate)"
-        }
-    }
-        
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -109,7 +103,7 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         }
         return 44.0
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -120,8 +114,8 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         let ent = NSEntityDescription.entityForName("Job", inManagedObjectContext: context!)
         let com = NSEntityDescription.entityForName("Company", inManagedObjectContext: context!)
         let col = NSEntityDescription.entityForName("Color", inManagedObjectContext: context!)
-
-
+        
+        
         let company = Company(entity: com!, insertIntoManagedObjectContext: context)
         let color = Color(entity: col!, insertIntoManagedObjectContext: context)
         let job = Job(entity: ent!, insertIntoManagedObjectContext: context)
@@ -129,22 +123,20 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
         
         company.name = nameTextField.text
         color.name = colorLabel.text!
-
+        
         
         job.setValue(company, forKey: "company")
         job.position = positionTextField.text
-        job.payRate = NSDecimalNumber(string: payRateLabel.text)
         job.setValue(color, forKey: "color")
+    
+        if payRate == nil {
+            job.payRate = 0.00
+        }
 
-        println(job.company.name)
-        println(job.color.name)
-            
-        println(color)
-        print(job)
-        print(company)
+
         context!.save(nil)
     }
-        
+    
     func editItem() {
         job.company.name = nameTextField.text
         job.position = positionTextField.text
@@ -156,6 +148,7 @@ class AddJobTableViewController: UITableViewController, UIPickerViewDataSource, 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
