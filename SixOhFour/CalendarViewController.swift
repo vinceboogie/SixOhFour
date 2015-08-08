@@ -8,48 +8,58 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CVCalendarViewDelegate {
+class CalendarViewController: UIViewController {
 
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var todayLabel: UILabel!
-    
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var tableView: UITableView!
     
+    var selectedDate: NSDate!
+    var monthSchedule: [ScheduledShift]!
+    var daySchedule: [ScheduledShift]!
+    var shift: ScheduledShift!
+    
     var shouldShowDaysOut = true
     var animationFinished = true
+    var currentMonth = CVDate(date: NSDate()).currentMonth
     
-    
-    // Dummy schedule for development
-    var schedule: [Shift]!
-    
-    
-    var currentMonth = CVDate(date: NSDate()).displayMonth()
     let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
+    let dataManager = DataManager()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.monthLabel.text = CVDate(date: NSDate()).displayMonthYear()
+        monthLabel.text = CVDate(date: NSDate()).globalDescription
         
         tableView.delegate = self
         tableView.dataSource = self
         
+        selectedDate = CVDate(date: NSDate()).convertedDate()
+        daySchedule = [ScheduledShift]()
         
-        schedule = [Shift]()
+        // DELETE: Testing pre-populating colors
+        var colors = dataManager.fetch("Color") as! [Color]
+        println(colors)
         
-        schedule.append(Shift(dictionary: ["color": UIColor.redColor(), "name": "Red Garage", "shiftTime": "0800-2200"]))
-        schedule.append(Shift(dictionary:["color": UIColor.greenColor(), "name": "Air New Zealand", "shiftTime": "1800-2200"]))
-        schedule.append(Shift(dictionary:["color": UIColor.blueColor(), "name": "Golden State Warriors", "shiftTime": "1930-2230"]))
-    
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         
-        self.calendarView.commitCalendarViewUpdate()
-        self.menuView.commitMenuViewUpdate()
+        let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
+        let sortDescriptor = NSSortDescriptor(key: "startTime", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+
+        monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate, sortDescriptors: sortDescriptors) as! [ScheduledShift]
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        calendarView.commitCalendarViewUpdate()
+        menuView.commitMenuViewUpdate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,18 +68,67 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    // MARK: IB Actions
+    // MARK: - IB Actions
     
     @IBAction func backToCalendar(segue:UIStoryboardSegue) {
         
     }
     
+    @IBAction func unwindAfterSaveSchedule(segue: UIStoryboardSegue) {
+
+    }
     
-    // MARK: Table View Datasource
+    
+    // MARK: - Navigation
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "addScheduleSegue" {
+            let destinationVC = segue.destinationViewController as! AddScheduleTableViewController
+            destinationVC.navigationItem.title = "Add Schedule"
+            destinationVC.hidesBottomBarWhenPushed = true;
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target: nil, action: nil)
+            
+            let today = NSDate()
+            
+            let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+           
+            let dateComponents = calendar.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay, fromDate: selectedDate)
+            let timeComponents = calendar.components(NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitMinute, fromDate: today)
+           
+            dateComponents.setValue(timeComponents.hour, forComponent: NSCalendarUnit.CalendarUnitHour)
+            dateComponents.setValue(timeComponents.minute, forComponent: NSCalendarUnit.CalendarUnitMinute)
+            
+            selectedDate = calendar.dateFromComponents(dateComponents)
+            
+            // Set start and end date to date selected on calendar
+            destinationVC.startTime = self.selectedDate
+            destinationVC.endTime = self.selectedDate
+            
+            destinationVC.isNewSchedule = true
+        }
+        
+        if segue.identifier == "editSchedule" {
+            let destinationVC = segue.destinationViewController as! AddScheduleTableViewController
+            destinationVC.navigationItem.title = "Edit Schedule"
+            destinationVC.hidesBottomBarWhenPushed = true;
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target: nil, action: nil)
+            
+            destinationVC.shift = self.shift
+            
+            destinationVC.isNewSchedule = false
+        }
+    }
+}
+
+
+// MARK: Table View Datasource
+
+extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if schedule != nil {
-            return schedule.count
+        if daySchedule != nil {
+            return daySchedule.count
         } else {
             return 0
         }
@@ -78,17 +137,51 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TodayScheduleCell", forIndexPath: indexPath) as! TodayScheduleCell
         
-        cell.shift = schedule[indexPath.row]
+        cell.shift = daySchedule[indexPath.row]
+        
+        cell.jobColorView.setNeedsDisplay()
         
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        shift = daySchedule[indexPath.row]
+        
+        self.performSegueWithIdentifier("editSchedule", sender: self)
+    }
     
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
     
-    // MARK: Calendar View Delegate
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == .Delete) {
+            tableView.beginUpdates()
+            let shiftToDelete = daySchedule[indexPath.row]
+            daySchedule.removeAtIndex(indexPath.row)
+            
+            dataManager.delete(shiftToDelete)
+            
+            tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: .Automatic)
+            tableView.endUpdates()
+        }
+    }
+}
+
+
+// MARK: - CVCalendarViewDelegate
+
+extension CalendarViewController: CVCalendarViewDelegate {
+    func presentationMode() -> CalendarMode {
+        return .MonthView
+    }
+    
+    func firstWeekday() -> Weekday {
+        return .Sunday
+    }
     
     func shouldShowWeekdaysOut() -> Bool {
-        return self.shouldShowDaysOut
+        return shouldShowDaysOut
     }
     
     func didSelectDayView(dayView: CVCalendarDayView) {
@@ -97,48 +190,34 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.todayLabel.text = weekday[index-1] + ", \(currentMonth) \(currentDay)"
             }
         }
-    }
-
+        
+        var selectedDay = dayView.date.currentDay
     
-    func dotMarker(colorOnDayView dayView: CVCalendarDayView) -> UIColor {
-        if dayView.date?.day == 3 {
-            return .redColor()
-        } else if dayView.date?.day == 5 {
-            return .blackColor()
-        } else if dayView.date?.day == 2 {
-            return .blueColor()
+        daySchedule = []
+        
+        for m in monthSchedule {
+            if selectedDay == m.startDate {
+                daySchedule.append(m)
+            }
         }
         
-        return .greenColor()
+        selectedDate = dayView.date.convertedDate()
+        
+        tableView.reloadData()
     }
-    
-    func dotMarker(shouldShowOnDayView dayView: CVCalendarDayView) -> Bool {
-        if dayView.date?.day == 3 || dayView.date?.day == 5 || dayView.date?.day == 2 {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func dotMarker(shouldMoveOnHighlightingOnDayView dayView: CVCalendarDayView) -> Bool {
-        return false
-    }
-    
-    func topMarker(shouldDisplayOnDayView dayView: CVCalendarDayView) -> Bool {
-        return true
-    }
-    
     
     func presentedDateUpdated(date: CVDate) {
-        if self.monthLabel.text != date.displayMonthYear() && self.animationFinished {
+        if monthLabel.text != date.globalDescription && self.animationFinished {
             
-            currentMonth = date.displayMonth()
+            currentMonth = date.currentMonth
+            let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
+            monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate) as! [ScheduledShift]
             
             let updatedMonthLabel = UILabel()
             updatedMonthLabel.textColor = monthLabel.textColor
             updatedMonthLabel.font = monthLabel.font
             updatedMonthLabel.textAlignment = .Center
-            updatedMonthLabel.text = date.displayMonthYear()
+            updatedMonthLabel.text = date.globalDescription
             updatedMonthLabel.sizeToFit()
             updatedMonthLabel.alpha = 0
             updatedMonthLabel.center = self.monthLabel.center
@@ -147,7 +226,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
             updatedMonthLabel.transform = CGAffineTransformMakeTranslation(0, offset)
             updatedMonthLabel.transform = CGAffineTransformMakeScale(1, 0.1)
             
-            UIView.animateWithDuration(0.35, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            UIView.animateWithDuration(0.35, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
                 self.animationFinished = false
                 self.monthLabel.transform = CGAffineTransformMakeTranslation(0, -offset)
                 self.monthLabel.transform = CGAffineTransformMakeScale(1, 0.1)
@@ -156,7 +235,8 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
                 updatedMonthLabel.alpha = 1
                 updatedMonthLabel.transform = CGAffineTransformIdentity
                 
-                }) { (finished) -> Void in
+                }) { _ in
+                    
                     self.animationFinished = true
                     self.monthLabel.frame = updatedMonthLabel.frame
                     self.monthLabel.text = updatedMonthLabel.text
@@ -169,33 +249,95 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func toggleMonthViewWithMonthOffset(offset: Int) {
-        let calendar = NSCalendar.currentCalendar()
-        let calendarManager = CVCalendarManager.sharedManager
-        let components = calendarManager.componentsForDate(NSDate()) // from today
-        
-        components.month += offset
-        
-        let resultDate = calendar.dateFromComponents(components)!
-        
-        self.calendarView.toggleMonthViewWithDate(resultDate)
+    func topMarker(shouldDisplayOnDayView dayView: CVCalendarDayView) -> Bool {
+        return true // line separators
     }
-
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func dotMarker(shouldShowOnDayView dayView: CVCalendarDayView) -> Bool {
         
-        if segue.identifier == "addScheduleSegue" {
-            let destinationVC = segue.destinationViewController as! UITableViewController
-            destinationVC.navigationItem.title = "Add Schedule"
-            destinationVC.hidesBottomBarWhenPushed = true;
-            self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target: nil, action: nil)
+        var currentMonth = dayView.date.currentMonth
+        let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
+
+        var monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate) as! [ScheduledShift]
+        
+//        // TODO: Optimize dotmarker generation
+//        for m in monthSchedule {
+//            println(m.startDate)
+//        }
+        
+        
+        let day = dayView.date.currentDay
+        var shouldShowDot = false
+        
+        for s in monthSchedule {
+            if day == s.startDate {
+                shouldShowDot = true
+            }
+        }
+        
+        return shouldShowDot
+    }
+    
+    func dotMarker(colorOnDayView dayView: CVCalendarDayView) -> [UIColor] {
+                
+        var currentMonth = dayView.date.currentMonth
+        let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
+        
+        var monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate) as! [ScheduledShift]
+        
+//        // TODO: Optimize dotmarker generation
+//        for m in monthSchedule {
+//            println(m.startDate)
+//        }
+
+        
+        let day = dayView.date.currentDay
+        let color = UIColor.lightGrayColor()
+        var numberOfDots = 0
+        
+        for s in monthSchedule {
+            if day == s.startDate {
+                numberOfDots++
+            }
+        }
+        
+        if numberOfDots == 2 {
+            return [color, color]
+        } else if numberOfDots >= 3 {
+            return [color, color, color]
+        } else {
+            return [color]
         }
     }
     
-
+    func dotMarker(shouldMoveOnHighlightingOnDayView dayView: CVCalendarDayView) -> Bool {
+        return true
+    }
 }
+
+
+// MARK: - CVCalendarViewAppearanceDelegate
+
+extension CalendarViewController: CVCalendarViewAppearanceDelegate {
+    func dayLabelPresentWeekdayInitallyBold() -> Bool {
+        return false
+    }
+    
+    func spaceBetweenDayViews() -> CGFloat {
+        return 2
+    }
+}
+
+
+// MARK: - CVCalendarMenuViewDelegate
+
+extension CalendarViewController: CVCalendarMenuViewDelegate {
+    // firstWeekday() has been already implemented.
+}
+
+
+
+
+
+
+

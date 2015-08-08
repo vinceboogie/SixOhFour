@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -36,6 +37,29 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         // Change color of the tab bar
 //         self.tabBar.barTintColor = UIColor.darkGrayColor()
+        
+        let dataManager = DataManager()
+        
+        var colors = dataManager.fetch("Color") as! [Color]
+        
+        var defaultColors = ["Red", "Green", "Blue"]
+        
+        if colors.isEmpty {
+            for d in defaultColors {
+                
+                let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+                
+                let ent = NSEntityDescription.entityForName("Color", inManagedObjectContext: context!)
+                let color = Color(entity: ent!, insertIntoManagedObjectContext: context)
+            
+                color.name = d
+                color.isSelected = false
+                
+                context?.save(nil)
+            }
+        } else {
+            println("Not Empty")
+        }
         
     }
 

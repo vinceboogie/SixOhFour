@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+@objc(ScheduledShift)
 
 class ScheduledShift: NSManagedObject {
 
@@ -15,5 +16,6 @@ class ScheduledShift: NSManagedObject {
     @NSManaged var startTime: NSDate
     @NSManaged var job: Job
     @NSManaged var scheduledShifts: NSSet
+    @NSManaged var startDate: String
 
 }
