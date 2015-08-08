@@ -62,20 +62,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if editingStyle == .Delete {
             managedObjectContext?.deleteObject(jobsList[indexPath.row] as Job)
             
-//            let alert : UIAlertController = UIAlertController(title: "Warning", message: "Deleting this job will also delete all associated time logs!", preferredStyle: UIAlertControllerStyle.Alert)
-//            
-//            let deleteAction : UIAlertAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
-//                self.tableView.reloadData()
-//            }
-//            
-//            let cancelAction : UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
-//            }
-//            
-//            alert.addAction(deleteAction)
-//            alert.addAction(cancelAction)
-//            
-//            presentViewController(alert, animated: true, completion: nil)
-            
             var error: NSError? = nil
             if !managedObjectContext!.save(&error) {
                 println("Failed to delete the item \(error), \(error?.userInfo)")
@@ -99,11 +85,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         cell.jobNameLabel.text = jobsList[indexPath.row].company.name
         cell.jobPositionLabel.text = jobsList[indexPath.row].position
-
-        // DELETE: Review and Delete
-//        var jc = JobColor()
-//        cell.jobColorView.color = jc.getJobColor(jobsList[indexPath.row].color.name)
-
         cell.jobColorView.color = jobsList[indexPath.row].color.getColor
         
         return cell

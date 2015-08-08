@@ -26,14 +26,11 @@ class AddJobTableViewController: UITableViewController {
     let dataManager = DataManager()
     var colors = [Color]()
     
-    // DELETE: Review and delete
-    // We're now fetching the prepopulated Color table and using that for our picker.
-//    let pickerData = ["Red", "Magenta", "Purple", "Blue", "Cyan", "Green", "Yellow", "Orange", "Brown", "Gray"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        colors = dataManager.fetch("Color") as! [Color]
+        let predicate = NSPredicate(format: "isSelected == false")
+        colors = dataManager.fetch("Color", predicate: predicate) as! [Color]
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -67,24 +64,11 @@ class AddJobTableViewController: UITableViewController {
         
         nameTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         
-        // DELETE: Review and Delete
-//        var selectedColor = 0
-//
-//        for var i = 0; i < pickerData.count; i++ {
-//            var color = colorLabel.text!
-//            if pickerData[i] == color {
-//                selectedColor = i
-//            }
-//        }
-//
-//        colorPicker.selectRow(selectedColor, inComponent: 0, animated: true)
-        
-        
         // so fresh and so clean :]
-        if job != nil {
-            let selectedColor = find(colors, job.color)
-            colorPicker.selectRow(selectedColor!, inComponent: 0, animated: true)
-        }
+//        if job != nil {
+//            let selectedColor = find(colors, job.color)
+//            colorPicker.selectRow(selectedColor!, inComponent: 0, animated: true)
+//        }
     }
     
     // MARK: - IBActions
@@ -143,55 +127,34 @@ class AddJobTableViewController: UITableViewController {
     }
     
     func newItem() {
-        
-        // DELETE: Review and delete
-        // Now using DataManager class
-//        let context = self.context
-//        let ent = NSEntityDescription.entityForName("Job", inManagedObjectContext: context!)
-//        let com = NSEntityDescription.entityForName("Company", inManagedObjectContext: context!)
-//        let col = NSEntityDescription.entityForName("Color", inManagedObjectContext: context!)
-//
-//        let company = Company(entity: com!, insertIntoManagedObjectContext: context)
-//        let color = Color(entity: col!, insertIntoManagedObjectContext: context)
-//        let job = Job(entity: ent!, insertIntoManagedObjectContext: context)
-        
-        
-        
         // TODO: let color is creating a new managedObj. 
         // We need to fetch the color and link jobs to it.
         // Also, we should pass job.position to coredata instead of positionTextField.text
         
+        let predicate = NSPredicate(format: "name == %@", colorLabel.text!)
+        let color = dataManager.fetch("Color", predicate: predicate) as! [Color]
+        var selectedColor = color[0]
+        selectedColor.isSelected = true
+        
+        println(color)
         let company = dataManager.addItem("Company") as! Company
-        let color = dataManager.addItem("Color") as! Color
         let job = dataManager.addItem("Job") as! Job
         
         company.name = nameTextField.text
-        color.name = colorLabel.text!
-    
         job.setValue(company, forKey: "company")
         job.position = positionTextField.text
-        job.setValue(color, forKey: "color")
+        job.setValue(selectedColor, forKey: "color")
         
         if payRate == nil {
             job.payRate = 0.00
+        } else {
+            job.payRate = self.payRate
         }
-
         dataManager.save()
     }
     
     func editItem() {
 
-        // DELETE: Review and delete
-        // Now using the Datamanager class
-        // Make sure edits are being saved/done properly
-//
-//        job.company.name = nameTextField.text
-//        job.position = positionTextField.text
-//        job.payRate = payRate
-//        job.color.name = colorLabel.text!
-//        
-//        context!.save(nil)
-        
         let editJob = dataManager.editItem(job, entityName: "Job") as! Job
         
         editJob.company.name = nameTextField.text
@@ -222,23 +185,14 @@ extension AddJobTableViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        // DELETE: Review and Delete
-//        return pickerData.count
         return colors.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        // DELETE: Review and Delete
-//        return pickerData[row]
         return colors[row].name
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // DELETE: Review and Delete
-//        colorLabel.text = pickerData[row]
-//        jobColorView.color = jc.getJobColor(pickerData[row])
-//        jobColorView.setNeedsDisplay()
-        
         colorLabel.text = colors[row].name
         jobColorView.color = colors[row].getColor
         jobColorView.setNeedsDisplay()
