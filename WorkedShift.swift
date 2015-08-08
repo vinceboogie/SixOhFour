@@ -13,10 +13,12 @@ import CoreData
 
 class WorkedShift: NSManagedObject {
 
+    @NSManaged var duration: Double
     @NSManaged var source: String
     @NSManaged var status: NSNumber
     @NSManaged var job: Job
     @NSManaged var timelogs: NSSet
+<<<<<<< HEAD
     @NSManaged var duration: Double
     
     var pay: Double!
@@ -33,6 +35,9 @@ class WorkedShift: NSManagedObject {
         pay  = (round( 100 * (duration / 3600) * ( Double(self.job.payRate) ) ) / 100)
         return pay
     }
+=======
+    
+>>>>>>> 3f1fd90... -Added timesheet date pickers
 
     func moneyShiftOT() -> Double {
         if duration > (60*60*8) {
