@@ -9,16 +9,16 @@
 import UIKit
 
 class SetBreakTimeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-
+    
     
     @IBOutlet weak var SetBreakTimePicker: UIPickerView!
     
     var breakHoursRange = 3
     var breakMinutesRange = 60
-
+    
     var breakHours = 0 //intial value, but then changed with segue
     var breakMinutes = 0 //intial value, but then changed with segue
-
+    
     var breakHoursSetIntial = 0 //intial value, but then changed with segue
     var breakMinutesSetIntial = 0 //intial value, but then changed with segue
     
@@ -29,18 +29,18 @@ class SetBreakTimeViewController: UIViewController, UIPickerViewDataSource, UIPi
         
         self.SetBreakTimePicker.dataSource = self
         self.SetBreakTimePicker.delegate = self
-
+        
         SetBreakTimePicker.selectRow(breakHours, inComponent: 0, animated: true)
         SetBreakTimePicker.selectRow(breakMinutes, inComponent: 1, animated: true)
         
         println("breakMinutesSet from Clockin = \(breakMinutes)")
         println("breakHoursSet from Clockin = \(breakHours)")
-
+        
         doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "doneSettingBreak")
         self.navigationItem.rightBarButtonItem = doneButton
         
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -50,8 +50,8 @@ class SetBreakTimeViewController: UIViewController, UIPickerViewDataSource, UIPi
     func doneSettingBreak () {
         self.performSegueWithIdentifier("unwindFromSetBreakTimeViewController", sender: self)
     }
-
-// MARK: - Set Break Time Picker
+    
+    // MARK: - Set Break Time Picker
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 3

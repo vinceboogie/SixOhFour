@@ -10,39 +10,26 @@ import UIKit
 import CoreData
 
 class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-  
+    
     @IBOutlet weak var ClockInJobsTable: UITableView!
+    
     
     var arrayOfJobs = [Job]()
     var selectedJob: Job!
+    var selectedJobIndex: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-          
+        
         var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         
-        var request = NSFetchRequest(entityName: "Jobs")
+        var request = NSFetchRequest(entityName: "Job")
         request.returnsObjectsAsFaults = false ;
         
         var results:NSArray = context.executeFetchRequest(request, error: nil)!
         
         arrayOfJobs = results as! [Job]
-        
-//        if(results.count > 0 ) {
-//            for res in results{
-//                var myjob = res as! Jobs
-//                if (myjob.job == "sec") {
-//                    arrayOfJobs.append(myjob)
-//                }
-////            println(res)
-//            }
-//        }else {
-//            println("nothing")
-//        }
-        
-        
-        // Do any additional setup after loading the view.
         
         ClockInJobsTable.delegate = self
         ClockInJobsTable.dataSource = self
@@ -51,7 +38,7 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return arrayOfJobs.count
+        return arrayOfJobs.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -59,9 +46,9 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
         let cell = tableView.dequeueReusableCellWithIdentifier("ClockInJobsCell", forIndexPath: indexPath) as! JobsListCell
         
         cell.job = arrayOfJobs[indexPath.row]
-
+        
         return cell
-    
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
