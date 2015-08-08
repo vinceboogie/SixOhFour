@@ -43,7 +43,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         
         nameLabel.text = job.company.name
         positionLabel.text = job.position
-        payLabel.text = numberFormatter.stringFromNumber(pay)!
+        payLabel.text = "\(numberFormatter.stringFromNumber(pay)!)/hr"
         
         calculateRegHours()
     }
@@ -68,9 +68,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     func calculateRegHours() {
         fetchData()
         
-        println(allWorkedShifts)
-        
-        
+        println(allWorkedShifts) 
     }
     
     func editJob() {
