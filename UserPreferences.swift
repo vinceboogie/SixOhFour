@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+@objc(UserPreferences)
+
 
 class UserPreferences: NSManagedObject {
 

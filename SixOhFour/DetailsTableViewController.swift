@@ -1,4 +1,12 @@
 //
+//  DetailsTableViewController.swift
+//  SixOhFour
+//
+//  Created by Joseph Pelina on 8/13/15.
+//  Copyright (c) 2015 vinceboogie. All rights reserved.
+//
+
+//
 //  detailsTimelogTableViewController.swift
 //  SixOhFour
 //
@@ -10,7 +18,7 @@ import UIKit
 import CoreData
 import Foundation
 
-class detailsTimelogViewController: UITableViewController {
+class DetailsTableViewController: UITableViewController {
     
     @IBOutlet weak var jobColorDisplay: JobColorView!
     @IBOutlet weak var jobLabel: UILabel!
@@ -23,14 +31,16 @@ class detailsTimelogViewController: UITableViewController {
     
     var entrySelectedIndex : Int = -1
     
-    var jobLabelDisplay = ""
+    var jobLabelDisplay = "" // will change from pushed data Segue
+    
     var doneButton : UIBarButtonItem!
     var noMinDate : Bool = false
     var noMaxDate : Bool = false
     var hideTimePicker : Bool = true
     
+    var selectedJob : Job!
     
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    //    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var nItem : Timelog! // will change from pushed data Segue
     var nItemPrevious : Timelog! // will change from pushed data Segue
@@ -41,7 +51,11 @@ class detailsTimelogViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        jobLabel.text = jobLabelDisplay
+        jobLabel.text = selectedJob.company.name
+        jobColorDisplay.color = selectedJob.color.getColor
+        
+        println(nItem)
+        
         entryLabel.text = nItem.type
         timestampLabel.text = "\(nItem.time)"
         minTimeLabel.hidden = true
@@ -124,7 +138,7 @@ class detailsTimelogViewController: UITableViewController {
         nItem.comment = commentTextField.text
         nItem.lastUpdate = NSDate()
         println(nItem)
-        context!.save(nil)
+        //        context!.save(nil)
         
         if noMinDate == false && (timestampPicker.date.compare(timestampPicker.minimumDate!)) == NSComparisonResult.OrderedAscending {
             nItem.time = timestampPicker.minimumDate!
@@ -141,7 +155,7 @@ class detailsTimelogViewController: UITableViewController {
     func doneSettingDetails () {
         editItem()
         println(nItem)
-        self.performSegueWithIdentifier("unwindFromDetailsTimelogViewController", sender: self)
+        self.performSegueWithIdentifier("unwindFromDetailsTableViewController", sender: self)
     }
     
     // MARK: - Date Picker
@@ -164,10 +178,17 @@ class detailsTimelogViewController: UITableViewController {
         if hideTimePicker == false {
             hideTimePicker(true)
             hideTimePicker = true
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 2 && hideTimePicker {
             hideTimePicker(false)
             hideTimePicker = false
+        } else if indexPath.row == 0 {
+            let addJobStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
+            let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
+                as! JobsListTableViewController
+            
+            self.navigationController?.pushViewController(jobsListVC, animated: true)
         }
+        
         
     }
     

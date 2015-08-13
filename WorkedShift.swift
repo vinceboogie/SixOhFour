@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+@objc(WorkedShift)
 
 class WorkedShift: NSManagedObject {
 
