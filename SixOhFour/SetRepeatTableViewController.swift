@@ -12,8 +12,10 @@ class SetRepeatTableViewController: UITableViewController {
 
     @IBOutlet weak var repeatPicker: UIPickerView!
     @IBOutlet weak var frequencyPicker: UIPickerView!
+    @IBOutlet weak var viewByPicker: UIPickerView!
     @IBOutlet weak var repeatLabel: UILabel!
     @IBOutlet weak var frequencyLabel: UILabel!
+    @IBOutlet weak var viewByLabel: UILabel!
     @IBOutlet var collectionView: [UICollectionView]!
     
     var doneButton: UIBarButtonItem!
@@ -21,15 +23,21 @@ class SetRepeatTableViewController: UITableViewController {
     
     var repeatPickerHidden = true
     var frequencyPickerHidden = true
+    var viewByPickerHidden = true
 
     let weekdaysArray = ["S", "M", "T", "W", "T", "F", "S"]
     let repeatTypes = ["Never", "Weekly", "Monthly"]
+    let viewBy = ["Date", "Day"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         repeatLabel.text = repeatSettings.type
-        setFrequencyLabelText(repeatSettings.frequency)
+        setFrequencyLabelText(repeatSettings.repeatEvery)
+        
+        if let repeatSettings = repeatSettings as? RepeatMonthly {
+            viewByLabel.text = viewBy[repeatSettings.viewType]
+        }
         
         doneButton = UIBarButtonItem(title:"Done", style: .Plain, target: self, action: "setRepeat")
         self.navigationItem.rightBarButtonItem = self.doneButton
@@ -43,8 +51,7 @@ class SetRepeatTableViewController: UITableViewController {
         }
         
         repeatPicker.selectRow(row, inComponent: 0, animated: true)
-        frequencyPicker.selectRow(repeatSettings.frequency-1, inComponent: 0, animated: true)
-
+        frequencyPicker.selectRow(repeatSettings.repeatEvery-1, inComponent: 0, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,12 +96,19 @@ class SetRepeatTableViewController: UITableViewController {
         case "repeatPicker":
             repeatPickerHidden = !repeatPickerHidden
             frequencyPickerHidden = true
+            viewByPickerHidden = true
         case "frequencyPicker":
             frequencyPickerHidden = !frequencyPickerHidden
             repeatPickerHidden = true
+            viewByPickerHidden = true
+        case "viewByPicker":
+            viewByPickerHidden = !viewByPickerHidden
+            repeatPickerHidden = true
+            frequencyPickerHidden = true
         default:
             repeatPickerHidden = true
             frequencyPickerHidden = true
+            viewByPickerHidden = true
         }
         
         tableView.beginUpdates()
@@ -105,15 +119,46 @@ class SetRepeatTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        if repeatSettings.type == "Never" {
+            return 1
+        } else {
+            return 2
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 4
+            return 6
         } else {
-            return repeatSettings.weeksToRepeat + 1 // Add 1 to account for the first cell containing the label
+            // TODO: Fix Repeat Monthly
+            if repeatSettings.type == "Weekly" {
+                return repeatSettings.repeatEvery
+            } else {
+                return 0
+            }
         }
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var header = ""
+        
+        if let repeatSettings = repeatSettings as? RepeatWeekly {
+            if repeatSettings.repeatEvery == 1 {
+                header = "Repeat every week"
+            } else {
+                header = "Repeat every \(repeatSettings.repeatEvery) weeks"
+            }
+        }
+        
+        if let repeatSettings = repeatSettings as? RepeatMonthly {
+            header = "Repeat on the following \(viewBy[repeatSettings.viewType])s"
+        }
+        
+        if section == 1 {
+            return header
+        }
+        
+        return ""
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -121,6 +166,8 @@ class SetRepeatTableViewController: UITableViewController {
             togglePicker("repeatPicker")
         } else if indexPath.section == 0 && indexPath.row == 2 {
             togglePicker("frequencyPicker")
+        } else if indexPath.section == 0 && indexPath.row == 4 {
+            togglePicker("viewByPicker")
         } else {
             togglePicker("close")
         }
@@ -135,12 +182,21 @@ class SetRepeatTableViewController: UITableViewController {
             return 0
         }
         
+        if viewByPickerHidden && indexPath.section == 0 && indexPath.row == 5 {
+            return 0
+        }
+        
         if repeatSettings.type == "Never" && indexPath.section == 0 && indexPath.row == 2 {
+            return 0
+        }
+        
+        if repeatSettings.type != "Monthly" && indexPath.section == 0 && indexPath.row == 4 {
             return 0
         }
         
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
+    
 }
 
 
@@ -154,6 +210,8 @@ extension SetRepeatTableViewController: UIPickerViewDataSource, UIPickerViewDele
             return 1
         case frequencyPicker:
             return 2
+        case viewByPicker:
+            return 1
         default:
             return 0
         }
@@ -172,6 +230,8 @@ extension SetRepeatTableViewController: UIPickerViewDataSource, UIPickerViewDele
                 }
             }
             return 1
+        case viewByPicker:
+            return 2
         default:
             return 0
         }
@@ -201,6 +261,8 @@ extension SetRepeatTableViewController: UIPickerViewDataSource, UIPickerViewDele
                     return ""
                 }
             }
+        case viewByPicker:
+            return viewBy[row]
         default:
             return ""
         }
@@ -210,57 +272,96 @@ extension SetRepeatTableViewController: UIPickerViewDataSource, UIPickerViewDele
         switch(pickerView) {
         case repeatPicker:
             repeatLabel.text = repeatTypes[row]
-            repeatSettings.type = repeatTypes[row]
+
+            if row == 1 {
+                repeatSettings = RepeatWeekly()
+                
+            } else if row == 2 {
+                repeatSettings = RepeatMonthly()
+                if let repeatSettings = self.repeatSettings as? RepeatMonthly  {
+                    viewByLabel.text = viewBy[repeatSettings.viewType]
+                    viewByPicker.selectRow(repeatSettings.viewType, inComponent: 0, animated: true)
+
+                }
+            }
             
-            setFrequencyLabelText(frequencyPicker.selectedRowInComponent(0)+1)
+            repeatSettings.type = repeatTypes[row]
+
+            var repeatEvery = frequencyPicker.selectedRowInComponent(0)+1
+            setFrequencyLabelText(repeatEvery)
+            
+            if repeatSettings.type == "Weekly" && repeatEvery > 4 {
+                repeatSettings.repeatEvery = 4
+            } else {
+                repeatSettings.repeatEvery = repeatEvery
+            }
+            
+            // Update table view cells
+            for x in 0...3 {
+                collectionView[x].reloadData()
+            }
+            
+            // DELETE: Test
+            if let repeatSettings = self.repeatSettings as? RepeatWeekly  {
+                for x in 0...3 {
+                    for y in 0...6 {
+                        print(repeatSettings.daysToRepeat[x][y])
+                        print("\t")
+                    }
+                    println("")
+                }
+                println("")
+            }
             
         case frequencyPicker:
             setFrequencyLabelText(row+1)
-            repeatSettings.frequency = row+1
+            
+            var previous = repeatSettings.repeatEvery
+            var current = row + 1
+            
+            repeatSettings.repeatEvery = current
+            
+            if let repeatSettings = self.repeatSettings as? RepeatWeekly  {
+                if current > previous {
+                    for x in previous...row {
+                        for y in 0...6 {
+                            repeatSettings.daysToRepeat[x][y] = repeatSettings.daysToRepeat[x-1][y]
+                        }
+                        collectionView[x].reloadData()
+                    }
+                }
+                
+                // DELETE: Test
+                for x in 0...3 {
+                    for y in 0...6 {
+                        print(repeatSettings.daysToRepeat[x][y])
+                        print("\t")
+                    }
+                    println("")
+                }
+                println("")
+            }
+            
+            
+        case viewByPicker:
+            if let repeatSettings = repeatSettings as? RepeatMonthly  {
+                repeatSettings.viewType = row
+                viewByLabel.text = viewBy[repeatSettings.viewType]
+                
+                self.repeatSettings = repeatSettings
+            }
         default: ()
             
         }
+
         
         frequencyPicker.reloadAllComponents()
         
         
-        //        // TODO: Implement weekly and monthly view
-        //        var previous = repeatSettings.weeksToRepeat
-        //        var current = row + 1
-        //
-        //        repeatSettings.weeksToRepeat = current
-        //
-        //
-        //        println(previous)
-        //        println(current)
-        //
-        //        if current > previous {
-        //            for x in previous...row {
-        //                for y in 0...6 {
-        //                    repeatSettings.selectedDaysArray[x][y] = repeatSettings.selectedDaysArray[x-1][y]
-        //                }
-        //                collectionView[x].reloadData()
-        //            }
-        //        }
-        //
-        //                // Test
-        //                for x in 0...4 {
-        //                    for y in 0...6 {
-        //                        print(repeatSettings.selectedDaysArray[x][y])
-        //                        print("\t")
-        //                    }
-        //                    println("")
-        //                }
-        //                println("")
-        //
-        //        // Reset the selected days for weeks not displayed
-        //        if repeatSettings.weeksToRepeat < 5 {
-        //            for x in repeatSettings.weeksToRepeat...4 {
-        //                for y in 0...6 {
-        //                    repeatSettings.selectedDaysArray[x][y] = false
-        //                }
-        //            }
-        //        }
+        // TODO: Implement weekly and monthly view
+
+    
+
         
         tableView.reloadData()
     }
@@ -279,16 +380,18 @@ extension SetRepeatTableViewController: UICollectionViewDataSource, UICollection
         
         var weekIndex = collectionView.tag
         
-        if repeatSettings.selectedDaysArray[weekIndex][indexPath.row]{
-            cell.backgroundColor = .colorFromCode(0x1D62F0)
-            cell.dayLabel.textColor = UIColor.whiteColor()
-        } else {
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.dayLabel.textColor = UIColor.blackColor()
+        if let repeatSettings = repeatSettings as? RepeatWeekly {
+            if repeatSettings.daysToRepeat[weekIndex][indexPath.row]{
+                cell.backgroundColor = .colorFromCode(0x1D62F0)
+                cell.dayLabel.textColor = UIColor.whiteColor()
+            } else {
+                cell.backgroundColor = UIColor.whiteColor()
+                cell.dayLabel.textColor = UIColor.blackColor()
+            }
+            
+            cell.dayLabel.font = UIFont.boldSystemFontOfSize(12.0)
+            cell.dayLabel.text = weekdaysArray[indexPath.row]
         }
-        
-        cell.dayLabel.font = UIFont.boldSystemFontOfSize(12.0)
-        cell.dayLabel.text = weekdaysArray[indexPath.row]
         
         return cell
     }
@@ -298,16 +401,39 @@ extension SetRepeatTableViewController: UICollectionViewDataSource, UICollection
         
         var weekIndex = collectionView.tag
         
-        if repeatSettings.selectedDaysArray[weekIndex][indexPath.row] == false{
-            cell.backgroundColor = .colorFromCode(0x1D62F0)
-            cell.dayLabel.textColor = UIColor.whiteColor()
+        if let repeatSettings = repeatSettings as? RepeatWeekly {
+            if repeatSettings.daysToRepeat[weekIndex][indexPath.row] == false{
+                cell.backgroundColor = .colorFromCode(0x1D62F0)
+                cell.dayLabel.textColor = UIColor.whiteColor()
+                
+                repeatSettings.daysToRepeat[weekIndex][indexPath.row] = true
+            } else {
+                cell.backgroundColor = UIColor.whiteColor()
+                cell.dayLabel.textColor = UIColor.blackColor()
+                
+                repeatSettings.daysToRepeat[weekIndex][indexPath.row] = false
+            }
             
-            repeatSettings.selectedDaysArray[weekIndex][indexPath.row] = true
-        } else {
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.dayLabel.textColor = UIColor.blackColor()
+            // DELETE: Test
+            for x in 0...3 {
+                for y in 0...6 {
+                    print(repeatSettings.daysToRepeat[x][y])
+                    print("\t")
+                }
+                println("")
+            }
+            println("")
+    
+            // Reset the selected days for weeks not displayed
+            if repeatSettings.repeatEvery < 4 {
+                for x in repeatSettings.repeatEvery...3 {
+                    for y in 0...6 {
+                        repeatSettings.daysToRepeat[x][y] = false
+                    }
+                }
+            }
             
-            repeatSettings.selectedDaysArray[weekIndex][indexPath.row] = false
+        
         }
     }
 }

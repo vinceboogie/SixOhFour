@@ -27,15 +27,16 @@ class AddScheduleTableViewController: UITableViewController {
     var endTime: NSDate!
     var job: Job!
     var shift: ScheduledShift!
-
+    
     var isNewSchedule = true
     var startDatePickerHidden = true
     var endDatePickerHidden = true
     var reminderPickerHidden = true
     var jobListEmpty = true;
     var reminderMinutes = 16 // Maximum reminder = 15 minutes
-    var repeatSettings = RepeatSettings()
     var dataManager = DataManager()
+    var repeatSettings = RepeatSettings()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,9 @@ class AddScheduleTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = saveButton
         saveButton.enabled = false
         
-        repeatLabel.text = "Never"
+        repeatLabel.text = repeatSettings.type
+        
+        // TODO: Change to repeatSettings.endDate
         endRepeatLabel.text = "Never"
                 
         if shift != nil {
@@ -88,6 +91,45 @@ class AddScheduleTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: - SetIB Actions
+    
+    @IBAction func startDatePickerValue(sender: AnyObject) {
+        datePickerChanged(startLabel, datePicker: startDatePicker)
+    }
+    
+    @IBAction func endDatePickerValue(sender: AnyObject) {
+        datePickerChanged(endLabel, datePicker: endDatePicker)
+    }
+    
+    @IBAction func unwindFromJobsListTableViewController(segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! JobsListTableViewController
+        
+        if sourceVC.selectedJob != nil {
+            job = sourceVC.selectedJob
+            jobNameLabel.text = sourceVC.selectedJob.company.name
+            
+            jobColorView.color = sourceVC.selectedJob.color.getColor
+        }
+    }
+    
+    @IBAction func unwindFromSetRepeatTableViewController(segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! SetRepeatTableViewController
+        
+        self.repeatSettings = sourceVC.repeatSettings
+        repeatLabel.text = repeatSettings.type
+        
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    @IBAction func unwindFromEndRepeatTableViewController(segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! EndRepeatTableViewController
+        
+        endRepeatLabel.text = sourceVC.endRepeat
     }
 
     
@@ -178,45 +220,6 @@ class AddScheduleTableViewController: UITableViewController {
         dataManager.save()
         
         self.performSegueWithIdentifier("unwindAfterSaveSchedule", sender: self)
-    }
-
-    
-    // MARK: - SetIB Actions
-    
-    @IBAction func startDatePickerValue(sender: AnyObject) {
-        datePickerChanged(startLabel, datePicker: startDatePicker)
-    }
-    
-    @IBAction func endDatePickerValue(sender: AnyObject) {
-        datePickerChanged(endLabel, datePicker: endDatePicker)
-    }
-    
-    @IBAction func unwindFromJobsListTableViewController(segue: UIStoryboardSegue) {
-        let sourceVC = segue.sourceViewController as! JobsListTableViewController
-        
-        if sourceVC.selectedJob != nil {
-            job = sourceVC.selectedJob
-            jobNameLabel.text = sourceVC.selectedJob.company.name
-            
-            jobColorView.color = sourceVC.selectedJob.color.getColor
-        }
-    }
-    
-    @IBAction func unwindFromSetRepeatTableViewController(segue: UIStoryboardSegue) {
-        let sourceVC = segue.sourceViewController as! SetRepeatTableViewController
-        
-        self.repeatSettings = sourceVC.repeatSettings
-        repeatLabel.text = repeatSettings.type
-
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
-    }
-    
-    @IBAction func unwindFromEndRepeatTableViewController(segue: UIStoryboardSegue) {
-        let sourceVC = segue.sourceViewController as! EndRepeatTableViewController
-        
-        endRepeatLabel.text = sourceVC.endRepeat
     }
     
     // MARK: - Toggles
@@ -326,8 +329,14 @@ class AddScheduleTableViewController: UITableViewController {
         if segue.identifier == "setRepeat" {
             let destinationVC = segue.destinationViewController as! SetRepeatTableViewController
             
-            repeatSettings.selectedDaysArray[0][repeatSettings.daySelectedIndex] = true 
+            // TODO: Set selected day = true
+            if let repeatSettings = repeatSettings as? RepeatWeekly {
+                repeatSettings.daysToRepeat[0][repeatSettings.daySelectedIndex] = true
+                self.repeatSettings = repeatSettings
+            }
+
             destinationVC.repeatSettings = self.repeatSettings
+
         }
         
         if segue.identifier == "setEndRepeat" {
@@ -413,6 +422,8 @@ extension AddScheduleTableViewController: UIPickerViewDataSource, UIPickerViewDe
             startTime = startDatePicker.date
         }
         
+        // TODO: Set selected day as true on daysToRepeat
+        
         let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let myComponents = cal!.components(NSCalendarUnit.CalendarUnitWeekday, fromDate: datePicker.date)
         repeatSettings.daySelectedIndex = myComponents.weekday - 1
@@ -444,3 +455,4 @@ extension AddScheduleTableViewController: UIPickerViewDataSource, UIPickerViewDe
         }
     }
 }
+

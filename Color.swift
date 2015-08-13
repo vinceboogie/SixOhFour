@@ -32,6 +32,16 @@ extension Color {
             return UIColor.yellowColor()
         case "Purple":
             return UIColor.purpleColor()
+        case "Cyan":
+            return UIColor.cyanColor()
+        case "Orange":
+            return UIColor.orangeColor()
+        case "Magenta":
+            return UIColor.magentaColor()
+        case "Brown":
+            return UIColor.brownColor()
+        case "Gray":
+            return UIColor.lightGrayColor()
         default:
             return UIColor.blackColor()
         }

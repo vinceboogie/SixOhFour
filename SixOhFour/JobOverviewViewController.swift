@@ -68,7 +68,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     func calculateRegHours() {
         fetchData()
         
-        println(allWorkedShifts) 
+//        println(allWorkedShifts) 
     }
     
     func editJob() {

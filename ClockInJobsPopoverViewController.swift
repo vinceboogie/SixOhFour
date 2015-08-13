@@ -9,27 +9,33 @@
 import UIKit
 import CoreData
 
-class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ClockInJobsPopoverViewController: UIViewController {
     
     @IBOutlet weak var ClockInJobsTable: UITableView!
     
-    
-    var arrayOfJobs = [Job]()
+    var jobs = [Job]()
     var selectedJob: Job!
     var selectedJobIndex: Int!
+    var dataManager = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        // DELETE: Review and Delete
+        // Now using the DataManager class
+//        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+//        var context:NSManagedObjectContext = appDel.managedObjectContext!
+//        
+//        var request = NSFetchRequest(entityName: "Job")
+//        request.returnsObjectsAsFaults = false ;
+//        
+//        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+//        jobs = results as! [Job]
+
         
-        var request = NSFetchRequest(entityName: "Job")
-        request.returnsObjectsAsFaults = false ;
+        // So fresh and so clean :]
+        jobs = dataManager.fetch("Job") as! [Job]
         
-        var results:NSArray = context.executeFetchRequest(request, error: nil)!
-        
-        arrayOfJobs = results as! [Job]
         
         ClockInJobsTable.delegate = self
         ClockInJobsTable.dataSource = self
@@ -37,15 +43,25 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
         self.ClockInJobsTable.reloadData()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+
+// MARK: - Table View Data Source and Delegate
+
+extension ClockInJobsPopoverViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfJobs.count
+        return jobs.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("ClockInJobsCell", forIndexPath: indexPath) as! JobsListCell
         
-        cell.job = arrayOfJobs[indexPath.row]
+        cell.job = jobs[indexPath.row]
         
         return cell
         
@@ -54,15 +70,10 @@ class ClockInJobsPopoverViewController: UIViewController, UITableViewDataSource,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         self.selectedJobIndex = indexPath.row
-
+        
         self.dismissViewControllerAnimated(true, completion: {})
         
         self.performSegueWithIdentifier("unwindFromClockInPopoverViewControllerIdentifier", sender: self)
-
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
 }
