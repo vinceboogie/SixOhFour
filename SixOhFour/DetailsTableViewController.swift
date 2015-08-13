@@ -6,14 +6,6 @@
 //  Copyright (c) 2015 vinceboogie. All rights reserved.
 //
 
-//
-//  detailsTimelogTableViewController.swift
-//  SixOhFour
-//
-//  Created by joenapoe
-//  Copyright (c) 2015 vinceboogie. All rights reserved.
-//
-
 import UIKit
 import CoreData
 import Foundation
@@ -220,7 +212,7 @@ class DetailsTableViewController: UITableViewController {
     }
     
     func dateFormatter (timestamp: NSDate) -> String {
-        //from NSDate to regualer
+        // NOTE: Convert from NSDate to regualer
         let dateString = NSDateFormatter.localizedStringFromDate( timestamp , dateStyle: .MediumStyle, timeStyle: .MediumStyle)
         return dateString
     }

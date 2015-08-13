@@ -38,11 +38,8 @@ class JobsListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
         
-        
-        // TODO: Change once we update storyboard
-//        cell.job = jobs[indexPath.row]
-        cell.jobNameLabel.text = jobs[indexPath.row].company.name
-        cell.jobColorView.color = jobs[indexPath.row].color.getColor
+        cell.job = jobs[indexPath.row]
+
         
         if cell.jobNameLabel.text == previousSelection {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
