@@ -26,6 +26,7 @@
 		874FAD021B33A9D7002EABB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD011B33A9D7002EABB0 /* Images.xcassets */; };
 		874FAD051B33A9D7002EABB0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874FAD031B33A9D7002EABB0 /* LaunchScreen.xib */; };
 		874FAD111B33A9D7002EABB0 /* SixOhFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */; };
+		8772D0F31B7D8931007DB395 /* TimesheetDateTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8772D0F21B7D8931007DB395 /* TimesheetDateTableView.swift */; };
 		879277011B5868E90023CBA6 /* JobOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879277001B5868E90023CBA6 /* JobOverviewViewController.swift */; };
 		879277031B588B2C0023CBA6 /* PayRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879277021B588B2C0023CBA6 /* PayRate.swift */; };
 		87B57CD71B509B4400D9B438 /* JobsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B57CD61B509B4400D9B438 /* JobsListCell.swift */; };
@@ -116,6 +117,7 @@
 		874FAD0A1B33A9D7002EABB0 /* SixOhFourTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SixOhFourTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		874FAD0F1B33A9D7002EABB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		874FAD101B33A9D7002EABB0 /* SixOhFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOhFourTests.swift; sourceTree = "<group>"; };
+		8772D0F21B7D8931007DB395 /* TimesheetDateTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesheetDateTableView.swift; sourceTree = "<group>"; };
 		879277001B5868E90023CBA6 /* JobOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobOverviewViewController.swift; sourceTree = "<group>"; };
 		879277021B588B2C0023CBA6 /* PayRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRate.swift; sourceTree = "<group>"; };
 		87B57CD51B5090D100D9B438 /* SixOhFourV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SixOhFourV2.xcdatamodel; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				87B57CD61B509B4400D9B438 /* JobsListCell.swift */,
 				87EAE1321B6B05D000EBEF78 /* TimesheetCell.swift */,
 				87EAE1361B6B18FA00EBEF78 /* DetailsCell.swift */,
+				8772D0F21B7D8931007DB395 /* TimesheetDateTableView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				B9E31D221B7C27A5008CF7DC /* RepeatSettings.swift in Sources */,
 				B9CF32A41B6B046900757E43 /* CVScrollDirection.swift in Sources */,
 				B93E888B1B46067E0030877B /* TodayScheduleCell.swift in Sources */,
+				8772D0F31B7D8931007DB395 /* TimesheetDateTableView.swift in Sources */,
 				87B57CD71B509B4400D9B438 /* JobsListCell.swift in Sources */,
 				874FACF81B33A9D7002EABB0 /* AppDelegate.swift in Sources */,
 				B992A18D1B582FFE006E5A2B /* SetRepeatTableViewController.swift in Sources */,

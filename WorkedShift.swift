@@ -12,9 +12,11 @@ import CoreData
 
 class WorkedShift: NSManagedObject {
 
+    @NSManaged var duration: Double
     @NSManaged var source: String
     @NSManaged var status: NSNumber
     @NSManaged var job: Job
     @NSManaged var timelogs: NSSet
+    
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDelegate {
+class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var positionLabel: UILabel!
@@ -20,6 +20,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var weekEarningLabel: UILabel!
     @IBOutlet weak var lastThirtyDaysLabel: UILabel!
     @IBOutlet weak var yearToDateLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     var editButton: UIBarButtonItem!
     var job: Job!
@@ -44,13 +45,46 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         nameLabel.text = job.company.name
         positionLabel.text = job.position
         payLabel.text = "\(numberFormatter.stringFromNumber(pay)!)/hr"
-        
-        calculateRegHours()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+            if indexPath.section == 0 && indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier("tsCell", forIndexPath: indexPath) as! UITableViewCell
+                return cell
+                
+            } else if indexPath.section == 0 && indexPath.row == 1 {
+                let cell = tableView.dequeueReusableCellWithIdentifier("startCell", forIndexPath: indexPath) as! UITableViewCell
+                return cell
+        
+            } else if indexPath.section == 0 && indexPath.row == 2 {
+                let cell = tableView.dequeueReusableCellWithIdentifier("startDateCell", forIndexPath: indexPath) as! UITableViewCell
+                return cell
+        
+            } else if indexPath.section == 0 && indexPath.row == 3 {
+                let cell = tableView.dequeueReusableCellWithIdentifier("endCell", forIndexPath: indexPath) as! UITableViewCell
+                return cell
+        
+            } else if indexPath.section == 0 && indexPath.row == 4 {
+                let cell = tableView.dequeueReusableCellWithIdentifier("endDateCell", forIndexPath: indexPath) as! UITableViewCell
+                return cell
+            
+        }
+        return UITableViewCell()
+    }
+    
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     
     func fetchData() {
@@ -66,9 +100,8 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     }
     
     func calculateRegHours() {
-        fetchData()
         
-//        println(allWorkedShifts) 
+        regularHoursLabel.text = "\(workedshift.duration)"
     }
     
     func editJob() {
