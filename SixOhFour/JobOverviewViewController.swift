@@ -112,6 +112,8 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         if segue.identifier == "editJob" {
             let destinationVC = segue.destinationViewController as! AddJobTableViewController
             destinationVC.navigationItem.title = "Edit Job"
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
+            destinationVC.hidesBottomBarWhenPushed = true
             destinationVC.job = self.job
         }
     }
