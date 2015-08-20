@@ -22,6 +22,8 @@ class AddJobTableViewController: UITableViewController {
     var job: Job!
     var pickerVisible = false
     var payRate: NSDecimalNumber!
+    var previousColor: Color!
+    var selectedColor: Color!
     
     let dataManager = DataManager()
     var colors = [Color]()
@@ -31,6 +33,8 @@ class AddJobTableViewController: UITableViewController {
         
         let predicate = NSPredicate(format: "isSelected == false")
         colors = dataManager.fetch("Color", predicate: predicate) as! [Color]
+        
+        selectedColor = colors[0]
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -52,6 +56,14 @@ class AddJobTableViewController: UITableViewController {
             payRate = job.payRate
             colorLabel.text = job.color.name
             jobColorView.color = job.color.getColor
+            
+            previousColor = job.color
+            selectedColor = job.color
+            colors.insert(selectedColor, atIndex: 0)
+        } else {
+            colorLabel.text = selectedColor.name
+            jobColorView.color = colors[0].getColor
+
         }
     }
 
@@ -69,6 +81,11 @@ class AddJobTableViewController: UITableViewController {
 //            let selectedColor = find(colors, job.color)
 //            colorPicker.selectRow(selectedColor!, inComponent: 0, animated: true)
 //        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - IBActions
@@ -100,7 +117,50 @@ class AddJobTableViewController: UITableViewController {
     }
     
     
-    // MARK: -  Table view data source
+    // MARK: - Class functions
+    
+    func newItem() {
+        // TODO: We should pass job.position to coredata instead of positionTextField.text
+        
+        let color = dataManager.editItem(selectedColor, entityName: "Color") as! Color
+        color.isSelected = true
+        
+        let company = dataManager.addItem("Company") as! Company
+        let job = dataManager.addItem("Job") as! Job
+        
+        company.name = nameTextField.text
+        job.setValue(company, forKey: "company")
+        job.position = positionTextField.text
+        job.setValue(color, forKey: "color")
+        
+        if payRate == nil {
+            job.payRate = 0.00
+        } else {
+            job.payRate = self.payRate
+        }
+        dataManager.save()
+    }
+    
+    func editItem() {
+        
+        let previous = dataManager.editItem(previousColor, entityName: "Color") as! Color
+        previous.isSelected = false
+        
+        let currentColor = dataManager.editItem(selectedColor, entityName: "Color") as! Color
+        currentColor.isSelected = true
+        
+        let editJob = dataManager.editItem(job, entityName: "Job") as! Job
+        
+        editJob.company.name = nameTextField.text
+        editJob.position = positionTextField.text
+        editJob.payRate = payRate
+        editJob.color = currentColor
+        
+        dataManager.save()
+    }
+    
+    
+    // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3 {
@@ -121,50 +181,8 @@ class AddJobTableViewController: UITableViewController {
         return 44.0
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    func newItem() {
-        // TODO: let color is creating a new managedObj. 
-        // We need to fetch the color and link jobs to it.
-        // Also, we should pass job.position to coredata instead of positionTextField.text
-        
-        let predicate = NSPredicate(format: "name == %@", colorLabel.text!)
-        let color = dataManager.fetch("Color", predicate: predicate) as! [Color]
-        var selectedColor = color[0]
-        selectedColor.isSelected = true
-        
-        println(color)
-        let company = dataManager.addItem("Company") as! Company
-        let job = dataManager.addItem("Job") as! Job
-        
-        company.name = nameTextField.text
-        job.setValue(company, forKey: "company")
-        job.position = positionTextField.text
-        job.setValue(selectedColor, forKey: "color")
-        
-        if payRate == nil {
-            job.payRate = 0.00
-        } else {
-            job.payRate = self.payRate
-        }
-        dataManager.save()
-    }
-    
-    func editItem() {
-
-        let editJob = dataManager.editItem(job, entityName: "Job") as! Job
-        
-        editJob.company.name = nameTextField.text
-        editJob.position = positionTextField.text
-        editJob.payRate = payRate
-        editJob.color.name = colorLabel.text!
-        
-        dataManager.save()
-    }
-    
+    // MARK: - Navigation 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "payRate" {
@@ -193,8 +211,11 @@ extension AddJobTableViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        colorLabel.text = colors[row].name
-        jobColorView.color = colors[row].getColor
+  
+        selectedColor = colors[row]
+        
+        colorLabel.text = selectedColor.name
+        jobColorView.color = selectedColor.getColor
         jobColorView.setNeedsDisplay()
     }
 

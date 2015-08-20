@@ -103,10 +103,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
+        if segue.identifier == "add" {
+            let destinationVC = segue.destinationViewController as! AddJobTableViewController
+            destinationVC.hidesBottomBarWhenPushed = true;
+            
+        }
+        
         if segue.identifier == "jobOverview" {
             let destinationVC = segue.destinationViewController as! JobOverviewViewController
+            destinationVC.hidesBottomBarWhenPushed = true;
+
             destinationVC.job = self.job
         }
+        
     }
     
 }
