@@ -1,62 +1,36 @@
 //
-//  TimesheetCell.swift
+//  StartDatePickerCell.swift
 //  SixOhFour
 //
-//  Created by vinceboogie on 7/30/15.
+//  Created by vinceboogie on 8/20/15.
 //  Copyright (c) 2015 vinceboogie. All rights reserved.
 //
 
 import UIKit
 
-class TimesheetCell: UITableViewCell {
+class StartDatePickerCell: UITableViewCell {
     
-    @IBOutlet weak var regularHoursLabel: UILabel!
-    @IBOutlet weak var overtimeHoursLabel: UILabel!
-    @IBOutlet weak var totalHoursLabel: UILabel!
-    @IBOutlet weak var earningsLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
-    @IBOutlet weak var endDatePicker: UIDatePicker!
-    @IBOutlet weak var dayLabel: UILabel!
-    @IBOutlet weak var hoursLabel: UILabel!
-    @IBOutlet weak var startDetailLabel: UILabel!
-    @IBOutlet weak var endDetailLabel: UILabel!
     
     @IBAction func startDatePickerValue(sender: AnyObject) {
-        datePickerChanged(startDetailLabel, datePicker: startDatePicker)
-    }
-    
-    @IBAction func endDatePickerValue(sender: AnyObject) {
-        datePickerChanged(endDetailLabel, datePicker: endDatePicker)
 
     }
-    
-    var endDate: NSDate!
+
     var startDate: NSDate!
+    var endDate: NSDate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        startDate = NSDate()
-        endDate = NSDate()
         
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         
         let dateComponents = calendar.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay, fromDate: endDate)
         startDate = calendar.dateByAddingUnit(NSCalendarUnit.CalendarUnitDay, value: -6, toDate: endDate, options: nil)
-        
-        println(startDate)
-        
-//        startDatePicker.date = NSDate()
-//        endDatePicker.date = NSDate()
-        
-        if startDatePicker == nil {
-            println("fml")
-        }
     }
-    
+
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
         // Configure the view for the selected state
     }
 
@@ -74,11 +48,11 @@ class TimesheetCell: UITableViewCell {
             } else {
                 endDetailLabel.text = dateFormatter.stringFromDate(endDatePicker.date)
             }
-        
+            
             startDate = datePicker.date
             endDate = endDatePicker.date
         }
-    
+        
         if datePicker == endDatePicker {
             if datePicker.date.compare(startDatePicker.date) == NSComparisonResult.OrderedAscending {
                 startDetailLabel.text = label.text
@@ -93,6 +67,3 @@ class TimesheetCell: UITableViewCell {
     }
 
 }
-    
-
-

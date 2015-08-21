@@ -36,7 +36,7 @@ class TimesheetViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TimesheetCell", forIndexPath: indexPath) as! TimesheetCell
-        
+
         cell.dayLabel.text = self.days[indexPath.row]
         cell.hoursLabel.text = self.hours[indexPath.row]
         

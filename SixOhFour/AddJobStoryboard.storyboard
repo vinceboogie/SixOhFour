@@ -826,7 +826,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="hoursCell" rowHeight="65" id="QsW-sR-FD3" customClass="TimesheetCell" customModule="SixOhFour" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="hoursCell" rowHeight="65" id="QsW-sR-FD3" customClass="HoursCell" customModule="SixOhFour" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QsW-sR-FD3" id="dp5-Hd-JyN">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -922,12 +922,12 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="overtimeHoursLabel" destination="oox-KX-snh" id="jxZ-mZ-SCb"/>
-                                    <outlet property="regularHoursLabel" destination="wsF-3d-VXx" id="qtZ-6R-ebN"/>
-                                    <outlet property="totalHoursLabel" destination="Bwv-uv-H6b" id="MpT-r4-uFC"/>
+                                    <outlet property="overtimeHoursLabel" destination="oox-KX-snh" id="iMG-1C-pXS"/>
+                                    <outlet property="regularHoursLabel" destination="wsF-3d-VXx" id="JpN-C3-kNY"/>
+                                    <outlet property="totalHoursLabel" destination="Bwv-uv-H6b" id="xnN-HH-S0G"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="earningsCell" rowHeight="52" id="kNx-J1-CGn" customClass="TimesheetCell" customModule="SixOhFour" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="earningsCell" rowHeight="52" id="kNx-J1-CGn" customClass="EarningsCell" customModule="SixOhFour" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kNx-J1-CGn" id="gbA-FR-Xc6">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -953,10 +953,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="earningsLabel" destination="nH8-N2-wnZ" id="aTc-qa-K2U"/>
+                                    <outlet property="earningsLabel" destination="nH8-N2-wnZ" id="cLq-9S-SAq"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="startCell" textLabel="fzk-As-lV4" detailTextLabel="wAH-Vm-dcj" style="IBUITableViewCellStyleValue1" id="pzL-0R-wqp" customClass="TimesheetCell" customModule="SixOhFour" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="startCell" textLabel="fzk-As-lV4" detailTextLabel="wAH-Vm-dcj" style="IBUITableViewCellStyleValue1" id="pzL-0R-wqp" customClass="StartDateCell" customModule="SixOhFour" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pzL-0R-wqp" id="dAZ-WV-zJz">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -976,10 +976,10 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="startDetailLabel" destination="wAH-Vm-dcj" id="749-qS-NnI"/>
+                                    <outlet property="startDetailLabel" destination="wAH-Vm-dcj" id="8oK-zk-8VS"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="startDateCell" rowHeight="162" id="GL0-BJ-Cef" customClass="TimesheetCell" customModule="SixOhFour" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="startDateCell" rowHeight="162" id="GL0-BJ-Cef" customClass="StartDatePickerCell" customModule="SixOhFour" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GL0-BJ-Cef" id="wrF-h1-K4y">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -990,7 +990,7 @@
                                                 <!--2015-08-15 00:02:53 +0000-->
                                             </date>
                                             <connections>
-                                                <action selector="startDatePickerValue:" destination="GL0-BJ-Cef" eventType="valueChanged" id="g41-h8-WEd"/>
+                                                <action selector="startDatePickerValue:" destination="GL0-BJ-Cef" eventType="valueChanged" id="UoB-om-171"/>
                                             </connections>
                                         </datePicker>
                                     </subviews>
@@ -1002,10 +1002,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="startDatePicker" destination="zib-GF-LER" id="W5O-cx-7Aa"/>
+                                    <outlet property="startDatePicker" destination="zib-GF-LER" id="GhB-Rs-RUy"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="endCell" textLabel="yWx-EX-0YR" detailTextLabel="AC0-2J-yZY" style="IBUITableViewCellStyleValue1" id="fdc-vK-VIG" customClass="TimesheetCell" customModule="SixOhFour" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="endCell" textLabel="yWx-EX-0YR" detailTextLabel="AC0-2J-yZY" style="IBUITableViewCellStyleValue1" id="fdc-vK-VIG" customClass="EndDateCell" customModule="SixOhFour" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fdc-vK-VIG" id="Yic-Gk-Dwr">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1025,10 +1025,10 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="endDetailLabel" destination="AC0-2J-yZY" id="vJU-pf-cu7"/>
+                                    <outlet property="endDetailLabel" destination="AC0-2J-yZY" id="4kR-rl-Dea"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="endDateCell" rowHeight="162" id="Qrp-qP-8fY" customClass="TimesheetCell" customModule="SixOhFour" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="endDateCell" rowHeight="162" id="Qrp-qP-8fY" customClass="EndDatePickerCell" customModule="SixOhFour" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qrp-qP-8fY" id="b2j-DN-RDy">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1039,7 +1039,7 @@
                                                 <!--2015-08-15 00:02:58 +0000-->
                                             </date>
                                             <connections>
-                                                <action selector="endDatePickerValue:" destination="Qrp-qP-8fY" eventType="valueChanged" id="Zen-YA-I5j"/>
+                                                <action selector="endDatePickerValue:" destination="Qrp-qP-8fY" eventType="valueChanged" id="zIH-am-Wa4"/>
                                             </connections>
                                         </datePicker>
                                     </subviews>
@@ -1051,10 +1051,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="endDatePicker" destination="Zvz-X0-iE9" id="SmI-Yj-gji"/>
+                                    <outlet property="endDatePicker" destination="Zvz-X0-iE9" id="klq-Yx-G3X"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dayCell" id="hlP-S0-k0F" customClass="TimesheetCell" customModule="SixOhFour" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dayCell" id="hlP-S0-k0F" customClass="TimesheetCell" customModule="SixOhFour">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hlP-S0-k0F" id="qPH-ey-wqk">
                                     <autoresizingMask key="autoresizingMask"/>

@@ -63,6 +63,10 @@ class TimesheetTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 && indexPath.row == 0 {
             togglePicker("startDate")
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("startCell") as! StartDatePickerCell
+            
+            print(cell.startDate)
         } else if indexPath.section == 1 && indexPath.row == 2 {
             togglePicker("endDate")
         } else {
