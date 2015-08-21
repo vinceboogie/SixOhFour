@@ -26,7 +26,9 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var tableView: UITableView!
     
     var editButton: UIBarButtonItem!
+    var jobs = [Job]()
     var job: Job!
+    var company: Company!
     var timelog: Timelog!
     var workedshift: WorkedShift!
     var allWorkedShifts = [WorkedShift]()
@@ -60,6 +62,8 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         nameLabel.text = job.company.name
         positionLabel.text = job.position
         payLabel.text = "\(numberFormatter.stringFromNumber(pay)!)/hr"
+        
+        fetchData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,19 +114,10 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     }
     
     func fetchData() {
-        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
-        
-        var request = NSFetchRequest(entityName: "WorkedShift")
-        request.returnsObjectsAsFaults = false ;
-        
-        var results:NSArray = context.executeFetchRequest(request, error: nil)!
-        
-        allWorkedShifts = results as! [WorkedShift]
+        jobs = dataManager.fetch("Job") as! [Job]
     }
     
     func calculateRegHours() {
-        
         regularHoursLabel.text = "\(workedshift.duration)"
     }
     

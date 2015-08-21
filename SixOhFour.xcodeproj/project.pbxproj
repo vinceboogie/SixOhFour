@@ -331,11 +331,11 @@
 		B9E34BBE1B508A4400B9FD88 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				870CECBE1B4F4E9C00B30AAE /* PayRateTableViewController.swift */,
-				870CECC01B4F77C900B30AAE /* AddJobTableViewController.swift */,
 				B9BBE8AC1B3BE356004D68DB /* HomeViewController.swift */,
 				879277001B5868E90023CBA6 /* JobOverviewViewController.swift */,
 				871307381B630E4B00D96582 /* TimesheetViewController.swift */,
+				870CECC01B4F77C900B30AAE /* AddJobTableViewController.swift */,
+				870CECBE1B4F4E9C00B30AAE /* PayRateTableViewController.swift */,
 				87EAE1341B6B15C000EBEF78 /* TSDetailsViewController.swift */,
 				87655D671B7EB3D400E89DFE /* TimesheetTableViewController.swift */,
 			);

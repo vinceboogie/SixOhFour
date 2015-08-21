@@ -42,7 +42,9 @@ class TimesheetTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 1 && indexPath.row == 1 {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return 60
+        } else if indexPath.section == 1 && indexPath.row == 1 {
             if startDatePickerHidden {
                 return 0
             } else {
@@ -107,13 +109,13 @@ class TimesheetTableViewController: UITableViewController {
         header.textLabel.textAlignment = NSTextAlignment.Justified
         
         if section == 1 {
-            header.textLabel.text = "Timesheet"
+            header.textLabel.text = "TIMESHEET"
         }
     }
 
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 1 {
-            return 20
+            return 30
         } else {
             return 35
         }
