@@ -205,6 +205,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="addButton" destination="t0x-tI-WZP" id="9cc-WH-oA3"/>
                         <outlet property="calendarView" destination="zmc-jX-FvP" id="N9s-r9-ctI"/>
                         <outlet property="menuView" destination="Bm5-vP-eYN" id="3Hh-lM-c28"/>
                         <outlet property="monthLabel" destination="DDt-fV-1UJ" id="Jgm-SC-tXz"/>

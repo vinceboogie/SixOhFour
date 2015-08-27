@@ -15,6 +15,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     var todayButton: UIBarButtonItem!
     var selectedDate: NSDate!
@@ -25,6 +26,7 @@ class CalendarViewController: UIViewController {
     var shouldShowDaysOut = true
     var animationFinished = true
     var currentMonth = CVDate(date: NSDate()).currentMonth
+    var deleteSchedule = [ScheduledShift]()
     
     let dataManager = DataManager()
     
@@ -36,7 +38,7 @@ class CalendarViewController: UIViewController {
         
         monthLabel.text = CVDate(date: NSDate()).monthYear
         
-        var today = NSDate()
+        let today = NSDate()
         var formatter = NSDateFormatter()
         formatter.dateFormat = "EEEE, MMMM d"
         
@@ -53,7 +55,20 @@ class CalendarViewController: UIViewController {
         super.viewWillAppear(true)
         
         fetchMonthSchedule()
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .LongStyle
+        formatter.timeStyle = .NoStyle
+        
+        let selectedDay = formatter.stringFromDate(selectedDate)
+        
+        updateDaySchedule(selectedDay)        
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        tableView.reloadData()
+    }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -82,9 +97,7 @@ class CalendarViewController: UIViewController {
         monthView = !monthView
     }
     
-    
-    // TODO: Update dotmarker and list of shifts on segue
-    
+        
     @IBAction func unwindAfterSaveSchedule(segue: UIStoryboardSegue) {
         calendarView.toggleViewWithDate(selectedDate)
     }
@@ -96,6 +109,35 @@ class CalendarViewController: UIViewController {
         calendarView.toggleCurrentDayView()
     }
     
+    func toggleAddButton() {
+        var today = NSDate()
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let comps = (NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay)
+        
+        let selectedDateComponents = calendar.components(comps, fromDate: selectedDate)
+        let todayComponents = calendar.components(comps, fromDate: today)
+        
+        today = calendar.dateFromComponents(todayComponents)!
+        let dateToCompare = calendar.dateFromComponents(selectedDateComponents)
+        
+        if dateToCompare!.compare(today) == NSComparisonResult.OrderedAscending {
+            addButton.enabled = false
+        } else {
+            addButton.enabled = true
+        }
+
+    }
+    
+    func updateDaySchedule(selectedDay: String) {
+        daySchedule = []
+        
+        for m in monthSchedule {
+            if selectedDay == m.startDate {
+                daySchedule.append(m)
+            }
+        }
+    }
+    
     func fetchMonthSchedule() {
         let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
         let sortDescriptor = NSSortDescriptor(key: "startTime", ascending: true)
@@ -104,7 +146,7 @@ class CalendarViewController: UIViewController {
         monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate, sortDescriptors: sortDescriptors) as! [ScheduledShift]
     }
     
-    func performBatchDelete(shift: ScheduledShift) {
+    func fetchRepeats(shift: ScheduledShift) {
         
         let sortDescriptor = NSSortDescriptor(key: "startTime", ascending: false)
         let sortDescriptors = [sortDescriptor]
@@ -122,28 +164,14 @@ class CalendarViewController: UIViewController {
         while startDate.compare(lastShift.startTime) == NSComparisonResult.OrderedAscending {
             
             let predicate = NSPredicate(format: "startTime == %@ && endTime == %@", startDate, endDate)
-            let results = dataManager.fetch("ScheduledShift", predicate: predicate)
+            let results = dataManager.fetch("ScheduledShift", predicate: predicate) as! [ScheduledShift]
             
             if results.count > 0 {
-                let shift = results[0] as! ScheduledShift
-                
-                // DELETE: Test
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-                dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
-                dateFormatter.timeZone = NSTimeZone()
-                
-                let start = dateFormatter.stringFromDate(shift.startTime)
-                let end = dateFormatter.stringFromDate(shift.endTime)
-                
-                println(String(format:"%@, %@ - %@", shift.startDate, start, end))
-                
-                dataManager.delete(shift)
+                deleteSchedule.append(results[0])
             }
             
             startDate = calendar.dateByAddingUnit(NSCalendarUnit.CalendarUnitDay, value: 7, toDate: startDate, options: nil)!
             endDate = calendar.dateByAddingUnit(NSCalendarUnit.CalendarUnitDay, value: 7, toDate: endDate, options: nil)!
-
         }
     }
 }
@@ -201,16 +229,93 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
             
             tableView.beginUpdates()
             
-            let shiftToDelete = daySchedule[indexPath.row]
-
-            performBatchDelete(shiftToDelete)
-
-            daySchedule.removeAtIndex(indexPath.row)
-
-            fetchMonthSchedule()
+            let app = UIApplication.sharedApplication()
             
-            tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: .Automatic)
+            let shiftToDelete = daySchedule[indexPath.row]
+            
+            fetchRepeats(shiftToDelete)
+
+            var alertTitle = "\(deleteSchedule.count) similar shift"
+            var deleteTitle = "Confirm Delete"
+            
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "EEEE"
+            
+            let day = formatter.stringFromDate(shiftToDelete.startTime)
+            
+            formatter.dateStyle = .NoStyle
+            formatter.timeStyle = .ShortStyle
+            formatter.timeZone = NSTimeZone()
+            
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+
+            if deleteSchedule.count > 1 {
+                alertTitle += "s"
+                
+                let deleteAll = UIAlertAction(title: "Delete All (\(deleteSchedule.count))", style: .Destructive) { (action) in
+                    for shift in self.deleteSchedule {
+                        for event in app.scheduledLocalNotifications {
+                            let notification = event as! UILocalNotification
+                            let startTime = notification.fireDate
+                            
+                            if shift.startTime.compare(startTime!) == NSComparisonResult.OrderedSame {
+                                app.cancelLocalNotification(notification)
+                                break
+                            }
+                        }
+                        
+                        self.dataManager.delete(shift)
+                    }
+                    
+                    self.deleteSchedule = []
+                    self.daySchedule.removeAtIndex(indexPath.row)
+                    self.fetchMonthSchedule()
+                    tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: .Automatic)
+                }
+                
+                let start = formatter.stringFromDate(shiftToDelete.startTime)
+                let end = formatter.stringFromDate(shiftToDelete.endTime)
+                let message = String(format: "\n%@\n%@ - %@\n", day, start, end)
+                
+                alertController.message = message
+                alertController.title = alertTitle
+                alertController.addAction(deleteAll)
+                
+                deleteTitle = "Delete this shift only"
+            }
+            
+            
+            let delete = UIAlertAction(title: deleteTitle, style: .Destructive) { (action) in
+                for event in app.scheduledLocalNotifications {
+                    let notification = event as! UILocalNotification
+                    let startTime = notification.fireDate
+                    
+                    if shiftToDelete.startTime.compare(startTime!) == NSComparisonResult.OrderedSame {
+                        app.cancelLocalNotification(notification)
+                        break
+                    }
+                }
+                
+                self.dataManager.delete(shiftToDelete)
+    
+                self.deleteSchedule = []
+                self.daySchedule.removeAtIndex(indexPath.row)
+                self.fetchMonthSchedule()
+                tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: .Automatic)
+            }
+        
+            let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                self.deleteSchedule = []
+            }
+            
+            alertController.addAction(delete)
+            alertController.addAction(cancel)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             tableView.endUpdates()
+            
         }
     }
 }
@@ -242,15 +347,10 @@ extension CalendarViewController: CVCalendarViewDelegate {
         
         var selectedDay = dayView.date.monthDayYear
         
-        daySchedule = []
-        
-        for m in monthSchedule {
-            if selectedDay == m.startDate {
-                daySchedule.append(m)
-            }
-        }
+        updateDaySchedule(selectedDay)
         
         selectedDate = dayView.date.convertedDate()
+        toggleAddButton()
 
         tableView.reloadData()
     }
@@ -348,19 +448,6 @@ extension CalendarViewController: CVCalendarViewDelegate {
     
     func dotMarker(shouldMoveOnHighlightingOnDayView dayView: CVCalendarDayView) -> Bool {
         return false
-    }
-}
-
-
-// MARK: - CVCalendarViewAppearanceDelegate
-
-extension CalendarViewController: CVCalendarViewAppearanceDelegate {
-    func dayLabelPresentWeekdayInitallyBold() -> Bool {
-        return false
-    }
-    
-    func spaceBetweenDayViews() -> CGFloat {
-        return 2
     }
 }
 

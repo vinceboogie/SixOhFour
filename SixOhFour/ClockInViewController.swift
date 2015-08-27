@@ -311,7 +311,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
                 as! JobsListTableViewController
             
-            jobsListVC.previousSelection = self.selectedJob.company.name
+            jobsListVC.previousSelection = self.selectedJob
             jobsListVC.source = "clockin"
             
             self.navigationController?.pushViewController(jobsListVC, animated: true)

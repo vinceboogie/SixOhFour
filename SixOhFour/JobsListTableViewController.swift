@@ -11,7 +11,7 @@ import UIKit
 class JobsListTableViewController: UITableViewController {
 
     var selectedJob: Job!
-    var previousSelection: String!
+    var previousSelection: Job!
     var source: String!
 
     var jobs = [Job]()
@@ -36,7 +36,6 @@ class JobsListTableViewController: UITableViewController {
             self.performSegueWithIdentifier("unwindFromJobsListTableViewControllerToClockIn", sender: self)
         case "details":
             self.performSegueWithIdentifier("unwindFromJobsListTableViewControllerToDetails", sender: self)
-
         default:
             ()
         }
@@ -55,7 +54,7 @@ class JobsListTableViewController: UITableViewController {
         
         cell.job = jobs[indexPath.row]
         
-        if cell.jobNameLabel.text == previousSelection {
+        if cell.job == previousSelection {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
         

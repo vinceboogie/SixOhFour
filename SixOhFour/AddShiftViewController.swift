@@ -163,7 +163,7 @@ class AddShiftViewController: UIViewController, UITableViewDelegate, UITableView
             let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
                 as! JobsListTableViewController
             jobsListVC.source = "details"
-            jobsListVC.previousSelection = selectedJob.company.name
+            jobsListVC.previousSelection = selectedJob
             
             
             self.navigationController?.pushViewController(jobsListVC, animated: true)
