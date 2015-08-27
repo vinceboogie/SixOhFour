@@ -554,6 +554,7 @@ extension AddScheduleTableViewController {
         if segue.identifier == "selectJob" {
             let destinationVC = segue.destinationViewController as! JobsListTableViewController
             destinationVC.previousSelection = jobNameLabel.text
+            destinationVC.source = "addSchedule"
         }
         
         if segue.identifier == "setRepeat" {
