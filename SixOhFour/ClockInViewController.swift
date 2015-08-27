@@ -23,6 +23,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var jobColorDisplay: JobColorView!
     @IBOutlet weak var jobTitleDisplayButton: UIButton!
     @IBOutlet weak var jobTitleDisplayLabel: UILabel!
+    @IBOutlet var positionLabel: UILabel!
     @IBOutlet weak var lapsTableView: UITableView!
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var breakButton: UIButton!
@@ -115,6 +116,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
                 var firstJob = jobsList[0]
                 jobTitleDisplayLabel.text = firstJob.company.name
                 jobTitleDisplayLabel.textColor = UIColor.blackColor()
+                positionLabel.text = firstJob.position
                 jobColorDisplay.hidden = false
                 jobColorDisplay.color = firstJob.color.getColor
                 jobListEmpty = false
@@ -125,12 +127,14 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else if jobsList.count == 0 { // NOTE: No Jobs exist
                 jobTitleDisplayLabel.text = "Add a Job"
                 jobTitleDisplayLabel.textColor = UIColor.blueColor()
+                positionLabel.text = ""
                 jobColorDisplay.hidden = true
                 addShiftButton.enabled = false
             }
         } else {
             jobTitleDisplayLabel.text = selectedJob.company.name
             jobColorDisplay.color = selectedJob.color.getColor
+            positionLabel.text = selectedJob.position
         }
         
         if flow == "clockedOut" {
@@ -337,7 +341,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         if timelogDescription.last == "Clocked In" {
             let newWorkedShift = dataManager.addItem("WorkedShift") as! WorkedShift
             currentWorkedShift = newWorkedShift
-            currentWorkedShift.status = 2 // 2=running, 1=incomplete, 0=complete
+            currentWorkedShift.status = 2 // 2=running, 1=incomplete, 0=complete, 3=added manually
             newTimelog.workedShift = currentWorkedShift
         } else {
             newTimelog.workedShift = currentWorkedShift
@@ -352,34 +356,20 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func saveWorkedShiftToJob() {
-        var predicateJob = NSPredicate(format: "company.name == %@" , jobTitleDisplayLabel.text!)
+        var predicateJob = NSPredicate(format: "company.name == %@ && position == %@" , selectedJob.company.name, selectedJob.position)
         let assignedJob = dataManager.fetch("Job", predicate: predicateJob) as! [Job]
         currentWorkedShift.job = assignedJob[0]
-        println("assignedJob = \(assignedJob[0].objectID)")
-        
         
         let allTimelogs = dataManager.fetch("Timelog") as! [Timelog]
         let allWorkedShifts = dataManager.fetch("WorkedShift") as! [WorkedShift]
         let allJobs = dataManager.fetch("Job") as! [Job]
 
         dataManager.save()
-
-        // TEST
-        println("Total \(allTimelogs.count) timeLogs")
-        println("Total \(allWorkedShifts.count) workedShifts")
-        println("Total \(allJobs.count) jobs")
-        for i in 0...(allJobs.count-1) {
-            var currentJob = allJobs[i]
-            println("1 of the jobs has \(currentJob.workedShifts.count) workedShifts")
-        }
-        
     }
     
     func appendToTimeTableView() {
-        
         timelogTimestamp.append(NSDate())
         updateTable()
-        
         var indexPathScroll = NSIndexPath(forRow: timelogList.count, inSection: 0)
         self.lapsTableView.scrollToRowAtIndexPath(indexPathScroll, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         
@@ -540,7 +530,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         openShiftsCIs = dataManager.fetch("Timelog", predicate: compoundPredicate, sortDescriptors: [sortNSDATE] ) as! [Timelog]
         
-        println("openShiftsCIs.count \(openShiftsCIs.count)")
         if openShiftsCIs.count == 0 {
             incompleteFolderButton.enabled = false
         } else {
@@ -646,9 +635,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             let destinationVC = segue.destinationViewController as! DetailsTableViewController
             destinationVC.hidesBottomBarWhenPushed = true;
-            
-            println(nItemClockIn)
-            
             destinationVC.nItem = self.nItemClockIn
             destinationVC.nItemPrevious = self.nItemClockInPrevious
             destinationVC.nItemNext = self.nItemClockInNext
@@ -678,14 +664,10 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func unwindFromJobsListTableViewControllerToClockIn (segue: UIStoryboardSegue) {
 
         let sourceVC = segue.sourceViewController as! JobsListTableViewController
-        
-        println("sourceVC.selectedJob = \(sourceVC.selectedJob)")
-        println("selectedJob = \(selectedJob)")
         selectedJob = sourceVC.selectedJob
 
         if timelogList.count > 0 {
             currentWorkedShift.job = selectedJob
-            println("currentWorkedShift.job.objectID = \(currentWorkedShift.job.objectID)")
         }
         updateTable()
     }
@@ -737,10 +719,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if((sourceVC.breakHours) >= 0 ) {
             breakHoursSet = sourceVC.breakHours
-            println("breakHoursSet from SetBreaktime = \(breakHours)")
             breakHoursChange = ( sourceVC.breakHours - sourceVC.breakHoursSetIntial )
-            println("breakHoursChange = \(breakHoursChange)")
-            
             breakHours =  (breakHours + breakHoursChange)
             
             if breakHours < 0 {
@@ -750,9 +729,7 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         if((sourceVC.breakMinutes) >= 0 ) {
             breakMinutesSet = sourceVC.breakMinutes
-            println("breakMinutesSet from SetBreaktime = \(breakMinutes)")
             breakMinutesChange = ( sourceVC.breakMinutes - sourceVC.breakMinutesSetIntial )
-            println("breakMinutesChange = \(breakMinutesChange)")
             breakMinutes = (breakMinutes + breakMinutesChange)
             
             if breakMinutes < 0 {

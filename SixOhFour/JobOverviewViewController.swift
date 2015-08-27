@@ -23,7 +23,6 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var weekEarningLabel: UILabel!
     @IBOutlet weak var lastThirtyDaysLabel: UILabel!
     @IBOutlet weak var yearToDateLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     
     var editButton: UIBarButtonItem!
     var jobs = [Job]()
@@ -32,6 +31,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     var timelog: Timelog!
     var workedshift: WorkedShift!
     var allWorkedShifts = [WorkedShift]()
+//    var totalTime: Double = 0.0
     
     var selectedDate: NSDate!
     var monthSchedule: [ScheduledShift]!
@@ -46,7 +46,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         editButton = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: "editJob")
         self.navigationItem.rightBarButtonItem = editButton
         
@@ -62,7 +62,11 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         nameLabel.text = job.company.name
         positionLabel.text = job.position
         payLabel.text = "\(numberFormatter.stringFromNumber(pay)!)/hr"
-        
+        fetchData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.hidesBottomBarWhenPushed = true
         fetchData()
     }
 
@@ -110,12 +114,110 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
     }
     
     func fetchData() {
         jobs = dataManager.fetch("Job") as! [Job]
+        calcWorkTime7Days()
+        calculatePayDaysAgo(7, labelName: weekEarningLabel)
+        calculatePayDaysAgo(30, labelName: lastThirtyDaysLabel)
+        calculatePayYearToDate(yearToDateLabel)
     }
+
+    func calcWorkTime7Days() {
+        
+        var totalTime = 0.0
+        var regTotalTime = 0.0
+        var oTTotalTime = 0.0
+        allWorkedShifts = []
+        
+        let predicateCurrent = NSPredicate(format: "workedShift.status != 2")
+        let predicateTypeJob = NSPredicate(format: "workedShift.job == %@ && type == %@", job, "Clocked In")
+        let predicateTime = NSPredicate(format: " time > %@", NSDate().dateByAddingTimeInterval(-7*24*60*60) )
+        let compoundPredicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicateTime, predicateTypeJob, predicateCurrent])
+        var sortNSDATE = NSSortDescriptor(key: "time", ascending: true)
+        var openShiftsCIs = dataManager.fetch("Timelog", predicate: compoundPredicate, sortDescriptors: [sortNSDATE] ) as! [Timelog]
+        for timelog in openShiftsCIs {
+            allWorkedShifts.append(timelog.workedShift)
+        }
+        
+        
+        for shift in allWorkedShifts {
+            var partialTime = shift.hoursWorked()
+            totalTime += partialTime
+            
+            var oTPartialTime = shift.hoursWorkedOT()
+            oTTotalTime += oTPartialTime
+            
+            var regPartialTime = shift.hoursWorkedReg()
+            regTotalTime += regPartialTime
+        }
+        
+        regularHoursLabel.text = "\(regTotalTime)"
+        overtimeLabel.text = "\(oTTotalTime)"
+        totalHoursLabel.text = "\(totalTime)"
+        
+    }
+    
+    func calculatePayDaysAgo(daysAgo: Double, labelName: UILabel) {
+
+        var totalPay = 0.00
+        allWorkedShifts = []
+        
+        let predicateCurrent = NSPredicate(format: "workedShift.status != 2")
+        let predicateTypeJob = NSPredicate(format: "workedShift.job == %@ && type == %@", job, "Clocked In")
+        let predicateTime = NSPredicate(format: "time > %@", NSDate().dateByAddingTimeInterval(-daysAgo*24*60*60) )
+        let compoundPredicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicateTime, predicateTypeJob, predicateCurrent])
+        var sortNSDATE = NSSortDescriptor(key: "time", ascending: true)
+        var openShiftsCIs = dataManager.fetch("Timelog", predicate: compoundPredicate, sortDescriptors: [sortNSDATE] ) as! [Timelog]
+        for timelog in openShiftsCIs {
+            allWorkedShifts.append(timelog.workedShift)
+        }
+        for shift in allWorkedShifts {
+            var partialPay = shift.moneyShiftOTx2()
+            totalPay += partialPay
+        }
+        labelName.text = "$\(totalPay)"
+    }
+    
+    func calculatePayYearToDate(labelName: UILabel) {
+        
+        
+        let today = NSDate()
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let dateComponents = calendar.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay, fromDate: today)
+        
+        dateComponents.setValue(1, forComponent: NSCalendarUnit.CalendarUnitMonth)
+        dateComponents.setValue(1, forComponent: NSCalendarUnit.CalendarUnitDay)
+ 
+        var date = calendar.dateFromComponents(dateComponents)
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .NoStyle
+        formatter.timeZone = NSTimeZone()
+        
+        var totalPay = 0.00
+        allWorkedShifts = []
+        
+        let predicateCurrent = NSPredicate(format: "workedShift.status != 2")
+        let predicateTypeJob = NSPredicate(format: "workedShift.job == %@ && type == %@", job, "Clocked In")
+        let predicateTime = NSPredicate(format: "time > %@", date!)
+        let compoundPredicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicateTime, predicateTypeJob, predicateCurrent])
+        var sortNSDATE = NSSortDescriptor(key: "time", ascending: true)
+        var openShiftsCIs = dataManager.fetch("Timelog", predicate: compoundPredicate, sortDescriptors: [sortNSDATE] ) as! [Timelog]
+        for timelog in openShiftsCIs {
+            allWorkedShifts.append(timelog.workedShift)
+        }
+        for shift in allWorkedShifts {
+            var partialPay = shift.moneyShiftOTx2()
+            totalPay += partialPay
+        }
+        labelName.text = "$\(totalPay)"
+    }
+    
     
     func calculateRegHours() {
         regularHoursLabel.text = "\(workedshift.duration)"
@@ -132,6 +234,15 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
             destinationVC.hidesBottomBarWhenPushed = true
             destinationVC.job = self.job
+        }
+        
+        if segue.identifier == "showTimesheet" {
+            let destinationVC = segue.destinationViewController as! TimesheetTableViewController
+            
+//            destinationVC.navigationItem.title = "Edit Job"
+//            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
+            destinationVC.hidesBottomBarWhenPushed = true
+            destinationVC.selectedJob = self.job
         }
     }
     
