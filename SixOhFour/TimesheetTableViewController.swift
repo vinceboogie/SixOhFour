@@ -10,11 +10,42 @@ import UIKit
 
 class TimesheetTableViewController: UITableViewController {
     
+    @IBOutlet var regularHoursLabel: UILabel!
+    @IBOutlet var overtimeHoursLabel: UILabel!
+    @IBOutlet var totalHoursLabel: UILabel!
+    @IBOutlet var earningsLabel: UILabel!
+    @IBOutlet var startDetailLabel: UILabel!
+    @IBOutlet var endDetailLabel: UILabel!
+    @IBOutlet var startDatePicker: UIDatePicker!
+    @IBOutlet var endDatePicker: UIDatePicker!
+    
+    @IBAction func startDatePickerValue(sender: AnyObject) {
+        datePickerChanged(startDetailLabel, datePicker: startDatePicker)
+    }
+    
+    @IBAction func endDatePickerValue(sender: AnyObject) {
+        datePickerChanged(endDetailLabel, datePicker: endDatePicker)
+    }
+    
     var startDatePickerHidden = true
     var endDatePickerHidden = true
     
+    var startDate: NSDate!
+    var endDate: NSDate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Timesheet"
+        
+        endDate = NSDate()
+        
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        
+        let dateComponents = calendar.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay, fromDate: endDate)
+        startDate = calendar.dateByAddingUnit(NSCalendarUnit.CalendarUnitDay, value: -6, toDate: endDate, options: nil)
+        
+        datePickerChanged(startDetailLabel, datePicker: startDatePicker)
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -26,31 +57,17 @@ class TimesheetTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 2
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 2
-        } else {
-            return 5
-        }
-    }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 {
-            return 60
-        } else if indexPath.section == 1 && indexPath.row == 1 {
+            return 50
+        } else if indexPath.section == 2 && indexPath.row == 1 {
             if startDatePickerHidden {
                 return 0
             } else {
                 return 162
             }
-        } else if indexPath.section == 1 && indexPath.row == 3 {
+        } else if indexPath.section == 2 && indexPath.row == 3 {
             if endDatePickerHidden {
                 return 0
             } else {
@@ -61,50 +78,15 @@ class TimesheetTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 && indexPath.row == 0 {
+        if indexPath.section == 2 && indexPath.row == 0 {
             togglePicker("startDate")
-        } else if indexPath.section == 1 && indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("startCell") as! StartDatePickerCell
-            
-            print(cell.startDate)
-        } else if indexPath.section == 1 && indexPath.row == 2 {
+        } else if indexPath.section == 2 && indexPath.row == 2 {
             togglePicker("endDate")
         } else {
             togglePicker("close")
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 && indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("hoursCell", forIndexPath: indexPath) as! UITableViewCell
-            return cell
-        
-        } else if indexPath.section == 0 && indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("earningsCell", forIndexPath: indexPath) as! UITableViewCell
-            return cell
-            
-        } else if indexPath.section == 1 && indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("startCell", forIndexPath: indexPath) as! UITableViewCell
-            return cell
-            
-        } else if indexPath.section == 1 && indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("startDateCell", forIndexPath: indexPath) as! UITableViewCell
-            return cell
-            
-        } else if indexPath.section == 1 && indexPath.row == 2 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("endCell", forIndexPath: indexPath) as! UITableViewCell
-            return cell
-            
-        } else if indexPath.section == 1 && indexPath.row == 3 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("endDateCell", forIndexPath: indexPath) as! UITableViewCell
-            return cell
-        
-        } else if indexPath.section == 1 && indexPath.row == 4 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("dayCell", forIndexPath: indexPath) as! UITableViewCell
-            return cell
-        }
-        return UITableViewCell()
-    }
     
     // Tableview Headers
     
@@ -112,8 +94,12 @@ class TimesheetTableViewController: UITableViewController {
         let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         header.textLabel.textAlignment = NSTextAlignment.Justified
         
-        if section == 1 {
-            header.textLabel.text = "TIMESHEET"
+        if section == 0 {
+            header.textLabel.text = "Hours"
+        } else if section == 1 {
+            header.textLabel.text = "Earnings"
+        } else if section == 2 {
+            header.textLabel.text = "Timesheet"
         }
     }
 
@@ -127,6 +113,38 @@ class TimesheetTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ""
+    }
+    
+    func datePickerChanged(label: UILabel, datePicker: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        
+        label.text = dateFormatter.stringFromDate(datePicker.date)
+        
+        if datePicker == startDatePicker {
+            if datePicker.date.compare(endDatePicker.date) == NSComparisonResult.OrderedDescending {
+                endDetailLabel.text = label.text
+                endDatePicker.date = datePicker.date
+            } else {
+                endDetailLabel.text = dateFormatter.stringFromDate(endDatePicker.date)
+            }
+            
+            startDate = datePicker.date
+            endDate = endDatePicker.date
+        }
+        
+        if datePicker == endDatePicker {
+            if datePicker.date.compare(startDatePicker.date) == NSComparisonResult.OrderedAscending {
+                startDetailLabel.text = label.text
+                startDatePicker.date = datePicker.date
+            } else {
+                startDetailLabel.text = dateFormatter.stringFromDate(startDatePicker.date)
+            }
+            endDate = datePicker.date
+            startDate = startDatePicker.date
+        }
+        
     }
     
     func togglePicker(picker: String) {

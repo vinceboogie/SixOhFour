@@ -83,8 +83,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return 30
     }
     
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        header.textLabel.textAlignment = NSTextAlignment.Justified
+        
+        header.textLabel.text = "My Jobs"
+    }
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "My Jobs"
+        return ""
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
