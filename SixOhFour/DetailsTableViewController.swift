@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Foundation
 
-class DetailsTableViewController: UITableViewController {
+class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var jobColorDisplay: JobColorView!
     @IBOutlet weak var jobLabel: UILabel!
@@ -21,31 +21,24 @@ class DetailsTableViewController: UITableViewController {
     @IBOutlet weak var minTimeLabel: UILabel!
     @IBOutlet weak var maxTimeLabel: UILabel!
     
-    var entrySelectedIndex : Int = -1
-    
-    var jobLabelDisplay = "" // will change from pushed data Segue
-    
-    var doneButton : UIBarButtonItem!
+    //PUSHED IN DATA
+    var selectedJob : Job!
     var noMinDate : Bool = false
     var noMaxDate : Bool = false
-    var hideTimePicker : Bool = true
-    
-    var selectedJob : Job!
-    
-    //    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
     var nItem : Timelog! // will change from pushed data Segue
     var nItemPrevious : Timelog! // will change from pushed data Segue
     var nItemNext : Timelog! // will change from pushed data Segue
     
-    var clockInTime : NSDate!
+    var doneButton : UIBarButtonItem!
+    var hideTimePicker : Bool = true
+    var jobLabelDisplay = String() // will change from pushed data Segue
+    
+    var dataManager = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        jobLabel.text = selectedJob.company.name
-        jobColorDisplay.color = selectedJob.color.getColor
-        
+
         println(nItem)
         
         entryLabel.text = nItem.type
@@ -54,13 +47,18 @@ class DetailsTableViewController: UITableViewController {
         commentTextField.text = nItem.comment
         
         
-        doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "doneSettingDetails")
+        doneButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveDetails")
         self.navigationItem.rightBarButtonItem = doneButton
+        var cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: "cancelDetails")
+        self.navigationItem.leftBarButtonItem = cancelButton
         
         timestampPicker.date = nItem.time
         
         datePickerChanged(timestampLabel!, datePicker: timestampPicker!)
+
         
+        // TODO : Need to set restrictions of 24hrs when picking times for both min and max
+        //Hurdle = how are you going to handle when the WS only has 1 entry CI.. what is the min?
         if noMinDate == true {
             //No Minimum Data
             println("FIRST ENTRY CHOOSEN = no min date")
@@ -73,24 +71,34 @@ class DetailsTableViewController: UITableViewController {
             println("timestampPicker.minimumDate \(timestampPicker.minimumDate!)")
         }
         
+        // TODO : Need to set restrictions of 24hrs when picking times for both min and max
+//        if noMaxDate == true && noMinDate == true {
         if noMaxDate == true {
             //No NextTimeStamp for Maxium Data
+            //And no MinDate to set 24hr restriction
             timestampPicker.maximumDate = NSDate()
             maxTimeLabel.text = "Cannot select a future time."
             
+//        } else if noMaxDate == true && nItemPrevious.time > 24hours ago {
+//
+//            timestampPicker.maximumDate = nItemPrevious.time + 24hours
+//            maxTimeLabel.text = "Must be within 24hrs of last entry"
+//        
+//        } else if noMaxDate == false {
+
         } else {
-            
             timestampPicker.maximumDate = nItemNext.time
             println("timestampPicker.maximumDate \(timestampPicker.maximumDate!)")
             maxTimeLabel.text = "\(nItemNext.type): \(dateFormatter(nItemNext.time))"
-            
         }
         
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        jobLabel.text = selectedJob.company.name
+        jobColorDisplay.color = selectedJob.color.getColor
     }
     
     @IBAction func timestampChanged(sender: AnyObject) {
@@ -123,6 +131,13 @@ class DetailsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    
     func editItem() {
         
         nItem.type = entryLabel.text!
@@ -138,16 +153,22 @@ class DetailsTableViewController: UITableViewController {
             nItem.time = timestampPicker.date
         }
         
-        if nItem.type == "Clocked In"
-        {
-            clockInTime = timestampPicker.date
-        }
     }
     
-    func doneSettingDetails () {
+    func saveDetails () {
         editItem()
         println(nItem)
-        self.performSegueWithIdentifier("unwindFromDetailsTableViewController", sender: self)
+        dataManager.save()
+        self.performSegueWithIdentifier("unwindSaveDetailsTVC", sender: self)
+        println("SAVED")
+
+    }
+    
+    func cancelDetails () {
+        self.performSegueWithIdentifier("unwindCancelDetailsTVC", sender: self)
+//        dataManager.delete(nItem)
+//        println("DELETED")
+
     }
     
     // MARK: - Date Picker
@@ -160,12 +181,14 @@ class DetailsTableViewController: UITableViewController {
         
         label.text = dateFormatter.stringFromDate(datePicker.date)
         
-        
-        
     }
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        commentTextField.resignFirstResponder()
         
         if hideTimePicker == false {
             hideTimePicker(true)
@@ -177,6 +200,8 @@ class DetailsTableViewController: UITableViewController {
             let addJobStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
             let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
                 as! JobsListTableViewController
+            jobsListVC.source = "details"
+            jobsListVC.previousSelection = self.selectedJob.company.name
             
             self.navigationController?.pushViewController(jobsListVC, animated: true)
         }
@@ -215,6 +240,28 @@ class DetailsTableViewController: UITableViewController {
         // NOTE: Convert from NSDate to regualer
         let dateString = NSDateFormatter.localizedStringFromDate( timestamp , dateStyle: .MediumStyle, timeStyle: .MediumStyle)
         return dateString
+    }
+    
+    @IBAction func unwindFromJobsListTableViewControllerToDetails (segue: UIStoryboardSegue) {
+        
+        let sourceVC = segue.sourceViewController as! JobsListTableViewController
+        
+        selectedJob = sourceVC.selectedJob
+
+        
+        // TODO : Need to fix selectedjob in display, label, and core data
+        
+        if sourceVC.selectedJob != nil {
+            selectedJob = sourceVC.selectedJob
+            jobColorDisplay.color = selectedJob.color.getColor
+        }
+        
+//        if timelogList != [] {
+//            saveWorkedShiftToJob()
+//        }
+//        
+//        updateTable()
+//        
     }
     
 }
