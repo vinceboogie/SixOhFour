@@ -23,11 +23,10 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var weekEarningLabel: UILabel!
     @IBOutlet weak var lastThirtyDaysLabel: UILabel!
     @IBOutlet weak var yearToDateLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     
     var editButton: UIBarButtonItem!
-    var jobs = [Job]()
     var job: Job!
+    var jobs: [Job]!
     var company: Company!
     var timelog: Timelog!
     var workedshift: WorkedShift!
@@ -46,7 +45,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         editButton = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: "editJob")
         self.navigationItem.rightBarButtonItem = editButton
         
@@ -58,11 +57,36 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
         numberFormatter.locale = unitedStatesLocale
         
-        monthLabel.text = CVDate(date: NSDate()).globalDescription
+        monthLabel.text = CVDate(date: NSDate()).monthYear
         nameLabel.text = job.company.name
         positionLabel.text = job.position
         payLabel.text = "\(numberFormatter.stringFromNumber(pay)!)/hr"
+
+        allWorkedShifts = dataManager.fetch("WorkedShift") as! [WorkedShift]
         
+        var totalHours: Double = 0.0
+        for i in 0...(allWorkedShifts.count-1) {
+            var tempTime = allWorkedShifts[i].hoursWorked()
+            totalHours = totalHours + tempTime
+            println(totalHours)
+        }
+
+//        for i in 0...10 {
+//            print(i)
+//        }
+        
+        if workedshift != nil {
+//            regularHoursLabel.text = "\(allWorkedShifts.hoursWorked())"
+            overtimeLabel.text = "\(workedshift.otWorked())"
+            totalHoursLabel.text = "\(workedshift.hoursWorked() + workedshift.otWorked())"
+        } else {
+            regularHoursLabel.text = "0.00"
+            overtimeLabel.text = "0.00"
+            totalHoursLabel.text = "\(totalHours)"
+            
+//            "You earned $\( selectedWorkedShift.moneyShiftOTx2()) for this shift"
+
+        }
         fetchData()
     }
 
@@ -114,7 +138,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
     }
     
     func fetchData() {
-        jobs = dataManager.fetch("Job") as! [Job]
+        let job = dataManager.fetch("Job") as! [Job]
     }
     
     func calculateRegHours() {
@@ -158,7 +182,7 @@ extension JobOverviewViewController: CVCalendarViewDelegate {
     }
     
     func presentedDateUpdated(date: CVDate) {
-        if monthLabel.text != date.globalDescription && self.animationFinished {
+        if monthLabel.text != date.monthYear && self.animationFinished {
             
             currentMonth = date.currentMonth
             let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
@@ -168,7 +192,7 @@ extension JobOverviewViewController: CVCalendarViewDelegate {
             updatedMonthLabel.textColor = monthLabel.textColor
             updatedMonthLabel.font = monthLabel.font
             updatedMonthLabel.textAlignment = .Center
-            updatedMonthLabel.text = date.globalDescription
+            updatedMonthLabel.text = date.monthYear
             updatedMonthLabel.sizeToFit()
             updatedMonthLabel.alpha = 0
             updatedMonthLabel.center = self.monthLabel.center
@@ -220,7 +244,7 @@ extension JobOverviewViewController: CVCalendarViewDelegate {
         //        }
         
         
-        let day = dayView.date.currentDay
+        let day = dayView.date.monthDayYear
         var shouldShowDot = false
         
         for s in monthSchedule {
@@ -243,7 +267,7 @@ extension JobOverviewViewController: CVCalendarViewDelegate {
         var monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate) as! [ScheduledShift]
         
         
-        let day = dayView.date.currentDay
+        let day = dayView.date.monthDayYear
         let color = job.color.getColor
         var numberOfDots = 0
         
@@ -286,4 +310,5 @@ extension JobOverviewViewController: CVCalendarViewAppearanceDelegate {
 extension JobOverviewViewController: CVCalendarMenuViewDelegate {
     // firstWeekday() has been already implemented.
 }
+
 

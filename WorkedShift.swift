@@ -29,6 +29,11 @@ class WorkedShift: NSManagedObject {
         return hoursWorked
     }
     
+    func otWorked() -> Double {
+        var otWorked: Double = (round( 100 * (((duration / 3600) - 8 )*1.5 + 8) * ( Double(self.job.payRate) ) ) / 100)
+        return otWorked
+    }
+    
     func moneyShift() -> Double {
         pay  = (round( 100 * (duration / 3600) * ( Double(self.job.payRate) ) ) / 100)
         return pay
