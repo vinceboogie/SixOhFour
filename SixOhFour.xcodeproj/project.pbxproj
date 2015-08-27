@@ -593,6 +593,7 @@
 				B9E34BCB1B50D21800B9FD88 /* JobsListTableViewController.swift in Sources */,
 				879277011B5868E90023CBA6 /* JobOverviewViewController.swift in Sources */,
 				87B7C1881B69C22800C65C96 /* RepeatingSchedule.swift in Sources */,
+                00941E341B7D828500656726 /* ManualEditsListTableViewCell.swift in Sources */,
 				87B7C1861B69C22800C65C96 /* Job.swift in Sources */,
 				B9CF32991B6B046900757E43 /* CVCalendarViewAnimator.swift in Sources */,
 				004C09911B7CF9ED004F4527 /* WatchCounter.swift in Sources */,

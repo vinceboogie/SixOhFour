@@ -58,7 +58,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
         numberFormatter.locale = unitedStatesLocale
         
-        monthLabel.text = CVDate(date: NSDate()).globalDescription
+        monthLabel.text = CVDate(date: NSDate()).monthYear
         nameLabel.text = job.company.name
         positionLabel.text = job.position
         payLabel.text = "\(numberFormatter.stringFromNumber(pay)!)/hr"
@@ -158,7 +158,7 @@ extension JobOverviewViewController: CVCalendarViewDelegate {
     }
     
     func presentedDateUpdated(date: CVDate) {
-        if monthLabel.text != date.globalDescription && self.animationFinished {
+        if monthLabel.text != date.monthYear && self.animationFinished {
             
             currentMonth = date.currentMonth
             let predicate = NSPredicate(format: "startDate contains[c] %@", currentMonth)
@@ -168,7 +168,7 @@ extension JobOverviewViewController: CVCalendarViewDelegate {
             updatedMonthLabel.textColor = monthLabel.textColor
             updatedMonthLabel.font = monthLabel.font
             updatedMonthLabel.textAlignment = .Center
-            updatedMonthLabel.text = date.globalDescription
+            updatedMonthLabel.text = date.monthYear
             updatedMonthLabel.sizeToFit()
             updatedMonthLabel.alpha = 0
             updatedMonthLabel.center = self.monthLabel.center
@@ -220,7 +220,7 @@ extension JobOverviewViewController: CVCalendarViewDelegate {
         //        }
         
         
-        let day = dayView.date.currentDay
+        let day = dayView.date.monthDayYear
         var shouldShowDot = false
         
         for s in monthSchedule {
@@ -243,7 +243,7 @@ extension JobOverviewViewController: CVCalendarViewDelegate {
         var monthSchedule = dataManager.fetch("ScheduledShift", predicate: predicate) as! [ScheduledShift]
         
         
-        let day = dayView.date.currentDay
+        let day = dayView.date.monthDayYear
         let color = job.color.getColor
         var numberOfDots = 0
         
