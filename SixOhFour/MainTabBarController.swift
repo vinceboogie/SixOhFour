@@ -37,6 +37,15 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         self.viewControllers = [addJobsVC, clockInVC, calendarVC ]
         
+        // Set the root view to Clock In once the user has added a job
+        let results = dataManager.fetch("Job") as! [Job]
+        
+        if results.count > 0 {
+            self.selectedIndex = 1
+        } else {
+            self.selectedIndex = 0
+        }
+        
         // Pre-populate the Color table when the app is opened for the first time
         
         var colors = dataManager.fetch("Color") as! [Color]

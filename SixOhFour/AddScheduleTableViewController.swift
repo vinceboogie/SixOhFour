@@ -404,6 +404,18 @@ extension AddScheduleTableViewController {
             
             let replace = UIAlertAction(title: replaceTitle, style: .Destructive) { (action) in
                 for conflict in self.conflicts {
+                    let app = UIApplication.sharedApplication()
+                    
+                    for event in app.scheduledLocalNotifications {
+                        let notification = event as! UILocalNotification
+                        let startTime = notification.fireDate
+                        
+                        if conflict.startTime.compare(startTime!) == NSComparisonResult.OrderedSame {
+                            app.cancelLocalNotification(notification)
+                            break
+                        }
+                    }
+                    
                     self.dataManager.delete(conflict)
                 }
                 
@@ -441,7 +453,7 @@ extension AddScheduleTableViewController {
             
             var notification = UILocalNotification()
             notification.alertBody = "REMINDER: You have a shift at \(start)"
-            notification.alertAction = "clockin"
+            notification.alertAction = "Clock in"
             notification.fireDate = shift.startTime
             notification.soundName = UILocalNotificationDefaultSoundName
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
@@ -553,7 +565,7 @@ extension AddScheduleTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "selectJob" {
             let destinationVC = segue.destinationViewController as! JobsListTableViewController
-            destinationVC.previousSelection = jobNameLabel.text
+            destinationVC.previousSelection = job
             destinationVC.source = "addSchedule"
         }
         

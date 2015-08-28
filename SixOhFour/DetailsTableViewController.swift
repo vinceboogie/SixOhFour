@@ -201,7 +201,7 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
             let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
                 as! JobsListTableViewController
             jobsListVC.source = "details"
-            jobsListVC.previousSelection = self.selectedJob.company.name
+            jobsListVC.previousSelection = self.selectedJob
             
             self.navigationController?.pushViewController(jobsListVC, animated: true)
         }
