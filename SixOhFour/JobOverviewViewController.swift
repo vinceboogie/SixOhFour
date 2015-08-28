@@ -160,7 +160,7 @@ class JobOverviewViewController: UIViewController, NSFetchedResultsControllerDel
         totalHoursLabel.text = "\(totalTime)"
         
     }
-    
+
     func calculatePayDaysAgo(daysAgo: Double, labelName: UILabel) {
 
         var totalPay = 0.00

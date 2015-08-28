@@ -25,6 +25,8 @@ class AddJobTableViewController: UITableViewController {
     var previousColor: Color!
     var selectedColor: Color!
     var currentString = ""
+    var companyName = ""
+    var position = ""
     
     let dataManager = DataManager()
     var colors = [Color]()
@@ -42,8 +44,13 @@ class AddJobTableViewController: UITableViewController {
         
         payTextField.delegate = self
         
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        tap.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tap)
+        
         colorPicker.dataSource = self
         colorPicker.delegate = self
+        
         
         if job != nil {
             let unitedStatesLocale = NSLocale(localeIdentifier: "en_US")
@@ -57,6 +64,7 @@ class AddJobTableViewController: UITableViewController {
             payTextField.text = numberFormatter.stringFromNumber(pay)!
             
             payRate = job.payRate
+            
             colorLabel.text = job.color.name
             jobColorView.color = job.color.getColor
             
@@ -89,6 +97,21 @@ class AddJobTableViewController: UITableViewController {
     // MARK: - IBActions
     
     @IBAction func saveJobButton(sender: AnyObject) {
+        var str = nameTextField.text
+        companyName = str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        str = positionTextField.text
+        position = str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        
+        if payTextField.text != nil {
+            var payStr = payTextField.text
+            payStr = payStr.stringByReplacingOccurrencesOfString(",", withString: "")
+            payStr = payStr.stringByReplacingOccurrencesOfString("$", withString: "")
+            
+            payRate = NSDecimalNumber(string: payStr)
+        } else {
+            payRate = 0.00
+        }
+        
         if job != nil {
             editItem()
         } else {
@@ -116,6 +139,10 @@ class AddJobTableViewController: UITableViewController {
     
     
     // MARK: - Class functions
+    
+    func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
     
     func toggleSaveButton() {
         if nameTextField.text == "" || positionTextField.text == "" {
@@ -164,16 +191,12 @@ class AddJobTableViewController: UITableViewController {
         let company = dataManager.addItem("Company") as! Company
         let job = dataManager.addItem("Job") as! Job
         
-        company.name = nameTextField.text
+        company.name = companyName
         job.setValue(company, forKey: "company")
-        job.position = positionTextField.text
+        job.position = position
         job.setValue(color, forKey: "color")
+        job.payRate = payRate
         
-        if payRate == nil {
-            job.payRate = 0.00
-        } else {
-            job.payRate = payRate
-        }
         dataManager.save()
     }
     
@@ -187,8 +210,8 @@ class AddJobTableViewController: UITableViewController {
         
         let editJob = dataManager.editItem(job, entityName: "Job") as! Job
         
-        editJob.company.name = nameTextField.text
-        editJob.position = positionTextField.text
+        editJob.company.name = companyName
+        editJob.position = position
         editJob.payRate = payRate
         editJob.color = currentColor
         
@@ -201,7 +224,7 @@ class AddJobTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 && indexPath.row == 1 {
             pickerVisible = !pickerVisible
-
+            
             tableView.reloadData()
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -268,6 +291,5 @@ extension AddJobTableViewController: UITextFieldDelegate {
 //        }
         
         toggleSaveButton()
-    }
-    
+    }    
 }

@@ -109,8 +109,9 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         let jobsList = dataManager.fetch("Job") as! [Job]
+        
 
-        if selectedJob == nil { // NOTE: SELECTS THE FIRST JOB WHEN APP IS LOADED
+        if selectedJob == nil || !contains(jobsList, selectedJob) { // NOTE: SELECTS THE FIRST JOB WHEN APP IS LOADED
             if jobsList.count > 0 {
                 //Fetches the first jobs
                 var firstJob = jobsList[0]

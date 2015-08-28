@@ -40,7 +40,7 @@ class TimesheetTableViewController: UITableViewController {
     var allWorkedShifts = [WorkedShift]()
     var selectedJob : Job!
     var openShiftsCIs = [Timelog]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
