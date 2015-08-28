@@ -42,7 +42,10 @@ class AddJobTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        payTextField.delegate = self
+//        payTextField.delegate = self
+        
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
         
         colorPicker.dataSource = self
         colorPicker.delegate = self
@@ -133,6 +136,11 @@ class AddJobTableViewController: UITableViewController {
     
     
     // MARK: - Class functions
+    
+    func DismissKeyboard(){
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     
     func toggleSaveButton() {
         if nameTextField.text == "" || positionTextField.text == "" {
