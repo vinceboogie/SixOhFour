@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Foundation
 
-class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
+class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var jobColorDisplay: JobColorView!
     @IBOutlet weak var jobLabel: UILabel!
@@ -42,6 +42,7 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
         timestampLabel.text = "\(nItem.time)"
         minTimeLabel.hidden = true
         commentTextView.text = nItem.comment
+        commentTextView.delegate = self
         
         doneButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveDetails")
         self.navigationItem.rightBarButtonItem = doneButton
@@ -51,6 +52,10 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
         timestampPicker.date = nItem.time
         
         datePickerChanged(timestampLabel!, datePicker: timestampPicker!)
+        
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        tap.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tap)
 
         
         // TODO : Need to set restrictions of 24hrs when picking times for both min and max. Hurdle = how are you going to handle when the WS only has 1 entry CI.. what is the min?
@@ -124,9 +129,23 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        commentTextView.resignFirstResponder()
         return true
     }
+    
+    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        commentTextView.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
 
+    func dismissKeyboard(){
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        self.view.endEditing(true)
+    }
     
     func editItem() {
         nItem.type = entryLabel.text!
@@ -169,6 +188,7 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
         commentTextView.resignFirstResponder()
+
         
         if hideTimePicker == false {
             hideTimePicker(true)

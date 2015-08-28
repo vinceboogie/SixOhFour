@@ -44,8 +44,9 @@ class AddJobTableViewController: UITableViewController {
         
         payTextField.delegate = self
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
-        view.addGestureRecognizer(tap)
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        tap.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tap)
         
         colorPicker.dataSource = self
         colorPicker.delegate = self
@@ -139,9 +140,8 @@ class AddJobTableViewController: UITableViewController {
     
     // MARK: - Class functions
     
-    func DismissKeyboard(){
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+    func dismissKeyboard(){
+        self.view.endEditing(true)
     }
     
     func toggleSaveButton() {
@@ -224,7 +224,7 @@ class AddJobTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 && indexPath.row == 1 {
             pickerVisible = !pickerVisible
-
+            
             tableView.reloadData()
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -291,6 +291,5 @@ extension AddJobTableViewController: UITextFieldDelegate {
 //        }
         
         toggleSaveButton()
-    }
-    
+    }    
 }
