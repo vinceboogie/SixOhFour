@@ -42,7 +42,7 @@ class AddJobTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-//        payTextField.delegate = self
+        payTextField.delegate = self
         
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
@@ -101,12 +101,14 @@ class AddJobTableViewController: UITableViewController {
         str = positionTextField.text
         position = str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         
-        if payRate != nil {
-        var payStr = payTextField.text
-        payStr = payStr.stringByReplacingOccurrencesOfString(",", withString: "")
-        payStr = payStr.stringByReplacingOccurrencesOfString("$", withString: "")
-        
-        payRate = NSDecimalNumber(string: payStr)
+        if payTextField.text != nil {
+            var payStr = payTextField.text
+            payStr = payStr.stringByReplacingOccurrencesOfString(",", withString: "")
+            payStr = payStr.stringByReplacingOccurrencesOfString("$", withString: "")
+            
+            payRate = NSDecimalNumber(string: payStr)
+        } else {
+            payRate = 0.00
         }
         
         if job != nil {
@@ -193,12 +195,7 @@ class AddJobTableViewController: UITableViewController {
         job.setValue(company, forKey: "company")
         job.position = position
         job.setValue(color, forKey: "color")
-        
-        if payRate == nil {
-            job.payRate = 0.00
-        } else {
-            job.payRate = self.payRate
-        }
+        job.payRate = payRate
         
         dataManager.save()
     }
