@@ -76,7 +76,7 @@ class IncompleteShiftsTableViewController: UITableViewController {
     // Tableview Headers
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
-        let header:UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        let header = view as! UITableViewHeaderFooterView
         
         header.textLabel.textColor = UIColor.blackColor()
         //        header.textLabel.font = UIFont.boldSystemFontOfSize(18)
@@ -93,6 +93,7 @@ class IncompleteShiftsTableViewController: UITableViewController {
             }
         }
     }
+    
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 35
     }
@@ -114,14 +115,22 @@ class IncompleteShiftsTableViewController: UITableViewController {
         let shiftToDelete = openShifts[indexPath.row]
         openShifts.removeAtIndex(indexPath.row)
 
+        //TODO: Remove with new DataManager Funct.
+        for timelog in shiftToDelete.timelogs {
+            dataManager.delete(timelog as! Timelog)
+        }
+
+        
         dataManager.delete(shiftToDelete)
 
         tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: .Fade)
+        
         tableView.endUpdates()
         
         // TODO: Time the reload data to better show animation of delete
         tableView.reloadData() // Needed to udate header
-    }
+        //tableView.reloadSectionIndexTitles()
+        }
     }
     
     

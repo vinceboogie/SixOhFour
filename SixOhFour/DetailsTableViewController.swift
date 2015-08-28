@@ -16,7 +16,7 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var jobLabel: UILabel!
     @IBOutlet weak var entryLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var timestampPicker: UIDatePicker!
     @IBOutlet weak var minTimeLabel: UILabel!
     @IBOutlet weak var maxTimeLabel: UILabel!
@@ -38,14 +38,10 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        println(nItem)
-        
         entryLabel.text = nItem.type
         timestampLabel.text = "\(nItem.time)"
         minTimeLabel.hidden = true
-        commentTextField.text = nItem.comment
-        
+        commentTextView.text = nItem.comment
         
         doneButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveDetails")
         self.navigationItem.rightBarButtonItem = doneButton
@@ -57,38 +53,32 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
         datePickerChanged(timestampLabel!, datePicker: timestampPicker!)
 
         
-        // TODO : Need to set restrictions of 24hrs when picking times for both min and max
-        //Hurdle = how are you going to handle when the WS only has 1 entry CI.. what is the min?
+        // TODO : Need to set restrictions of 24hrs when picking times for both min and max. Hurdle = how are you going to handle when the WS only has 1 entry CI.. what is the min?
         if noMinDate == true {
             //No Minimum Data
-            println("FIRST ENTRY CHOOSEN = no min date")
             minTimeLabel.text = ""
-            
         } else {
-            
             timestampPicker.minimumDate = nItemPrevious.time
             minTimeLabel.text = "\(nItemPrevious.type): \(dateFormatter(nItemPrevious.time))"
-            println("timestampPicker.minimumDate \(timestampPicker.minimumDate!)")
         }
         
         // TODO : Need to set restrictions of 24hrs when picking times for both min and max
-//        if noMaxDate == true && noMinDate == true {
         if noMaxDate == true {
             //No NextTimeStamp for Maxium Data
             //And no MinDate to set 24hr restriction
-            timestampPicker.maximumDate = NSDate()
-            maxTimeLabel.text = "Cannot select a future time."
+
+            if nItem.type == "Clocked Out" {
+                timestampPicker.maximumDate = NSDate().dateByAddingTimeInterval(8*60*60)
+                maxTimeLabel.text = "Cannot exceed 8 hrs from now."
+            } else {
+                timestampPicker.maximumDate = NSDate()
+                maxTimeLabel.text = "Cannot select a future time."
+            }
             
-//        } else if noMaxDate == true && nItemPrevious.time > 24hours ago {
-//
-//            timestampPicker.maximumDate = nItemPrevious.time + 24hours
-//            maxTimeLabel.text = "Must be within 24hrs of last entry"
-//        
-//        } else if noMaxDate == false {
+
 
         } else {
             timestampPicker.maximumDate = nItemNext.time
-            println("timestampPicker.maximumDate \(timestampPicker.maximumDate!)")
             maxTimeLabel.text = "\(nItemNext.type): \(dateFormatter(nItemNext.time))"
         }
         
@@ -139,36 +129,26 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
 
     
     func editItem() {
-        
         nItem.type = entryLabel.text!
         nItem.time = timestampPicker.date
-        nItem.comment = commentTextField.text
+        nItem.comment = commentTextView.text
         nItem.lastUpdate = NSDate()
-        println(nItem)
-        //        context!.save(nil)
         
         if noMinDate == false && (timestampPicker.date.compare(timestampPicker.minimumDate!)) == NSComparisonResult.OrderedAscending {
             nItem.time = timestampPicker.minimumDate!
         } else {
             nItem.time = timestampPicker.date
         }
-        
     }
     
     func saveDetails () {
         editItem()
-        println(nItem)
         dataManager.save()
         self.performSegueWithIdentifier("unwindSaveDetailsTVC", sender: self)
-        println("SAVED")
-
     }
     
     func cancelDetails () {
         self.performSegueWithIdentifier("unwindCancelDetailsTVC", sender: self)
-//        dataManager.delete(nItem)
-//        println("DELETED")
-
     }
     
     // MARK: - Date Picker
@@ -188,7 +168,7 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
-        commentTextField.resignFirstResponder()
+        commentTextView.resignFirstResponder()
         
         if hideTimePicker == false {
             hideTimePicker(true)
