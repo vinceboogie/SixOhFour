@@ -56,6 +56,9 @@ class ShiftTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         tableView.reloadData()
+        println(selectedWorkedShift)
+        dataManager.save()
+        println("SAVED!")
     }
     
     override func didReceiveMemoryWarning() {
@@ -303,13 +306,19 @@ class ShiftTableViewController: UITableViewController {
             destinationVC.noMaxDate = self.noMaxDate
             destinationVC.selectedJob = self.selectedJob
         }
+
+
+    
     }
     
-    @IBAction func unwindFromShift (segue: UIStoryboardSegue) {
+
+    
+    @IBAction func unwindShift (segue: UIStoryboardSegue) {
         let sourceVC = segue.sourceViewController as! ShiftTableViewController
         let destVC = segue.destinationViewController as! IncompleteShiftsTableViewController
         destVC.selectedWorkedShift = self.selectedWorkedShift
         dataManager.save()
+        println("unwindShift")
     }
     
     @IBAction func unwindSaveDetailsTVC (segue: UIStoryboardSegue) {
