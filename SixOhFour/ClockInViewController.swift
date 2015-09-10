@@ -41,18 +41,15 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     var breakMinutes: Int = 0
     var breakSeconds: Int = 0
     var breakHours: Int = 0
-    
     var breakMinutesSet: Int = 30
     var breakSecondsSet: Int = 0
     var breakHoursSet: Int = 0
-    
     var breakMinutesChange: Int = 0
     var breakHoursChange: Int = 0
-    
     var breakTimerOver = NSTimer()
-    
     var workWatchString: String = ""
     var breakWatchString: String = ""
+    var startedBreakTime: NSDate!
     
     var flow: String = "Idle"
     var breakCount: Int = 0
@@ -110,6 +107,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let jobsList = dataManager.fetch("Job") as! [Job]
         
+        addShiftButton.enabled = true
+
 
         if selectedJob == nil || !contains(jobsList, selectedJob) { // NOTE: SELECTS THE FIRST JOB WHEN APP IS LOADED
             if jobsList.count > 0 {
@@ -203,6 +202,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             flow = "onBreak"
             breakCount++
             
+            startedBreakTime = NSDate()
+            
             breakTimeLabel.hidden = false
             breakTitleLabel.hidden = false
             editBreakInstruction.hidden = false
@@ -215,8 +216,9 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             breakTimeLabel.textColor = UIColor.blueColor()
             editBreakInstruction.textColor = UIColor.blueColor()
             
-            
+            createNotifyBreakOver()
             breakTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("runBreakTimer"), userInfo: nil, repeats: true)
+
             
             timer.invalidate()
 
@@ -267,6 +269,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             
             breakTimeLabel.text = "0\(breakHours):\(breakMinutes):0\(breakSeconds)"
+            
+            cancelNotifyBreakOver()
             
             //RESET and SAVE (WorkedShift to current JOB that is picked)
         } else if flow == "clockedOut" {
@@ -417,23 +421,31 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func runBreakTimer() {
         
-        breakWatchString  = getWatchString(breakSeconds, minutes: breakMinutes, hours: breakHours)
-        breakTimeLabel.text = breakWatchString
+        var differenceInTime = NSDate().timeIntervalSinceDate(startedBreakTime)
+        var totalBreakTime = breakSecondsSet + breakMinutesSet*60 + breakHoursSet*60*60
+        var breaktimeRemaining = totalBreakTime - Int(differenceInTime)
         
-        if breakSeconds > 0 {
-            breakSeconds--
-        } else if breakSeconds == 0 && breakMinutes > 0 {
-            breakMinutes--
-            breakSeconds = 59
-        } else if breakMinutes == 0 && breakHours > 0 {
-            breakHours--
-            breakMinutes = 59
+        if breaktimeRemaining >= 3600 {
+            breakSeconds = (breaktimeRemaining % 60 ) % 60
+            breakMinutes = (breaktimeRemaining % 3600 ) / 60
+            breakHours = breaktimeRemaining / 60 / 60
+        } else if breaktimeRemaining >= 60 {
+            breakSeconds = breaktimeRemaining % 60
+            breakMinutes = breaktimeRemaining / 60
+            breakHours = 0
+        } else if breaktimeRemaining >= 0 {
+            breakSeconds = breaktimeRemaining
+            breakMinutes = 0
+            breakHours = 0
         } else {
-            
-            notifyBreakOver ()
+            alertBreakOver()
             breakTimer.invalidate()
             breakTimerOver = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("runBreakTimerOver"), userInfo: nil, repeats: true)
         }
+        
+        breakWatchString  = getWatchString(breakSeconds, minutes: breakMinutes, hours: breakHours)
+        breakTimeLabel.text = breakWatchString
+
     }
     
     func runBreakTimerOver() {
@@ -479,15 +491,20 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    func notifyBreakOver() {
+    func createNotifyBreakOver() {
         //Notifications outside the App (Home screen and Lock Screen)
+        cancelNotifyBreakOver()
         var localNotification: UILocalNotification = UILocalNotification()
-        localNotification.alertAction = "PUCHIE"
+        localNotification.alertAction = "SixOhFour"
         localNotification.alertBody = "Your breaktime is over!"
         localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.fireDate = NSDate(timeIntervalSinceNow: 1) //seconds from now
+        var timeFromNow: Double = Double(breakSeconds) + Double(breakMinutes)*60 + Double(breakHours)*60*60
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: timeFromNow) //seconds from now
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        
+        print("CREATED!")
+    }
+    
+    func alertBreakOver() {
         //Notifications insdie the App (Home screen and Lock Screen)
         let alert: UIAlertController = UIAlertController(title: "Breaktime is over!",
             message: "Please choose from the following:",
@@ -497,7 +514,6 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             action in self.lapReset(true)
         }))
         alert.addAction(UIAlertAction(title: "Add 5 Minutes", style: .Default, handler: { action in
-            
             self.breakTimerOver.invalidate()
             self.breakMinutes = 5
             self.breakSeconds = 0
@@ -508,11 +524,24 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.breakTitleLabel.textColor = UIColor.blueColor()
             self.breakTitleLabel.text = "You've extended your break by 5 minutes"
             self.breakTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("runBreakTimer"), userInfo: nil, repeats: true)
-            
+            self.createNotifyBreakOver()
         }))
         alert.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    func cancelNotifyBreakOver () {
+        let app = UIApplication.sharedApplication()
+        for event in app.scheduledLocalNotifications {
+            let notification = event as! UILocalNotification
+            if notification.alertBody == "Your breaktime is over!" {
+                app.cancelLocalNotification(notification)
+                print("DELETED!")
+                //break
+            }
+        }
+    }
+    
     
     func getWatchString(seconds: Int, minutes: Int, hours: Int) -> String {
         let secondsString = String.secondsString(seconds)
@@ -743,6 +772,8 @@ class ClockInViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         displayBreaktime ()
+        createNotifyBreakOver()
+        
     }
 
     override func didReceiveMemoryWarning() {

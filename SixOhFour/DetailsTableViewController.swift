@@ -247,10 +247,8 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
         let sourceVC = segue.sourceViewController as! JobsListTableViewController
         
         selectedJob = sourceVC.selectedJob
-
         
-        // TODO : Need to fix selectedjob in display, label, and core data
-        
+                
         if sourceVC.selectedJob != nil {
             selectedJob = sourceVC.selectedJob
             jobColorDisplay.color = selectedJob.color.getColor
