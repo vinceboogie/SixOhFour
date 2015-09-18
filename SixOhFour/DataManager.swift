@@ -71,9 +71,23 @@ class DataManager {
             let sArray = job.scheduledShifts.allObjects as NSArray
             let scheduledShifts = sArray as! [ScheduledShift]
             
-            for shift in scheduledShifts{
-                context?.deleteObject(shift)
+            for shift in scheduledShifts {
+               delete(shift)
             }
+        }
+        
+        if let shift = objectToDelete as? ScheduledShift {
+            let app = UIApplication.sharedApplication()
+
+            for event in app.scheduledLocalNotifications {
+                let notification = event as! UILocalNotification
+                let startTime = notification.fireDate
+                
+                if shift.startTime.compare(startTime!) == NSComparisonResult.OrderedSame {
+                    app.cancelLocalNotification(notification)
+                    break
+                }
+            }            
         }
         
         context?.deleteObject(objectToDelete)
