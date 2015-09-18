@@ -17,16 +17,20 @@ class JobsListTableViewController: UITableViewController {
     var jobs = [Job]()
     var dataManager = DataManager()
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         jobs = dataManager.fetch("Job") as! [Job]
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    
+    // MARK: - Class Functions
     
     func performUnwindTo(source: String) {
         switch source {

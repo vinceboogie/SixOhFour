@@ -15,11 +15,9 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        //  Each of these are relative to the storyboard files they belong to
-        let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let addJobStoryboard: UIStoryboard = UIStoryboard(name: "AddJobStoryboard", bundle: nil)
         let clockInStoryboard: UIStoryboard = UIStoryboard(name: "ClockInStoryboard", bundle: nil)
         let calendarStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
         
@@ -27,11 +25,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let calendarVC: UINavigationController = calendarStoryboard.instantiateViewControllerWithIdentifier("CalendarNavController") as! UINavigationController
         let addJobsVC: UINavigationController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsNavController") as! UINavigationController
         
-        let homeIcon = UITabBarItem(title: "", image:UIImage(named: "home.png"), tag: 1)
+        let jobsIcon = UITabBarItem(title: "", image:UIImage(named: "list.png"), tag: 1)
         let clockInIcon = UITabBarItem(title: "", image:UIImage(named: "clock.png"), tag: 2)
         let calendarIcon = UITabBarItem(title: "", image:UIImage(named: "calendar.png"), tag: 3)
 
-        addJobsVC.tabBarItem = homeIcon
+        addJobsVC.tabBarItem = jobsIcon
         clockInVC.tabBarItem = clockInIcon
         calendarVC.tabBarItem = calendarIcon
         
@@ -107,18 +105,4 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
-    
 }
