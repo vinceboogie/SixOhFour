@@ -74,9 +74,7 @@ class DataManager {
             for shift in scheduledShifts {
                delete(shift)
             }
-        }
-        
-        if let shift = objectToDelete as? ScheduledShift {
+        } else if let shift = objectToDelete as? ScheduledShift {
             let app = UIApplication.sharedApplication()
 
             for event in app.scheduledLocalNotifications {
