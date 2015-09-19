@@ -21,17 +21,18 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
     @IBOutlet weak var minTimeLabel: UILabel!
     @IBOutlet weak var maxTimeLabel: UILabel!
     
-    //PUSHED IN DATA
-    var selectedJob : Job!
-    var noMinDate : Bool = false
-    var noMaxDate : Bool = false
-    var nItem : Timelog! // will change from pushed data Segue
-    var nItemPrevious : Timelog! // will change from pushed data Segue
-    var nItemNext : Timelog! // will change from pushed data Segue
-    
     var doneButton : UIBarButtonItem!
-    var hideTimePicker : Bool = true
-    var jobLabelDisplay = String() // will change from pushed data Segue
+    
+    //PUSHED IN DATA when segued
+    var selectedJob : Job!
+    var noMinDate = false
+    var noMaxDate = false
+    var nItem : Timelog!
+    var nItemPrevious : Timelog!
+    var nItemNext : Timelog!
+    var jobLabelDisplay = String()
+    
+    var hideTimePicker = true
     
     var dataManager = DataManager()
     
@@ -56,7 +57,6 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         tap.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tap)
-
         
         // TODO : Need to set restrictions of 24hrs when picking times for both min and max. Hurdle = how are you going to handle when the WS only has 1 entry CI.. what is the min?
         if noMinDate == true {
@@ -71,7 +71,7 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
         if noMaxDate == true {
             //No NextTimeStamp for Maxium Data
             //And no MinDate to set 24hr restriction
-
+            
             if nItem.type == "Clocked Out" {
                 timestampPicker.maximumDate = NSDate().dateByAddingTimeInterval(8*60*60)
                 maxTimeLabel.text = "Cannot exceed 8 hrs from now."
@@ -79,21 +79,21 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
                 timestampPicker.maximumDate = NSDate()
                 maxTimeLabel.text = "Cannot select a future time."
             }
-            
-
-
         } else {
             timestampPicker.maximumDate = nItemNext.time
             maxTimeLabel.text = "\(nItemNext.type): \(dateFormatter(nItemNext.time))"
         }
-        
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         jobLabel.text = selectedJob.company.name
         jobColorDisplay.color = selectedJob.color.getColor
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func timestampChanged(sender: AnyObject) {
@@ -109,7 +109,6 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
             }
         }
         
-        
         if noMaxDate == true {
             if timestampPicker.date.timeIntervalSinceNow > -120 {
                 maxTimeLabel.hidden = false
@@ -121,11 +120,6 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
         }
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -141,7 +135,7 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
-
+    
     func dismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         self.view.endEditing(true)
@@ -173,51 +167,10 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
     // MARK: - Date Picker
     
     func datePickerChanged(label: UILabel, datePicker: UIDatePicker) {
-        
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
-        
         label.text = dateFormatter.stringFromDate(datePicker.date)
-        
-    }
-    
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-        commentTextView.resignFirstResponder()
-
-        
-        if hideTimePicker == false {
-            hideTimePicker(true)
-            hideTimePicker = true
-        } else if indexPath.row == 2 && hideTimePicker {
-            hideTimePicker(false)
-            hideTimePicker = false
-        } else if indexPath.row == 0 {
-            let addJobStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
-            let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
-                as! JobsListTableViewController
-            jobsListVC.source = "details"
-            jobsListVC.previousSelection = self.selectedJob
-            
-            self.navigationController?.pushViewController(jobsListVC, animated: true)
-        }
-        
-        
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        if hideTimePicker && indexPath.row == 3 {
-            hideTimePicker(true)
-            return 0
-        } else {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        }
-        
     }
     
     func hideTimePicker(status: Bool) {
@@ -242,25 +195,48 @@ class DetailsTableViewController: UITableViewController, UITextFieldDelegate, UI
         return dateString
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        commentTextView.resignFirstResponder()
+        
+        if hideTimePicker == false {
+            hideTimePicker(true)
+            hideTimePicker = true
+        } else if indexPath.row == 2 && hideTimePicker {
+            hideTimePicker(false)
+            hideTimePicker = false
+        } else if indexPath.row == 0 {
+            let addJobStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
+            let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
+                as! JobsListTableViewController
+            jobsListVC.source = "details"
+            jobsListVC.previousSelection = self.selectedJob
+            
+            self.navigationController?.pushViewController(jobsListVC, animated: true)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        if hideTimePicker && indexPath.row == 3 {
+            hideTimePicker(true)
+            return 0
+        } else {
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        }
+        
+    }
+    
+    //MARK: Segues
     @IBAction func unwindFromJobsListTableViewControllerToDetails (segue: UIStoryboardSegue) {
         
         let sourceVC = segue.sourceViewController as! JobsListTableViewController
-        
         selectedJob = sourceVC.selectedJob
         
-                
         if sourceVC.selectedJob != nil {
             selectedJob = sourceVC.selectedJob
             jobColorDisplay.color = selectedJob.color.getColor
         }
-        
-//        if timelogList != [] {
-//            saveWorkedShiftToJob()
-//        }
-//        
-//        updateTable()
-//        
     }
-    
 }
-

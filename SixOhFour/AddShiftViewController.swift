@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AddShiftViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class AddShiftViewController: UIViewController {
+    
     @IBOutlet var addBreakButton: UIButton!
     @IBOutlet var worktimeLabel: UILabel!
     @IBOutlet var timelogTable: UITableView!
@@ -26,14 +26,12 @@ class AddShiftViewController: UIViewController, UITableViewDelegate, UITableView
     var nItemClockInPrevious : Timelog!
     var nItemClockInNext : Timelog!
     var selectedJob : Job!
-    var noMinDate: Bool = false
-    var noMaxDate: Bool = false
+    var noMinDate = false
+    var noMaxDate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.title = "Add Shift"
-
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: nil)
         
         timelogTable.sectionHeaderHeight = 1.0
@@ -52,7 +50,7 @@ class AddShiftViewController: UIViewController, UITableViewDelegate, UITableView
         
         createTLappend("Clocked In")
         createTLappend("Clocked Out")
-
+        
         worktimeLabel.text = "Work time = \( newShift.hoursWorked() ) hrs"
         earnedLabel.text = "You earned $\( newShift.moneyShiftOTx2()) for this shift"
     }
@@ -61,21 +59,11 @@ class AddShiftViewController: UIViewController, UITableViewDelegate, UITableView
         selectedJob.color.getColor
         newShift.sumUpDuration()
         timelogTable.reloadData()
-
-    }
-
-    func saveWS() {
-        dataManager.save()
-        self.performSegueWithIdentifier("unwindAddShiftSave", sender: self)
     }
     
-    func cancelWS() {
-        for i in allTLsArrary {
-            dataManager.delete(i)
-        }
-        
-        dataManager.delete(newShift)
-        self.performSegueWithIdentifier("unwindAddShift", sender: self)
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func addBreakPressed(sender: AnyObject) {
@@ -95,114 +83,19 @@ class AddShiftViewController: UIViewController, UITableViewDelegate, UITableView
         self.timelogTable.scrollToRowAtIndexPath(indexPathScroll, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         timelogTable.reloadData()
     }
-
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+    
+    func saveWS() {
+        dataManager.save()
+        self.performSegueWithIdentifier("unwindAddShiftSave", sender: self)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 2 {
-            return (breakCount*2)
-        } else {
-            return 1
-        }
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 45
-        } else {
-            return 30
-        }
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
-            cell.job = selectedJob
-            cell.jobColorView.setNeedsDisplay()
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("TimelogCell", forIndexPath: indexPath) as! TimelogCell
-        
-            //TODO: Change the TLs so that NSDATE is not choosen for new entries
-            if indexPath.section == 1 {
-                cell.timelog = allTLsArrary.first
-//                cell.time.text = NSDateFormatter.localizedStringFromDate( (allTLsArrary.first!.time) , dateStyle: .MediumStyle, timeStyle: .MediumStyle)
-                
-//                cell.type.text = allTLsArrary.first?.type
-
-            } else if indexPath.section == 3 {
-                cell.timelog = allTLsArrary.last
-//                cell.time.text = allTLsArrary.last?.time
-//                cell.type.text = allTLsArrary.last?.type
-
-            } else {
-                cell.timelog = allTLsArrary[indexPath.row+1]
-//                cell.time.text = allTLsArrary[indexPath.row+1].time
-//                cell.type.text = allTLsArrary[indexPath.row+1].type
-                
-            }
-
-            
-            cell.job = selectedJob
-            cell.jobColorView.setNeedsDisplay()
-
-            return cell
-        }
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        if indexPath.section == 0 {
-            let addJobStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
-            let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
-                as! JobsListTableViewController
-            jobsListVC.source = "details"
-            jobsListVC.previousSelection = selectedJob
-            
-            
-            self.navigationController?.pushViewController(jobsListVC, animated: true)
-
-        } else {
-            
-            
-            if indexPath.section == 1 {
-                noMinDate = true // user select CLOCKIN so noMinDate
-                nItemClockIn = allTLsArrary.first
-            } else {
-                noMinDate = false
-                
-                if indexPath.section == 3 {
-                    nItemClockIn = allTLsArrary.last
-                    self.nItemClockInPrevious = allTLsArrary[allTLsArrary.count-2]
-                } else {
-                    nItemClockIn = allTLsArrary[indexPath.row+1]
-                    self.nItemClockInPrevious = allTLsArrary[indexPath.row]
-                }
-            }
-            
-            if indexPath.section == 3 {
-                nItemClockIn = allTLsArrary.last
-                noMaxDate = true //user select last TIMELOD so noMaxDat is sent, and will use NSDATE instead
-            } else {
-                noMaxDate = false
-                
-                if indexPath.section == 1 {
-                    nItemClockIn = allTLsArrary.first
-                    self.nItemClockInNext = allTLsArrary[1]
-                } else {
-                    nItemClockIn = allTLsArrary[indexPath.row+1]
-                    self.nItemClockInNext = allTLsArrary[indexPath.row+2]
-                }
-            }
-            
-            self.performSegueWithIdentifier("showDetails", sender: tableView.cellForRowAtIndexPath(indexPath))
+    func cancelWS() {
+        for i in allTLsArrary {
+            dataManager.delete(i)
         }
         
+        dataManager.delete(newShift)
+        self.performSegueWithIdentifier("unwindAddShift", sender: self)
     }
     
     func createTLappend(type: String){
@@ -213,7 +106,7 @@ class AddShiftViewController: UIViewController, UITableViewDelegate, UITableView
         newTL.time = NSDate()
         allTLsArrary.append(newTL)
     }
-
+    
     func createTLinsert(type: String){
         let newTL = dataManager.addItem("Timelog") as! Timelog
         newTL.workedShift = newShift
@@ -238,8 +131,121 @@ class AddShiftViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    @IBAction func unwindFromJobsListTableViewControllerToDetails (segue: UIStoryboardSegue) {
+        let sourceVC = segue.sourceViewController as! JobsListTableViewController
+        selectedJob = sourceVC.selectedJob
+        newShift.job = selectedJob
+        earnedLabel.text = "You earned $\( newShift.moneyShiftOTx2()) for this shift"
+    }
+    
+    @IBAction func unwindSaveDetailsTVC (segue: UIStoryboardSegue) {
+        //by hitting the SAVE button
+        let sourceVC = segue.sourceViewController as! DetailsTableViewController
+        nItemClockIn = sourceVC.nItem
         
+        newShift.hoursWorked()
+        worktimeLabel.text = "Work time = \( newShift.hoursWorked() ) hrs"
+        earnedLabel.text = "You earned $\( newShift.moneyShiftOTx2()) for this shift"
+        selectedJob = sourceVC.selectedJob
+        timelogTable.reloadData()
+    }
+    
+    @IBAction func unwindCancelDetailsTVC (segue: UIStoryboardSegue) {
+        //by hitting the CANCEL button
+        //Nothing saved!
+    }
+}
+
+extension AddShiftViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("JobsListCell", forIndexPath: indexPath) as! JobsListCell
+            cell.job = selectedJob
+            cell.jobColorView.setNeedsDisplay()
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("TimelogCell", forIndexPath: indexPath) as! TimelogCell
+            
+            //TODO: Change the TLs so that NSDATE is not choosen for new entries
+            if indexPath.section == 1 {
+                cell.timelog = allTLsArrary.first
+            } else if indexPath.section == 3 {
+                cell.timelog = allTLsArrary.last
+            } else {
+                cell.timelog = allTLsArrary[indexPath.row+1]
+            }
+            cell.job = selectedJob
+            cell.jobColorView.setNeedsDisplay()
+            return cell
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 4
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 2 {
+            return (breakCount*2)
+        } else {
+            return 1
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 45
+        } else {
+            return 30
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            let addJobStoryboard: UIStoryboard = UIStoryboard(name: "CalendarStoryboard", bundle: nil)
+            let jobsListVC: JobsListTableViewController = addJobStoryboard.instantiateViewControllerWithIdentifier("JobsListTableViewController")
+                as! JobsListTableViewController
+            jobsListVC.source = "details"
+            jobsListVC.previousSelection = selectedJob
+            
+            self.navigationController?.pushViewController(jobsListVC, animated: true)
+        } else {
+            if indexPath.section == 1 {
+                noMinDate = true // user select CLOCKIN so noMinDate
+                nItemClockIn = allTLsArrary.first
+            } else {
+                noMinDate = false
+                
+                if indexPath.section == 3 {
+                    nItemClockIn = allTLsArrary.last
+                    self.nItemClockInPrevious = allTLsArrary[allTLsArrary.count-2]
+                } else {
+                    nItemClockIn = allTLsArrary[indexPath.row+1]
+                    self.nItemClockInPrevious = allTLsArrary[indexPath.row]
+                }
+            }
+            if indexPath.section == 3 {
+                nItemClockIn = allTLsArrary.last
+                noMaxDate = true //user select last TIMELOD so noMaxDat is sent, and will use NSDATE instead
+            } else {
+                noMaxDate = false
+                
+                if indexPath.section == 1 {
+                    nItemClockIn = allTLsArrary.first
+                    self.nItemClockInNext = allTLsArrary[1]
+                } else {
+                    nItemClockIn = allTLsArrary[indexPath.row+1]
+                    self.nItemClockInNext = allTLsArrary[indexPath.row+2]
+                }
+            }
+            self.performSegueWithIdentifier("showDetails", sender: tableView.cellForRowAtIndexPath(indexPath))
+        }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header:UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         header.textLabel.textColor = UIColor.blackColor()
         header.textLabel.frame = header.frame
@@ -252,57 +258,12 @@ class AddShiftViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         if section == 0 {
-        return "Job"
+            return "Job"
         } else if section == 1 {
-        return "Entries"
+            return "Entries"
         } else {
             return nil
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    @IBAction func unwindFromJobsListTableViewControllerToDetails (segue: UIStoryboardSegue) {
-        let sourceVC = segue.sourceViewController as! JobsListTableViewController
-        selectedJob = sourceVC.selectedJob
-        newShift.job = selectedJob
-        earnedLabel.text = "You earned $\( newShift.moneyShiftOTx2()) for this shift"
-        
-    }
-    
-    @IBAction func unwindSaveDetailsTVC (segue: UIStoryboardSegue) {
-            //by hitting the SAVE button
-            let sourceVC = segue.sourceViewController as! DetailsTableViewController
-            nItemClockIn = sourceVC.nItem
-
-            newShift.hoursWorked()
-            worktimeLabel.text = "Work time = \( newShift.hoursWorked() ) hrs"
-            earnedLabel.text = "You earned $\( newShift.moneyShiftOTx2()) for this shift"
-            selectedJob = sourceVC.selectedJob
-            timelogTable.reloadData()
-        }
-        
-    @IBAction func unwindCancelDetailsTVC (segue: UIStoryboardSegue) {
-        //by hitting the CANCEL button
-        //Nothing saved!
-    }
-    
-    
-
 }

@@ -23,27 +23,19 @@ class ShiftTableViewController: UITableViewController {
     var nItemClockInPrevious : Timelog!
     var nItemClockInNext : Timelog!
     var selectedJob : Job!
-    var noMinDate: Bool = false
-    var noMaxDate: Bool = false
+    var noMinDate = false
+    var noMaxDate = false
     var selectedRowIndex = Int()
     
     // Created to handle Incomplete
     var cellIncomp: TimelogCell!
     
-    var newItemCreated: Int = 0
+    var newItemCreated = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Shift"
         self.tableView.rowHeight = 30.0
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         fetchTLresults()
     }
     
@@ -64,6 +56,12 @@ class ShiftTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchTLresults() {
+        var predicate = NSPredicate(format: "SELF.workedShift == %@", selectedWorkedShift)
+        var sortNSDATE = NSSortDescriptor(key: "time", ascending: true)
+        TLresults = dataManager.fetch("Timelog", predicate: predicate, sortDescriptors: [sortNSDATE] ) as! [Timelog]
     }
     
     // MARK: - Table view data source
@@ -116,19 +114,14 @@ class ShiftTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
         var predicateJob = NSPredicate(format: "company.name == %@", (TLresults[indexPath.row].workedShift.job.company.name) )
         JOBresults = dataManager.fetch("Job", predicate: predicateJob) as! [Job]
         
         selectedJob = JOBresults[0]
         
         if indexPath.section == 1 {
-            
             newItemCreated = 0
-
             nItemClockIn = TLresults[indexPath.row]
-            
             selectedRowIndex = (indexPath.row)
             
             if (indexPath.row) == 0 {
@@ -137,25 +130,21 @@ class ShiftTableViewController: UITableViewController {
                 noMinDate = false
                 self.nItemClockInPrevious = TLresults[indexPath.row - 1]
             }
-            
             if (TLresults.count - indexPath.row - 1) == 0 {
                 noMaxDate = true //user select last TIMELOD so noMaxDat is sent, and will use NSDATE instead
             } else {
                 noMaxDate = false
                 self.nItemClockInNext = TLresults[indexPath.row + 1]
             }
-            
-            
         } else if indexPath.section == 2 {
             
             newItemCreated = 1
-
+            
             if indexPath.row == 1 { //clock out is sitting 2nd position so you need to add end break
                 newItemCreated = 2
             }
             
             let tempTL = dataManager.addItem("Timelog") as! Timelog
-//            tempTL.workedShift = selectedWorkedShift
             tempTL.comment = ""
             tempTL.time = (TLresults.last!.time).dateByAddingTimeInterval(1)
             
@@ -175,18 +164,9 @@ class ShiftTableViewController: UITableViewController {
             noMinDate = false
             self.nItemClockInPrevious = TLresults.last
             
-            //            noMaxDate = false
             noMaxDate = true
             
             // TODO : need to send up a restriction of 24hrs
-            
-            //            if (TLresults.count - indexPath.row - 1) == 0 {
-            //                noMaxDate = true //user select last TIMELOD so noMaxDat is sent, and will use NSDATE instead
-            //            } else {
-            //                noMaxDate = false
-            //                self.nItemClockInNext = TLresults[indexPath.row + 1]
-            //            }
-            
         }
         self.performSegueWithIdentifier("showDetails", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
@@ -226,7 +206,6 @@ class ShiftTableViewController: UITableViewController {
     }
     override func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         let footer:UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
-        //        header.textLabel.frame = header.frame
         footer.textLabel.textAlignment = NSTextAlignment.Left
         if section == 0 {
             footer.textLabel.text = "You earned $\( selectedWorkedShift.moneyShiftOTx2()) for this shift"
@@ -238,57 +217,6 @@ class ShiftTableViewController: UITableViewController {
         return ""
     }
     
-    func fetchTLresults() {
-        var predicate = NSPredicate(format: "SELF.workedShift == %@", selectedWorkedShift)
-        var sortNSDATE = NSSortDescriptor(key: "time", ascending: true)
-        TLresults = dataManager.fetch("Timelog", predicate: predicate, sortDescriptors: [sortNSDATE] ) as! [Timelog]
-    }
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
-    }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
     
     // MARK: Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -297,8 +225,6 @@ class ShiftTableViewController: UITableViewController {
             
             let destinationVC = segue.destinationViewController as! DetailsTableViewController
             destinationVC.hidesBottomBarWhenPushed = true;
-//            self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"Cancel", style:.Plain, target: nil, action: nil)
-
             destinationVC.nItem = self.nItemClockIn
             destinationVC.nItemPrevious = self.nItemClockInPrevious
             destinationVC.nItemNext = self.nItemClockInNext
@@ -306,12 +232,7 @@ class ShiftTableViewController: UITableViewController {
             destinationVC.noMaxDate = self.noMaxDate
             destinationVC.selectedJob = self.selectedJob
         }
-
-
-    
     }
-    
-
     
     @IBAction func unwindShift (segue: UIStoryboardSegue) {
         let sourceVC = segue.sourceViewController as! ShiftTableViewController
@@ -338,7 +259,7 @@ class ShiftTableViewController: UITableViewController {
             sourceVC.nItem.workedShift = selectedWorkedShift
             TLresults.append(sourceVC.nItem)
         } else if newItemCreated == 2 {
-//            TODO: write code to hanle 2 new TLs
+            // TODO: write code to hanle 2 new TLs
             let tempTL2 = dataManager.addItem("Timelog") as! Timelog
             tempTL2.time = TLresults.last!.time
             tempTL2.comment = ""
@@ -349,7 +270,7 @@ class ShiftTableViewController: UITableViewController {
             }
             tempTL2.workedShift = selectedWorkedShift
             TLresults.append(tempTL2)
-
+            
             sourceVC.nItem.workedShift = selectedWorkedShift
             TLresults.append(sourceVC.nItem)
         }

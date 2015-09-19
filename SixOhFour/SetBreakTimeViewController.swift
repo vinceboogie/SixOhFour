@@ -10,19 +10,17 @@ import UIKit
 
 class SetBreakTimeViewController: UIViewController {
     
-    
     @IBOutlet weak var SetBreakTimePicker: UIPickerView!
+    var doneButton : UIBarButtonItem!
     
     var breakHoursRange = 3
     var breakMinutesRange = 60
     
-    var breakHours = 0 //intial value, but then changed with segue
-    var breakMinutes = 0 //intial value, but then changed with segue
-    
-    var breakHoursSetIntial = 0 //intial value, but then changed with segue
-    var breakMinutesSetIntial = 0 //intial value, but then changed with segue
-    
-    var doneButton : UIBarButtonItem!
+    //Variable values are passed in when segue
+    var breakHours = 0
+    var breakMinutes = 0
+    var breakHoursSetIntial = 0
+    var breakMinutesSetIntial = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,16 +38,13 @@ class SetBreakTimeViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Class Functions
-    
+// MARK: - Class Functions
     func doneSettingBreak () {
         self.performSegueWithIdentifier("unwindFromSetBreakTimeViewController", sender: self)
     }
 }
-
 
 // MARK: - Picker View Source and Delegate
 
@@ -60,7 +55,6 @@ extension SetBreakTimeViewController: UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         if component == 0 {
             return breakHoursRange
         } else if component == 1 {
@@ -68,17 +62,14 @@ extension SetBreakTimeViewController: UIPickerViewDataSource, UIPickerViewDelega
         } else {
             return 0
         }
-        
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        
         if component == 0{
             return "\(row)"
         } else {
             return "\(row)"
         }
-        
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
