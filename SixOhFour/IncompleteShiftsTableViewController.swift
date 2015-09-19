@@ -17,16 +17,10 @@ class IncompleteShiftsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Incomplete Shifts"
-        //        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: nil)
-        //        var doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: nil)
-        //        self.navigationItem.rightBarButtonItem = doneButton
-        
     }
     
     override func viewWillAppear(animated: Bool) {
-        
         super.viewWillAppear(true)
         
         let predicateOpenWS = NSPredicate(format: "workedShift.status == 1")
@@ -55,11 +49,8 @@ class IncompleteShiftsTableViewController: UITableViewController {
         return openShifts.count
     }
     
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("ShiftListTableViewCell", forIndexPath: indexPath) as! ManualEditsListTableViewCell
-        
         cell.workedShift = openShifts[indexPath.row]
         cell.clockInTL = openShiftsCIs[indexPath.row]
         return cell
@@ -70,16 +61,12 @@ class IncompleteShiftsTableViewController: UITableViewController {
         selectedWorkedShift = openShifts[indexPath.row]
         
         self.performSegueWithIdentifier("showShift", sender: tableView.cellForRowAtIndexPath(indexPath))
-        
     }
     
     // Tableview Headers
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
         let header = view as! UITableViewHeaderFooterView
-        
         header.textLabel.textColor = UIColor.blackColor()
-        //        header.textLabel.font = UIFont.boldSystemFontOfSize(18)
         header.textLabel.frame = header.frame
         header.textLabel.textAlignment = NSTextAlignment.Justified
         header.textLabel.text = "You have \(openShifts.count) unsaved shifts:"
@@ -101,67 +88,36 @@ class IncompleteShiftsTableViewController: UITableViewController {
         return ""
     }
     
-    // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
+        return true
     }
     
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-        tableView.beginUpdates()
-
-        let shiftToDelete = openShifts[indexPath.row]
-        openShifts.removeAtIndex(indexPath.row)
-
-        //TODO: Remove with new DataManager Funct.
-        for timelog in shiftToDelete.timelogs {
-            dataManager.delete(timelog as! Timelog)
+        
+        if editingStyle == .Delete {
+            tableView.beginUpdates()
+            
+            let shiftToDelete = openShifts[indexPath.row]
+            openShifts.removeAtIndex(indexPath.row)
+            
+            //TODO: Remove with new DataManager Funct.
+            for timelog in shiftToDelete.timelogs {
+                dataManager.delete(timelog as! Timelog)
+            }
+            
+            dataManager.delete(shiftToDelete)
+            
+            tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: .Fade)
+            
+            tableView.endUpdates()
+            
+            // TODO: Time the reload data to better show animation of delete
+            tableView.reloadData() // Needed to udate header
         }
-
-        
-        dataManager.delete(shiftToDelete)
-
-        tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: .Fade)
-        
-        tableView.endUpdates()
-        
-        // TODO: Time the reload data to better show animation of delete
-        tableView.reloadData() // Needed to udate header
-        //tableView.reloadSectionIndexTitles()
-        }
     }
-    
-    
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if segue.identifier == "showShift" {
             let destinationVC = segue.destinationViewController as! ShiftTableViewController
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"Back", style:.Plain, target: nil, action: nil)
@@ -169,7 +125,4 @@ class IncompleteShiftsTableViewController: UITableViewController {
             destinationVC.selectedWorkedShift = self.selectedWorkedShift
         }
     }
-    
-    
-    
 }
